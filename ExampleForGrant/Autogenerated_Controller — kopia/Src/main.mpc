@@ -1,0 +1,279 @@
+#include "stm32f7xx_hal.h"
+#include <string.h>
+#include "low_lvl_main.h"
+#include "obl_macierzowe.h"
+#include "mat_lib.h"
+#include "alokacja_nr.h"
+#include "pk.h"
+
+#define __FUN_WRITE() {write_string((char*)__func__);write_string((char*)"\r\n");}while(0)
+
+float us[3] = {0.0f};
+float avg_us[1] = {0.0f};
+int maximum_ind = -1;
+char str[100] = {0};
+
+extern ADC_HandleTypeDef hadc3;
+extern DMA_HandleTypeDef hdma_adc3;
+
+extern DAC_HandleTypeDef hdac;
+
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim5;
+
+extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart6;
+
+extern void timer_loop(void);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+    if (htim->Instance == TIM2) {
+        timer_loop();
+    }
+
+
+}
+
+long get_time(){
+    return HAL_GetTick();
+}
+
+float* measureOutput(){
+    return __measureOutput(); // values from -1 to 1
+}
+
+void setControlValue(float* value){ // values from -1 to 1
+    __setControlValue(value);
+}
+
+void hardware_setup(){
+    #MPC_PROFILER_BEGIN 1
+    low_lvl_main();
+    #MPC_PROFILER_END 1
+}
+
+void string_spin(){
+    static int ind = 0;
+    static char txt[3] = "?\r\0";
+    // static char stages[4] = {'\\','|','/','-'}; int ssize = 4;
+    static char stages[5] = {' ','_','o','O','o'}; int ssize = 5;
+    txt[0] = stages[ind];
+    write_string(txt);
+    ind = (ind+1)%ssize;
+}
+
+void printMat(float ** A, long x, long y, const char * fmat){
+    long i = 1;
+    long j = 1;
+    for(i=1; i<=x; ++i){
+        if(i==1) write_string("[");
+        else     write_string(" ");
+        for(j=1; j<=y; ++j){
+            sprintf(str,fmat,A[i][j]);
+            write_string(str);
+            if(j==y && i!=x) write_string(";\n\r");
+            if(j!=y) write_string(",");
+        }
+        if(i==x) write_string("]\n\r");
+    }
+}
+
+void printVec(float * A, long x, const char * fmat){
+    long i = 1;
+    write_string("[");
+    for(i=1; i<=x; ++i){
+        if(i!=1) write_string(" ");
+        sprintf(str,fmat,A[i]);
+        write_string(str);
+        if(i!=x) write_string(";\n\r");
+    }
+    write_string("]\n\r");
+}
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA SPECJALISTY MATLAB
+#MPC_BEGIN
+global MPC_CROSSCOMPILER
+% Obiekt rzeczywisty -- 2xRC
+%S(1,1,:)=[0.1784, 0.3805, 0.5334, 0.6467, 0.7305, 0.7926, 0.8385, 0.8724, 0.8975, 0.9161, 0.9299, 0.9401, 0.9476, 0.9532, 0.9573, 0.9603, 0.9626, 0.9643, 0.9655, 0.9664, 0.9671, 0.9676, 0.9679]; % Tp = 0.1
+S(1,1,:)=[0.3805, 0.6467, 0.7926, 0.8724, 0.9161, 0.9401, 0.9532, 0.9603, 0.9643, 0.9664]; % Tp = 0.2
+a(1,:) = [-7.875594597027e-01,+3.526926067685e-02]; % Tp = 0.1?
+b(1,1,:) = [+1.783577301464e-01,+6.167306699759e-02]; % Tp = 0.1?
+
+
+%% Code generation
+if(MPC_CROSSCOMPILER == 1)
+    %% DMC 
+    % generate(DMC_MIMO_A(S,10,5,1,1,[],[],-1,1),'CONTROLLER');
+    % generate(DMC_MIMO_N(S,10,5,1,1,[],[],-1,1),'CONTROLLER_N');
+    %% GPC
+    generate(GPC_MIMO_A(a,b,20,5,10,1,[],[],-1, 1),'CONTROLLER');
+    generate(GPC_MIMO_N(a,b,20,5,10,1,[],[],-1, 1),'CONTROLLER_N');
+    % generate(Constant([-1 -1]),'CONTROLLER');
+    return;
+end
+
+%% Optional simulation
+fprintf('Tutaj mozna przeprowadzic symulacje...\n');
+#MPC_END
+
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA UZYTKOWNIKA KONCOWEGO
+ArchiveData ad;
+CurrentControl cc;
+
+void measurements(){
+    #MPC_PROFILER_BEGIN 4
+    HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+    new_output(&ad,measureOutput());
+    #MPC_PROFILER_END 4
+}
+
+void controller_setup(){
+    #MPC_PROFILER_BEGIN 2
+    init_archive_data(&ad, 100, 100, 1, 1, 0, 0, 0.01);
+    init_current_control(&cc,&ad);
+    get_time();
+    CONTROLLER(NULL,NULL);
+    CONTROLLER_N(NULL,NULL);
+    #MPC_PROFILER_END 2
+}
+
+void idle(){
+    #MPC_PROFILER_BEGIN 13
+    const int k = 0;
+    static int i = 0;
+    static char str[100] = {0};
+    // Komunikacja z komputerem zbierającym dane 
+    // sprintf(str, "y=[%8.4f,%8.4f];z=[%8.4f,%8.4f];u=[%8.4f,%8.4f];\n\r", ad.y[k][0],ad.y[k][1],ad.z[0],ad.z[1],ad.u[k-1][0],ad.u[k-1][1]);
+    sprintf(str, "y=%8.4f;z=%8.4f;u=%8.4f;us=[%8.4f, %8.4f, %8.4f];\n\r", ad.y[k][0],ad.z[0],ad.u[k-1][0],us[0],us[1],us[2]);
+    write_string(str);
+
+    if(i<50){    
+        ad.z[0] = -0.5;
+        HAL_GPIO_WritePin(SETPOINT_GPIO_Port,SETPOINT1_Pin,GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(SETPOINT_GPIO_Port,SETPOINT2_Pin,GPIO_PIN_RESET);
+    } else {
+        ad.z[0] = +0.5;
+        HAL_GPIO_WritePin(SETPOINT_GPIO_Port,SETPOINT1_Pin,GPIO_PIN_SET);
+        HAL_GPIO_WritePin(SETPOINT_GPIO_Port,SETPOINT2_Pin,GPIO_PIN_SET);
+    }   
+    if(++i >= 100) i = 0;
+    #MPC_PROFILER_END 3
+    #MPC_PROFILER_END 13
+    //HAL_Delay(1000);
+}
+
+void loop(){
+    #MPC_PROFILER_BEGIN 10
+    __startListening(&huart2);
+    __startListening(&huart6);
+    CONTROLLER_N(&ad,&cc);
+
+    // static float du[1] = {0};
+    // if(i++<500) du[0] = 0.0f;
+    // else      du[0] = 1.0f;
+    // setCurrentControl(&cc,du);
+    #MPC_PROFILER_END 10
+    // string_spin();
+}
+
+void controls(){
+    static float * lu;
+    const int k = 0;
+    const float max_dif = 0.02;
+    static int i = 0;
+    static float avg = 0.0f;
+    static float difs[3] = {0.0f};
+    static char str[100] = {0};
+    static int debug = 0;
+    static int maximum_ind_2 = -1;
+
+    #MPC_PROFILER_BEGIN 3
+    HAL_Delay(20);
+    us[2] = cc.du[0]+ad.u[k-1][0];
+    us[1] = __getSlaveControlValue(&huart2);
+    us[0] = __getSlaveControlValue(&huart6);
+
+    // Decision!!!
+    if(isnan(us[0]))
+        us[0] = us[2];
+    if(isnan(us[1]))
+        us[1] = us[2];
+
+    avg = 0.0f;
+    for(i=0;i<3;++i) avg += us[i]/3;
+    for(i=0;i<3;++i) difs[i] = us[i]-avg;
+    for(i=0;i<3;++i) if(difs[i]*difs[i] <= max_dif*max_dif) difs[i] = 0.0f; // jesli jakies dif miesci sie w okregu, to nie jest juz interesujace
+
+    if(debug){
+        write_string("%%------------------------------------------------------\n\r");
+        sprintf(str,"us=[%f,%f,%f];\n\r",us[0],us[1],us[2]); write_string(str);
+        sprintf(str,"max_dif=%f;\n\r",max_dif); write_string(str);
+        write_string("%%......................................................\n\r");
+        sprintf(str,"avg=%f;\n\r",avg); write_string(str);
+        sprintf(str,"difs=[%f,%f,%f];\n\r",difs[0],difs[1],difs[2]); write_string(str);
+    }
+    maximum_ind = -1;
+    for(i=0;i<3;++i){
+        if(difs[i] > 0.0f){
+            maximum_ind = 0;
+            break; // check if there are any nonzero difs;
+        }
+    }
+    if(debug){
+        sprintf(str,"maximum_ind=%d;\n\r",maximum_ind); write_string(str);
+    }
+
+    if(maximum_ind == -1){ // all signals are close
+        avg_us[0] = avg;
+    } else { // at least one signal is not close
+        // look for largest dif
+        for(i=0;i<3;++i) if(difs[maximum_ind]*difs[maximum_ind]<difs[i]*difs[i]) maximum_ind = i;
+        if(debug){
+            write_string("%%......................................................\n\r");
+            sprintf(str,"maximum_ind=%d;\n\r",maximum_ind); write_string(str);
+        }
+
+        avg = 0.0f;
+        for(i=0;i<3;++i) if(i!=maximum_ind) avg += us[i]/2;
+        for(i=0;i<3;++i) if(i!=maximum_ind) difs[i] = us[i]-avg;
+        for(i=0;i<3;++i) if(i!=maximum_ind) if(difs[i]*difs[i] <= max_dif*max_dif) difs[i] = 0.0f; // jesli jakies dif miesci sie w okregu, to nie jest juz interesujace
+        if(debug){
+            sprintf(str,"avg=%f;\n\r",avg); write_string(str);
+            sprintf(str,"difs=[%f,%f,%f];\n\r",difs[0],difs[1],difs[2]); write_string(str);
+        }
+        maximum_ind_2 = -1;
+        for(i=0;i<3;++i){
+            if(i!=maximum_ind && difs[i] > 0.0f){
+                maximum_ind_2 = 0;
+                break;
+            }
+        }
+        if(debug){
+            sprintf(str,"maximum_ind=%d;\n\r",maximum_ind); write_string(str);
+        }
+        if(maximum_ind_2 == -1) avg_us[0] = avg; // those two signals are close enough
+        else                    avg_us[0] = us[2]; // no signals are close enough, therefore I trust myself
+    }
+    if(debug){
+        sprintf(str,"result=%f;\n\r",avg_us[0]); write_string(str);
+    }
+
+    setCurrentControl(&cc,avg_us);
+
+    pushCurrentControlsToArchiveData(&cc,&ad);
+    setControlValue(last_control(&ad));
+
+    // __sendMasterControlValue(&huart1,last_control(&ad));
+    lu = last_control(&ad);
+    __sendMasterControlValue(&huart2,lu[0]);
+    __sendMasterControlValue(&huart6,lu[0]);
+    HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+
+ 
+}
+
+void timeout(){
+    //setControlValue(0.0);
+    // while(1);
+}
+
+// zups

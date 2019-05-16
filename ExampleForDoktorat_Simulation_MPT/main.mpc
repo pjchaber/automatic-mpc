@@ -1,0 +1,195 @@
+#include <stdio.h>
+
+#define NU 2
+#define NY 2
+#define NX 2
+
+#define KU 20
+#define KY 20
+
+FILE * fd;
+
+static long t = 0;
+static long i = 0;
+static long j = 0;
+static float* last_control_tmp;
+static float ** A;
+static float ** B;
+static float ** C;
+static float ** D;
+static float** control_value;
+static float** AD_X;
+static float** AD_Y;
+static float** AD_Xtmp1;
+static float** AD_Ytmp1;
+static float** AD_Xtmp2;
+static float** AD_Ytmp2;
+static float** AD_Uk1;
+static float** AD_Yk1;
+static float** AD_Xk1;
+
+long time = 0;
+
+long get_time(){
+    return time++;
+}
+
+#MPC_BEGIN
+main_matlab_file
+#MPC_END
+
+ArchiveData ad;
+CurrentControl cc;
+
+void sim_measurements(){
+    static float ** output;
+    output = dtablica(1,1,1,NU);
+    last_control_tmp = last_control(&ad);
+    for(i=1;i<=NU;++i) AD_Uk1[i][1] = last_control_tmp[i-1];
+    iloczynab(A,AD_Xk1,AD_Xtmp1,NX,NX,NX,1);
+    iloczynab(B,AD_Uk1,AD_Xtmp2,NX,NU,NU,1);
+    sumaaa(AD_Xtmp1,AD_Xtmp2,AD_X,NX,1,1);
+    // AD_X = SSz.A*AD_X+SSz.B*AD_U;
+    iloczynab(C,AD_Xk1,AD_Ytmp1,NY,NX,NX,1);
+    iloczynab(D,AD_Uk1,AD_Ytmp2,NY,NU,NU,1);
+    sumaaa(AD_Ytmp1,AD_Ytmp2,AD_Y,NY,1,1);
+    // AD_Y = SSz.C*AD_X+SSz.D*AD_U;
+    
+    iloczyna(AD_X,1,AD_Xk1,NX,1); // X(k-1) <-- X(k)*1
+    for(i=1;i<=NY;++i) output[1][i] = AD_Y[i][1];   
+    new_simulated_signal(&ad,&(output[1][1]));    
+}
+
+void measurements(){
+    static float ** output;
+    output = dtablica(1,1,1,NU);
+    output[1][1] = 0.21;
+    output[1][2] = 0.22;
+    new_output(&ad,&(output[1][1]));    
+}
+
+void sim_setup(){
+    #MPC_PROFILER_BEGIN 2
+    AD_X = dtablica(1,NX,1,1);
+    AD_Y = dtablica(1,NY,1,1);
+    AD_Uk1 = dtablica(1,NU,1,1);
+    AD_Yk1 = dtablica(1,NY,1,1);
+    AD_Xk1 = dtablica(1,NX,1,1);
+    AD_Ytmp1 = dtablica(1,NY,1,1);
+    AD_Xtmp1 = dtablica(1,NX,1,1);
+    AD_Ytmp2 = dtablica(1,NY,1,1);
+    AD_Xtmp2 = dtablica(1,NX,1,1);
+
+    A = dtablica(1,NX,1,NX);
+    A[1][1] = 0.367879441171442f;
+    A[1][2] =               0.0f;
+    A[2][1] =               0.0f;
+    A[2][2] = 0.367879441171442f;
+
+    B = dtablica(1,NX,1,NU);
+    B[1][1] = 0.632120558828558f;
+    B[1][2] = 0.063212055882856f;
+    B[2][1] = 0.012642411176571f;
+    B[2][2] = 0.568908502945702f;
+
+    C = dtablica(1,NY,1,NX);
+    C[1][1] = 1.0f;
+    C[1][2] = 0.0f;
+    C[2][1] = 0.0f;
+    C[2][2] = 1.0f;
+
+    D = dtablica(1,NY,1,NU);
+    D[1][1] = 0.0f;
+    D[1][2] = 0.0f;
+    D[2][1] = 0.0f;
+    D[2][2] = 0.0f;
+
+    AD_X  [1][1] = 1.10f;    AD_X  [2][1] = 0.92f;
+    AD_Xk1[1][1] = 1.10f;    AD_Xk1[2][1] = 0.92f;
+    AD_Uk1[1][1] = 1.00f;    AD_Uk1[2][1] = 1.00f;
+    AD_Yk1[1][1] = 1.10f;    AD_Yk1[2][1] = 0.92f;
+    #MPC_PROFILER_END 2
+}
+
+void controller_setup(){
+    #MPC_PROFILER_BEGIN 3
+    control_value = dtablica(1,1,1,NU);
+    fd = fopen("./data.csv","w");
+    // fd = stdout;
+
+    init_archive_data(&ad, 30, 30, 2, 2, 0.0f, 0.0f, 0.0f);
+    init_current_control(&cc,&ad);
+    controller(NULL,NULL);
+    #MPC_PROFILER_BEGIN 9
+    fprintf(fd,"T, ");
+    for(i=1;i<=NY;++i)
+        fprintf(fd,"Z%d, ",i);
+    for(i=1;i<=NY;++i)
+        fprintf(fd,"Y%d, ",i);
+    for(i=1;i<=NU;++i)
+        fprintf(fd,"U%d, ",i);
+    for(i=1;i<=NX;++i)
+        fprintf(fd,"X%d, ",i);
+    fprintf(fd,"\n");
+    #MPC_PROFILER_END 9
+    #MPC_PROFILER_END 3
+}
+
+void idle(){
+    fprintf(fd,"%d, ", t);
+    for(i=1;i<=NY;++i)
+        fprintf(fd,"%e, ", ad.z[i-1]);
+    for(i=1;i<=NY;++i)
+        fprintf(fd,"%e, ", ad.y[ad.k][i-1]);
+    for(i=1;i<=NU;++i)
+        fprintf(fd,"%e, ", ad.u[ad.k-1][i-1]);
+    for(i=1;i<=NX;++i)
+        fprintf(fd,"%e, ", ad.u[ad.k-1][i-1]);
+    fprintf(fd,"\n");
+    ++t;
+
+    if(t >= 1000) {
+        #MPC_PROFILER_COUNT 99
+        #MPC_PROFILER_PRINT
+        fclose(fd);
+        exit(0);
+    }
+}
+void function(void){
+    static int d = 0;
+    #MPC_PROFILER_COUNT 1
+    if(t > 237){
+        #MPC_PROFILER_COUNT 14
+        d = 1;
+        // ... seria operacji
+    } else {
+        #MPC_PROFILER_COUNT 15
+        // ... seria operacji
+        d = 4;
+    }
+    #MPC_PROFILER_BEGIN 5
+    #MPC_PROFILER_BEGIN 100
+        time += 3+d;
+    // ... seria operacji
+    #MPC_PROFILER_END 100
+
+    #MPC_PROFILER_BEGIN 101
+        time += 5+d;
+    // ... seria operacji
+    #MPC_PROFILER_END 101
+    #MPC_PROFILER_END 5
+}
+
+void loop(){
+    if     (t<= 200){ ad.z[0] = 0.0f; ad.z[1] = 0.0f; }
+    else if(t<= 400){ ad.z[0] = 0.0f; ad.z[1] = 0.4f; }
+    else if(t<= 600){ ad.z[0] = 0.1f; ad.z[1] = 0.4f; }
+    else if(t<= 800){ ad.z[0] = 0.1f; ad.z[1] = 0.2f; }
+    else if(t<=1000){ ad.z[0] = 0.5f; ad.z[1] = 0.2f; }
+    function();
+    controller(&ad,&cc);
+}
+
+void controls(){
+    push_current_controls_to_archive_data(&cc,&ad);
+}

@@ -1,0 +1,13 @@
+void piszkomunikat(char tekst[],int polecenie);
+long *lwektor(long nl, long nh);
+long **ltablica(long nrl, long nrh, long ncl, long nch);
+float *dwektor(long nl, long nh);
+float **dtablica(long nrl, long nrh, long ncl, long nch);
+float ***dtablica3(long nrl, long nrh, long ncl, long nch, long ndl, long ndh);
+void dwektorkasuj(float *v, long nl, long nh);
+void dtablicakasuj(float **m, long nrl, long nrh, long ncl, long nch);
+void dtablica3kasuj(float ***t, long nrl, long nrh, long ncl, long nch,long ndl, long ndh);
+void lwektorkasuj(long *v, long nl, long nh);
+void ltablicakasuj(long **m, long nrl, long nrh, long ncl, long nch);
+long wart_max(long a, long b);
+long wart_min(long a, long b);

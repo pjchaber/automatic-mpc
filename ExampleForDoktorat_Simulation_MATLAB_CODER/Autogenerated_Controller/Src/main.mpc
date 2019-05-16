@@ -1,0 +1,131 @@
+#include "stm32f7xx_hal.h"
+#include <string.h>
+#include "low_lvl_main.h"
+#include "mat_lib.h"
+
+#define U_SIZE 2
+#define Y_SIZE 2
+
+#define __FUN_WRITE() {write_string((char*)__func__);write_string((char*)"\r\n");}while(0)
+
+char str[100];
+int alg = 0;
+
+extern ADC_HandleTypeDef hadc3;
+extern DMA_HandleTypeDef hdma_adc3;
+
+extern DAC_HandleTypeDef hdac;
+
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim5;
+
+extern UART_HandleTypeDef huart1;
+
+extern void timer_loop(void);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+    if (htim->Instance == TIM2) {
+        timer_loop();
+    }
+}
+
+long get_time(){
+    return HAL_GetTick();
+}
+
+float* measureOutput(){
+    return __measureOutput(); // values from -1 to 1
+}
+
+void set_control_value(float* value){ // values from -1 to 1
+    __setControlValue(value);
+}
+
+void hardware_setup(){
+    #MPC_PROFILER_BEGIN 1
+    low_lvl_main();
+    #MPC_PROFILER_END 1
+}
+
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA SPECJALISTY MATLAB
+#MPC_BEGIN
+eksperymenty_MIMO
+#MPC_END
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA UZYTKOWNIKA KONCOWEGO
+
+ArchiveData ad;
+CurrentControl cc;
+
+void measurements(){
+    #MPC_PROFILER_BEGIN 4
+    new_output(&ad,measureOutput());
+    #MPC_PROFILER_END 4
+}
+
+void controller_setup(){
+    #MPC_PROFILER_BEGIN 2
+    init_archive_data(&ad, 100, 100, U_SIZE, Y_SIZE, 0, 0, 0.01);
+    init_current_control(&cc,&ad);
+    get_time();
+    controller(NULL,NULL);
+    controller_fast(NULL,NULL);
+    #MPC_PROFILER_END 2
+}
+
+void idle(){
+    #MPC_PROFILER_BEGIN 13
+    const int k = 0;
+    // Komunikacja z komputerem zbierającym dane 
+    sprintf(str, "x = [%f,%f;", ad.y[k][0], ad.y[k][1]);
+    write_string(str);
+    sprintf(str,      "%f,%f;", ad.z[0], ad.z[1]);
+    write_string(str);
+    sprintf(str,      "%f,%f]; ", ad.u[k-1][0],ad.u[k-1][1]);
+    write_string(str);
+    sprintf(str,      "a = %d;\n", alg);
+    write_string(str);
+    #MPC_PROFILER_END 13
+}
+
+void loop(){
+    #MPC_PROFILER_BEGIN 10
+    static int i = 0;
+    // 0: 225-525, 500-600
+    // 1: 0-225, 425-500; 
+         if(i< 50){ ad.z[0] =  0.1; ad.z[1] =  0.2; }
+    else if(i<100){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
+    else if(i<150){ ad.z[0] = -0.1; ad.z[1] = -0.2; }
+    else if(i<200){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
+    else if(i<250){ ad.z[0] =  0.1; ad.z[1] =  0.2; }
+    else if(i<300){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
+    else if(i<350){ ad.z[0] = -0.1; ad.z[1] = -0.2; }
+    else if(i<400){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
+    else if(i<450){ ad.z[0] =  0.1; ad.z[1] =  0.2; }
+    else if(i<500){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
+    else if(i<550){ ad.z[0] = -0.1; ad.z[1] = -0.2; }
+    else if(i<600){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
+
+         if(i< 10) alg = 1;
+    else if(i<225) alg = 0;
+    else if(i<425) alg = 1;
+    else if(i<510) alg = 0;
+
+    if(++i >= 600) i = 0;
+    if(alg == 1)    controller(&ad,&cc);
+    else            controller_fast(&ad,&cc);
+    push_current_controls_to_archive_data(&cc,&ad);
+    #MPC_PROFILER_END 10
+    // string_spin();
+}
+
+void controls(){
+    #MPC_PROFILER_BEGIN 3
+    set_control_value(last_control(&ad));
+    #MPC_PROFILER_END 3
+}
+
+void timeout(){
+    //set_control_value(0.0);
+    while(1);
+}
+
+// dupps

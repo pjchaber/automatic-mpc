@@ -1,0 +1,16 @@
+void iloczynaat(float **a,float **b,long a1,long a2);
+void iloczynata(float **a,float **b,long a1,long a2);
+void iloczynab(float **a,float **b,float **c,long a1,long a2,long b1,long b2);
+void iloczynatb(float **a,float **b,float **c,long a1,long a2,long b1,long b2);
+void iloczynatbt(float **a,float **b,float **c,long a1,long a2,long b1,long b2);
+void iloczynabt(float **a,float **b,float **c,long a1,long a2,long b1,long b2);
+void iloczynaw(float **a,float *w,float *b,long a1,long a2,long w1);
+void sumaww(float *wa,float *wb,float *wc,long w1,long suma);
+void sumaaa(float **a,float **b,float **c,long a1,long a2,long suma);
+void iloczynwwt(float *wa,float *wb,float **wc,long w1,long w2);
+float iloczynwtw(float *wa,float *wb,long w1);
+void iloczynwta(float *wa,float **b,float *wc,long w1,long b1,long b2);
+void iloczynatw(float **a,float *wb,float *wc,long a1,long a2,long b1);
+void iloraza(float **a,float b,float **c,long w1,long w2);
+void iloczyna(float **a,float b,float **c,long w1,long w2);
+void iloczynw(float *a,float b,float *c,long w1);

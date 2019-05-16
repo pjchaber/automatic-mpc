@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+ArchiveData ad;
+
+void write_str(char * str){
+    printf("%s\n",str);
+}
+
+#MPC_BEGIN
+if(MPC_CROSSCOMPILER == 1)
+    %generate(PID([1,1,1,1]),'PID');
+    generate(DMC_analitic([1,2,3],2,2,1,[],[],[],[]),'DMC_analitic');
+    return;
+end
+#MPC_END
+
+void idle(){
+    printf("%ld %ld\n",sizeof(ad), sizeof(cc));
+}

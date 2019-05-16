@@ -1,0 +1,161 @@
+#include "stm32f7xx_hal.h"
+#include <string.h>
+#include "low_lvl_main.h"
+#include "mat_lib.h"
+
+#define U_SIZE 2
+#define Y_SIZE 2
+
+#define __FUN_WRITE() {write_string((char*)__func__);write_string((char*)"\r\n");}while(0)
+
+char str[100];
+
+extern ADC_HandleTypeDef hadc3;
+extern DMA_HandleTypeDef hdma_adc3;
+
+extern DAC_HandleTypeDef hdac;
+
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim5;
+
+extern UART_HandleTypeDef huart1;
+
+extern void timer_loop(void);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+    if (htim->Instance == TIM2) {
+        timer_loop();
+    }
+}
+
+long get_time(){
+    return HAL_GetTick();
+}
+
+float* measureOutput(){
+    return __measureOutput(); // values from -1 to 1
+}
+
+void setControlValue(float* value){ // values from -1 to 1
+    __setControlValue(value);
+}
+
+void hardware_setup(){
+    #MPC_PROFILER_BEGIN 1
+    low_lvl_main();
+    #MPC_PROFILER_END 1
+}
+
+void string_spin(){
+    static int ind = 0;
+    static char txt[3] = "?\r\0";
+    // static char stages[4] = {'\\','|','/','-'}; int ssize = 4;
+    static char stages[5] = {' ','_','o','O','o'}; int ssize = 5;
+    txt[0] = stages[ind];
+    write_string(txt);
+    ind = (ind+1)%ssize;
+}
+
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA SPECJALISTY MATLAB
+#MPC_BEGIN
+global MPC_CROSSCOMPILER
+
+% Obiekt emulowany (trzeba pamietac, zeby zmienic na obiekcie okres probkowania z 5ms na 10ms)
+%S(:,:,1) =[0.0000 0; 0 0.0000];
+%S(:,:,2) =[0.6321 0; 0 0.6321];
+%S(:,:,3) =[0.8647 0; 0 0.8647];
+%S(:,:,4) =[0.9502 0; 0 0.9502];
+%S(:,:,5) =[0.9817 0; 0 0.9817];
+%S(:,:,6) =[0.9933 0; 0 0.9933];
+%
+%a =[-0.3679;-0.3679];
+%b(:,:,1) =[0,0;0,0];
+%b(:,:,2) =[0.6321,0;0,0.6321];
+
+% Obiekt rzeczywisty -- 2xRC
+S(1,1,:)=[0.1784,0.3805,0.5334,0.6467,0.7305,0.7926,0.8385,0.8724,0.8975,0.9161,0.9299,0.9401,0.9476,0.9532,0.9573,0.9603,0.9626,0.9643,0.9655,0.9664,0.9671,0.9676];
+S(1,2,:)=S(1,1,:)*0;
+S(2,1,:)=S(1,1,:)*0;
+S(2,2,:)=S(1,1,:)*0;
+
+a(1,:) = [-7.875594597027e-01,+3.526926067685e-02];
+a(2,:) = a(1,:)*0;
+
+b(1,1,:) = [+0.000000000000e+00,+1.783577301464e-01,+6.167306699759e-02];
+b(1,2,:) = b(1,1,:)*0;
+b(2,1,:) = b(1,1,:)*0;
+b(2,2,:) = b(1,1,:)*0;
+
+N = 100;
+Nu = 100;
+lambda = 1;
+psi = 1;
+
+%% Code generation
+if(MPC_CROSSCOMPILER == 1)
+    generate(DMC_MIMO_A(S,N,Nu,lambda,psi,[],[],[-1],[ 1]),'CONTROLLER');
+    % generate(GPC_MIMO_A(a,b,N,Nu,lambda*100,psi,[],[],[-1],[ 1]),'CONTROLLER');
+    % generate(Constant([-1 -1]),'CONTROLLER');
+    return;
+end
+
+%% Optional simulation
+fprintf('Tutaj mozna przeprowadzic symulacje...\n');
+#MPC_END
+
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA UZYTKOWNIKA KONCOWEGO
+ArchiveData ad;
+CurrentControl cc;
+
+void measurements(){
+    #MPC_PROFILER_BEGIN 4
+    new_output(&ad,measureOutput());
+    #MPC_PROFILER_END 4
+}
+
+void controller_setup(){
+    #MPC_PROFILER_BEGIN 2
+    init_archive_data(&ad, 100, 100, U_SIZE, Y_SIZE, 0, 0, 0.01);
+    init_current_control(&cc,&ad);
+    get_time();
+    CONTROLLER(NULL,NULL);
+    #MPC_PROFILER_END 2
+}
+
+void idle(){
+    #MPC_PROFILER_BEGIN 13
+    const int k = 0;
+    // Komunikacja z komputerem zbierającym dane 
+    sprintf(str, "x = [%f,%f;", ad.y[k][0], ad.y[k][1]);
+    write_string(str);
+    sprintf(str,      "%f,%f;", ad.z[0], ad.z[1]);
+    write_string(str);
+    sprintf(str,          "%f,%f];\n", ad.u[k-1][0],ad.u[k-1][1]);
+    write_string(str);
+    #MPC_PROFILER_END 13
+}
+
+void loop(){
+    #MPC_PROFILER_BEGIN 10
+    static int i = 0;
+    if(i<500){ ad.z[0] =  0.1; ad.z[1] =  0.2; }
+    else     { ad.z[0] = -0.1; ad.z[1] = -0.2; }
+    if(++i >= 1000) i = 0;
+    CONTROLLER(&ad,&cc);
+    #MPC_PROFILER_END 10
+    // string_spin();
+}
+
+void controls(){
+    #MPC_PROFILER_BEGIN 3
+    pushCurrentControlsToArchiveData(&cc,&ad);
+    //projectOnFeasibleSet(&ad, NAN, NAN, 0.0, 1.0);
+    setControlValue(last_control(&ad));
+    #MPC_PROFILER_END 3
+}
+
+void timeout(){
+    //setControlValue(0.0);
+    while(1);
+}
+
+// zups

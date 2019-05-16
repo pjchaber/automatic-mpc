@@ -1,0 +1,71 @@
+# Put your stlink folder here so make burn will work.
+STLINK=$(HOME)/stlink
+
+# Put your source files here (or *.c, etc)
+SRCS =main.c system_stm32f4xx.c stm32f4xx_*.c 
+SRCS+=/home/juzio/Playground/C++/Kompilator_skrosny/Libs/C/*.c
+
+# Binaries will be generated with this name (.elf, .bin, .hex, etc)
+PROJ_NAME=examplereg
+
+# Put your STM32F4 library code directory here
+# STM_COMMON=$(HOME)/stm32_discovery_arm_gcc/STM32F401-Discovery_FW_V1.0.0
+STM_COMMON=$(HOME)/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0
+
+# Normally you shouldn't need to change anything below this line!
+#######################################################################################
+
+CC=arm-none-eabi-gcc
+OBJCOPY=arm-none-eabi-objcopy
+SIMC=gcc
+
+LIBS = -lm
+FLAGS =
+
+CFLAGS  = -Tstm32f407_flash.ld -lc --specs=nosys.specs
+# CFLAGS  = -Tstm32f401_flash.ld -lnosys
+
+CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16 -D__FPU_XXX
+# CFLAGS += -mfloat-abi=soft
+CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
+FLAGS  = -g -O0 -w
+FLAGS += -I.
+FLAGS += -DUSE_STDPERIPH_DRIVER -DHSE_VAL=8000000
+FLAGS += -DSTM32F4xx
+
+
+# Include files from STM libraries
+FLAGS += -I$(STM_COMMON)/Utilities/STM32F4-Discovery
+FLAGS += -I$(STM_COMMON)/Libraries/CMSIS/Include 
+# FLAGS += -I$(STM_COMMON)/Libraries/CMSIS/Device/ST/STM32F4xx/Include
+FLAGS += -I$(STM_COMMON)/Libraries/CMSIS/ST/STM32F4xx/Include
+FLAGS += -I$(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/inc
+
+# add startup file to build
+# STARTUP = $(STM_COMMON)/Libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/TrueSTUDIO/startup_stm32f401xx.s 
+STARTUP = $(STM_COMMON)/Libraries/CMSIS/ST/STM32F4xx/Source/Templates/TrueSTUDIO/startup_stm32f4xx.s 
+
+OBJS = $(SRCS:.c=.o)
+
+
+.PHONY: proj software
+
+all: proj
+#all: software
+
+software: 
+	$(SIMC) $(SIMCFLAGS) $(FLAGS) $(SRCS) -o $(PROJ_NAME).out $(LIBS)
+
+proj: $(PROJ_NAME).elf
+
+$(PROJ_NAME).elf: $(SRCS) $(STARTUP)
+	$(CC) $(FLAGS) $(CFLAGS) $^ -o $@ $(LIBS)
+	$(OBJCOPY) -O ihex $(PROJ_NAME).elf $(PROJ_NAME).hex
+	$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
+
+clean:
+	rm -f *.o $(PROJ_NAME).elf $(PROJ_NAME).hex $(PROJ_NAME).bin
+
+# Flash the STM32F4
+burn: proj
+	$(STLINK)/st-flash write $(PROJ_NAME).bin 0x8000000

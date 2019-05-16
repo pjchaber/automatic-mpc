@@ -1,0 +1,189 @@
+#include "stm32f7xx_hal.h"
+#include <string.h>
+#include "low_lvl_main.h"
+#include "obl_macierzowe.h"
+#include "mat_lib.h"
+#include "alokacja_nr.h"
+#include "pk.h"
+
+#define __FUN_WRITE() {write_string((char*)__func__);write_string((char*)"\r\n");}while(0)
+
+char str[100];
+int i = -50;
+uint32_t tcur = 0;
+uint32_t tmax = 0;
+uint32_t tmin = 0xFFFFFFFF;
+
+extern ADC_HandleTypeDef hadc3;
+extern DMA_HandleTypeDef hdma_adc3;
+
+extern DAC_HandleTypeDef hdac;
+
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim5;
+
+extern UART_HandleTypeDef huart1;
+
+extern void timer_loop(void);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+    if (htim->Instance == TIM2) {
+        timer_loop();
+    }
+}
+
+long get_time(){
+    return HAL_GetTick();
+}
+
+float* measureOutput(){
+    return __measureOutput(); // values from -1 to 1
+}
+
+void setControlValue(float* value){ // values from -1 to 1
+    __setControlValue(value);
+}
+
+void hardware_setup(){
+    #MPC_PROFILER_BEGIN 1
+    low_lvl_main();
+    #MPC_PROFILER_END 1
+}
+
+void string_spin(){
+    static int ind = 0;
+    static char txt[3] = "?\r\0";
+    // static char stages[4] = {'\\','|','/','-'}; int ssize = 4;
+    static char stages[5] = {' ','_','o','O','o'}; int ssize = 5;
+    txt[0] = stages[ind];
+    write_string(txt);
+    ind = (ind+1)%ssize;
+}
+
+void printMat(float ** A, long x, long y, const char * fmat){
+    long i = 1;
+    long j = 1;
+    for(i=1; i<=x; ++i){
+        if(i==1) write_string("[");
+        else     write_string(" ");
+        for(j=1; j<=y; ++j){
+            sprintf(str,fmat,A[i][j]);
+            write_string(str);
+            if(j==y && i!=x) write_string(";\n\r");
+            if(j!=y) write_string(",");
+        }
+        if(i==x) write_string("]\n\r");
+    }
+}
+
+void printVec(float * A, long x, const char * fmat){
+    long i = 1;
+    write_string("[");
+    for(i=1; i<=x; ++i){
+        if(i!=1) write_string(" ");
+        sprintf(str,fmat,A[i]);
+        write_string(str);
+        if(i!=x) write_string(";\n\r");
+    }
+    write_string("]\n\r");
+}
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA SPECJALISTY MATLAB
+#MPC_BEGIN
+global MPC_CROSSCOMPILER
+
+if(MPC_CROSSCOMPILER == 1)
+    A = -1; % 0 -- DMC_A, 1 -- DMC_N, 2 -- GPC_A, 3 -- GPC_N, -1 -- CONST,
+    load('C:\\Users\\Admin\\Documents\\GitHub\\Cpp\\Kompilator_skrosny\\ExampleForGrant\\conf.mat');
+
+        if (A == 1) generate(Constant(-1),'CONTROLLER');
+    elseif (A == 2) generate(DMC_MIMO_A(S  ,N,Nu,Lambda,Psi,dumin,dumax,umin,umax),'CONTROLLER');
+    elseif (A == 3) generate(DMC_MIMO_N(S  ,N,Nu,Lambda,Psi,dumin,dumax,umin,umax),'CONTROLLER');
+    elseif (A == 4) generate(GPC_MIMO_A(a,b,N,Nu,Lambda,Psi,dumin,dumax,umin,umax),'CONTROLLER');
+    elseif (A == 5) generate(GPC_MIMO_N(a,b,N,Nu,Lambda,Psi,dumin,dumax,umin,umax),'CONTROLLER');
+    end
+
+    return;
+end
+
+%% Optional simulation
+fprintf('Tutaj mozna przeprowadzic symulacje...\n');
+#MPC_END
+
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA UZYTKOWNIKA KONCOWEGO
+ArchiveData ad;
+CurrentControl cc;
+
+void measurements(){
+    #MPC_PROFILER_BEGIN 4
+    new_output(&ad,measureOutput());
+    #MPC_PROFILER_END 4
+}
+
+void controller_setup(){
+    #MPC_PROFILER_BEGIN 2
+    init_archive_data(&ad, 100, 100, 1, 1, 0.0f, 0.0f, 0.0f);
+    init_current_control(&cc,&ad);
+    get_time();
+    CONTROLLER(NULL,NULL);
+    #MPC_PROFILER_END 2
+}
+
+void idle(){
+    #MPC_PROFILER_BEGIN 13
+    const int k = 0;
+    // Komunikacja z komputerem zbierającym dane 
+    // sprintf(str, "y=[%8.4f,%8.4f];z=[%8.4f,%8.4f];u=[%8.4f,%8.4f];\n\r", ad.y[k][0],ad.y[k][1],ad.z[0],ad.z[1],ad.u[k-1][0],ad.u[k-1][1]);
+    sprintf(str, "y=%8.4f;z=%8.4f;u=%8.4f;t=%d/108;\n\r", ad.y[k][0],ad.z[0],ad.u[k-1][0],tcur);
+    if(i>=0){
+        write_string(str);
+    }
+    if(i>=700){
+        sprintf(str, "DONE=1;tmax=%d/108;tmin=%d/108;\n\r", tmax, tmin);
+        write_string(str);
+    }
+    ++i;
+    #MPC_PROFILER_END 13
+    //HAL_Delay(1000);
+}
+
+void loop(){
+    #MPC_PROFILER_BEGIN 10
+         if(i< 50) ad.z[0] = +0.0;
+    else if(i<100) ad.z[0] = +0.1;
+    else if(i<150) ad.z[0] = -0.2;
+    else if(i<200) ad.z[0] = +0.2;
+    else if(i<250) ad.z[0] = -0.3;
+    else if(i<300) ad.z[0] = -0.2;
+    else if(i<350) ad.z[0] = -0.1;
+    else if(i<400) ad.z[0] = +0.0;
+    else if(i<450) ad.z[0] = +0.1;
+    else if(i<500) ad.z[0] = +0.2;
+    else if(i<550) ad.z[0] = +0.3;
+    else if(i<600) ad.z[0] = +0.1;
+    else if(i<650) ad.z[0] = -0.1;
+    else           ad.z[0] = +0.0;
+    
+    htim5.Instance->CNT = 0; // reset timer counter
+    
+    CONTROLLER(&ad,&cc);
+
+    tcur = htim5.Instance->CNT;
+    tmax = (tcur>tmax)?tcur:tmax;
+    tmin = (tcur<tmin)?tcur:tmin;     
+
+    #MPC_PROFILER_END 10
+}
+
+void controls(){
+    #MPC_PROFILER_BEGIN 3
+    pushCurrentControlsToArchiveData(&cc,&ad);
+    //projectOnFeasibleSet(&ad, NAN, NAN, 0.0, 1.0);
+    setControlValue(last_control(&ad));
+    #MPC_PROFILER_END 3
+}
+
+void timeout(){
+    //setControlValue(0.0);
+    // while(1);
+}
+
+// test1

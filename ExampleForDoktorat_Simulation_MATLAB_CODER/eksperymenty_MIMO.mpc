@@ -1,0 +1,10 @@
+#MPC_BEGIN
+eksperymenty_MIMO
+#MPC_END
+
+ArchiveData ad;
+CurrentControl cc;
+
+long get_time(){
+    return 0;
+}

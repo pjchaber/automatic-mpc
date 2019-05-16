@@ -1,0 +1,390 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>main_matlab_file</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-05-17"><meta name="DC.source" content="main_matlab_file.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Przygotowanie danych</a></li><li><a href="#3">Obiekt regulacji i jego modele</a></li><li><a href="#4">Parametry algorytmu regulacji</a></li><li><a href="#5">Inicjalizacja procesu regulacji</a></li><li><a href="#6">Symulacja</a></li><li><a href="#7">Funkcja wy&#347;wietlaj&#261;ca przebieg regulacji na jednej figurze podzielonej</a></li><li><a href="#8">w poziomie na g&oacute;rny wykres (wyj&#347;cie Y i warto&#347;&#263; zadana Z w czasie T),</a></li><li><a href="#9">oraz na dolny wykres (warto&#347;&#263; sterowania U w czasie T)</a></li></ul></div><pre class="codeinput">clearvars <span class="string">-except</span> <span class="string">MPC_CROSSCOMPILER</span>
+warning <span class="string">off</span>
+
+<span class="keyword">if</span>(~exist(<span class="string">'MPC_CROSSCOMPILER'</span>,<span class="string">'var'</span>))
+    fprintf(<span class="string">'MPC_CROSSCOMPILER NOT PRESENT\n'</span>);
+    NO_CROSSCOMPILER = 1;
+    addpath(<span class="string">'..\\TestingFiles\\'</span>);
+<span class="keyword">else</span>
+    fprintf(<span class="string">'MPC_CROSSCOMPILER EXISTS\n'</span>);
+    clearvars <span class="string">MPC_CROSSCOMPILER</span>
+    NO_CROSSCOMPILER = 0;
+<span class="keyword">end</span>
+
+alg = <span class="string">'AutoMATiC_GPC_A'</span>;
+</pre><pre class="codeoutput">MPC_CROSSCOMPILER NOT PRESENT
+</pre><h2 id="2">Przygotowanie danych</h2><pre class="codeinput">control_value = zeros(2,1); <span class="comment">% tutaj przechowywane s&#261; nowe przyrosty sterowa&#324;</span>
+
+INIT = 1;
+kp = 100; kk = 1000;    <span class="comment">% Czas startu i ko&#324;ca eksperymentu</span>
+nu = 2; ny = 2; nx = 2; <span class="comment">% Wymiarowo&#347;&#263; zadania</span>
+AD_Y    = zeros(kk,ny); <span class="comment">% Macierze i wektory</span>
+AD_U    = zeros(kk,nu); <span class="comment">% do przechowywania</span>
+AD_X    = zeros(kk,nx); <span class="comment">% danych na temat</span>
+AD_DU   = zeros(kk,nu); <span class="comment">% procesu regulacji</span>
+AD_Z    = zeros(1,2);   <span class="comment">% i samej regulacji</span>
+</pre><h2 id="3">Obiekt regulacji i jego modele</h2><pre class="codeinput">KS = [1,.1;.02,.9]; <span class="comment">% Macierz wzmocnie&#324; statycznych</span>
+Gs  = [<span class="keyword">...</span><span class="comment"> % Model w postaci transmitancji ci&#261;g&#322;ej</span>
+    tf(KS(1,1),[1,1]), tf(KS(1,2),[1,1]);<span class="keyword">...</span>
+    tf(KS(2,1),[1,1]), tf(KS(2,2),[1,1]);<span class="keyword">...</span>
+];
+SSs = ss([-1,0;0,-1],KS,[1,0;0,1],[0,0;0,0]); <span class="comment">% Model w przestrzeni stan&oacute;w</span>
+Gz = c2d(Gs,1); <span class="comment">% Dyskretyzacja transmitancji ci&#261;g&#322;ej</span>
+SSz = c2d(SSs,1); <span class="comment">% Dyskretyzacja modelu w przestrzeni stan&oacute;w</span>
+Stmp = step(Gz);      <span class="comment">% Odpowied&#378; skokowa</span>
+S = shiftdim(Stmp,1); <span class="comment">% Przekszta&#322;cenie do wygodniejszej postaci</span>
+DMC_S=S(:,:,2:end);   <span class="comment">% Pozbycie si&#281; pierwszego elementu</span>
+<span class="keyword">for</span> m=1:ny <span class="comment">% Wyznaczenie parametr&oacute;w modelu ARX</span>
+    tmpa = conv(Gz.Denominator{m,1},Gz.Denominator{m,2});
+    GPC_a(m,:) = tmpa(2:end);
+    tmpb = conv(Gz.Numerator{m,1},Gz.Denominator{m,2});
+    GPC_b(m,1,:) = tmpb(1:end);
+    tmpb = conv(Gz.Numerator{m,2},Gz.Denominator{m,1});
+    GPC_b(m,2,:) = tmpb(1:end);
+<span class="keyword">end</span>
+</pre><h2 id="4">Parametry algorytmu regulacji</h2><pre class="codeinput">N  = 10; <span class="comment">% Horyzont predykcji</span>
+Nu = 10; <span class="comment">% Horyzont sterowania</span>
+lambda = 1.0; <span class="comment">% Wsp&oacute;&#322;czynnik kary za przyrosty sterowa&#324;</span>
+psi = 1.0; <span class="comment">% Wsp&oacute;&#322;czynnik kary za uchyb regulacji</span>
+dumin = -0.10; <span class="comment">% Ograniczenie na minimalny przyrost sterowania</span>
+dumax =  0.10; <span class="comment">% Ograniczenie na maksymalny przyrost sterowania</span>
+umin  = -4.00; <span class="comment">% Ograniczenie na minimaln&#261; warto&#347;&#263; sterowania</span>
+umax  =  4.00; <span class="comment">% Ograniczenie na maksymaln&#261; warto&#347;&#263; sterowania</span>
+
+run(alg); <span class="comment">% Uruchomienie inicjalizuj&#261;ce algorytm</span>
+</pre><h2 id="5">Inicjalizacja procesu regulacji</h2><pre class="codeinput">Zpp = [0;0]; <span class="comment">% Domy&#347;lna warto&#347;&#263; zadana</span>
+Xpp = [0;0]; <span class="comment">% Stan w punkcie pracy (nie wyznaczony)</span>
+Upp = [1;1]; <span class="comment">% Sterowanie w punkcie pracy</span>
+<span class="keyword">for</span> AD_K = 1:kk <span class="comment">% Wyznaczenie stanu w punkcie pracy</span>
+    Xpp = SSz.A*Xpp+SSz.B*Upp;
+<span class="keyword">end</span>
+Ypp = SSz.C*Xpp; <span class="comment">% Wyznaczenie sterowania w punkcie pracy</span>
+simT = (1:kk)'; <span class="comment">% Czas dyskretny regulacji</span>
+simU = ones(kk,1)*Upp'; <span class="comment">% Trajektoria sygna&#322;u steruj&#261;cego</span>
+simY = ones(kk,1)*Ypp'; <span class="comment">% Trajektoria sygna&#322;u wyj&#347;ciowego</span>
+simZ = ones(kk,1)*Zpp'; <span class="comment">% Trajektoria sygna&#322;u zadanego</span>
+<span class="keyword">for</span> AD_K = 1:(kp-1) <span class="comment">% Inicjalizacja pocz&#261;tkowych warto&#347;ci trajektorii</span>
+    AD_Y(AD_K,:) = Ypp;
+    AD_U(AD_K,:) = Upp;
+    AD_X(AD_K,:) = Xpp;
+<span class="keyword">end</span>
+</pre><h2 id="6">Symulacja</h2><pre class="codeinput"><span class="keyword">if</span>(NO_CROSSCOMPILER)
+    <span class="keyword">for</span> AD_K = kp:kk
+        <span class="comment">% Symulacja z wykorzystaniem dyskretnych r&oacute;wna&#324; stanu</span>
+        AD_X(AD_K,:) = (SSz.A*AD_X(AD_K-1,:)'+SSz.B*AD_U(AD_K-1,:)')';
+        AD_Y(AD_K,:) = (SSz.C*AD_X(AD_K-1,:)'+SSz.D*AD_U(AD_K-1,:)')';
+
+        <span class="comment">% Okre&#347;lenie warto&#347;ci zadanej</span>
+        <span class="keyword">if</span>    (AD_K&lt;= 200); AD_Z = [0.0, 0.0];
+        <span class="keyword">elseif</span>(AD_K&lt;= 400); AD_Z = [0.0, 0.4];
+        <span class="keyword">elseif</span>(AD_K&lt;= 600); AD_Z = [0.1, 0.4];
+        <span class="keyword">elseif</span>(AD_K&lt;= 800); AD_Z = [0.1, 0.2];
+        <span class="keyword">elseif</span>(AD_K&lt;=1000); AD_Z = [0.5, 0.2];
+        <span class="keyword">end</span>
+
+        <span class="comment">% Algorytm regulacji</span>
+        run(alg);
+
+        <span class="comment">% Zapis nowej warto&#347;ci przyrosti sterowania (control_value)</span>
+        AD_DU(AD_K,:) = control_value';
+        <span class="comment">% Zapis nowej warto&#347;ci sterowania</span>
+        AD_U (AD_K,:) = AD_U(AD_K-1,:)+AD_DU(AD_K,:);
+
+        <span class="comment">% Zapis danych do p&oacute;&#378;niejszych prezentacji</span>
+        simT(AD_K) = AD_K;
+        simU(AD_K,:) = AD_U(AD_K,:);
+        simY(AD_K,:) = AD_Y(AD_K,:);
+        simZ(AD_K,:) = AD_Z(:);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Wy&#347;wietlenie przebiegu eksperymentu</span>
+<span class="keyword">if</span>(NO_CROSSCOMPILER)
+    plot_result(simT,simY,simZ,simU)
+<span class="keyword">end</span>
+
+<span class="comment">% Wygenerowanie algorytmu regulacji w j&#281;zyku C (dodatkowo kod zapisany jest</span>
+<span class="comment">% do zmiennej ,,code'' na potrzeby jego skopiowania w dodatkowe miejsce</span>
+code = generate(alg,<span class="string">'controller'</span>);
+
+
+<span class="comment">% Kompilacja programu testuj&#261;cego wygenerowany algorytm regulacji</span>
+<span class="keyword">if</span>(NO_CROSSCOMPILER)
+    <span class="comment">%fd=fopen('./controller.cinclude','w');</span>
+    <span class="comment">%fprintf(fd,code);</span>
+    <span class="comment">%fclose(fd);</span>
+    <span class="comment">%!mex -v -client engine ./*.c -output test.exe</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Uruchomienie programu testuj&#261;cego wygenerowany algorytm regulacji</span>
+<span class="keyword">if</span>(NO_CROSSCOMPILER)
+    <span class="comment">%!test.exe</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Wy&#347;wietlenie danych z przebiegu regulacji --</span>
+<span class="comment">%     -- (program w C zapisuje dane do data.csv)</span>
+<span class="keyword">if</span>(NO_CROSSCOMPILER)
+    data = csvread(<span class="string">'data.csv'</span>,1);
+    simT = data(:,1);
+    simZ = data(:,2:3);
+    simY = data(:,4:5);
+    simU = data(:,6:7);
+    Empty = data(:,8);
+    plot_result(simT,simY,simZ,simU);
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> plot_result(simT,simY,simZ,simU)
+</pre><h2 id="7">Funkcja wy&#347;wietlaj&#261;ca przebieg regulacji na jednej figurze podzielonej</h2><h2 id="8">w poziomie na g&oacute;rny wykres (wyj&#347;cie Y i warto&#347;&#263; zadana Z w czasie T),</h2><h2 id="9">oraz na dolny wykres (warto&#347;&#263; sterowania U w czasie T)</h2><pre class="codeinput">    figure;
+    subplot(2,1,1);
+    plot(simT,simY);
+    hold <span class="string">on</span>;
+    stairs(simT,simZ,<span class="string">'--'</span>);
+    grid;
+    title(<span class="string">'Wyj&#347;cie'</span>);
+
+    subplot(2,1,2);
+    stairs(simT,simU);
+    grid;
+    ylim([-2 2]);
+    title(<span class="string">'Sterowanie'</span>);
+</pre><img vspace="5" hspace="5" src="main_matlab_file_01.png" alt=""> <img vspace="5" hspace="5" src="main_matlab_file_02.png" alt=""> <pre class="codeinput"><span class="keyword">end</span>
+</pre><pre class="codeoutput">ALG: AutoMATiC_GPC_A -&gt; NAME: controller
+--- LEXER ----
+--- PARSER ----
+--- GENERATOR ----
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clearvars -except MPC_CROSSCOMPILER
+warning off
+
+if(~exist('MPC_CROSSCOMPILER','var'))
+    fprintf('MPC_CROSSCOMPILER NOT PRESENT\n');
+    NO_CROSSCOMPILER = 1;
+    addpath('..\\TestingFiles\\');
+else
+    fprintf('MPC_CROSSCOMPILER EXISTS\n');
+    clearvars MPC_CROSSCOMPILER
+    NO_CROSSCOMPILER = 0;
+end
+
+alg = 'AutoMATiC_GPC_A';
+%% Przygotowanie danych
+control_value = zeros(2,1); % tutaj przechowywane są nowe przyrosty sterowań
+
+INIT = 1;
+kp = 100; kk = 1000;    % Czas startu i końca eksperymentu
+nu = 2; ny = 2; nx = 2; % Wymiarowość zadania
+AD_Y    = zeros(kk,ny); % Macierze i wektory
+AD_U    = zeros(kk,nu); % do przechowywania
+AD_X    = zeros(kk,nx); % danych na temat
+AD_DU   = zeros(kk,nu); % procesu regulacji
+AD_Z    = zeros(1,2);   % i samej regulacji
+
+%% Obiekt regulacji i jego modele
+KS = [1,.1;.02,.9]; % Macierz wzmocnień statycznych
+Gs  = [... % Model w postaci transmitancji ciągłej
+    tf(KS(1,1),[1,1]), tf(KS(1,2),[1,1]);...
+    tf(KS(2,1),[1,1]), tf(KS(2,2),[1,1]);...
+];
+SSs = ss([-1,0;0,-1],KS,[1,0;0,1],[0,0;0,0]); % Model w przestrzeni stanów
+Gz = c2d(Gs,1); % Dyskretyzacja transmitancji ciągłej
+SSz = c2d(SSs,1); % Dyskretyzacja modelu w przestrzeni stanów
+Stmp = step(Gz);      % Odpowiedź skokowa
+S = shiftdim(Stmp,1); % Przekształcenie do wygodniejszej postaci
+DMC_S=S(:,:,2:end);   % Pozbycie się pierwszego elementu
+for m=1:ny % Wyznaczenie parametrów modelu ARX
+    tmpa = conv(Gz.Denominator{m,1},Gz.Denominator{m,2});
+    GPC_a(m,:) = tmpa(2:end);
+    tmpb = conv(Gz.Numerator{m,1},Gz.Denominator{m,2});
+    GPC_b(m,1,:) = tmpb(1:end);
+    tmpb = conv(Gz.Numerator{m,2},Gz.Denominator{m,1});
+    GPC_b(m,2,:) = tmpb(1:end);
+end
+
+%% Parametry algorytmu regulacji
+N  = 10; % Horyzont predykcji
+Nu = 10; % Horyzont sterowania
+lambda = 1.0; % Współczynnik kary za przyrosty sterowań
+psi = 1.0; % Współczynnik kary za uchyb regulacji
+dumin = -0.10; % Ograniczenie na minimalny przyrost sterowania
+dumax =  0.10; % Ograniczenie na maksymalny przyrost sterowania
+umin  = -4.00; % Ograniczenie na minimalną wartość sterowania
+umax  =  4.00; % Ograniczenie na maksymalną wartość sterowania
+
+run(alg); % Uruchomienie inicjalizujące algorytm
+
+%% Inicjalizacja procesu regulacji
+Zpp = [0;0]; % Domyślna wartość zadana
+Xpp = [0;0]; % Stan w punkcie pracy (nie wyznaczony)
+Upp = [1;1]; % Sterowanie w punkcie pracy
+for AD_K = 1:kk % Wyznaczenie stanu w punkcie pracy
+    Xpp = SSz.A*Xpp+SSz.B*Upp;
+end
+Ypp = SSz.C*Xpp; % Wyznaczenie sterowania w punkcie pracy
+simT = (1:kk)'; % Czas dyskretny regulacji
+simU = ones(kk,1)*Upp'; % Trajektoria sygnału sterującego
+simY = ones(kk,1)*Ypp'; % Trajektoria sygnału wyjściowego
+simZ = ones(kk,1)*Zpp'; % Trajektoria sygnału zadanego
+for AD_K = 1:(kp-1) % Inicjalizacja początkowych wartości trajektorii
+    AD_Y(AD_K,:) = Ypp;
+    AD_U(AD_K,:) = Upp;
+    AD_X(AD_K,:) = Xpp;
+end
+
+%% Symulacja
+if(NO_CROSSCOMPILER)
+    for AD_K = kp:kk
+        % Symulacja z wykorzystaniem dyskretnych równań stanu
+        AD_X(AD_K,:) = (SSz.A*AD_X(AD_K-1,:)'+SSz.B*AD_U(AD_K-1,:)')';
+        AD_Y(AD_K,:) = (SSz.C*AD_X(AD_K-1,:)'+SSz.D*AD_U(AD_K-1,:)')';
+
+        % Określenie wartości zadanej
+        if    (AD_K<= 200); AD_Z = [0.0, 0.0];
+        elseif(AD_K<= 400); AD_Z = [0.0, 0.4];
+        elseif(AD_K<= 600); AD_Z = [0.1, 0.4];
+        elseif(AD_K<= 800); AD_Z = [0.1, 0.2];
+        elseif(AD_K<=1000); AD_Z = [0.5, 0.2];
+        end
+
+        % Algorytm regulacji
+        run(alg);
+
+        % Zapis nowej wartości przyrosti sterowania (control_value)
+        AD_DU(AD_K,:) = control_value';              
+        % Zapis nowej wartości sterowania
+        AD_U (AD_K,:) = AD_U(AD_K-1,:)+AD_DU(AD_K,:);
+
+        % Zapis danych do późniejszych prezentacji
+        simT(AD_K) = AD_K;
+        simU(AD_K,:) = AD_U(AD_K,:);
+        simY(AD_K,:) = AD_Y(AD_K,:);
+        simZ(AD_K,:) = AD_Z(:);
+    end
+end
+
+% Wyświetlenie przebiegu eksperymentu
+if(NO_CROSSCOMPILER)
+    plot_result(simT,simY,simZ,simU)
+end
+
+% Wygenerowanie algorytmu regulacji w języku C (dodatkowo kod zapisany jest
+% do zmiennej ,,code'' na potrzeby jego skopiowania w dodatkowe miejsce
+code = generate(alg,'controller');
+
+
+% Kompilacja programu testującego wygenerowany algorytm regulacji
+if(NO_CROSSCOMPILER)
+    %fd=fopen('./controller.cinclude','w');
+    %fprintf(fd,code);
+    %fclose(fd);
+    %!mex -v -client engine ./*.c -output test.exe
+end
+
+% Uruchomienie programu testującego wygenerowany algorytm regulacji
+if(NO_CROSSCOMPILER)
+    %!test.exe
+end
+
+% Wyświetlenie danych z przebiegu regulacji REPLACE_WITH_DASH_DASH 
+%     REPLACE_WITH_DASH_DASH (program w C zapisuje dane do data.csv)
+if(NO_CROSSCOMPILER)
+    data = csvread('data.csv',1);
+    simT = data(:,1);
+    simZ = data(:,2:3);
+    simY = data(:,4:5);
+    simU = data(:,6:7);
+    Empty = data(:,8);
+    plot_result(simT,simY,simZ,simU);
+end
+
+function plot_result(simT,simY,simZ,simU)
+%% Funkcja wyświetlająca przebieg regulacji na jednej figurze podzielonej 
+%% w poziomie na górny wykres (wyjście Y i wartość zadana Z w czasie T), 
+%% oraz na dolny wykres (wartość sterowania U w czasie T)
+    figure;
+    subplot(2,1,1);
+    plot(simT,simY);
+    hold on;
+    stairs(simT,simZ,'REPLACE_WITH_DASH_DASH');
+    grid;
+    title('Wyjście');
+
+    subplot(2,1,2);
+    stairs(simT,simU);
+    grid;
+    ylim([-2 2]);
+    title('Sterowanie');
+end
+
+
+
+##### SOURCE END #####
+--></body></html>

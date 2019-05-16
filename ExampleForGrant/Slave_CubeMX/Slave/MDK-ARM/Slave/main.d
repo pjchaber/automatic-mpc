@@ -1,0 +1,9 @@
+slave\main.o: ..\..\..\..\Libs\C\main.c
+slave\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+slave\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\signal.h
+slave\main.o: ..\..\..\..\Libs\C\./defines.h
+slave\main.o: ..\..\..\..\Libs\C\./profiler.h
+slave\main.o: ..\..\..\..\Libs\C\./simulated_signals.h
+slave\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+slave\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+slave\main.o: ..\..\..\..\Libs\C\././mpctools.h

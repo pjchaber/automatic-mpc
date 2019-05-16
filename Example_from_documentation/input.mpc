@@ -1,0 +1,345 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include <math.h>
+#include <sys/time.h>
+#include "misc.h"
+#include "stm32f4xx_conf.h"
+#include "stm32f4xx_it.h"
+#include "stm32f4xx.h"
+
+/*STM32 Code*/
+typedef enum {LEDG, LEDO, LEDR, LEDB} LED;
+typedef enum {BUT1, BUT2, BUT3, BUT4} BUT;
+__IO uint32_t TimingDelay = 0;
+__IO uint32_t timer = 0;
+volatile char str[1000];
+
+void Delay(__IO uint32_t nTime){ TimingDelay = nTime; while(TimingDelay != 0); }
+void SysTick_Handler(void){ ++timer; if (TimingDelay != 0x00) --TimingDelay; }
+
+uint32_t led2pin(LED l){
+    switch(l){
+        case LEDG: return GPIO_Pin_12;
+        case LEDO: return GPIO_Pin_13;
+        case LEDR: return GPIO_Pin_14;
+        case LEDB: return GPIO_Pin_15;
+    }
+    return GPIO_Pin_12;
+}
+
+uint32_t but2pin(BUT l){
+    switch(l){
+        case BUT1: return GPIO_Pin_1;
+        case BUT2: return GPIO_Pin_2;
+        case BUT3: return GPIO_Pin_3;
+        case BUT4: return GPIO_Pin_4;
+    }
+    return GPIO_Pin_1;
+}
+
+void ledOn(LED l){ GPIO_SetBits(GPIOD, led2pin(l)); }
+void ledOff(LED l){ GPIO_ResetBits(GPIOD, led2pin(l)); }
+int readButton(BUT b){ return GPIO_ReadInputDataBit(GPIOD, but2pin(b)); }
+
+void USART_puts(USART_TypeDef * usart , volatile char * s){
+    while(*s){
+        while(!(usart->SR & 0x00000040));
+        USART_SendData(usart,*s);
+        *s++;
+    }
+}
+
+void UsartInit(){
+    USART_InitTypeDef USART_InitStructure;
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+    // USART 6
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+    GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_USART6);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6, ENABLE);
+
+    USART_InitStructure.USART_BaudRate = 115200;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_InitStructure.USART_Mode = USART_Mode_Tx;
+    USART_InitStructure.USART_Parity = USART_Parity_No;
+    USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    USART_Init(USART6, &USART_InitStructure);
+    USART_Cmd(USART6, ENABLE);
+
+    // USART 2 (TX PA2)
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+    GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+
+    USART_InitStructure.USART_BaudRate = 115200;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_InitStructure.USART_Mode = USART_Mode_Tx;
+    USART_InitStructure.USART_Parity = USART_Parity_No;
+    USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    USART_Init(USART2, &USART_InitStructure);
+    USART_Cmd(USART2, ENABLE);
+}
+
+void ClkInit(){
+    SystemCoreClockUpdate();                                // Update system clock (needed to obtain SystemCoreClock)
+    SysTick_Config(SystemCoreClock / 1000);                 // Enable SysTick
+}
+
+void LedInit(){
+    /* Configure the GPIO_LED pin */
+    GPIO_InitTypeDef GPIO_InitStructure;
+    
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);   // Enable the GPIO_LED Clock
+    GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+    ledOff(LEDO);
+    ledOff(LEDR);
+    ledOff(LEDG);
+    ledOff(LEDB);
+}
+
+void AdcInit(){ // ADC1_IN14 on PC4
+    ADC_InitTypeDef ADC_InitStructure;
+    ADC_CommonInitTypeDef ADC_CommonInitStructure;
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+    ADC_DeInit();
+
+    ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
+    ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2;
+    ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_Disabled;
+    ADC_CommonInit(&ADC_CommonInitStructure);
+
+    ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
+    ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+    ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
+    ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
+    ADC_InitStructure.ADC_ExternalTrigConv = 0;
+    ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+    ADC_InitStructure.ADC_NbrOfConversion = 1;
+    ADC_Init(ADC1, &ADC_InitStructure);
+
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 1, ADC_SampleTime_28Cycles);
+
+    ADC_Cmd(ADC1, ENABLE);
+}
+
+void ButtonsInit(){
+    GPIO_InitTypeDef GPIO_InitStructure;
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+}
+
+void TIM3_IRQHandler(void){
+    if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET) {
+        TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+        timer_loop();
+    }
+}
+
+void TimerInit(void){
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    NVIC_InitTypeDef NVIC_InitStructure;
+
+    /* TIM3 clock enable */
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+
+    /* Enable the TIM3 gloabal Interrupt */
+    NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+    // NVIC_SetPriorityGrouping(2);
+    NVIC_SetPriority(TIM3_IRQn, 1);
+ 
+    // PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 65536) - 1;
+    TIM_TimeBaseStructure.TIM_Period = 2000 - 1;
+    TIM_TimeBaseStructure.TIM_Prescaler = 2100 - 1;
+    TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+    /* TIM Interrupts enable */
+    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+    /* TIM3 enable counter */
+    TIM_Cmd(TIM3, ENABLE);    
+}
+
+void FpuInit(void){
+    SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
+}
+
+char * float2str(float x){
+    char tmpstr[100];
+    int integer = (int)(x);
+    int fractional = (int)( (x-integer)*10000 );
+    if(fractional < 0) fractional *= -1;
+    sprintf(tmpstr, "%d.%04d",integer, fractional);
+    return tmpstr;
+}
+
+void send_control_signal(float u){
+    sprintf(str,"!%04d",(int)(last_control(&ad)*100));
+    USART_puts(USART2, str);
+}
+
+void hardware_setup(){
+    #MPC_PROFILER_BEGIN 2
+    ClkInit();
+    FpuInit();
+    LedInit();  
+    ButtonsInit();
+    UsartInit();
+    AdcInit();
+    TimerInit();
+    #MPC_PROFILER_END 2
+}
+
+void measurements(){
+    #MPC_PROFILER_BEGIN 0
+    uint32_t pomiar = 0;
+    ADC_SoftwareStartConv(ADC1);
+    while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
+    pomiar = (uint16_t)ADC_GetConversionValue(ADC1);
+    new_output(&ad,pomiar*0.01);
+    #MPC_PROFILER_END 0
+}
+
+void write_string_ext(char * s, int clean, int newline){
+    USART_puts(USART6, s);
+    if(newline) USART_puts(USART6, "\n");
+    if(clean)   memset(s, 0, strlen(s));
+}
+void write_string(char * s){
+    write_string_ext(s,1,1);
+}
+
+long get_time(){
+    return timer;
+}
+
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA SPECJALISTY MATLAB
+#MPC_BEGIN
+global MPC_CROSSCOMPILER
+
+%% PID parameters
+pid_par = [4.5, 0.5, 0, 0.1]; % K, Ti, Td, T
+
+%% DMC parameters
+S = [0.000000, 0.092150, 0.173850, 0.248100, 0.318800, 0.377800, 0.431050, 0.482250, 0.525350, 0.562900, 0.601350, 0.632200, 0.662350, 0.687750, 0.708050, 0.730500, 0.750150, 0.767650, 0.781550, 0.796300, 0.808050, 0.818450, 0.827000, 0.838500, 0.845200, 0.852700, 0.858100, 0.864350, 0.870200, 0.873350, 0.879250, 0.882050, 0.886500, 0.888350, 0.891600, 0.894450, 0.896650, 0.898500, 0.899500, 0.903350, 0.904200, 0.903200, 0.905050, 0.906650, 0.907000, 0.907750, 0.907550, 0.908850, 0.910550, 0.910400];
+N  = 10;
+Nu =  5;
+lambda = 1;
+
+%% Code generation
+if(MPC_CROSSCOMPILER == 1)
+    generate(PID(pid_par),'PID');
+    generate(DMC_analitic(S,N,Nu,lambda,[],[],[],[]),'DMC_analitic');
+    return;
+end
+
+%% Optional simulation
+fprintf('Tutaj mozna przeprowadzic symulacje...\n');
+#MPC_END
+
+//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA UZYTKOWNIKA KONCOWEGO
+enum {ALG_PID, ALG_DMC_ANALITIC};
+volatile int algorithm = ALG_PID;
+
+ArchiveData ad;
+CurrentControl cc;
+
+
+void controller_setup(){
+    #MPC_PROFILER_BEGIN 1
+    init_archive_data(&ad, 200, 200, 0, 0, 10.0);
+    get_time();
+    PID(NULL,NULL);
+    DMC_analitic(NULL,NULL);
+    #MPC_PROFILER_END 1
+}
+
+void idle(){
+    if(readButton(BUT1)) algorithm = ALG_PID;
+    else                 algorithm = ALG_DMC_ANALITIC;
+
+    if(readButton(BUT2)) ad.yzad = 30.0;
+    else                 ad.yzad = 10.0;
+
+    if(readButton(BUT3)) while(1);
+    
+    // Komunikacja z komputerem zbierającym dane 
+    sprintf(str, "%d,%s,"  , algorithm,float2str(ad.yk[M(0)]));
+    write_string_ext(str, 1, 0);
+    sprintf(str,       "%s,", float2str(ad.yzad));
+    write_string_ext(str, 1, 0);
+    sprintf(str,            "%s", float2str(ad.uk1[M(-1)]));
+    write_string(str);
+}
+
+void loop(){
+    if(algorithm == ALG_PID){
+        #MPC_PROFILER_BEGIN 10
+        PID(&ad,&cc);
+        #MPC_PROFILER_END 10
+    }
+    if(algorithm == ALG_DMC_ANALITIC) {
+        #MPC_PROFILER_BEGIN 11
+        DMC_analitic(&ad,&cc);
+        #MPC_PROFILER_END 11
+    }
+}
+
+void controls(){
+    #MPC_PROFILER_BEGIN 4
+    pushCurrentControlsToArchiveData(&cc,&ad);
+    projectOnFeasibleSet(&ad, -10.0,10.0, 0.0, 40.0);
+    send_control_signal(last_control(&ad));
+    #MPC_PROFILER_END 4
+}
+
+void timeout(){
+    // Zapal diode czerwona
+    ledOn(LEDR);
+    // Wystaw zerowe sterowanie
+    send_control_signal(0);
+    // Wyswietl wyniki dzialania profilera
+    print_profiler();
+    // Wejdz w petle nieskonczona
+    while(1);
+}
+

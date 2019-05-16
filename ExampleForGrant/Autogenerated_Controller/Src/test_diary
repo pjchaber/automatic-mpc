@@ -1,0 +1,22 @@
+fprintf('Test\n');
+Test
+diary off
+diary test_diary
+test_script;
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+Test
+diary off;
