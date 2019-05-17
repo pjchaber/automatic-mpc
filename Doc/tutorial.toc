@@ -1,2 +1,15 @@
 \contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {A}Test}{2}
+\contentsline {section}{\numberline {2}Requirements}{2}
+\contentsline {section}{\numberline {3}Installation}{2}
+\contentsline {section}{\numberline {4}Single Algorithm in a Controller}{3}
+\contentsline {subsection}{\numberline {4.1}Communication with PC using USART}{4}
+\contentsline {subsection}{\numberline {4.2}Measuring and Creating Voltage Signal}{4}
+\contentsline {subsection}{\numberline {4.3}Dynamic Matrix Control -- Analytic version}{5}
+\contentsline {subsection}{\numberline {4.4}Dynamic Matrix Control -- Numeric version}{5}
+\contentsline {subsection}{\numberline {4.5}Generalized Predictive Control -- Analytic version}{5}
+\contentsline {subsection}{\numberline {4.6}Generalized Predictive Control -- Numeric version}{5}
+\contentsline {section}{\numberline {5}Multiple Algorithms in a Controller}{5}
+\contentsline {subsection}{\numberline {5.1}Analytic and Numeric versions of DMC}{5}
+\contentsline {section}{\numberline {6}Extending of the Library}{5}
+\contentsline {subsection}{\numberline {6.1}Proportional-Integral-Derivative Controller}{5}
+\contentsline {section}{\numberline {A}Test}{5}

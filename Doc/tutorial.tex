@@ -22,40 +22,63 @@
 \sisetup{detect-weight,exponent-product=\cdot,output-decimal-marker={,},per-mode=symbol,binary-units=true,range-phrase={-},range-units=single}
 \SendSettingsToPgf
 %konfiguracje pakietu listings
+
 \lstset{
-	backgroundcolor=\color{szary},
-	frame=single,
+	escapeinside = {@}{@},
 	breaklines=true,
+	tabsize=2,
+	captionpos=t,
+	xleftmargin=2pt,
+	showstringspaces=false,
+	aboveskip=0em,
+  belowskip=0em,
+  basicstyle=\footnotesize\ttfamily,
 }
+
 \lstdefinestyle{customlatex}{
 	basicstyle=\footnotesize\ttfamily,
 	%basicstyle=\small\ttfamily,
 }
-\lstdefinestyle{customc}{
-	breaklines=true,
-	frame=tb,
+
+\definecolor{matlabtext}{HTML}{000000}
+\definecolor{matlabbg}{HTML}{FFFFFF}
+\definecolor{matlabkeywords}{HTML}{0000FF}
+\definecolor{matlabcomments}{HTML}{228B22}
+\definecolor{matlabstring}{HTML}{A020F0}
+\definecolor{matlaberror}{HTML}{FF0000}
+\definecolor{matlabvariable}{HTML}{000000}
+
+\lstdefinestyle{myc}{
 	language=C,
-	xleftmargin=0pt,
-	showstringspaces=false,
-	basicstyle=\small\ttfamily,
+	backgroundcolor=\color{white},
 	keywordstyle=\bfseries\color{green!40!black},
 	commentstyle=\itshape\color{purple!40!black},
 	identifierstyle=\color{blue},
 	stringstyle=\color{orange},
+	classoffset=1,% starting a new class
+%	alsoletter=\#,
+	otherkeywords={\#MPC\_BEGIN, \#MPC\_END, \#MPC\_INCLUDE, \#MPC\_PROFILER\_BEGIN, \#MPC\_PROFILER\_COUNT, \#MPC\_PROFILER\_END, \#MPC\_PROFILER\_PRINT},	
+	morekeywords=[2]{\#MPC\_BEGIN,\#MPC\_END},
+	keywordstyle=[2]\bfseries\color{orange},
+	morekeywords=[3]{\#MPC\_PROFILER\_BEGIN, \#MPC\_PROFILER\_COUNT, \#MPC\_PROFILER\_END, \#MPC\_PROFILER\_PRINT},
+	keywordstyle=[3]\bfseries\color{purple},
+	morekeywords=[4]{\#MPC\_INCLUDE},
+	keywordstyle=[4]\bfseries\color{red}, % not used anymore	
+	morekeywords=[5]{CurrentControlPtr,CurrentControl},
+	keywordstyle=[5]\bfseries\color{green!50!blue}, % not used anymore	
+	morekeywords=[6]{ArchiveDataPtr,ArchiveData},
+	keywordstyle=[6]\bfseries\color{green!50!red}, % not used anymore	
 }
-\lstdefinestyle{custommatlab}{
-	captionpos=t,
-	breaklines=true,
-	frame=tb,
-	xleftmargin=0pt,
+\lstdefinestyle{mym}{
 	language=matlab,
-	showstringspaces=false,
-	%basicstyle=\footnotesize\ttfamily,
-	basicstyle=\scriptsize\ttfamily,
-	keywordstyle=\bfseries\color{green!40!black},
-	commentstyle=\itshape\color{purple!40!black},
-	identifierstyle=\color{blue},
-	stringstyle=\color{orange},
+	backgroundcolor=\color{white},
+	basicstyle=\footnotesize\ttfamily\color{matlabtext},
+	keywordstyle=\bfseries\color{matlabkeywords},
+	commentstyle=\color{matlabcomments},
+	morecomment=[l][\color{matlabcomments}\bfseries]{\%\%},
+	morecomment=[l][\color{matlabcomments}]{...},
+	identifierstyle=\color{matlabvariable},
+	stringstyle=\color{matlabstring},
 }
 
 %wymiar tekstu (bez ¿ywej paginy)
@@ -82,9 +105,202 @@ title style={font=\small}
 \newpage
 \section{Introduction}
 \section{Requirements}
+This software was tested using following setup:
+\begin{itemize}
+\item Microsoft Windows 10 Pro
+\item MATLAB 2019a
+\item MinGW64 Compiler (C++)
+\end{itemize}
+and for the programming of the exemplary microcontroller:
+\begin{itemize}
+\item STM32F746IGT6 microcontroller (part of the Core7XXI evaluation board with Open7XXI-C board -- both produced by WaveShare)
+\item J-Link v9.3
+\item Keil uVision v5.17.0.0
+\item STM32CubeMX
+\end{itemize}
+
+Despite aforementioned configuration, this software was tested with MATLAB 2017b, thus should work with any other MATLAB version in between of those two. This software should work also on Linux based operating systems, but it may require minor changes in paths notation.
+
 \section{Installation}
+To build \AutomaticMPC\ system compile its sources using \lstinline[style=mym]{mex} compiler in MATLAB with following steps:
+\begin{enumerate}
+\item download or clone the repository of \AutomaticMPC:\\ \url{https://github.com/pjchaber/automatic-mpc.git}
+\item make sure that MATLAB is callable from the shell by executing: \label{it:shell}
+\begin{lstlisting}[]
+matlab -batch "disp(version);"
+\end{lstlisting}
+which should print output similar to the following:
+\begin{lstlisting}[]
+9.6.0.1072779 (R2019a)
+\end{lstlisting}
+If the output differs, make sure that the following MATLAB directory:
+\begin{lstlisting}[]
+<MATLAB root directory>\bin\win64
+\end{lstlisting}
+is listed in \lstinline|PATH| variable of your system. For example:
+\begin{lstlisting}[]
+E:\Program Files\MATLAB\R2019a\bin\win64
+\end{lstlisting}
+\item register MATLAB for further use of its engine executing of the following instruction in shell:\label{it:regserver}
+\begin{lstlisting}[]
+matlab -regserver
+\end{lstlisting}
+\item change current working directory to a directory with the source of the project 
+\item execute in MATLAB following instruction
+\begin{lstlisting}[style=mym]
+mex -v -client engine main.cpp XGetOpt.cpp;
+\end{lstlisting}
+If the compilation fails, make sure that you have set a C++ compiler by executing in MATLAB:
+\begin{lstlisting}[style=mym]
+mex -setup C++
+\end{lstlisting}
+Also make sure, to use the same MATLAB version which was used in the shell at step \ref{it:shell} and \ref{it:regserver}.
+\end{enumerate}
 
 \section{Single Algorithm in a Controller}
+Firstly lets create STM32CubeMX project which will be used as a base for further definition of a target platform's configuration (it is expected from the reader to know how to use STM32CubeMX and how to create projects for STM32F746IGT6 or similar, and how to, based on such a project, generate a Keil uVision 5 project). Details of this project are as follows:
+\begin{itemize}
+	\item Target Platform: STM32F746IGTx
+	\item Pinout and Configuration:
+	\begin{itemize}
+		\item RCC (HSE as Crystal/Ceramic Resonator)
+		\item ADC3 (IN0 and IN1 enabled):
+		\begin{itemize}
+			\item Clock Prescaler: PLCK divided by 4
+			\item Scan Conversion: Enabled
+			\item Continuous Conversion: Enabled
+			\item DMA Continuous Requests: Enabled
+			\item Number of Regular Conversions: 2
+			\item Rank 1:
+			\begin{itemize}
+				\item Channel: Channel 0
+				\item Sampling Time: 144 Cycles
+			\end{itemize}
+			\item Rank 2:
+			\begin{itemize}
+				\item Channel: Channel 1
+				\item Sampling Time: 144 Cycles
+			\end{itemize}
+		\end{itemize}
+		\item DAC (OUT1 and OUT2 enabled), for both outputs:
+		\begin{itemize}
+			\item  Output Buffer: Enable
+			\item  Trigger: None
+		\end{itemize}
+		\item TIM2 (Clock Source: Internal Clock):
+		\begin{itemize}
+			\item Prescaler: 1000-1
+			\item Counter Period: 10800
+		\end{itemize}
+		\item TIM5 (Clock Source: Internal Clock):
+		\begin{itemize}
+			\item Prescaler: 0
+			\item Counter Period: 0xffffffff
+		\end{itemize}
+		\item USART1 (Asynchronous):
+		\begin{itemize}
+			\item Data Direction: Transmit Only
+		\end{itemize}
+		\item DMA2
+		\begin{itemize}
+			\item ADC3:
+			\begin{itemize}
+				\item Stream: DMA2 Stream 0
+				\item Direction: Peripheral to Memory
+				\item Priority: Low
+				\item Mode: Circular
+				\item Peripheral Data Width: Word
+				\item Memory Data Width: Word
+			\end{itemize}
+			\item ADC3:
+			\begin{itemize}
+				\item Stream: DMA2 Stream 0
+				\item Direction: Peripheral to Memory
+				\item Priority: Low
+				\item Mode: Circular
+				\item Peripheral Data Width: Word
+				\item Memory Data Width: Word
+			\end{itemize}
+		\end{itemize}
+		\item NVIC:
+		\begin{itemize}
+			\item Time base of System tick Timer (Preemption Priority: 5)
+			\item ADC1, ADC2 and ADC3 global interrupts (Enable, Preemption Priority: 3)
+			\item TIM2 global interrupts (Enabled, Preemption Priority: 1)
+			\item USART1 global interrupts (Enabled)
+			\item DMA2 stream0 global interrupts (Preemption Priority: 4)
+		\end{itemize}
+	\end{itemize}
+	\item Clock Configuration:
+	\begin{itemize}
+		\item Input Frequency for HSE: 8Hz
+		\item PLL Source Mux: HSE
+		\item HCLK (MHz): 216 (confirm by pressing ENTER)
+	\end{itemize}
+	\item Project Manager:
+	\begin{itemize}
+		\item Toolchain / IDE: MDK-ARM V5
+		\item Minimum Heap Size: 0x8000
+		\item Minimum Stack Size: 0x40000
+	\end{itemize}
+\end{itemize}
+
+After generating code to a Keil uVision 5 project communication interface with the PC and interface to connect process of control has to be implemented. It is worth making sure, that all the code, that is added to the project after its generation is placed between comments \lstinline[style=myc]|/* USER CODE BEGIN <name> */| and \lstinline[style=myc]|/* USER CODE END <name> */|, which will further on be denoted as "<name>" block. It will further ease the process of regeneration of the microcontroller's configuration.
+
+\subsection{Communication with PC using USART}
+Firstly, in the \lstinline[]|main.c| file, \lstinline|string.h| library header has to be included in the "Includes" block. This will allow to send text messages to a PC in a simple manner. Next a simple wrapper for transmitting of a string should be defined in block "0":
+\begin{lstlisting}[style=myc]
+void write_string(char * txt){
+	while(HAL_UART_GetState(&huart1) == HAL_UART_STATE_BUSY_TX);
+	if(HAL_UART_Transmit_IT(&huart1, (uint8_t*)txt, strlen(txt))!= HAL_OK) 
+		Error_Handler();  
+	while(HAL_UART_GetState(&huart1) == HAL_UART_STATE_BUSY_TX);
+}
+\end{lstlisting}
+
+At this point, it is possible to send text messages to a PC, it is worth noting, that the new line character and carriage return is not included by default in the sent string.
+\subsection{Measuring Voltage Signal}
+Voltage signals after conversion to a digital values will be averaged over 100 consecutive samples. Therefore a table for those raw measurements have to be defined in block "PV" as:
+\begin{lstlisting}[style=myc]
+uint32_t adc_val_raw[ADC_SIZE*2] = {0};
+\end{lstlisting}
+where \lstinline[style=myc]|ADC_SIZE| is defined in block "PD" as:
+\begin{lstlisting}[style=myc]
+#define ADC_SIZE 100
+\end{lstlisting}
+Due to having two signals, the size of table with raw measurements is \lstinline[style=myc]|ADC_SIZE*2|. To increase the resolution of averaged measurements, those will be stored as \lstinline[style=myc]|float| variables (block "PV"):
+\begin{lstlisting}[style=myc]
+float adc_val_f[2] = {0,0};
+\end{lstlisting}
+
+Having those defined, it is important to start a ADC unit. It can be implemented by inserting following code into a block "2":
+\begin{lstlisting}[style=myc]
+HAL_ADC_Start(&hadc3);
+if(HAL_ADC_Start_DMA(&hadc3, (uint32_t*)adc_val_raw, ADC_SIZE*2) != HAL_OK) Error_Handler();
+\end{lstlisting}
+
+Thanks to a DMA mechanism, after obtaining 100 consecutive samples of each signal a specific callback function will be executed. It can be redefined to perform measurements' averaging as soon as they are available, by inserting following code in block "0":
+\begin{lstlisting}[style=myc]
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
+{
+	static int i=0; 
+	static uint32_t tmpval[2] = {0,0};
+	for(i=0,tmpval[0]=0,tmpval[1]=0;i<ADC_SIZE; ++i){
+		tmpval[0] += adc_val_raw[2*i];
+		tmpval[1] += adc_val_raw[2*i+1];
+	}
+	adc_val_f[0] = ((float)tmpval[0]/ADC_SIZE-2047.5f)/2047.5f;
+	adc_val_f[1] = ((float)tmpval[1]/ADC_SIZE-2047.5f)/2047.5f;
+}
+\end{lstlisting}
+This will allow to have constant supply of averaged results from ADC without consuming much of a computational power of a microcontroller core (thanks to DMA).
+
+\subsection{Creating Voltage Signal}
+% TODO DAC
+
+\subsection{Inducing Interruptions with a Constant Frequency}
+% TODO TIM2
+
 \subsection{Dynamic Matrix Control -- Analytic version}
 \subsection{Dynamic Matrix Control -- Numeric version}
 \subsection{Generalized Predictive Control -- Analytic version}
