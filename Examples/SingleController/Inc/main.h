@@ -54,6 +54,10 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
+int low_lvl_main(void);
+float * __measureOutput(void);
+void __setControlValue(float* value);
+void write_string(char * txt);
 
 /* USER CODE END EFP */
 

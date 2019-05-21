@@ -57,6 +57,7 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 uint32_t adc_val_raw[ADC_SIZE*2] = {0};
 float adc_val_f[2] = {0,0};
+float v[2] = {-1.0f, 1.0f};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -93,13 +94,22 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
 	adc_val_f[0] = ((float)tmpval[0]/ADC_SIZE-2047.5f)/2047.5f;
 	adc_val_f[1] = ((float)tmpval[1]/ADC_SIZE-2047.5f)/2047.5f;
 }
+
+void __setControlValue(float* value){ // we assume that this part is known at the design time
+  HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1,DAC_ALIGN_12B_R, (uint32_t)(value[0]*2047.5f+2047.5f));
+  HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_2,DAC_ALIGN_12B_R, (uint32_t)(value[1]*2047.5f+2047.5f));
+}
+float* __measureOutput(){	
+	return adc_val_f;
+}
+
 /* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
   * @retval int
   */
-int main(void)
+int low_lvl_main(void)
 {
   /* USER CODE BEGIN 1 */
 
@@ -135,18 +145,25 @@ int main(void)
   HAL_ADC_Start(&hadc3);
 	if(HAL_ADC_Start_DMA(&hadc3, (uint32_t*)adc_val_raw, ADC_SIZE*2) != HAL_OK) Error_Handler();
 	
-	/* USER CODE END 2 */
+	HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
+	HAL_DAC_Start(&hdac, DAC_CHANNEL_2);
+	
+	HAL_TIM_Base_Init(&htim2);     // Init timer
+	HAL_TIM_Base_Start_IT(&htim2); // start timer interrupts
+  /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
 		char txt[100] = {0};
-    /* USER CODE END WHILE */
-		HAL_Delay(1000);
-		
-		sprintf(txt,"1:%6f,2:%6f\n\r",adc_val_f[0],adc_val_f[1]);
+		sprintf(txt,"%f %f\n\r",adc_val_f[0],adc_val_f[1]);
 		write_string(txt);
+		__setControlValue((float*)v);
+		HAL_Delay(100);
+
+    /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

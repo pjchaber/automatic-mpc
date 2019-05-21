@@ -148,7 +148,7 @@ matlab -regserver
 \item change current working directory to a directory with the source of the project 
 \item execute in MATLAB following instruction
 \begin{lstlisting}[style=mym]
-mex -v -client engine main.cpp XGetOpt.cpp;
+mex -v -client engine main.cpp XGetOpt.cpp -output automatic_transcompiler.exe;;
 \end{lstlisting}
 If the compilation fails, make sure that you have set a C++ compiler by executing in MATLAB:
 \begin{lstlisting}[style=mym]
@@ -157,7 +157,11 @@ mex -setup C++
 Also make sure, to use the same MATLAB version which was used in the shell at step \ref{it:shell} and \ref{it:regserver}.
 \end{enumerate}
 
+\section{Setup}
+All further examples focus on the task of controlling output voltage of emulated process. It is also done using voltage signals. All those signals range from 0 to 3.3V. From the implementation side, those signals are represented as values from -1 to 1, where the lowest value represents 0V and the highest one represents 3.3V. The process that is emulated is a matrix of single inertia transfer functions. {\color{red} Should I give an exact process definition or the code for one?}
+
 \section{Single Algorithm in a Controller}
+
 Firstly lets create STM32CubeMX project which will be used as a base for further definition of a target platform's configuration (it is expected from the reader to know how to use STM32CubeMX and how to create projects for STM32F746IGT6 or similar, and how to, based on such a project, generate a Keil uVision 5 project). Details of this project are as follows:
 \begin{itemize}
 	\item Target Platform: STM32F746IGTx
@@ -245,7 +249,7 @@ Firstly lets create STM32CubeMX project which will be used as a base for further
 	\end{itemize}
 \end{itemize}
 
-After generating code to a Keil uVision 5 project communication interface with the PC and interface to connect process of control has to be implemented. It is worth making sure, that all the code, that is added to the project after its generation is placed between comments \lstinline[style=myc]|/* USER CODE BEGIN <name> */| and \lstinline[style=myc]|/* USER CODE END <name> */|, which will further on be denoted as "<name>" block. It will further ease the process of regeneration of the microcontroller's configuration.
+After generating code to a Keil uVision 5 project communication interface with the PC and interface to connect process of control has to be implemented. It is worth making sure, that all the code, that is added to the project after its generation is placed between comments \lstinline[style=myc]|/* USER CODE BEGIN <name> */| and \lstinline[style=myc]|/* USER CODE END <name> */|, which will further on be denoted as "\textless name\textgreater" block. It will further ease the process of regeneration of the microcontroller's configuration.
 
 \subsection{Communication with PC using USART}
 Firstly, in the \lstinline[]|main.c| file, \lstinline|string.h| library header has to be included in the "Includes" block. This will allow to send text messages to a PC in a simple manner. Next a simple wrapper for transmitting of a string should be defined in block "0":
@@ -296,10 +300,215 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
 This will allow to have constant supply of averaged results from ADC without consuming much of a computational power of a microcontroller core (thanks to DMA).
 
 \subsection{Creating Voltage Signal}
-% TODO DAC
+To generate voltage signal DAC are used. Those are already configured thanks to the generation of the code from STM32CubeMX, although, they have to be started before they can be used. To start them, in the block "2" there has to be invoked:
+\begin{lstlisting}[style=myc]
+HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
+HAL_DAC_Start(&hdac, DAC_CHANNEL_2);
+\end{lstlisting}
+A following calls allow to generate 0V on first output, and the 3.3V on the second one, since this is a 12 bit DAC:
+\begin{lstlisting}[style=myc]
+HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1,DAC_ALIGN_12B_R,0);
+HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_2,DAC_ALIGN_12B_R,4095);
+\end{lstlisting}
+and thus, to use this with a variable that ranges from -1 to 1, a following function is defined (in block "WHILE"):
+\begin{lstlisting}[style=myc]
+void __setControlValue(float* value){
+  HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1,DAC_ALIGN_12B_R, (uint32_t)(value[0]*2047.5f+2047.5f));
+  HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_2,DAC_ALIGN_12B_R, (uint32_t)(value[1]*2047.5f+2047.5f));
+}
+\end{lstlisting}
+where an array of two floats is an argument, and it contains values for consecutive outputs.
 
 \subsection{Inducing Interruptions with a Constant Frequency}
-% TODO TIM2
+To generate an interruption with a constant frequency, which will further be used as an indicator of the beginning of new discrete time, a timer TIM2 is used. It is already configured to generate events with a constant period of 100ms, but it is not started yet. To do so, a following must be implemented in a block "2":
+\begin{lstlisting}[style=myc]
+HAL_TIM_Base_Init(&htim2);   
+HAL_TIM_Base_Start_IT(&htim2);
+\end{lstlisting}
+This will cause an execution of a callback function which can be redefined:
+\begin{lstlisting}[style=myc]
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+    if (htim->Instance == TIM2) {
+		// interrupt each 100ms
+    }
+}
+\end{lstlisting}
+Although its implementation will be further extended.
+\subsection{Interface for Further Ease of Use}
+At this point it is worth to create additional functions, that will wrap already existing functionality, so that anyone who will be working with this project in terms of control algorithms, will have easy interface to work with. Firstly, to give access to measurements signals a following will be used (block "0"):
+\begin{lstlisting}[style=myc]
+float* __measureOutput(){	
+	return adc_val_f;
+}
+\end{lstlisting}
+and it will return a pointer to a two element array of measurement values. It is clearly visible, that it is analogous to the previously defined \lstinline[style=myc]|void __setControlValue(float* value)| function. Those two functions have to have their declarations in the header file corresponding to the source file in which they are defined (block "EFP" in \lstinline|main.h|). In this header, it could be convenient to declare also a function for communication with a PC \lstinline[style=myc]|void write_string(char * txt)|.
+
+Because the main function of the program (namely \lstinline[style=myc]|int main(void)|) is defined in the \AutomaticMPC\ system software framework, the existing one have to be redefined using another name, e.g. \lstinline[style=myc]|void low_lvl_main(void)|, which of course also has to be accessible from other source files. Therefore its declaration has to be given in a proper header file.
+
+At the end it will be convenient to set up the Keil uVision 5 project in such a way, the transcompilation process is executed always right before the build process starts. For this, "Options for Target" window has to be opened, and in the "User" tab, in "Before Build/Rebuild" a "Run \#1" has to be filled with an execution of the transcompiler. A following will be used:
+\begin{lstlisting}
+<absolute path to AutoMATiC>/automatic_transcompiler.exe -I -p -d -i ../Src/main.mpc -o ../Src/main_mpc.c -l <absolute path to AutoMATiC>/Libs/MATLAB/ -L <absolute path to AutoMATiC>/Libs/C/
+\end{lstlisting}
+It is worth noting, that the transcompiler is executed while being in the directory with a project file (i.e. \lstinline|MDK-ARM|). Consecutive arguments of the \lstinline|automatic_transcompiler.exe| execution denotes:
+\begin{itemize}
+\item \lstinline|-I| -- usage of the interrupt based software framework variant,
+\item \lstinline|-p| -- usage of the profiler,
+\item \lstinline|-d| -- usage of the forced delay of the control signal application,
+\item \lstinline|-i <path>| -- relative path to the input file used for transcompilation,
+\item \lstinline|-o <path>| -- relative path to the output file storing the result of transcompilation,
+\item \lstinline|-l <path>| -- relative path to the directory with MATLAB libraries of the transcompiler,
+\item \lstinline|-L <path>| -- relative path to the directory with C libraries of the transcompiler.
+\end{itemize}
+
+To complete the setup of the project one has to add source files and headers of \AutomaticMPC\ system to a project for further compilation. All these files can be found in a directory \lstinline|<absolute path to AutoMATiC>/Libs/C/|. Also a file named \lstinline|main.mpc| has to be created and placed in the \lstinline|../Src/| directory. This file will contain all the logic of the controller with as few low level implementation parts as possible.
+
+\subsection{Logic of the Controller}
+The file that contains logic of the controller, namely \lstinline|main.mpc|, contains implementations which can be divided in a few parts:
+\begin{itemize}
+\item utilisation of the low level interface functions,
+\item invoke of the MATLAB script, used for automatic code generation of the MPC algorithm,
+\item implementation of controllers behaviour.
+\end{itemize}
+The execution of the MATLAB script is not necessary -- content of this script could be as well placed right here. This notation nevertheless allows for clearer separation of the aforementioned parts of implementation of this file:
+
+\begin{lstlisting}[style=myc]
+#include "stm32f7xx_hal.h"
+#include <string.h>
+#include "main.h"
+#include "mat_lib.h"
+
+long get_time(){ return HAL_GetTick(); }
+
+extern void timer_loop(void);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+    if (htim->Instance == TIM2) {
+        timer_loop();
+    }
+}
+void measurements(){
+    #MPC_PROFILER_BEGIN 4
+    new_output(&ad,__measureOutput());
+    #MPC_PROFILER_END 4
+}
+void controls(){
+    #MPC_PROFILER_BEGIN 3
+    __setControlValue(last_control(&ad));
+    #MPC_PROFILER_END 3
+}
+void hardware_setup(){
+    #MPC_PROFILER_BEGIN 1
+    low_lvl_main();
+    #MPC_PROFILER_END 1
+}
+
+#MPC_BEGIN
+\end{lstlisting}
+\begin{lstlisting}[style=mym]
+% Here is the MATLAB code
+algorithms_parameters_definitions
+\end{lstlisting}
+\begin{lstlisting}[style=myc]
+#MPC_END
+
+ArchiveData ad;
+CurrentControl cc;
+
+void controller_setup(){
+    #MPC_PROFILER_BEGIN 2
+    init_archive_data(&ad, 200, 200, U_SIZE, Y_SIZE, 0, 0, 0.01);
+    init_current_control(&cc,&ad);
+    controller(NULL,NULL);
+    #MPC_PROFILER_END 2
+}
+
+void idle(){
+    #MPC_PROFILER_BEGIN 13
+    const int k = 0;
+	static char str[1000] = {0};
+
+    sprintf(str, "x = [%f,%f,",ad.y[k][0], ad.y[k][1]);    write_string(str);
+    sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
+    sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
+    write_string("];\n\r");
+    #MPC_PROFILER_END 13
+}
+
+void loop(){
+    #MPC_PROFILER_BEGIN 10
+    static int i = 0;
+	if(i<  50){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
+	else      { ad.z[0] =  0.1; ad.z[1] = -0.2; }
+    if(++i > 100) i = 0;
+	
+    #MPC_PROFILER_BEGIN 50
+	controller(&ad,&cc);
+	#MPC_PROFILER_END 50
+	
+    push_current_controls_to_archive_data(&cc,&ad);	
+    #MPC_PROFILER_END 10		
+}
+
+void timeout(){
+    while(1);
+}
+\end{lstlisting}
+
+On the listing, there is a reference to a function called \lstinline[style=myc]|controller|, which declaration is as follows:
+\begin{lstlisting}[style=myc]
+void controller(ArchiveData * ad, CurrentControl * c);
+\end{lstlisting}
+This function will be generated as soon as the MATLAB script is finished.
+
+The \AutomaticMPC\ system software framework assumes that there is an implementation of functions:
+\begin{itemize}
+\item \lstinline[style=myc]|void write_string(char * str);| -- function used by the profiler to write out the results of its measurements,
+\item \lstinline[style=myc]|long get_time(void);|  -- function used by the profiler to measure time of execution,
+\item \lstinline[style=myc]|void hardware_setup(void);| -- function used to setup hardware configuration of the controller,
+\item \lstinline[style=myc]|void controller_setup(void);| -- function used to setup software configuration of the controller,
+\item \lstinline[style=myc]|void measurements(void);| -- function used to obtain measurements for the current controller iteration,
+\item \lstinline[style=myc]|void loop(void);| -- function used to define the behaviour of the controller -- here control algorithms are executed,
+\item \lstinline[style=myc]|void controls(void);| -- function used to determine what to do with results obtained from consecutive control algorithms,
+\item \lstinline[style=myc]|void idle(void);| -- function used for other, lower prioritized procedures,
+\item \lstinline[style=myc]|void timeout(void);| -- function executed when the iteration lasts longer than the sampling period.
+\end{itemize}
+These functions are used in the framework, in the predefined order. If some of these are not implemented, a default (often empty) implementation is assumed.
+
+To implement interrupt based variant of the software framework, a function
+\begin{lstlisting}[style=myc]
+extern void timer_loop(void);
+\end{lstlisting}
+has to be declared, and called each time a new discrete time instant starts. In these examples it occurs each time, the timer TIM2 generates an interrupt, and thus causes execution of the following function:
+\begin{lstlisting}[style=myc]
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+\end{lstlisting}
+
+Each new measurement has to be stored in the \lstinline[style=myc]|ArchiveData| structure, using
+\begin{lstlisting}[style=myc]
+void new_output(ArchiveDataPtr ad, float* y);
+\end{lstlisting}
+function. Also the final values of new control signals have to be stored in the same structure using 
+\begin{lstlisting}[style=myc]
+void push_current_controls_to_archive_data(CurrentControlPtr c,ArchiveDataPtr ad);
+\end{lstlisting}
+where \lstinline[style=myc]|CurrentControl| structure is filled by each control algorithm.
+
+Lastly, there are a few functions in the \lstinline[style=myc]|void controller_setup()| function, that are necessary to use those two structures. A function 
+\begin{lstlisting}[style=myc]
+void init_archive_data(ArchiveDataPtr ad, 
+	long number_of_u, long number_of_y, 
+	long size_of_u, long size_of_y, 
+	float default_u, float default_y, 
+	float current_yzad);
+\end{lstlisting}
+is used to initialize the \lstinline[style=myc]|ArchiveData| instance. First argument is a pointer to this structure instance, next there are two parameters used to define number of control and output signals (in this order) of the process of control. Further there are two values that determine, how many previous values of control and output signals have to be stored in the memory of the controller. At the end, there are default values of control, output and set-point signal, used for initialization of the microcontroller memory -- those can be changed as soon as the initialization function is finished.
+
+Next function is
+\begin{lstlisting}[style=myc]
+void init_current_control(CurrentControlPtr cc, ArchiveDataPtr ad);
+\end{lstlisting}
+which is used to allocate memory for an instance of \lstinline[style=myc]|CurrentControl| based on the data stored in the alreaty setup \lstinline[style=myc]|ArchiveData| instance.
+
+At the end of the software setup, there is an execution of the controller function, with both parameters set to \lstinline[style=myc]|NULL|, which is used to initialize some values of the controller that are constant through its whole existence -- this will be clear as soon as the generated code of the algorithm appears.
 
 \subsection{Dynamic Matrix Control -- Analytic version}
 \subsection{Dynamic Matrix Control -- Numeric version}
@@ -312,8 +521,7 @@ This will allow to have constant supply of averaged results from ADC without con
 \section{Extending of the Library}
 \subsection{Proportional-Integral-Derivative Controller}
 
-\appendix
-\section{Test}
-Two
+%\appendix
+%\section{}
 \end{document}
 

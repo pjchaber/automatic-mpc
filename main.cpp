@@ -218,7 +218,7 @@ int main (int argc, TCHAR *argv[]){
     // output_file << "#include \""<< c_libraries_path << "/default_functions.h\"" << endl;
     // Windows Style
     output_file << "#include \""<< c_libraries_path << "defines.h\"" << endl;
-    if(profiler) output_file << "#include \""<< c_libraries_path << "/profiler.h\"" << endl;
+    if(profiler) output_file << "#include \""<< c_libraries_path << "profiler.h\"" << endl;
     output_file << "#include \""<< c_libraries_path << "mpctools.h\"" << endl;
     output_file << "#include \""<< c_libraries_path << "simulated_signals.h\"" << endl;
     // output_file << "#include \""<< c_libraries_path << "default_functions.h\"" << endl;
@@ -229,7 +229,7 @@ int main (int argc, TCHAR *argv[]){
     
 	string line;
     bool block_open = false;
-    int block_counter = 0;
+    long int block_counter = 0;
 	while (getline(input_file, line)){
 		istringstream iss(line);
 		string word;
@@ -239,7 +239,7 @@ int main (int argc, TCHAR *argv[]){
 
 		if(!block_open && word.compare(BLOCK_OPEN)==0){ // if there is a block opening keyword
             tmp_input_file_name = base_tmp_input_file_name;
-            tmp_input_file_name.append(to_string((long double)block_counter++));                                   // add to input file name the _tmp.m ending
+            tmp_input_file_name.append(to_string(block_counter++));  
             tmp_input_file_name.append("_tmp.m");                                   // add to input file name the _tmp.m ending
             cout << "[II] Opening temporary file: " << tmp_input_file_name << "..." << flush;
 			tmp_input_file.open(tmp_input_file_name.c_str(), ios_base::out);
