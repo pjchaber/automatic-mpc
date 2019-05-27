@@ -1,6 +1,6 @@
 open746i-regulator\main_mpc.o: ..\Src\main_mpc.c
 open746i-regulator\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\defines.h
-open746i-regulator\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\/profiler.h
+open746i-regulator\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h
 open746i-regulator\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h
 open746i-regulator\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h
 open746i-regulator\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
@@ -47,5 +47,3 @@ open746i-regulator\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal
 open746i-regulator\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h
 open746i-regulator\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
 open746i-regulator\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-open746i-regulator\main_mpc.o: ../Inc/low_lvl_main.h
-open746i-regulator\main_mpc.o: ../Inc/mat_lib.h

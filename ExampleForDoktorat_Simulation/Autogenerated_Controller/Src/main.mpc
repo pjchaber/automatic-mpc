@@ -1,26 +1,9 @@
 #include "stm32f7xx_hal.h"
 #include <string.h>
-#include "low_lvl_main.h"
+#include "main.h"
 #include "mat_lib.h"
 
-#define U_SIZE 2
-#define Y_SIZE 2
-
-#define __FUN_WRITE() {write_string((char*)__func__);write_string((char*)"\r\n");}while(0)
-
-char str[1000];
-int alg = -5;
-float fb_time = 0;
-
-extern ADC_HandleTypeDef hadc3;
-extern DMA_HandleTypeDef hdma_adc3;
-
-extern DAC_HandleTypeDef hdac;
-
-extern TIM_HandleTypeDef htim2;
-extern TIM_HandleTypeDef htim5;
-
-extern UART_HandleTypeDef huart1;
+long get_time(){ return HAL_GetTick(); }
 
 extern void timer_loop(void);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
@@ -28,129 +11,65 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
         timer_loop();
     }
 }
-
-long get_time(){
-    return HAL_GetTick();
+void measurements(){
+    #MPC_PROFILER_BEGIN 4
+    new_output(&ad,__measureOutput());
+    #MPC_PROFILER_END 4
 }
-
-float* measureOutput(){
-    return __measureOutput(); // values from -1 to 1
+void controls(){
+    #MPC_PROFILER_BEGIN 3
+    __setControlValue(last_control(&ad));
+    #MPC_PROFILER_END 3
 }
-
-void set_control_value(float* value){ // values from -1 to 1
-    __setControlValue(value);
-}
-
 void hardware_setup(){
     #MPC_PROFILER_BEGIN 1
     low_lvl_main();
     #MPC_PROFILER_END 1
 }
 
-//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA SPECJALISTY MATLAB
 #MPC_BEGIN
-eksperymenty_MIMO
+% Here is the MATLAB code
+algorithms_parameters_definitions
 #MPC_END
-//////////////////////////////////////////////////// TUTAJ ZACZYNA SIE ROBOTA UZYTKOWNIKA KONCOWEGO
 
 ArchiveData ad;
 CurrentControl cc;
-
-void measurements(){
-    #MPC_PROFILER_BEGIN 4
-    new_output(&ad,measureOutput());
-    #MPC_PROFILER_END 4
-}
 
 void controller_setup(){
     #MPC_PROFILER_BEGIN 2
     init_archive_data(&ad, 200, 200, U_SIZE, Y_SIZE, 0, 0, 0.01);
     init_current_control(&cc,&ad);
-    get_time();
     controller(NULL,NULL);
-    //controller2(NULL,NULL);
     #MPC_PROFILER_END 2
 }
 
 void idle(){
     #MPC_PROFILER_BEGIN 13
     const int k = 0;
-    // Komunikacja z komputerem zbierającym dane 
-    sprintf(str, "x = [%d,%f,%f,",0, ad.y[k][0], ad.y[k][1]);
-    write_string(str);
-    sprintf(str,      "%f,%f,", ad.z[0], ad.z[1]);
-    write_string(str);
-    sprintf(str,      "%f,%f, ", ad.u[k-1][0],ad.u[k-1][1]);
-    write_string(str);
-    sprintf(str, "%f,%d];\n\r", fb_time  , alg);
-    write_string(str);
+	static char str[1000] = {0};
+
+    sprintf(str, "x = [%f,%f,",ad.y[k][0], ad.y[k][1]);    write_string(str);
+    sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
+    sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
+    write_string("];\n\r");
     #MPC_PROFILER_END 13
 }
 
 void loop(){
     #MPC_PROFILER_BEGIN 10
     static int i = 0;
-    static int j = 0;
-         if(i<  50){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-    else if(i< 100){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-    else if(i< 150){ ad.z[0] = -0.1; ad.z[1] = -0.2; }
-    else if(i< 200){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    else if(i< 250){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    else if(i< 300){ ad.z[0] =  0.1; ad.z[1] =  0.2; }
-    else if(i< 350){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-    else if(i< 400){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-    else if(i< 450){ ad.z[0] = -0.1; ad.z[1] = -0.2; }
-    else if(i< 500){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    else if(i< 550){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    else if(i< 600){ ad.z[0] =  0.1; ad.z[1] =  0.2; }
-    else if(i< 650){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-    else if(i< 700){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-    else if(i< 750){ ad.z[0] = -0.1; ad.z[1] = -0.2; }
-    else if(i< 800){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    else if(i< 850){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    else if(i< 900){ ad.z[0] =  0.1; ad.z[1] =  0.2; }
-    else if(i< 950){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-    else if(i<1000){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-    else if(i<1050){ ad.z[0] = -0.1; ad.z[1] = -0.2; }
-    else if(i<1100){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    else if(i<1150){ ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    else if(i<1200){ ad.z[0] =  0.1; ad.z[1] =  0.2; }
-
-    if(++i > 1200) i = 0;
-
-	//if(i == 133) alg =  5;
-	//if(i == 260) alg = -5;
-	//if(i == 550) alg =  5;
-	//if(i == 560) alg = -5;
-	//if(i == 800) alg =  5;
-	//if(i == 910) alg = -5;
+	if(i<  50){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
+	else      { ad.z[0] =  0.1; ad.z[1] = -0.2; }
+    if(++i > 100) i = 0;
 	
-    htim5.Instance->CNT = 0; // get timer counter
-	#MPC_PROFILER_BEGIN 50
+    #MPC_PROFILER_BEGIN 50
 	controller(&ad,&cc);
 	#MPC_PROFILER_END 50
 	
-	//if(alg > 0) controller(&ad,&cc);
-	//else        controller2(&ad,&cc);
-    fb_time = (htim5.Instance->CNT)/108.0f; // get timer counter            
-
-
     push_current_controls_to_archive_data(&cc,&ad);	
     #MPC_PROFILER_END 10		
-	if(++j == 1000){
-		write_string("\n");
-		profiler_print();
-	}
-    // string_spin();
-}
-
-void controls(){
-    #MPC_PROFILER_BEGIN 3
-    set_control_value(last_control(&ad));
-    #MPC_PROFILER_END 3
 }
 
 void timeout(){
-    //set_control_value(0.0);
     while(1);
 }

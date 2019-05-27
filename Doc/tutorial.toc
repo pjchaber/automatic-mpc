@@ -10,10 +10,10 @@
 \contentsline {subsection}{\numberline {5.5}Interface for Further Ease of Use}{6}
 \contentsline {subsection}{\numberline {5.6}Logic of the Controller}{7}
 \contentsline {subsection}{\numberline {5.7}Dynamic Matrix Control -- Analytic version}{9}
-\contentsline {subsection}{\numberline {5.8}Dynamic Matrix Control -- Numeric version}{9}
-\contentsline {subsection}{\numberline {5.9}Generalized Predictive Control -- Analytic version}{9}
-\contentsline {subsection}{\numberline {5.10}Generalized Predictive Control -- Numeric version}{9}
-\contentsline {section}{\numberline {6}Multiple Algorithms in a Controller}{9}
-\contentsline {subsection}{\numberline {6.1}Analytic and Numeric versions of DMC}{9}
-\contentsline {section}{\numberline {7}Extending of the Library}{9}
-\contentsline {subsection}{\numberline {7.1}Proportional-Integral-Derivative Controller}{9}
+\contentsline {subsection}{\numberline {5.8}Dynamic Matrix Control -- Numeric version}{11}
+\contentsline {section}{\numberline {6}Multiple Algorithms in a Controller}{11}
+\contentsline {subsection}{\numberline {6.1}Analytic and Numeric versions of DMC}{11}
+\contentsline {section}{\numberline {7}Extending of the Library}{12}
+\contentsline {subsection}{\numberline {7.1}Proportional-Integral-Derivative Controller}{12}
+\contentsline {section}{\numberline {A}Analytic DMC -- generated source of \texttt {main\_mpc.c}}{12}
+\contentsline {section}{\numberline {B}Numeric DMC -- generated source of \texttt {main\_mpc.c}}{15}

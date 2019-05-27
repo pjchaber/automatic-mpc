@@ -3,15 +3,29 @@
 #include "main.h"
 #include "mat_lib.h"
 
+ArchiveData ad;
+CurrentControl cc;
+
+int algorithm_used = 0;
+
+long get_time(){ return HAL_GetTick(); }
+
 extern void timer_loop(void);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
     if (htim->Instance == TIM2) {
         timer_loop();
     }
 }
-
-long get_time(){ return HAL_GetTick(); }
-
+void measurements(){
+    #MPC_PROFILER_BEGIN 4
+    new_output(&ad,__measureOutput());
+    #MPC_PROFILER_END 4
+}
+void controls(){
+    #MPC_PROFILER_BEGIN 3
+    __setControlValue(last_control(&ad));
+    #MPC_PROFILER_END 3
+}
 void hardware_setup(){
     #MPC_PROFILER_BEGIN 1
     low_lvl_main();
@@ -23,20 +37,12 @@ void hardware_setup(){
 algorithms_parameters_definitions
 #MPC_END
 
-ArchiveData ad;
-CurrentControl cc;
-
-void measurements(){
-    #MPC_PROFILER_BEGIN 4
-    new_output(&ad,__measureOutput());
-    #MPC_PROFILER_END 4
-}
-
 void controller_setup(){
     #MPC_PROFILER_BEGIN 2
-    init_archive_data(&ad, 200, 200, U_SIZE, Y_SIZE, 0, 0, 0.01);
+    init_archive_data(&ad, 200, 200, 2, 2, 0, 0, 0.01);
     init_current_control(&cc,&ad);
-    controller(NULL,NULL);
+    controllerDMCA(NULL,NULL);
+    controllerDMCN(NULL,NULL);
     #MPC_PROFILER_END 2
 }
 
@@ -65,12 +71,6 @@ void loop(){
 	
     push_current_controls_to_archive_data(&cc,&ad);	
     #MPC_PROFILER_END 10		
-}
-
-void controls(){
-    #MPC_PROFILER_BEGIN 3
-    __setControlValue(last_control(&ad));
-    #MPC_PROFILER_END 3
 }
 
 void timeout(){

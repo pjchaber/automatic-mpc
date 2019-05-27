@@ -10,13 +10,13 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x55DB8DE8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB8DE6)
 I (..\..\..\Libs\C\./default_functions.h)(0x5C1272C6)
 I (..\..\..\Libs\C\././mpctools.h)(0x5C1272C6)
-I (..\..\..\Libs\C\./defines.h)(0x5CE41681)
+I (..\..\..\Libs\C\./defines.h)(0x5CEBACF9)
 I (..\..\..\Libs\C\./simulated_signals.h)(0x5C1272C6)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x55DB8DEE)
 F (..\..\..\Libs\C\main.c)(0x5C92470E)(--c99 -c --cpu Cortex-M7.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I..\..\..\Libs\C-I C:\Users\Admin\Documents\GitHub\AutoMATiC\Examples\SingleController\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F746xx -DUSE_HAL_DRIVER -DSTM32F746xx-o singlecontroller\main.o --omf_browse singlecontroller\main.crf --depend singlecontroller\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB8DE6)
 I (C:\Keil_v5\ARM\ARMCC\include\signal.h)(0x55DB8DF0)
-I (..\..\..\Libs\C\./defines.h)(0x5CE41681)
+I (..\..\..\Libs\C\./defines.h)(0x5CEBACF9)
 I (..\..\..\Libs\C\./default_functions.h)(0x5C1272C6)
 I (..\..\..\Libs\C\././mpctools.h)(0x5C1272C6)
 I (..\..\..\Libs\C\./profiler.h)(0x5C1272C6)
@@ -30,7 +30,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x55DB8DE8)
 F (..\..\..\Libs\C\mpctools.c)(0x5C87C75D)(--c99 -c --cpu Cortex-M7.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I..\..\..\Libs\C-I C:\Users\Admin\Documents\GitHub\AutoMATiC\Examples\SingleController\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F746xx -DUSE_HAL_DRIVER -DSTM32F746xx-o singlecontroller\mpctools.o --omf_browse singlecontroller\mpctools.crf --depend singlecontroller\mpctools.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x55DB8DE8)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x55DB8DEE)
-I (..\..\..\Libs\C\./defines.h)(0x5CE41681)
+I (..\..\..\Libs\C\./defines.h)(0x5CEBACF9)
 I (..\..\..\Libs\C\./mpctools.h)(0x5C1272C6)
 F (..\..\..\Libs\C\obl_macierzowe.c)(0x5C1272C6)(--c99 -c --cpu Cortex-M7.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I..\..\..\Libs\C-I C:\Users\Admin\Documents\GitHub\AutoMATiC\Examples\SingleController\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F746xx -DUSE_HAL_DRIVER -DSTM32F746xx-o singlecontroller\obl_macierzowe.o --omf_browse singlecontroller\obl_macierzowe.crf --depend singlecontroller\obl_macierzowe.d)
 F (..\..\..\Libs\C\pk.c)(0x5C1272C6)(--c99 -c --cpu Cortex-M7.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I..\..\..\Libs\C-I C:\Users\Admin\Documents\GitHub\AutoMATiC\Examples\SingleController\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F746xx -DUSE_HAL_DRIVER -DSTM32F746xx-o singlecontroller\pk.o --omf_browse singlecontroller\pk.crf --depend singlecontroller\pk.d)
@@ -51,7 +51,7 @@ F (..\..\..\Libs\C\simulated_signals.c)(0x5C1272C6)(--c99 -c --cpu Cortex-M7.fp.
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x55DB8DEE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB8DE6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x55DB8DE8)
-I (..\..\..\Libs\C\./defines.h)(0x5CE41681)
+I (..\..\..\Libs\C\./defines.h)(0x5CEBACF9)
 I (..\..\..\Libs\C\./mpctools.h)(0x5C1272C6)
 F (../Src/main.c)(0x5CE40798)(--c99 -c --cpu Cortex-M7.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I..\..\..\Libs\C-I C:\Users\Admin\Documents\GitHub\AutoMATiC\Examples\SingleController\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F746xx -DUSE_HAL_DRIVER -DSTM32F746xx-o singlecontroller\main_1.o --omf_browse singlecontroller\main_1.crf --depend singlecontroller\main_1.d)
 I (../Inc/main.h)(0x5CE408A1)
@@ -170,8 +170,8 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x5CDEC866)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x5CDEC866)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5CDEC866)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5CDEC866)
-F (..\Src\main_mpc.c)(0x5CE41683)(--c99 -c --cpu Cortex-M7.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I..\..\..\Libs\C-I C:\Users\Admin\Documents\GitHub\AutoMATiC\Examples\SingleController\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F746xx -DUSE_HAL_DRIVER -DSTM32F746xx-o singlecontroller\main_mpc.o --omf_browse singlecontroller\main_mpc.crf --depend singlecontroller\main_mpc.d)
-I (C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\defines.h)(0x5CE41681)
+F (..\Src\main_mpc.c)(0x5CEBACFB)(--c99 -c --cpu Cortex-M7.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I..\..\..\Libs\C-I C:\Users\Admin\Documents\GitHub\AutoMATiC\Examples\SingleController\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F746xx -DUSE_HAL_DRIVER -DSTM32F746xx-o singlecontroller\main_mpc.o --omf_browse singlecontroller\main_mpc.crf --depend singlecontroller\main_mpc.d)
+I (C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\defines.h)(0x5CEBACF9)
 I (C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h)(0x5C1272C6)
 I (C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h)(0x5C1272C6)
 I (C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h)(0x5C1272C6)
