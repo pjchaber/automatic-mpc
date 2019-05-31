@@ -1,37 +1,48 @@
 close all;
-clearvars -except X A name
+clearvars -except X name
 kk = length(X);
 U=zeros(kk,2); % 2 wejscia
 Y=zeros(kk,2); % 2 wyjscia
 Z=zeros(kk,2); % 2 wyjscia
-FBt=zeros(kk,1); % jeden pomiar czasu na iteracjê 
 ALG=zeros(kk,1); % jedna wartoœæ na iteracjê
 T=(0:(kk-1))*.1;
 for k=1:kk
     cX = X{k};
-    Y(k,:) = cX(1,2:3);
-    Z(k,:) = cX(1,4:5);
-    U(k,:) = cX(1,6:7);
-    FBt(k) = cX(1,8:8);
-    ALG(k) = cX(1,9:9);
+    Y(k,:) = cX(1,1:2);
+    Z(k,:) = cX(1,3:4);
+    U(k,:) = cX(1,5:6);
+    if(size(cX,2)>=7)
+        ALG(k) = cX(1,7);
+    else
+        ALG(k) = 0;
+    end
 end
 
 subplot(2,1,1);
 plot(T,Y); hold on; 
 stairs(T,Z); 
-if(exist('A','var'))
-    tmp = ylim();
-    stairs(T,(A-0.5)*10,'k--'); 
-    ylim(tmp);
-end
 hold off;
 subplot(2,1,2);
 stairs(T,U); hold on;
-if(exist('A','var'))
-    tmp = ylim();
-    stairs(T,(A-0.5)*10,'k--'); 
-    ylim(tmp);
-end
 hold off;
+csvwrite('pid.csv',[T',Y,Z,U,(ALG-0.5)*100]);
+
+U1=zeros(kk,2)*nan; % 2 wejscia
+Y1=zeros(kk,2)*nan; % 2 wyjscia
+U2=zeros(kk,2)*nan; % 2 wejscia
+Y2=zeros(kk,2)*nan; % 2 wyjscia
 
 
+ac = T([0;diff(ALG)]~=0);
+col = 5;
+fprintf('\\fill[mycolor%d,opacity=1] ({axis cs: \\xstart,-0.5}) rectangle ({axis cs:%.1f,0.5});\n',col,ac(1))
+for i = 1:(length(ac) - 1)
+    if(col == 5); col = 6;
+    else        ; col = 5;
+    end
+    fprintf('\\fill[mycolor%d,opacity=1] ({axis cs: %.1f,-0.5}) rectangle ({axis cs:%.1f,0.5});\n',col,ac(i),ac(i+1))
+end
+if(col == 5); col = 6;
+else        ; col = 5;
+end
+fprintf('\\fill[mycolor%d,opacity=1] ({axis cs:%.1f,-0.5}) rectangle ({axis cs:50.0,0.5});\n',col,ac(end))

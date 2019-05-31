@@ -1,0 +1,10 @@
+.\multiplecontroller\main.o: ..\..\..\Libs\C\main.c
+.\multiplecontroller\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\multiplecontroller\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\signal.h
+.\multiplecontroller\main.o: ..\..\..\Libs\C\./defines.h
+.\multiplecontroller\main.o: ..\..\..\Libs\C\./default_functions.h
+.\multiplecontroller\main.o: ..\..\..\Libs\C\././mpctools.h
+.\multiplecontroller\main.o: ..\..\..\Libs\C\./profiler.h
+.\multiplecontroller\main.o: ..\..\..\Libs\C\./simulated_signals.h
+.\multiplecontroller\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\multiplecontroller\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

@@ -6,8 +6,6 @@
 ArchiveData ad;
 CurrentControl cc;
 
-int algorithm_used = 0;
-
 long get_time(){ return HAL_GetTick(); }
 
 extern void timer_loop(void);
@@ -41,35 +39,38 @@ void controller_setup(){
     #MPC_PROFILER_BEGIN 2
     init_archive_data(&ad, 200, 200, 2, 2, 0, 0, 0.01);
     init_current_control(&cc,&ad);
-    controllerDMCA(NULL,NULL);
-    controllerDMCN(NULL,NULL);
+    controller(NULL,NULL);
     #MPC_PROFILER_END 2
 }
 
 void idle(){
     #MPC_PROFILER_BEGIN 13
     const int k = 0;
+	static int i = 0;
 	static char str[1000] = {0};
 
     sprintf(str, "x = [%f,%f,",ad.y[k][0], ad.y[k][1]);    write_string(str);
     sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
     sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
     write_string("];\n\r");
+	if(++i > 510) profiler_print();
     #MPC_PROFILER_END 13
 }
 
 void loop(){
     #MPC_PROFILER_BEGIN 10
     static int i = 0;
-	if(i<  50){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-	else      { ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    if(++i > 100) i = 0;
+	     if(i< 100){ ad.z[0] = -0.1f; ad.z[1] = +0.2f; }
+	else if(i< 150){ ad.z[0] = -0.1f; ad.z[1] = -0.2f; }
+	else if(i< 250){ ad.z[0] = +0.1f; ad.z[1] = -0.2f; }
+	else           { ad.z[0] = +0.1f; ad.z[1] = +0.2f; }
+	if(++i > 300) i = 0;
 	
     #MPC_PROFILER_BEGIN 50
 	controller(&ad,&cc);
 	#MPC_PROFILER_END 50
 	
-    push_current_controls_to_archive_data(&cc,&ad);	
+	push_current_controls_to_archive_data(&cc,&ad);	
     #MPC_PROFILER_END 10		
 }
 

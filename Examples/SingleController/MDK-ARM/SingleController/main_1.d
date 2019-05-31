@@ -33,6 +33,7 @@ singlecontroller\main_1.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c
 singlecontroller\main_1.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h
 singlecontroller\main_1.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h
 singlecontroller\main_1.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h
+singlecontroller\main_1.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rng.h
 singlecontroller\main_1.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h
 singlecontroller\main_1.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h
 singlecontroller\main_1.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h

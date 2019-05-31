@@ -86,11 +86,9 @@ if( INIT == 1 )
     AutoMATiC_DMC_Aducell = cell(Nu,Nu);
     AutoMATiC_DMC_Aucell = cell(Nu,Nu);
     AutoMATiC_DMC_bvarcell = cell(Nu,1);
-    AutoMATiC_DMC_bcell = cell(Nu,1);
 
     for AutoMATiC_DMC_i = 1:Nu
         AutoMATiC_DMC_bvarcell{AutoMATiC_DMC_i}  = eye(AutoMATiC_DMC_nu);
-        AutoMATiC_DMC_bcell{AutoMATiC_DMC_i}  = ones(AutoMATiC_DMC_nu,1);
         for AutoMATiC_DMC_j = 1:Nu
             if(AutoMATiC_DMC_i>=AutoMATiC_DMC_j)
                 AutoMATiC_DMC_Aucell{AutoMATiC_DMC_i,AutoMATiC_DMC_j} = AutoMATiC_DMC_EYEnu;      
@@ -106,12 +104,21 @@ if( INIT == 1 )
         end
     end
 
+    AutoMATiC_DMC_bducell = cell(Nu*2,1);
+    AutoMATiC_DMC_bucell = cell(Nu*2,1);
+    for AutoMATiC_DMC_i = 1:Nu
+        AutoMATiC_DMC_bducell{AutoMATiC_DMC_i}     = -dumin';
+        AutoMATiC_DMC_bducell{AutoMATiC_DMC_i+Nu}  = +dumax';
+        AutoMATiC_DMC_bucell{AutoMATiC_DMC_i}      = -umin';
+        AutoMATiC_DMC_bucell{AutoMATiC_DMC_i+Nu}   = +umax';
+    end
+    
     AutoMATiC_DMC_Adu = [-cell2mat(AutoMATiC_DMC_Aducell); cell2mat(AutoMATiC_DMC_Aducell)];
     AutoMATiC_DMC_Au  = [-cell2mat(AutoMATiC_DMC_Aucell ); cell2mat(AutoMATiC_DMC_Aucell )];
     AutoMATiC_DMC_A = [AutoMATiC_DMC_Adu;AutoMATiC_DMC_Au];
 
-    AutoMATiC_DMC_bdu = [-cell2mat(AutoMATiC_DMC_bcell)*dumin; cell2mat(AutoMATiC_DMC_bcell)*dumax];
-    AutoMATiC_DMC_bu  = [-cell2mat(AutoMATiC_DMC_bcell)*umin; cell2mat(AutoMATiC_DMC_bcell)*umax];
+    AutoMATiC_DMC_bdu = cell2mat(AutoMATiC_DMC_bducell);
+    AutoMATiC_DMC_bu  = cell2mat(AutoMATiC_DMC_bucell);
     AutoMATiC_DMC_b = [AutoMATiC_DMC_bdu;AutoMATiC_DMC_bu];
     AutoMATiC_DMC_bvardu = [cell2mat(AutoMATiC_DMC_bvarcell)*0; cell2mat(AutoMATiC_DMC_bvarcell)*0];
     AutoMATiC_DMC_bvaru = [cell2mat(AutoMATiC_DMC_bvarcell); -cell2mat(AutoMATiC_DMC_bvarcell)];

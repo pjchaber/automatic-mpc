@@ -1,0 +1,89 @@
+#include "stm32f7xx_hal.h"
+#include <string.h>
+#include "main.h"
+#include "mat_lib.h"
+
+ArchiveData ad;
+CurrentControl cc;
+
+int algorithm_used = 0;
+
+long get_time(){ return HAL_GetTick(); }
+
+extern void timer_loop(void);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+    if (htim->Instance == TIM2) {
+        timer_loop();
+    }
+}
+void measurements(){
+    #MPC_PROFILER_BEGIN 4
+    new_output(&ad,__measureOutput());
+    #MPC_PROFILER_END 4
+}
+void controls(){
+    #MPC_PROFILER_BEGIN 3
+    __setControlValue(last_control(&ad));
+    #MPC_PROFILER_END 3
+}
+void hardware_setup(){
+    #MPC_PROFILER_BEGIN 1
+    low_lvl_main();
+    #MPC_PROFILER_END 1
+}
+
+#MPC_BEGIN
+% Here is the MATLAB code
+algorithms_parameters_definitions
+#MPC_END
+
+void controller_setup(){
+    #MPC_PROFILER_BEGIN 2
+    init_archive_data(&ad, 200, 200, 2, 2, 0, 0, 0.01);
+    init_current_control(&cc,&ad);
+    controllerDMCA(NULL,NULL);
+    controllerDMCN(NULL,NULL);
+    #MPC_PROFILER_END 2
+}
+
+void idle(){
+    #MPC_PROFILER_BEGIN 13
+    const int k = 0;
+	static int i = 0;
+	static char str[1000] = {0};
+
+    sprintf(str, "x = [%f,%f,",ad.y[k][0], ad.y[k][1]);    write_string(str);
+    sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
+    sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
+    sprintf(str,      "%d,",algorithm_used);               write_string(str);
+    write_string("];\n\r");
+	if(++i > 510) profiler_print();
+    #MPC_PROFILER_END 13
+}
+
+void loop(){
+    #MPC_PROFILER_BEGIN 10
+    static int i = 0;
+	     if(i< 100){ ad.z[0] = -0.1f; ad.z[1] = +0.2f; }
+	else if(i< 150){ ad.z[0] = -0.1f; ad.z[1] = -0.2f; }
+	else if(i< 250){ ad.z[0] = +0.1f; ad.z[1] = -0.2f; }
+	else           { ad.z[0] = +0.1f; ad.z[1] = +0.2f; }
+	if(++i > 300){
+		i = 0;
+	}
+   	if((i%10==0) && ((random() % 100) < 10))
+		algorithm_used = algorithm_used==0?1:0;
+
+	
+    #MPC_PROFILER_BEGIN 50
+	if(algorithm_used == 0) controllerDMCA(&ad,&cc);
+	else                    controllerDMCN(&ad,&cc);
+	#MPC_PROFILER_END 50
+	
+	push_current_controls_to_archive_data(&cc,&ad);	
+    #MPC_PROFILER_END 10		
+}
+
+void timeout(){
+    while(1);
+}

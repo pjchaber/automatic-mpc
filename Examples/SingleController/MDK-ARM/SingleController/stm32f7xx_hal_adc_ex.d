@@ -32,6 +32,7 @@ singlecontroller\stm32f7xx_hal_adc_ex.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm
 singlecontroller\stm32f7xx_hal_adc_ex.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h
 singlecontroller\stm32f7xx_hal_adc_ex.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h
 singlecontroller\stm32f7xx_hal_adc_ex.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h
+singlecontroller\stm32f7xx_hal_adc_ex.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rng.h
 singlecontroller\stm32f7xx_hal_adc_ex.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h
 singlecontroller\stm32f7xx_hal_adc_ex.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h
 singlecontroller\stm32f7xx_hal_adc_ex.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h

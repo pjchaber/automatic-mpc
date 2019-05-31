@@ -14,14 +14,27 @@
 \usepackage{xcolor}
 \usepackage{pgfplots}
 \usetikzlibrary{pgfplots.groupplots}
+\usetikzlibrary{backgrounds}
 \usepackage{listings}
 \usepackage{matlab-prettifier}
 \usepackage{enumitem,amssymb}
 \definecolor{szary}{rgb}{0.95,0.95,0.95}
 \usepackage{siunitx}
 \sisetup{detect-weight,exponent-product=\cdot,output-decimal-marker={,},per-mode=symbol,binary-units=true,range-phrase={-},range-units=single}
+
+
+\pgfplotsset{
+	compat=newest,
+	tick label style={font=\tiny},
+	label style={font=\scriptsize},
+	legend style={font=\scriptsize,draw=none,fill=none},
+	title style={font=\scriptsize},
+	xticklabel style={/pgf/number format/fixed}
+}
+
 \SendSettingsToPgf
 %konfiguracje pakietu listings
+
 
 \lstset{
 	escapeinside = {@}{@},
@@ -47,6 +60,84 @@
 \definecolor{matlabstring}{HTML}{A020F0}
 \definecolor{matlaberror}{HTML}{FF0000}
 \definecolor{matlabvariable}{HTML}{000000}
+
+
+\newlength\figureheight
+\newlength\figurewidth
+\setlength\figureheight{7cm}
+\setlength\figurewidth{14cm}
+
+\definecolor{myred}{rgb}{1.00000,0.00000,0.00000}%
+\definecolor{mygreen}{rgb}{0.00000,0.70000,0.00000}%
+\definecolor{myblue}{rgb}{0.00000,0.00000,1.00000}%
+\definecolor{mydarkblue}{rgb}{0.00000,0.00000,0.70000}%
+\definecolor{mylightblue}{rgb}{0.50000,0.50000,1.00000}%
+\definecolor{mydarkred}{rgb}{0.70000,0.00000,0.00000}%
+\definecolor{mydarkgreen}{rgb}{0.00000,0.50000,0.00000}%
+\definecolor{myblack}{rgb}{0.00000,0.00000,0.00000}%
+\definecolor{mycolor5}{rgb}{1.00000,0.95000,0.90000}%
+\definecolor{mycolor6}{rgb}{0.90000,0.95000,1.00000}%
+
+\newcommand{\unone}{$u$}
+\newcommand{\uone} {$u_1$}
+\newcommand{\utwo} {$u_2$}
+\newcommand{\uthree} {$u_3$}
+\newcommand{\uavg} {$\overline{u}$}
+\newcommand{\ynone}   {$y$}
+\newcommand{\yone}    {$y_1$}
+\newcommand{\ytwo}    {$y_2$}
+\newcommand{\ythree}    {$y_3$}
+\newcommand{\yzadnone}{$y^\mathrm{sp}$}
+\newcommand{\yzadone} {$y^\mathrm{sp}_1$}
+\newcommand{\yzadtwo} {$y^\mathrm{sp}_2$}
+
+\newcommand{\xstart}{0.5}
+
+\newcommand{\plotthissiet}[1]{\begin{tikzpicture}
+\begin{groupplot}[
+    group style={
+        group name=left plots,
+        group size=1 by 2,
+        vertical sep=15pt,
+        x descriptions at=edge bottom},
+    width=\figurewidth,
+    height=\figureheight,
+%    scale only axis,
+    xmin=\xstart,
+    xmax=50,
+    axis background/.style={fill=white},
+    legend pos=south east,legend columns=4,legend cell align={left},legend style={draw=none},
+%    scale only axis
+    ]
+\nextgroupplot[%
+xticklabels={,,},
+ymin=-0.5,
+ymax=0.5,
+ylabel={\yone, \ytwo},
+]
+\addplot[thick,opacity=0.5,           color=myblue           ] % Y1
+table[col sep = comma, x index = {0}, y index = {1}]{./#1.csv};
+\addplot[thick,opacity=0.5,           color=myred     ,      ] % Y2
+table[col sep = comma, x index = {0}, y index = {2}]{./#1.csv};
+\addplot[thick,            const plot,color=mydarkblue,dashed] % Z1
+table[col sep = comma, x index = {0}, y index = {3}]{./#1.csv};
+\addplot[thick,            const plot,color=mydarkred ,dashed] % Z2
+table[col sep = comma, x index = {0}, y index = {4}]{./#1.csv};
+\legend{\yone,\ytwo,\yzadone,\yzadtwo};
+\nextgroupplot[%
+xlabel={time [s]},
+ymin=-0.5,
+ymax=0.5,
+ylabel={\uone, \utwo},
+]
+\addplot[thick,opacity=0.5,const plot,color=myblue    ,      ] % U1
+table[col sep = comma, x index = {0}, y index = {5}]{./#1.csv};
+\addplot[thick,opacity=0.5,const plot,color=myred     ,      ] % U2
+table[col sep = comma, x index = {0}, y index = {6}]{./#1.csv};
+\legend{\uone,\utwo};
+\end{groupplot}
+\end{tikzpicture}%
+}
 
 \lstdefinestyle{myc}{
 	language=C,
@@ -234,6 +325,7 @@ Firstly lets create STM32CubeMX project which will be used as a base for further
 			\item USART1 global interrupts (Enabled)
 			\item DMA2 stream0 global interrupts (Preemption Priority: 4)
 		\end{itemize}
+		\item RNG (Activated)
 	\end{itemize}
 	\item Clock Configuration:
 	\begin{itemize}
@@ -263,6 +355,19 @@ void write_string(char * txt){
 \end{lstlisting}
 
 At this point, it is possible to send text messages to a PC, it is worth noting, that the new line character and carriage return is not included by default in the sent string.
+
+All further controllers will send to a PC a message, each iteration, in a following format \lstinline|x = [<y1>,<y2>,<z1>,<z2>,<u1>,<u2>,<alg>,];|, where consecutive placeholders are defined as following:
+\begin{itemize}
+\item \lstinline|<y1>| -- measurement of the first output signal,
+\item \lstinline|<y2>| -- measurement of the second output signal,
+\item \lstinline|<z1>| -- set point for the first output signal,
+\item \lstinline|<z2>| -- set point for the second output signal,
+\item \lstinline|<u1>| -- first control signal applied to a controlled process,
+\item \lstinline|<u2>| -- second control signal applied to a controlled process,
+\item \lstinline|<alg>| -- number of the algorithm used in the controller (used only when more than one control algorithm is used).
+\end{itemize}
+This format is convenient because messages that follows this format can be used in the MATLAB script as an argument of the \lstinline[style=mym]|eval| function, and further easily plotted and saved as a CSV file.
+
 \subsection{Measuring Voltage Signal}
 Voltage signals after conversion to a digital values will be averaged over 100 consecutive samples. Therefore a table for those raw measurements have to be defined in block "PV" as:
 \begin{lstlisting}[style=myc]
@@ -343,17 +448,17 @@ float* __measureOutput(){
 \end{lstlisting}
 and it will return a pointer to a two element array of measurement values. It is clearly visible, that it is analogous to the previously defined \lstinline[style=myc]|void __setControlValue(float* value)| function. Those two functions have to have their declarations in the header file corresponding to the source file in which they are defined (block "EFP" in \lstinline|main.h|). In this header, it could be convenient to declare also a function for communication with a PC \lstinline[style=myc]|void write_string(char * txt)|.
 
-Because the main function of the program (namely \lstinline[style=myc]|int main(void)|) is defined in the \AutomaticMPC\ system software framework, the existing one have to be redefined using another name, e.g. \lstinline[style=myc]|void low_lvl_main(void)|, which of course also has to be accessible from other source files. Therefore its declaration has to be given in a proper header file.
+Because the main function of the program (namely \lstinline[style=myc]|int main(void)|) is defined in the \AutomaticMPC\ system software framework, the existing one have to be redefined using another name, e.g. \lstinline[style=myc]|void low_lvl_main(void)|, which of course also has to be accessible from other source files. Therefore its declaration has to be given in a proper header file. It is also important to remove the \lstinline[style=myc]|while| loop from the \lstinline[style=myc]|low_lvl_main| function, so that it will not hang the controller.
 
 At the end it will be convenient to set up the Keil uVision 5 project in such a way, the transcompilation process is executed always right before the build process starts. For this, "Options for Target" window has to be opened, and in the "User" tab, in "Before Build/Rebuild" a "Run \#1" has to be filled with an execution of the transcompiler. A following will be used:
 \begin{lstlisting}
-<absolute path to AutoMATiC>/automatic_transcompiler.exe -I -p -d -i ../Src/main.mpc -o ../Src/main_mpc.c -l <absolute path to AutoMATiC>/Libs/MATLAB/ -L <absolute path to AutoMATiC>/Libs/C/
+<absolute path to AutoMATiC>/automatic_transcompiler.exe -I -p -c -i ../Src/main.mpc -o ../Src/main_mpc.c -l <absolute path to AutoMATiC>/Libs/MATLAB/ -L <absolute path to AutoMATiC>/Libs/C/
 \end{lstlisting}
 It is worth noting, that the transcompiler is executed while being in the directory with a project file (i.e. \lstinline|MDK-ARM|). Consecutive arguments of the \lstinline|automatic_transcompiler.exe| execution denotes:
 \begin{itemize}
 \item \lstinline|-I| -- usage of the interrupt based software framework variant,
 \item \lstinline|-p| -- usage of the profiler,
-\item \lstinline|-d| -- usage of the forced delay of the control signal application,
+\item \lstinline|-c| -- usage of the forced delay of the control signal application,
 \item \lstinline|-i <path>| -- relative path to the input file used for transcompilation,
 \item \lstinline|-o <path>| -- relative path to the output file storing the result of transcompilation,
 \item \lstinline|-l <path>| -- relative path to the directory with MATLAB libraries of the transcompiler,
@@ -540,8 +645,8 @@ To determine step response coefficients a \lstinline[style=mym]|step| function o
 \begin{lstlisting}[style=mym]
 for m=1:2 % ARX model determination
     tmpa = conv(Gz.Den{m,1},Gz.Den{m,2}); GPC_a(m,:)   = tmpa(2:end);
-    tmpb = conv(Gz.Num{m,1},Gz.Den{m,2}); GPC_b(m,1,:) = [tmpb(2:end) 0]; 
-    tmpb = conv(Gz.Num{m,2},Gz.Den{m,1}); GPC_b(m,2,:) = [tmpb(2:end) 0];
+    tmpb = conv(Gz.Num{m,1},Gz.Den{m,2}); GPC_b(m,1,:) = [tmpb(1:end) 0]; 
+    tmpb = conv(Gz.Num{m,2},Gz.Den{m,1}); GPC_b(m,2,:) = [tmpb(1:end) 0];
 end
 \end{lstlisting}
 
@@ -598,6 +703,29 @@ At this point, if the build procedure will be called on the Keil uVision5 projec
 
 As it is visible, the \lstinline|<path to AutoMATiC>| in this example is \lstinline|C:\Users\Admin\Documents\GitHub\AutoMATiC|. It is worth noting, that there is no part where the MATLAB code could be placed, instead there is a definition of the \lstinline[style=myc]|void controller(ArchiveData * ad, CurrentControl * c)| function. Also each pair of \lstinline[style=myc]|#MPC_PROFILER_BEGIN <id>| and \lstinline[style=myc]|#MPC_PROFILER_END <id>| is substituted with a pair of corresponding C functions \lstinline[style=myc]|profiler_start(<id>)| and \lstinline[style=myc]|profiler_end(<id>)|. If this generated C language source file is not included in the project and the build fails -- it is necessary to add this file to the project and repeat the building process. At this point everything should be ready to program the microcontroller, and test the controller itself.
 
+\begin{figure}
+\centering
+\plotthissiet{dmca}
+\caption{Test}
+\label{fig:dmca}
+\end{figure}
+A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:dmca}. Also the result generated with a profiler is shown in table \ref{tab:dmca}.
+\begin{table}
+\centering
+\caption{Test}
+\label{tab:dmca}
+\begin{tabular}{ccccccc}
+        id & time total &    entries &    min &       mean &  max &    running \\ \hline
+    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
+    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
+    3 ( 3) &          0 &        519 &      0 &     0.0000 &    0 & 0\\
+    4 ( 4) &         27 &        519 &      0 &     0.0520 &    1 & 0\\
+   10 ( A) &         65 &        519 &      0 &     0.1252 &    1 & 0\\
+   50 (32) &         11 &        519 &      0 &     0.0211 &    1 & 0\\
+   13 ( D) &       4115 &        519 &      6 &     7.9287 &   74 & 1\\
+\end{tabular}
+\end{table}
+
 \subsection{Dynamic Matrix Control -- Numeric version}
 Based on the already created project for analytical version of DMC algorithm, a change to its numeric version is straightforward. It only requires the change od the name of used algorithm, i.e. a following line from the \lstinline|algorithms_parameters_definitions.m| script:
 \begin{lstlisting}[style=mym]
@@ -609,6 +737,98 @@ AutoMATiC_Generate('AutoMATiC_DMC_Numeric_Algorithm','controller');
 \end{lstlisting}
 which, after performing same tasks as before to generate the final pure C code, will result in the code listed in the appendix \ref{ch:dmcn}.
 
+
+\begin{figure}
+\centering
+\plotthissiet{dmcn}
+\caption{Test}
+\label{fig:dmcn}
+\end{figure}
+A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:dmcn}. Also the result generated with a profiler is shown in table \ref{tab:dmcn}.
+
+\begin{table}
+\centering
+\caption{Test}
+\label{tab:dmcn}
+\begin{tabular}{ccccccc}
+        id & time total &    entries &    min &       mean &  max &    running\\ \hline
+    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
+    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
+    3 ( 3) &          0 &        511 &      0 &     0.0000 &    0 & 0\\
+    4 ( 4) &         29 &        511 &      0 &     0.0567 &    1 & 0\\
+   10 ( A) &       2401 &        511 &      2 &     4.6986 &   50 & 0\\
+   50 (32) &       2375 &        511 &      1 &     4.6477 &   50 & 0\\
+   13 ( D) &       3566 &        511 &      6 &     6.9784 &    8 & 1\\
+\end{tabular}
+\end{table}
+
+\subsection{General Predictive Control -- Analytic version}
+Due to the already performed determination of the GPC model in considered MATLAB script, only a simple modification has to be performed to change which algorithm is to be generated to a GPC in its analytic version. Therefore the line:
+\begin{lstlisting}[style=mym]
+AutoMATiC_Generate('AutoMATiC_DMC_Numeric_Algorithm','controller');
+\end{lstlisting}
+should be changed to:
+\begin{lstlisting}[style=mym]
+AutoMATiC_Generate('AutoMATiC_GPC_Analytic_Algorithm','controller');
+\end{lstlisting}
+which, after performing same tasks as before to generate the final pure C code, will result in the code listed in the appendix \ref{ch:gpca}.
+
+\begin{figure}
+\centering
+\plotthissiet{gpca}
+\caption{Test}
+\label{fig:gpca}
+\end{figure}
+A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:gpca}. Also the result generated with a profiler is shown in table \ref{tab:gpca}.
+
+\begin{table}
+\centering
+\caption{Test}
+\label{tab:gpca}
+\begin{tabular}{ccccccc}
+        id & time total &    entries &    min &       mean &  max &    running\\ \hline
+    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
+    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
+    3 ( 3) &          0 &        511 &      0 &     0.0000 &    0 & 0\\
+    4 ( 4) &         25 &        511 &      0 &     0.0489 &    1 & 0\\
+   10 ( A) &         55 &        511 &      0 &     0.1076 &    1 & 0\\
+   50 (32) &          5 &        511 &      0 &     0.0097 &    1 & 0\\
+   13 ( D) &       3528 &        511 &      6 &     6.9041 &    7 & 1\\
+\end{tabular}
+\end{table}
+\subsection{General Predictive Control -- Numeric version}
+Again, to change the analytic version of GPC algorithm to its numeric version, a change from:
+\begin{lstlisting}[style=mym]
+AutoMATiC_Generate('AutoMATiC_GPC_Analytic_Algorithm','controller');
+\end{lstlisting}
+to:
+\begin{lstlisting}[style=mym]
+AutoMATiC_Generate('AutoMATiC_GPC_Numeric_Algorithm','controller');
+\end{lstlisting}
+has to be performed. After performing same tasks as before to generate the final pure C code, will result in the code listed in the appendix \ref{ch:gpcn}.
+
+\begin{figure}
+\centering
+\plotthissiet{gpcn}
+\caption{Test}
+\label{fig:gpcn}
+\end{figure}
+A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:gpcn}. Also the result generated with a profiler is shown in table \ref{tab:gpcn}.
+\begin{table}
+\centering
+\caption{Test}
+\label{tab:gpcn}
+\begin{tabular}{ccccccc}
+        id & time total &    entries &    min &       mean &  max &    running\\ \hline
+    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
+    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
+    3 ( 3) &          0 &        511 &      0 &     0.0000 &    0 & 0\\
+    4 ( 4) &         29 &        511 &      0 &     0.0567 &    1 & 0\\
+   10 ( A) &       2447 &        511 &      2 &     4.7886 &   56 & 0\\
+   50 (32) &       2395 &        511 &      2 &     4.6868 &   56 & 0\\
+   13 ( D) &       3540 &        511 &      6 &     6.9275 &    8 & 1\\
+\end{tabular}
+\end{table}
 \section{Multiple Algorithms in a Controller}
 \subsection{Analytic and Numeric versions of DMC}
 To implement a simple controller, which contains two different algorithms, e.g. DMC in two versions, analytical and numerical, it is required to perform some minor changes both in the controllers' logic (\lstinline|main.mpc|), and the MATLAB script that defines parameters of used algorithms (\lstinline|algorithms_parameters_definitions.m|). In the logic part, a new global variable, e.g. \lstinline[style=myc]|int algorithm_used = 0;| should be created -- it will define, which algorithm is currently used. Next, the switching logic should be implemented -- in the \lstinline[style=myc]|void loop()| function a simple condition will be added:
@@ -618,19 +838,26 @@ else                    controllerDMCN(&ad,&cc);
 \end{lstlisting}
 which will define, that if the variable \lstinline[style=myc]|algorithm_used| equals 0, the analytical version of DMC algorithm will be used, otherwise a numeric version will be executed. It is also clearly visible, that those algorithms have new, distinct names. These should be used consequently in both C and MATLAB code. All will be properly set further in this document. First, the software initialization function (named \lstinline[style=myc]|controller_setup|) has to be modified, by substituting a line:
 \begin{lstlisting}[style=myc]
-    controller(NULL,NULL);
+controller(NULL,NULL);
 \end{lstlisting}
 with two new lines:
 \begin{lstlisting}[style=myc]
-    controllerDMCA(NULL,NULL);
-    controllerDMCN(NULL,NULL);
+controllerDMCA(NULL,NULL);
+controllerDMCN(NULL,NULL);
 \end{lstlisting}
 Lastly, the value of variable \lstinline[style=myc]|algorithm_used| has to be defined in time. Therefore, in the function \lstinline[style=myc]|loop()|, right before the newly added conditional execution of control algorithms, a following code should be added:
 \begin{lstlisting}[style=myc]
-if(i == 0 && algorithm_used == 0) algorithm_used == 1;
-if(i == 0 && algorithm_used == 1) algorithm_used == 0;
+if((i%10==0) && ((random() % 100) < 10))
+	algorithm_used = algorithm_used==0?1:0;
 \end{lstlisting}
-which will cause the algorithm to change each time a variable \lstinline[style=myc]|i| is zeroed, which occurs each 100 iterations.
+which will cause the algorithm to change with a constant probability every 10 iterations. The \lstinline[style=myc]|random()| is defined as follows in the \lstinline|main.c| file in the block "0":
+\begin{lstlisting}[style=myc]
+uint32_t random(void){
+	static uint32_t rnd = 0;
+	HAL_RNG_GenerateRandomNumber(&hrng, &rnd);
+	return rnd;
+}
+\end{lstlisting}
 
 Having the C part upgraded, next, the MATLAB script has to be modified. Firstly, the line:
 \begin{lstlisting}[style=mym]
@@ -645,1352 +872,205 @@ and a following code has to be appended to this script:
 lambda= [0.1 0.1]; % Penalty--control signals' increments
 dumin =-[.1  .1 ]; % Lower bound--control increments
 dumax = [.1  .1 ]; % Upper bound--control increments
-code = AutoMATiC_Generate('AutoMATiC_DMC_Analytic_Algorithm','controllerDMCA',0);
+AutoMATiC_Generate('AutoMATiC_DMC_Analytic_Algorithm','controllerDMCA',0);
 \end{lstlisting}
 which will generate second definition of an algorithm, with lower penalty for control signals' increments, and also more relaxed constraints on control increments rendering this particular implementation a bit more aggressive. By adding third argument to the execution of the \lstinline[style=mym]|AutoMATiC_Generate| function, the transcompiler is informed that the generated algorithm is not yet the last one in the project (value of 1), or that it is indeed the last one that will be generated (value of 0). This script finally completes the generation of multiple algorithms in the same project, where a simple condition is used to switch between those two.
 
+A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:dmcan}. Also the result generated with a profiler is shown in table \ref{tab:dmcan}.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep=0.2cm},width=\figurewidth,height=\figureheight,xmin=\xstart,xmax=50,
+    axis background/.style={fill=none},legend pos=south east,legend columns=4,legend cell align={left},legend style={draw=none}]
+\nextgroupplot[yshift=0.15cm,xticklabels={,,},ymin=-0.5,ymax=0.5,ylabel={\yone, \ytwo}]
+\begin{scope}[on background layer]
+\fill[mycolor5,opacity=1] ({axis cs: \xstart,-0.5}) rectangle ({axis cs:3.9,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 3.9,-0.5}) rectangle ({axis cs:5.9,0.5});
+\fill[mycolor5,opacity=1] ({axis cs: 5.9,-0.5}) rectangle ({axis cs:6.9,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 6.9,-0.5}) rectangle ({axis cs:27.9,0.5});
+\fill[mycolor5,opacity=1] ({axis cs: 27.9,-0.5}) rectangle ({axis cs:37.0,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 37.0,-0.5}) rectangle ({axis cs:40.0,0.5});
+\fill[mycolor5,opacity=1] ({axis cs:40.0,-0.5}) rectangle ({axis cs:50.0,0.5});
+\end{scope}
+\addplot[thick,opacity=0.5,           color=myblue           ] table[col sep = comma, x index = {0}, y index = {1}]{./dmcan.csv};
+\addplot[thick,opacity=0.5,           color=myred     ,      ] table[col sep = comma, x index = {0}, y index = {2}]{./dmcan.csv};
+\addplot[thick,            const plot,color=mydarkblue,dashed] table[col sep = comma, x index = {0}, y index = {3}]{./dmcan.csv};
+\addplot[thick,            const plot,color=mydarkred ,dashed] table[col sep = comma, x index = {0}, y index = {4}]{./dmcan.csv};
+\addplot[                  const plot,color=myblack,   dotted] table[col sep = comma, x index = {0}, y index = {7}]{./dmcan.csv};
+\legend{\yone,\ytwo,\yzadone,\yzadtwo};
+
+\nextgroupplot[xlabel={time [s]},ymin=-0.5,ymax=0.5,ylabel={\uone, \utwo}]
+\begin{scope}[on background layer]
+\fill[mycolor5,opacity=1] ({axis cs: \xstart,-0.5}) rectangle ({axis cs:3.9,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 3.9,-0.5}) rectangle ({axis cs:5.9,0.5});
+\fill[mycolor5,opacity=1] ({axis cs: 5.9,-0.5}) rectangle ({axis cs:6.9,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 6.9,-0.5}) rectangle ({axis cs:27.9,0.5});
+\fill[mycolor5,opacity=1] ({axis cs: 27.9,-0.5}) rectangle ({axis cs:37.0,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 37.0,-0.5}) rectangle ({axis cs:40.0,0.5});
+\fill[mycolor5,opacity=1] ({axis cs:40.0,-0.5}) rectangle ({axis cs:50.0,0.5});
+\end{scope}
+\addplot[thick,opacity=0.5,const plot,color=myblue    ,      ] table[col sep = comma, x index = {0}, y index = {5}]{./dmcan.csv};
+\addplot[thick,opacity=0.5,const plot,color=myred     ,      ] table[col sep = comma, x index = {0}, y index = {6}]{./dmcan.csv};
+\addplot[                  const plot,color=myblack,   dotted] table[col sep = comma, x index = {0}, y index = {7}]{./dmcan.csv};
+\begin{scope}[on background layer]
+\fill[mycolor5,opacity=1] ({axis cs: \xstart,-0.5}) rectangle ({axis cs:3.9,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 3.9,-0.5}) rectangle ({axis cs:5.9,0.5});
+\fill[mycolor5,opacity=1] ({axis cs: 5.9,-0.5}) rectangle ({axis cs:6.9,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 6.9,-0.5}) rectangle ({axis cs:27.9,0.5});
+\fill[mycolor5,opacity=1] ({axis cs: 27.9,-0.5}) rectangle ({axis cs:37.0,0.5});
+\fill[mycolor6,opacity=1] ({axis cs: 37.0,-0.5}) rectangle ({axis cs:40.0,0.5});
+\fill[mycolor5,opacity=1] ({axis cs:40.0,-0.5}) rectangle ({axis cs:50.0,0.5});
+\end{scope}
+\legend{\uone,\utwo};
+
+\end{groupplot}
+\end{tikzpicture}%
+\caption{Test}
+\label{fig:dmcan}
+\end{figure}
+
+
+\begin{table}
+\centering
+\caption{Test}
+\label{tab:dmcan}
+\begin{tabular}{ccccccc}
+        id & time total &    entries &    min &       mean &  max &    running\\ \hline
+    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
+    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
+    3 ( 3) &          0 &        511 &      0 &     0.0000 &    0 & 0\\
+    4 ( 4) &         29 &        511 &      0 &     0.0567 &    1 & 0\\
+   10 ( A) &        539 &        511 &      0 &     1.0547 &   20 & 0\\
+   50 (32) &        496 &        511 &      0 &     0.9706 &   20 & 0\\
+   13 ( D) &       3637 &        511 &      6 &     7.1174 &    8 & 1\\
+\end{tabular}
+\end{table}
+
 \section{Extending of the Library}
+To extend the list of algorithms that are available to be used for automatic code generation one has to add a new MATLAB script to a library directory \lstinline|<path to AutoMATiC>/Libs/MATLAB/|. As an example a script containing simple multi-loop PID controller will be created. 
+
 \subsection{Proportional-Integral-Derivative Controller}
+PID is a control algorithm used for processes that have one input and one output signals. Therefore for a process with many input and many output signals, respective number of PID controllers (loops) has to be defined. It is assumed that PID control loops are created for pairs of consecutive input and output signals, i.e. there will be loops for 1st input and 1st output signal, 2nd input and 2nd output signals, etc. Each loop will be characterised by classic set of PID parameters:
+\begin{itemize}
+\item $K$ (\lstinline[style=mym]|K|)-- proportional gain,
+\item $T_i$ (\lstinline[style=mym]|Ti|)-- integration time constant,
+\item $T_d$ (\lstinline[style=mym]|Td|)-- derivative time constant,
+\end{itemize}
+and one common parameter for all those loops, namely $T$ (\lstinline[style=mym]|T|) -- sampling time. Also, like in the DMC and GPC algorithms, there are constraints defined for each control (input) signal $u_\text{min}$ (\lstinline[style=mym]|umin|) $\le u(k) \le u_\text{max}$ (\lstinline[style=mym]|umax|) and its increments $\triangle u_\text{min}$ (\lstinline[style=mym]|dumin|) $\le \triangle u(k) \le \triangle u_\text{max}$ (\lstinline[style=mym]|dumax|), where $k$ is a current time instant. Therefore a following script will be used as a parameters definition of this algorithm (assuming the same process of control as before):
+\begin{lstlisting}[style=mym]
+T = 0.1; % sampling time [s]
+dumin =-[ .1  .1]; % Lower bound--control increments
+dumax = [ .1  .1]; % Upper bound--control increments
+umin  =-[1.0 1.0]; % Lower bound--control signal
+umax  = [1.0 1.0]; % Upper bound--control signal
 
+K =  [ .1  .05]; % proportional gains
+Ti = [1    .1 ]; % integration time constants [s]
+Td = [0.0 0.0 ]; % derivative time constants [s]
 
+AutoMATiC_Generate('AutoMATiC_PID_Algorithm','controller');
+\end{lstlisting}
+
+The PID controller, that is here implemented is defined as follow:
+\begin{equation}
+\triangle u_n(k) = e_n(k)r_n^{(0)} + e_n(k-1)r_n^{(1)} + e_n(k-2)r_n^{(0)}
+\end{equation}
+where $e_n(k-p) = y_n^\text{sp} - y_n(k-p)$. The index $n$ in this case denotes both input and output signal number. The implementation of this controller starts with a definition of constant values. Notice, that in the parameters definition constants $K$, $T_i$ and $T_d$ were used, and in the PID definition values of $r_n^{(1)}$, $r_n^{(1)}$ and $r_n^{(2)}$ are needed. There is a simple relation between those two sets of parameters, which will be implemented in this very part. The constants have to be defined in a conditional block of:
+\begin{lstlisting}[style=mym]
+if( INIT == 1 )
+	... here define constants
+	INIT = 0; return;
+end
+\end{lstlisting}
+where the \lstinline[style=mym]|INIT| is a special variable that is utilised by the transcompiler to determine which part of the code has to be executed and which one should be translated. Constant definition for PID will be therefore defined as follows:
+\begin{lstlisting}[style=mym]
+if( INIT == 1 )
+    nu = length(K);
+    r = [K.*Td./T;
+         K.*(T./(2*Ti)-2*Td./T-1);
+         K.*(1+T./(2*Ti)+Td./T)];
+    INIT = 0; return;
+end
+\end{lstlisting}
+Apart from the aforementioned variables, there is defined an additional one, namely \lstinline[style=mym]|nu|, which denotes a number of PID controllers, and thus number of input or output signals. It is worth underlining, that the variables used in the algorithms definition are accessed using the base workspace. That means, that every variable defined in the base scope, can be used in the definition of the algorithm. This induces that names used in the control algorithms definition should be as unique as possible -- for the purpose of clarity of code, this example will ignore this requirement. 
+
+After the constants, a code to be translated has to be defined. Therefore a comment line starting from \lstinline[style=mym]|%% TRANSLATE| has to be inserted. From this point on the code will only be translated, and thus a limited set of MATLAB functionality is available. The PID controller will calculate its results in following steps:
+\begin{enumerate}
+\item create variables for control errors and increments of control signals,
+\item create variables for intermediate results,
+\item for each control loop:
+\begin{enumerate}
+\item calculate errors,
+\item calculate product of errors time PID constants,
+\item calculate control signal increment,
+\item incorporate constraints for control signal increment,
+\item calculate temporary value of control signal,
+\item incorporate constraints for control signal
+\end{enumerate}
+\item store calculated control signal increments in a special variable
+\end{enumerate}
+
+Following the steps above, a following implementation can be created:
+\begin{lstlisting}[style=mym]
+e     = zeros(nu, 3); du = zeros(nu,1);
+er    = zeros(nu, 3); tmpu = zeros(nu,1);
+control_value = zeros(1,nu);
+for n=1:nu
+    e( n,1) = AD_Z(n) - AD_Y(AD_K-0,n);
+    e( n,2) = AD_Z(n) - AD_Y(AD_K-1,n);
+    e( n,3) = AD_Z(n) - AD_Y(AD_K-2,n);
+    er(n,1) = e(n,1)*r(1,n);
+    er(n,2) = e(n,2)*r(2,n);
+    er(n,3) = e(n,3)*r(3,n);
+    
+    du(n,1) = du(n,1) + er(n,1);
+    du(n,1) = du(n,1) + er(n,2);
+    du(n,1) = du(n,1) + er(n,3);
+
+    if(du(n,1)>dumax(1,n)); du(n,1) = dumax(1,n); end
+    if(du(n,1)<dumin(1,n)); du(n,1) = dumin(1,n); end
+    tmpu(n,1) = AD_U(AD_K-1,n) + du(n,1);
+    if(tmpu(n,1)>umax(1,n)); tmpu(n,1) = umax(1,n); end
+    if(tmpu(n,1)<umin(1,n)); tmpu(n,1) = umin(1,n); end
+    du(n,1) = tmpu(n,1) - AD_U(AD_K-1,n);
+end
+
+for n=1:nu
+    control_value(1,n) = du(n,1);
+end
+\end{lstlisting}
+There are a few aspects worth noting. Firstly, a set point value can be used in the algorithms definition by using an \lstinline[style=mym]|AD_Z| vector, which contains set point values for consecutive output signals. Also, the output signal measurement can be found in the matrix \lstinline[style=mym]|AD_Y|, where column index denotes the number of output signal, and the row index denotes a time instant of the measurement. The variable \lstinline[style=mym]|AD_K| denotes the current time instant. Lastly the matrix \lstinline[style=mym]|AD_U| can be used to access past control signals, again the column index denotes the number of input signal, and the row index denotes a time instant of the control value. Analogously past control increments can be accessed with the use of variable \lstinline[style=mym]|AD_DU|. It is important to know that the result of the algorithm, i.e. the final control increments vector, has to be stored in the special variable (horizontal vector) \lstinline[style=mym]|control_value|. As the variables, which name starts with \lstinline[style=mym]|AD_| corresponds to the \lstinline[style=myc]|ArchiveData| structure, the variable \lstinline[style=mym]|control_value| corresponds to the \lstinline[style=myc]|CurrentControl| structure.
+
+It is important to finish the code that is to be used for transcompilation with a special comment \lstinline[style=mym]|%% STOP| which defines the end of the algorithms definition.
+
+Having the definition of the PID controller prepared, the same Keil uVision 5 project as the one used for the DMC Analytic algorithm, can be utilised. Therefore a recompilation (which will also execute the transcompilation), and further programming of the microcontroller should results in the trajectories of control and output signals as shown on Fig. \ref{fig:pid}.
+
+\begin{figure}
+\centering
+\plotthissiet{pid}
+\caption{Test}
+\label{fig:pid}
+\end{figure}
+
+\newpage 
 \appendix
 \section{Analytic DMC -- generated source of \texttt{main\_mpc.c}}\label{ch:dmca}
-\begin{lstlisting}[style=myc]
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\defines.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\obl_macierzowe.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\alokacja_nr.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\pk.h"
-#include "stm32f7xx_hal.h"
-#include <string.h>
-#include "main.h"
-#include "mat_lib.h"
-
-ArchiveData ad;
-CurrentControl cc;
-
-long get_time(){ return HAL_GetTick(); }
-
-extern void timer_loop(void);
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-    if (htim->Instance == TIM2) {
-        timer_loop();
-    }
-}
-void measurements(){
-profiler_start(4);
-    new_output(&ad,__measureOutput());
-profiler_end(4);
-}
-void controls(){
-profiler_start(3);
-    __setControlValue(last_control(&ad));
-profiler_end(3);
-}
-void hardware_setup(){
-profiler_start(1);
-    low_lvl_main();
-profiler_end(1);
-}
-
-void controller(ArchiveData * ad, CurrentControl * c){
-	static float** AutoMATiC_DMC_Y;
-	static float** AutoMATiC_DMC_Yzad;
-	static float** AutoMATiC_DMC_dUp;
-	static float** AutoMATiC_DMC_du;
-	static float** AutoMATiC_DMC_dutmp1;
-	static float** AutoMATiC_DMC_dutmp2;
-	static float** AutoMATiC_DMC_e;
-	static long AutoMATiC_DMC_i;
-	static long AutoMATiC_DMC_itmp;
-	static long AutoMATiC_DMC_j;
-	static long AutoMATiC_DMC_n;
-	static float** AutoMATiC_DMC_tmpu;
-	static float** control_value;
-	static long j;
-	static long k;
-	static float** AutoMATiC_DMC_Ke;
-	static float** AutoMATiC_DMC_Ku;
-	static float** dumax;
-	static float** dumin;
-	static float** umax;
-	static float** umin;
-	if(ad == NULL){
-		AutoMATiC_DMC_dUp = dtablica(1,10,1,1);
-		AutoMATiC_DMC_Yzad = dtablica(1,10,1,1);
-		AutoMATiC_DMC_Y = dtablica(1,10,1,1);
-		AutoMATiC_DMC_tmpu = dtablica(1,2,1,1);
-		AutoMATiC_DMC_e = dtablica(1,2,1,1);
-		control_value = dtablica(1,1,1,2);
-		AutoMATiC_DMC_dutmp1 = dtablica(1,2,1,1);
-		AutoMATiC_DMC_Ke = dtablica(1,2,1,2);
-		AutoMATiC_DMC_Ke[1][1] = 3.373006e-01f;
-		AutoMATiC_DMC_Ke[1][2] = -8.539666e-02f;
-		AutoMATiC_DMC_Ke[2][1] = -1.016548e-01f;
-		AutoMATiC_DMC_Ke[2][2] = 5.115693e-01f;
-		AutoMATiC_DMC_dutmp2 = dtablica(1,2,1,1);
-		AutoMATiC_DMC_Ku = dtablica(1,2,1,10);
-		AutoMATiC_DMC_Ku[1][1] = 1.246174e+00f;
-		AutoMATiC_DMC_Ku[1][2] = 1.325670e-01f;
-		AutoMATiC_DMC_Ku[1][3] = 6.357246e-01f;
-		AutoMATiC_DMC_Ku[1][4] = 6.227585e-02f;
-		AutoMATiC_DMC_Ku[1][5] = 3.156590e-01f;
-		AutoMATiC_DMC_Ku[1][6] = 2.680473e-02f;
-		AutoMATiC_DMC_Ku[1][7] = 1.498871e-01f;
-		AutoMATiC_DMC_Ku[1][8] = 1.083353e-02f;
-		AutoMATiC_DMC_Ku[1][9] = 4.935498e-02f;
-		AutoMATiC_DMC_Ku[1][10] = 3.084074e-03f;
-		AutoMATiC_DMC_Ku[2][1] = 5.999027e-02f;
-		AutoMATiC_DMC_Ku[2][2] = 8.674656e-01f;
-		AutoMATiC_DMC_Ku[2][3] = -1.205763e-01f;
-		AutoMATiC_DMC_Ku[2][4] = 2.407995e-01f;
-		AutoMATiC_DMC_Ku[2][5] = -8.573715e-02f;
-		AutoMATiC_DMC_Ku[2][6] = 6.612598e-02f;
-		AutoMATiC_DMC_Ku[2][7] = -4.201587e-02f;
-		AutoMATiC_DMC_Ku[2][8] = 1.771064e-02f;
-		AutoMATiC_DMC_Ku[2][9] = -1.437298e-02f;
-		AutoMATiC_DMC_Ku[2][10] = 3.741803e-03f;
-		AutoMATiC_DMC_du = dtablica(1,2,1,1);
-		dumax = dtablica(1,1,1,2);
-		dumax[1][1] = 1.000000e-02f;
-		dumax[1][2] = 1.000000e-02f;
-		dumin = dtablica(1,1,1,2);
-		dumin[1][1] = -1.000000e-02f;
-		dumin[1][2] = -1.000000e-02f;
-		umax = dtablica(1,1,1,2);
-		umax[1][1] = 1.000000e+00f;
-		umax[1][2] = 1.000000e+00f;
-		umin = dtablica(1,1,1,2);
-		umin[1][1] = -1.000000e+00f;
-		umin[1][2] = -1.000000e+00f;
-		return;
-	}
-	for(j=1;j<=10;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_dUp[j][k] = 0;
-	for(j=1;j<=10;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_Yzad[j][k] = 0;
-	for(j=1;j<=10;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_Y[j][k] = 0;
-	for(j=1;j<=2;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_tmpu[j][k] = 0;
-	AutoMATiC_DMC_itmp=1;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=5;++AutoMATiC_DMC_i){
-		for(AutoMATiC_DMC_j=1;AutoMATiC_DMC_j<=2;++AutoMATiC_DMC_j){
-			AutoMATiC_DMC_dUp[AutoMATiC_DMC_itmp][1]=ad->du[ad->k-AutoMATiC_DMC_i][AutoMATiC_DMC_j-1];
-			AutoMATiC_DMC_itmp=AutoMATiC_DMC_itmp+1;
-		}
-	}
-	AutoMATiC_DMC_itmp=1;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=5;++AutoMATiC_DMC_i){
-		for(AutoMATiC_DMC_j=1;AutoMATiC_DMC_j<=2;++AutoMATiC_DMC_j){
-			AutoMATiC_DMC_Yzad[AutoMATiC_DMC_itmp][1]=ad->z[AutoMATiC_DMC_j-1];
-			AutoMATiC_DMC_itmp=AutoMATiC_DMC_itmp+1;
-		}
-	}
-	AutoMATiC_DMC_itmp=1;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=5;++AutoMATiC_DMC_i){
-		for(AutoMATiC_DMC_j=1;AutoMATiC_DMC_j<=2;++AutoMATiC_DMC_j){
-			AutoMATiC_DMC_Y[AutoMATiC_DMC_itmp][1]=ad->y[ad->k][AutoMATiC_DMC_j-1];
-			AutoMATiC_DMC_itmp=AutoMATiC_DMC_itmp+1;
-		}
-	}
-	for(j=1;j<=2;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_e[j][k] = 0;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
-		AutoMATiC_DMC_e[AutoMATiC_DMC_i][1]=ad->z[AutoMATiC_DMC_i-1]-ad->y[ad->k][AutoMATiC_DMC_i-1];
-	}
-	iloczynab(AutoMATiC_DMC_Ke,AutoMATiC_DMC_e,AutoMATiC_DMC_dutmp1,2,2,2,1);
-	iloczynab(AutoMATiC_DMC_Ku,AutoMATiC_DMC_dUp,AutoMATiC_DMC_dutmp2,2,10,10,1);
-	sumaaa(AutoMATiC_DMC_dutmp1,AutoMATiC_DMC_dutmp2,AutoMATiC_DMC_du,2,1,-1);
-	for(AutoMATiC_DMC_n=1;AutoMATiC_DMC_n<=2;++AutoMATiC_DMC_n){
-		if(AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]>dumax[1][AutoMATiC_DMC_n]){
-			AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]=dumax[1][AutoMATiC_DMC_n];
-		}
-		if(AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]<dumin[1][AutoMATiC_DMC_n]){
-			AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]=dumin[1][AutoMATiC_DMC_n];
-		}
-		AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]=ad->u[ad->k-1][AutoMATiC_DMC_n-1]+AutoMATiC_DMC_du[AutoMATiC_DMC_n][1];
-		if(AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]>umax[1][AutoMATiC_DMC_n]){
-			AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]=umax[1][AutoMATiC_DMC_n];
-		}
-		if(AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]<umin[1][AutoMATiC_DMC_n]){
-			AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]=umin[1][AutoMATiC_DMC_n];
-		}
-		AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]=AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]-ad->u[ad->k-1][AutoMATiC_DMC_n-1];
-	}
-	for(j=1;j<=1;++j) for(k=1;k<=2;++k) control_value[j][k] = 0;
-	for(AutoMATiC_DMC_n=1;AutoMATiC_DMC_n<=2;++AutoMATiC_DMC_n){
-		control_value[1][AutoMATiC_DMC_n]=AutoMATiC_DMC_du[AutoMATiC_DMC_n][1];
-	}
-
-	set_current_control_increment(c,&(control_value[1][1])); // du is indexed starting with 1, therefore to maintain compatibility it is required to refer to first element of an actual array
-}
-
-void controller_setup(){
-profiler_start(2);
-    init_archive_data(&ad, 200, 200, 2, 2, 0, 0, 0.01);
-    init_current_control(&cc,&ad);
-    controller(NULL,NULL);
-profiler_end(2);
-}
-
-void idle(){
-profiler_start(13);
-    const int k = 0;
-	static char str[1000] = {0};
-
-    sprintf(str, "x = [%f,%f,",ad.y[k][0], ad.y[k][1]);    write_string(str);
-    sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
-    sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
-    write_string("];\n\r");
-profiler_end(13);
-}
-
-void loop(){
-profiler_start(10);
-    static int i = 0;
-	if(i<  50){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-	else      { ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    if(++i > 100) i = 0;
-	
-profiler_start(50);
-	controller(&ad,&cc);
-profiler_end(50);
-	
-    push_current_controls_to_archive_data(&cc,&ad);	
-profiler_end(10);
-}
-
-void timeout(){
-    while(1);
-}
-\end{lstlisting}
-
+\lstinputlisting[style=myc]{dmca.c}
+\newpage 
 \section{Numeric DMC -- generated source of \texttt{main\_mpc.c}}\label{ch:dmcn}
-\begin{lstlisting}[style=myc]
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\defines.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\obl_macierzowe.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\alokacja_nr.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\pk.h"
-#include "stm32f7xx_hal.h"
-#include <string.h>
-#include "main.h"
-#include "mat_lib.h"
-
-ArchiveData ad;
-CurrentControl cc;
-
-long get_time(){ return HAL_GetTick(); }
-
-extern void timer_loop(void);
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-    if (htim->Instance == TIM2) {
-        timer_loop();
-    }
-}
-void measurements(){
-profiler_start(4);
-    new_output(&ad,__measureOutput());
-profiler_end(4);
-}
-void controls(){
-profiler_start(3);
-    __setControlValue(last_control(&ad));
-profiler_end(3);
-}
-void hardware_setup(){
-profiler_start(1);
-    low_lvl_main();
-profiler_end(1);
-}
-
-void controller(ArchiveData * ad, CurrentControl * c){
-	static float** AutoMATiC_DMC_Y;
-	static float** AutoMATiC_DMC_Yzad;
-	static float** AutoMATiC_DMC_btmp1;
-	static float** AutoMATiC_DMC_btmp2;
-	static float** AutoMATiC_DMC_dUp;
-	static float** AutoMATiC_DMC_du;
-	static float** AutoMATiC_DMC_dutmp1;
-	static float** AutoMATiC_DMC_dutmp2;
-	static float** AutoMATiC_DMC_e;
-	static float** AutoMATiC_DMC_ftmp1;
-	static float** AutoMATiC_DMC_ftmp2;
-	static float** AutoMATiC_DMC_ftmp3;
-	static float** AutoMATiC_DMC_ftmp4;
-	static long AutoMATiC_DMC_i;
-	static long AutoMATiC_DMC_itmp;
-	static long AutoMATiC_DMC_j;
-	static long AutoMATiC_DMC_n;
-	static float** AutoMATiC_DMC_tmpu;
-	static float** AutoMATiC_DMC_uk;
-	static float** control_value;
-	static long j;
-	static long k;
-	static float** AutoMATiC_DMC_Ke;
-	static float** AutoMATiC_DMC_Ku;
-	static float** AutoMATiC_DMC_Mp;
-	static float** AutoMATiC_DMC_fconst;
-	static float** AutoMATiC_DMC_bvar;
-	static float** AutoMATiC_DMC_b;
-	static float** dumax;
-	static float** dumin;
-	static float** umax;
-	static float** umin;
-	static float ** AutoMATiC_DMC_H;
-	static float ** AutoMATiC_DMC_A;
-	static float * AutoMATiC_DMC_ftmp;
-	static float * AutoMATiC_DMC_btmp;
-	static float * AutoMATiC_DMC_qpx;
-	if(ad == NULL){
-		ustawilogr(40);
-		ustawilzm(10);
-		inicjalizacjapk();
-		AutoMATiC_DMC_A=pobierzA();
-		AutoMATiC_DMC_H=pobierzG();
-		AutoMATiC_DMC_btmp=pobierzb();
-		AutoMATiC_DMC_ftmp=pobierzt();
-		AutoMATiC_DMC_qpx=pobierzx();
-		AutoMATiC_DMC_A[1][1] = 1.000000e+00f;
-		AutoMATiC_DMC_A[1][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[1][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[1][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[1][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[1][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[1][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[1][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[1][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[1][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][2] = 1.000000e+00f;
-		AutoMATiC_DMC_A[2][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[2][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][3] = 1.000000e+00f;
-		AutoMATiC_DMC_A[3][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[3][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][4] = 1.000000e+00f;
-		AutoMATiC_DMC_A[4][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[4][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][5] = 1.000000e+00f;
-		AutoMATiC_DMC_A[5][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[5][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][6] = 1.000000e+00f;
-		AutoMATiC_DMC_A[6][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[6][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][7] = 1.000000e+00f;
-		AutoMATiC_DMC_A[7][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[7][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][8] = 1.000000e+00f;
-		AutoMATiC_DMC_A[8][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[8][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[9][9] = 1.000000e+00f;
-		AutoMATiC_DMC_A[9][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[10][10] = 1.000000e+00f;
-		AutoMATiC_DMC_A[11][1] = -1.000000e+00f;
-		AutoMATiC_DMC_A[11][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[11][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[11][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[11][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[11][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[11][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[11][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[11][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[11][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][2] = -1.000000e+00f;
-		AutoMATiC_DMC_A[12][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[12][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][3] = -1.000000e+00f;
-		AutoMATiC_DMC_A[13][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[13][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][4] = -1.000000e+00f;
-		AutoMATiC_DMC_A[14][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[14][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][5] = -1.000000e+00f;
-		AutoMATiC_DMC_A[15][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[15][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][6] = -1.000000e+00f;
-		AutoMATiC_DMC_A[16][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[16][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][7] = -1.000000e+00f;
-		AutoMATiC_DMC_A[17][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[17][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][8] = -1.000000e+00f;
-		AutoMATiC_DMC_A[18][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[18][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[19][9] = -1.000000e+00f;
-		AutoMATiC_DMC_A[19][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[20][10] = -1.000000e+00f;
-		AutoMATiC_DMC_A[21][1] = 1.000000e+00f;
-		AutoMATiC_DMC_A[21][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[21][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[21][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[21][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[21][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[21][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[21][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[21][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[21][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][2] = 1.000000e+00f;
-		AutoMATiC_DMC_A[22][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[22][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[23][1] = 1.000000e+00f;
-		AutoMATiC_DMC_A[23][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[23][3] = 1.000000e+00f;
-		AutoMATiC_DMC_A[23][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[23][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[23][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[23][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[23][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[23][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[23][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[24][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[24][2] = 1.000000e+00f;
-		AutoMATiC_DMC_A[24][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[24][4] = 1.000000e+00f;
-		AutoMATiC_DMC_A[24][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[24][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[24][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[24][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[24][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[24][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[25][1] = 1.000000e+00f;
-		AutoMATiC_DMC_A[25][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[25][3] = 1.000000e+00f;
-		AutoMATiC_DMC_A[25][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[25][5] = 1.000000e+00f;
-		AutoMATiC_DMC_A[25][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[25][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[25][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[25][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[25][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[26][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[26][2] = 1.000000e+00f;
-		AutoMATiC_DMC_A[26][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[26][4] = 1.000000e+00f;
-		AutoMATiC_DMC_A[26][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[26][6] = 1.000000e+00f;
-		AutoMATiC_DMC_A[26][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[26][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[26][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[26][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[27][1] = 1.000000e+00f;
-		AutoMATiC_DMC_A[27][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[27][3] = 1.000000e+00f;
-		AutoMATiC_DMC_A[27][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[27][5] = 1.000000e+00f;
-		AutoMATiC_DMC_A[27][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[27][7] = 1.000000e+00f;
-		AutoMATiC_DMC_A[27][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[27][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[27][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[28][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[28][2] = 1.000000e+00f;
-		AutoMATiC_DMC_A[28][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[28][4] = 1.000000e+00f;
-		AutoMATiC_DMC_A[28][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[28][6] = 1.000000e+00f;
-		AutoMATiC_DMC_A[28][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[28][8] = 1.000000e+00f;
-		AutoMATiC_DMC_A[28][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[28][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[29][1] = 1.000000e+00f;
-		AutoMATiC_DMC_A[29][2] = 0.000000e+00f;
-		AutoMATiC_DMC_A[29][3] = 1.000000e+00f;
-		AutoMATiC_DMC_A[29][4] = 0.000000e+00f;
-		AutoMATiC_DMC_A[29][5] = 1.000000e+00f;
-		AutoMATiC_DMC_A[29][6] = 0.000000e+00f;
-		AutoMATiC_DMC_A[29][7] = 1.000000e+00f;
-		AutoMATiC_DMC_A[29][8] = 0.000000e+00f;
-		AutoMATiC_DMC_A[29][9] = 1.000000e+00f;
-		AutoMATiC_DMC_A[29][10] = 0.000000e+00f;
-		AutoMATiC_DMC_A[30][1] = 0.000000e+00f;
-		AutoMATiC_DMC_A[30][2] = 1.000000e+00f;
-		AutoMATiC_DMC_A[30][3] = 0.000000e+00f;
-		AutoMATiC_DMC_A[30][4] = 1.000000e+00f;
-		AutoMATiC_DMC_A[30][5] = 0.000000e+00f;
-		AutoMATiC_DMC_A[30][6] = 1.000000e+00f;
-		AutoMATiC_DMC_A[30][7] = 0.000000e+00f;
-		AutoMATiC_DMC_A[30][8] = 1.000000e+00f;
-		AutoMATiC_DMC_A[30][9] = 0.000000e+00f;
-		AutoMATiC_DMC_A[30][10] = 1.000000e+00f;
-		AutoMATiC_DMC_A[31][1] = -1.000000e+00f;
-		AutoMATiC_DMC_A[31][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[31][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[31][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[31][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[31][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[31][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[31][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[31][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[31][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][2] = -1.000000e+00f;
-		AutoMATiC_DMC_A[32][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[32][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[33][1] = -1.000000e+00f;
-		AutoMATiC_DMC_A[33][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[33][3] = -1.000000e+00f;
-		AutoMATiC_DMC_A[33][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[33][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[33][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[33][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[33][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[33][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[33][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[34][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[34][2] = -1.000000e+00f;
-		AutoMATiC_DMC_A[34][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[34][4] = -1.000000e+00f;
-		AutoMATiC_DMC_A[34][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[34][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[34][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[34][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[34][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[34][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[35][1] = -1.000000e+00f;
-		AutoMATiC_DMC_A[35][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[35][3] = -1.000000e+00f;
-		AutoMATiC_DMC_A[35][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[35][5] = -1.000000e+00f;
-		AutoMATiC_DMC_A[35][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[35][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[35][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[35][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[35][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[36][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[36][2] = -1.000000e+00f;
-		AutoMATiC_DMC_A[36][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[36][4] = -1.000000e+00f;
-		AutoMATiC_DMC_A[36][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[36][6] = -1.000000e+00f;
-		AutoMATiC_DMC_A[36][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[36][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[36][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[36][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[37][1] = -1.000000e+00f;
-		AutoMATiC_DMC_A[37][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[37][3] = -1.000000e+00f;
-		AutoMATiC_DMC_A[37][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[37][5] = -1.000000e+00f;
-		AutoMATiC_DMC_A[37][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[37][7] = -1.000000e+00f;
-		AutoMATiC_DMC_A[37][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[37][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[37][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[38][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[38][2] = -1.000000e+00f;
-		AutoMATiC_DMC_A[38][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[38][4] = -1.000000e+00f;
-		AutoMATiC_DMC_A[38][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[38][6] = -1.000000e+00f;
-		AutoMATiC_DMC_A[38][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[38][8] = -1.000000e+00f;
-		AutoMATiC_DMC_A[38][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[38][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[39][1] = -1.000000e+00f;
-		AutoMATiC_DMC_A[39][2] = -0.000000e+00f;
-		AutoMATiC_DMC_A[39][3] = -1.000000e+00f;
-		AutoMATiC_DMC_A[39][4] = -0.000000e+00f;
-		AutoMATiC_DMC_A[39][5] = -1.000000e+00f;
-		AutoMATiC_DMC_A[39][6] = -0.000000e+00f;
-		AutoMATiC_DMC_A[39][7] = -1.000000e+00f;
-		AutoMATiC_DMC_A[39][8] = -0.000000e+00f;
-		AutoMATiC_DMC_A[39][9] = -1.000000e+00f;
-		AutoMATiC_DMC_A[39][10] = -0.000000e+00f;
-		AutoMATiC_DMC_A[40][1] = -0.000000e+00f;
-		AutoMATiC_DMC_A[40][2] = -1.000000e+00f;
-		AutoMATiC_DMC_A[40][3] = -0.000000e+00f;
-		AutoMATiC_DMC_A[40][4] = -1.000000e+00f;
-		AutoMATiC_DMC_A[40][5] = -0.000000e+00f;
-		AutoMATiC_DMC_A[40][6] = -1.000000e+00f;
-		AutoMATiC_DMC_A[40][7] = -0.000000e+00f;
-		AutoMATiC_DMC_A[40][8] = -1.000000e+00f;
-		AutoMATiC_DMC_A[40][9] = -0.000000e+00f;
-		AutoMATiC_DMC_A[40][10] = -1.000000e+00f;
-		AutoMATiC_DMC_H[1][1] = 1.344566e+02f;
-		AutoMATiC_DMC_H[1][2] = 4.114478e+01f;
-		AutoMATiC_DMC_H[1][3] = 1.000269e+02f;
-		AutoMATiC_DMC_H[1][4] = 3.169500e+01f;
-		AutoMATiC_DMC_H[1][5] = 6.190011e+01f;
-		AutoMATiC_DMC_H[1][6] = 2.023139e+01f;
-		AutoMATiC_DMC_H[1][7] = 2.567725e+01f;
-		AutoMATiC_DMC_H[1][8] = 8.808511e+00f;
-		AutoMATiC_DMC_H[1][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[1][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[2][1] = 4.114478e+01f;
-		AutoMATiC_DMC_H[2][2] = 3.436150e+01f;
-		AutoMATiC_DMC_H[2][3] = 3.099487e+01f;
-		AutoMATiC_DMC_H[2][4] = 2.477126e+01f;
-		AutoMATiC_DMC_H[2][5] = 1.931418e+01f;
-		AutoMATiC_DMC_H[2][6] = 1.576652e+01f;
-		AutoMATiC_DMC_H[2][7] = 8.233726e+00f;
-		AutoMATiC_DMC_H[2][8] = 6.910587e+00f;
-		AutoMATiC_DMC_H[2][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[2][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[3][1] = 1.000269e+02f;
-		AutoMATiC_DMC_H[3][2] = 3.099487e+01f;
-		AutoMATiC_DMC_H[3][3] = 8.804002e+01f;
-		AutoMATiC_DMC_H[3][4] = 2.792375e+01f;
-		AutoMATiC_DMC_H[3][5] = 5.644363e+01f;
-		AutoMATiC_DMC_H[3][6] = 1.883764e+01f;
-		AutoMATiC_DMC_H[3][7] = 2.413991e+01f;
-		AutoMATiC_DMC_H[3][8] = 8.414358e+00f;
-		AutoMATiC_DMC_H[3][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[3][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[4][1] = 3.169500e+01f;
-		AutoMATiC_DMC_H[4][2] = 2.477126e+01f;
-		AutoMATiC_DMC_H[4][3] = 2.792375e+01f;
-		AutoMATiC_DMC_H[4][4] = 2.454154e+01f;
-		AutoMATiC_DMC_H[4][5] = 1.838345e+01f;
-		AutoMATiC_DMC_H[4][6] = 1.514642e+01f;
-		AutoMATiC_DMC_H[4][7] = 8.018635e+00f;
-		AutoMATiC_DMC_H[4][8] = 6.775021e+00f;
-		AutoMATiC_DMC_H[4][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[4][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[5][1] = 6.190011e+01f;
-		AutoMATiC_DMC_H[5][2] = 1.931418e+01f;
-		AutoMATiC_DMC_H[5][3] = 5.644363e+01f;
-		AutoMATiC_DMC_H[5][4] = 1.838345e+01f;
-		AutoMATiC_DMC_H[5][5] = 4.711061e+01f;
-		AutoMATiC_DMC_H[5][6] = 1.565679e+01f;
-		AutoMATiC_DMC_H[5][7] = 2.097070e+01f;
-		AutoMATiC_DMC_H[5][8] = 7.558490e+00f;
-		AutoMATiC_DMC_H[5][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[5][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[6][1] = 2.023139e+01f;
-		AutoMATiC_DMC_H[6][2] = 1.576652e+01f;
-		AutoMATiC_DMC_H[6][3] = 1.883764e+01f;
-		AutoMATiC_DMC_H[6][4] = 1.514642e+01f;
-		AutoMATiC_DMC_H[6][5] = 1.565679e+01f;
-		AutoMATiC_DMC_H[6][6] = 1.510759e+01f;
-		AutoMATiC_DMC_H[6][7] = 7.391926e+00f;
-		AutoMATiC_DMC_H[6][8] = 6.332568e+00f;
-		AutoMATiC_DMC_H[6][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[6][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[7][1] = 2.567725e+01f;
-		AutoMATiC_DMC_H[7][2] = 8.233726e+00f;
-		AutoMATiC_DMC_H[7][3] = 2.413991e+01f;
-		AutoMATiC_DMC_H[7][4] = 8.018635e+00f;
-		AutoMATiC_DMC_H[7][5] = 2.097070e+01f;
-		AutoMATiC_DMC_H[7][6] = 7.391926e+00f;
-		AutoMATiC_DMC_H[7][7] = 1.634423e+01f;
-		AutoMATiC_DMC_H[7][8] = 5.541646e+00f;
-		AutoMATiC_DMC_H[7][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[7][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[8][1] = 8.808511e+00f;
-		AutoMATiC_DMC_H[8][2] = 6.910587e+00f;
-		AutoMATiC_DMC_H[8][3] = 8.414358e+00f;
-		AutoMATiC_DMC_H[8][4] = 6.775021e+00f;
-		AutoMATiC_DMC_H[8][5] = 7.558490e+00f;
-		AutoMATiC_DMC_H[8][6] = 6.332568e+00f;
-		AutoMATiC_DMC_H[8][7] = 5.541646e+00f;
-		AutoMATiC_DMC_H[8][8] = 6.871756e+00f;
-		AutoMATiC_DMC_H[8][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[8][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][1] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][2] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][3] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][4] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][5] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][6] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][7] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][8] = 0.000000e+00f;
-		AutoMATiC_DMC_H[9][9] = 2.000000e+00f;
-		AutoMATiC_DMC_H[9][10] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][1] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][2] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][3] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][4] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][5] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][6] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][7] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][8] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][9] = 0.000000e+00f;
-		AutoMATiC_DMC_H[10][10] = 2.000000e+00f;
-		AutoMATiC_DMC_dUp = dtablica(1,10,1,1);
-		AutoMATiC_DMC_Yzad = dtablica(1,10,1,1);
-		AutoMATiC_DMC_Y = dtablica(1,10,1,1);
-		AutoMATiC_DMC_tmpu = dtablica(1,2,1,1);
-		AutoMATiC_DMC_e = dtablica(1,2,1,1);
-		AutoMATiC_DMC_du = dtablica(1,2,1,1);
-		AutoMATiC_DMC_uk = dtablica(1,2,1,1);
-		control_value = dtablica(1,1,1,2);
-		AutoMATiC_DMC_dutmp1 = dtablica(1,2,1,1);
-		AutoMATiC_DMC_Ke = dtablica(1,2,1,2);
-		AutoMATiC_DMC_Ke[1][1] = 3.373006e-01f;
-		AutoMATiC_DMC_Ke[1][2] = -8.539666e-02f;
-		AutoMATiC_DMC_Ke[2][1] = -1.016548e-01f;
-		AutoMATiC_DMC_Ke[2][2] = 5.115693e-01f;
-		AutoMATiC_DMC_dutmp2 = dtablica(1,2,1,1);
-		AutoMATiC_DMC_Ku = dtablica(1,2,1,10);
-		AutoMATiC_DMC_Ku[1][1] = 1.246174e+00f;
-		AutoMATiC_DMC_Ku[1][2] = 1.325670e-01f;
-		AutoMATiC_DMC_Ku[1][3] = 6.357246e-01f;
-		AutoMATiC_DMC_Ku[1][4] = 6.227585e-02f;
-		AutoMATiC_DMC_Ku[1][5] = 3.156590e-01f;
-		AutoMATiC_DMC_Ku[1][6] = 2.680473e-02f;
-		AutoMATiC_DMC_Ku[1][7] = 1.498871e-01f;
-		AutoMATiC_DMC_Ku[1][8] = 1.083353e-02f;
-		AutoMATiC_DMC_Ku[1][9] = 4.935498e-02f;
-		AutoMATiC_DMC_Ku[1][10] = 3.084074e-03f;
-		AutoMATiC_DMC_Ku[2][1] = 5.999027e-02f;
-		AutoMATiC_DMC_Ku[2][2] = 8.674656e-01f;
-		AutoMATiC_DMC_Ku[2][3] = -1.205763e-01f;
-		AutoMATiC_DMC_Ku[2][4] = 2.407995e-01f;
-		AutoMATiC_DMC_Ku[2][5] = -8.573715e-02f;
-		AutoMATiC_DMC_Ku[2][6] = 6.612598e-02f;
-		AutoMATiC_DMC_Ku[2][7] = -4.201587e-02f;
-		AutoMATiC_DMC_Ku[2][8] = 1.771064e-02f;
-		AutoMATiC_DMC_Ku[2][9] = -1.437298e-02f;
-		AutoMATiC_DMC_Ku[2][10] = 3.741803e-03f;
-		AutoMATiC_DMC_ftmp1 = dtablica(1,10,1,1);
-		AutoMATiC_DMC_ftmp2 = dtablica(1,10,1,1);
-		AutoMATiC_DMC_Mp = dtablica(1,10,1,10);
-		AutoMATiC_DMC_Mp[1][1] = 2.552292e+00f;
-		AutoMATiC_DMC_Mp[1][2] = 6.321206e-01f;
-		AutoMATiC_DMC_Mp[1][3] = 1.249453e+00f;
-		AutoMATiC_DMC_Mp[1][4] = 2.325442e-01f;
-		AutoMATiC_DMC_Mp[1][5] = 6.116594e-01f;
-		AutoMATiC_DMC_Mp[1][6] = 8.554821e-02f;
-		AutoMATiC_DMC_Mp[1][7] = 2.994327e-01f;
-		AutoMATiC_DMC_Mp[1][8] = 3.147143e-02f;
-		AutoMATiC_DMC_Mp[1][9] = 1.465848e-01f;
-		AutoMATiC_DMC_Mp[1][10] = 1.157769e-02f;
-		AutoMATiC_DMC_Mp[2][1] = 8.111244e-01f;
-		AutoMATiC_DMC_Mp[2][2] = 1.426990e+00f;
-		AutoMATiC_DMC_Mp[2][3] = 1.532016e-01f;
-		AutoMATiC_DMC_Mp[2][4] = 4.088396e-01f;
-		AutoMATiC_DMC_Mp[2][5] = 2.893605e-02f;
-		AutoMATiC_DMC_Mp[2][6] = 1.171345e-01f;
-		AutoMATiC_DMC_Mp[2][7] = 5.465313e-03f;
-		AutoMATiC_DMC_Mp[2][8] = 3.355960e-02f;
-		AutoMATiC_DMC_Mp[2][9] = 1.032264e-03f;
-		AutoMATiC_DMC_Mp[2][10] = 9.614986e-03f;
-		AutoMATiC_DMC_Mp[3][1] = 3.801745e+00f;
-		AutoMATiC_DMC_Mp[3][2] = 8.646647e-01f;
-		AutoMATiC_DMC_Mp[3][3] = 1.861112e+00f;
-		AutoMATiC_DMC_Mp[3][4] = 3.180924e-01f;
-		AutoMATiC_DMC_Mp[3][5] = 9.110921e-01f;
-		AutoMATiC_DMC_Mp[3][6] = 1.170196e-01f;
-		AutoMATiC_DMC_Mp[3][7] = 4.460175e-01f;
-		AutoMATiC_DMC_Mp[3][8] = 4.304912e-02f;
-		AutoMATiC_DMC_Mp[3][9] = 1.465848e-01f;
-		AutoMATiC_DMC_Mp[3][10] = 1.157769e-02f;
-		AutoMATiC_DMC_Mp[4][1] = 9.643260e-01f;
-		AutoMATiC_DMC_Mp[4][2] = 1.835830e+00f;
-		AutoMATiC_DMC_Mp[4][3] = 1.821377e-01f;
-		AutoMATiC_DMC_Mp[4][4] = 5.259741e-01f;
-		AutoMATiC_DMC_Mp[4][5] = 3.440136e-02f;
-		AutoMATiC_DMC_Mp[4][6] = 1.506941e-01f;
-		AutoMATiC_DMC_Mp[4][7] = 6.497578e-03f;
-		AutoMATiC_DMC_Mp[4][8] = 4.317458e-02f;
-		AutoMATiC_DMC_Mp[4][9] = 1.032264e-03f;
-		AutoMATiC_DMC_Mp[4][10] = 9.614986e-03f;
-		AutoMATiC_DMC_Mp[5][1] = 4.413404e+00f;
-		AutoMATiC_DMC_Mp[5][2] = 9.502129e-01f;
-		AutoMATiC_DMC_Mp[5][3] = 2.160545e+00f;
-		AutoMATiC_DMC_Mp[5][4] = 3.495638e-01f;
-		AutoMATiC_DMC_Mp[5][5] = 1.057677e+00f;
-		AutoMATiC_DMC_Mp[5][6] = 1.285973e-01f;
-		AutoMATiC_DMC_Mp[5][7] = 4.460175e-01f;
-		AutoMATiC_DMC_Mp[5][8] = 4.304912e-02f;
-		AutoMATiC_DMC_Mp[5][9] = 1.465848e-01f;
-		AutoMATiC_DMC_Mp[5][10] = 1.157769e-02f;
-		AutoMATiC_DMC_Mp[6][1] = 9.932621e-01f;
-		AutoMATiC_DMC_Mp[6][2] = 1.952965e+00f;
-		AutoMATiC_DMC_Mp[6][3] = 1.876030e-01f;
-		AutoMATiC_DMC_Mp[6][4] = 5.595337e-01f;
-		AutoMATiC_DMC_Mp[6][5] = 3.543362e-02f;
-		AutoMATiC_DMC_Mp[6][6] = 1.603091e-01f;
-		AutoMATiC_DMC_Mp[6][7] = 6.497578e-03f;
-		AutoMATiC_DMC_Mp[6][8] = 4.317458e-02f;
-		AutoMATiC_DMC_Mp[6][9] = 1.032264e-03f;
-		AutoMATiC_DMC_Mp[6][10] = 9.614986e-03f;
-		AutoMATiC_DMC_Mp[7][1] = 4.712837e+00f;
-		AutoMATiC_DMC_Mp[7][2] = 9.816844e-01f;
-		AutoMATiC_DMC_Mp[7][3] = 2.307130e+00f;
-		AutoMATiC_DMC_Mp[7][4] = 3.611415e-01f;
-		AutoMATiC_DMC_Mp[7][5] = 1.057677e+00f;
-		AutoMATiC_DMC_Mp[7][6] = 1.285973e-01f;
-		AutoMATiC_DMC_Mp[7][7] = 4.460175e-01f;
-		AutoMATiC_DMC_Mp[7][8] = 4.304912e-02f;
-		AutoMATiC_DMC_Mp[7][9] = 1.465848e-01f;
-		AutoMATiC_DMC_Mp[7][10] = 1.157769e-02f;
-		AutoMATiC_DMC_Mp[8][1] = 9.987274e-01f;
-		AutoMATiC_DMC_Mp[8][2] = 1.986524e+00f;
-		AutoMATiC_DMC_Mp[8][3] = 1.886352e-01f;
-		AutoMATiC_DMC_Mp[8][4] = 5.691487e-01f;
-		AutoMATiC_DMC_Mp[8][5] = 3.543362e-02f;
-		AutoMATiC_DMC_Mp[8][6] = 1.603091e-01f;
-		AutoMATiC_DMC_Mp[8][7] = 6.497578e-03f;
-		AutoMATiC_DMC_Mp[8][8] = 4.317458e-02f;
-		AutoMATiC_DMC_Mp[8][9] = 1.032264e-03f;
-		AutoMATiC_DMC_Mp[8][10] = 9.614986e-03f;
-		AutoMATiC_DMC_Mp[9][1] = 4.859422e+00f;
-		AutoMATiC_DMC_Mp[9][2] = 9.932621e-01f;
-		AutoMATiC_DMC_Mp[9][3] = 2.307130e+00f;
-		AutoMATiC_DMC_Mp[9][4] = 3.611415e-01f;
-		AutoMATiC_DMC_Mp[9][5] = 1.057677e+00f;
-		AutoMATiC_DMC_Mp[9][6] = 1.285973e-01f;
-		AutoMATiC_DMC_Mp[9][7] = 4.460175e-01f;
-		AutoMATiC_DMC_Mp[9][8] = 4.304912e-02f;
-		AutoMATiC_DMC_Mp[9][9] = 1.465848e-01f;
-		AutoMATiC_DMC_Mp[9][10] = 1.157769e-02f;
-		AutoMATiC_DMC_Mp[10][1] = 9.997596e-01f;
-		AutoMATiC_DMC_Mp[10][2] = 1.996139e+00f;
-		AutoMATiC_DMC_Mp[10][3] = 1.886352e-01f;
-		AutoMATiC_DMC_Mp[10][4] = 5.691487e-01f;
-		AutoMATiC_DMC_Mp[10][5] = 3.543362e-02f;
-		AutoMATiC_DMC_Mp[10][6] = 1.603091e-01f;
-		AutoMATiC_DMC_Mp[10][7] = 6.497578e-03f;
-		AutoMATiC_DMC_Mp[10][8] = 4.317458e-02f;
-		AutoMATiC_DMC_Mp[10][9] = 1.032264e-03f;
-		AutoMATiC_DMC_Mp[10][10] = 9.614986e-03f;
-		AutoMATiC_DMC_ftmp3 = dtablica(1,10,1,1);
-		AutoMATiC_DMC_ftmp4 = dtablica(1,10,1,1);
-		AutoMATiC_DMC_fconst = dtablica(1,10,1,10);
-		AutoMATiC_DMC_fconst[1][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[1][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[1][3] = -5.104583e+00f;
-		AutoMATiC_DMC_fconst[1][4] = -1.622249e+00f;
-		AutoMATiC_DMC_fconst[1][5] = -7.603490e+00f;
-		AutoMATiC_DMC_fconst[1][6] = -1.928652e+00f;
-		AutoMATiC_DMC_fconst[1][7] = -8.826808e+00f;
-		AutoMATiC_DMC_fconst[1][8] = -1.986524e+00f;
-		AutoMATiC_DMC_fconst[1][9] = -9.425674e+00f;
-		AutoMATiC_DMC_fconst[1][10] = -1.997455e+00f;
-		AutoMATiC_DMC_fconst[2][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[2][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[2][3] = -1.264241e+00f;
-		AutoMATiC_DMC_fconst[2][4] = -2.853981e+00f;
-		AutoMATiC_DMC_fconst[2][5] = -1.729329e+00f;
-		AutoMATiC_DMC_fconst[2][6] = -3.671660e+00f;
-		AutoMATiC_DMC_fconst[2][7] = -1.900426e+00f;
-		AutoMATiC_DMC_fconst[2][8] = -3.905929e+00f;
-		AutoMATiC_DMC_fconst[2][9] = -1.963369e+00f;
-		AutoMATiC_DMC_fconst[2][10] = -3.973048e+00f;
-		AutoMATiC_DMC_fconst[3][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[3][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[3][3] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[3][4] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[3][5] = -5.104583e+00f;
-		AutoMATiC_DMC_fconst[3][6] = -1.622249e+00f;
-		AutoMATiC_DMC_fconst[3][7] = -7.603490e+00f;
-		AutoMATiC_DMC_fconst[3][8] = -1.928652e+00f;
-		AutoMATiC_DMC_fconst[3][9] = -8.826808e+00f;
-		AutoMATiC_DMC_fconst[3][10] = -1.986524e+00f;
-		AutoMATiC_DMC_fconst[4][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[4][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[4][3] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[4][4] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[4][5] = -1.264241e+00f;
-		AutoMATiC_DMC_fconst[4][6] = -2.853981e+00f;
-		AutoMATiC_DMC_fconst[4][7] = -1.729329e+00f;
-		AutoMATiC_DMC_fconst[4][8] = -3.671660e+00f;
-		AutoMATiC_DMC_fconst[4][9] = -1.900426e+00f;
-		AutoMATiC_DMC_fconst[4][10] = -3.905929e+00f;
-		AutoMATiC_DMC_fconst[5][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[5][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[5][3] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[5][4] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[5][5] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[5][6] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[5][7] = -5.104583e+00f;
-		AutoMATiC_DMC_fconst[5][8] = -1.622249e+00f;
-		AutoMATiC_DMC_fconst[5][9] = -7.603490e+00f;
-		AutoMATiC_DMC_fconst[5][10] = -1.928652e+00f;
-		AutoMATiC_DMC_fconst[6][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[6][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[6][3] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[6][4] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[6][5] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[6][6] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[6][7] = -1.264241e+00f;
-		AutoMATiC_DMC_fconst[6][8] = -2.853981e+00f;
-		AutoMATiC_DMC_fconst[6][9] = -1.729329e+00f;
-		AutoMATiC_DMC_fconst[6][10] = -3.671660e+00f;
-		AutoMATiC_DMC_fconst[7][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[7][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[7][3] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[7][4] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[7][5] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[7][6] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[7][7] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[7][8] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[7][9] = -5.104583e+00f;
-		AutoMATiC_DMC_fconst[7][10] = -1.622249e+00f;
-		AutoMATiC_DMC_fconst[8][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[8][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[8][3] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[8][4] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[8][5] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[8][6] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[8][7] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[8][8] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[8][9] = -1.264241e+00f;
-		AutoMATiC_DMC_fconst[8][10] = -2.853981e+00f;
-		AutoMATiC_DMC_fconst[9][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][3] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][4] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][5] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][6] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][7] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][8] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][9] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[9][10] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][1] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][2] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][3] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][4] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][5] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][6] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][7] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][8] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][9] = 0.000000e+00f;
-		AutoMATiC_DMC_fconst[10][10] = 0.000000e+00f;
-		AutoMATiC_DMC_btmp1 = dtablica(1,40,1,1);
-		AutoMATiC_DMC_bvar = dtablica(1,40,1,2);
-		AutoMATiC_DMC_bvar[1][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[1][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[2][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[2][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[3][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[3][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[4][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[4][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[5][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[5][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[6][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[6][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[7][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[7][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[8][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[8][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[9][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[9][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[10][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[10][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[11][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[11][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[12][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[12][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[13][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[13][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[14][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[14][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[15][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[15][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[16][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[16][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[17][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[17][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[18][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[18][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[19][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[19][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[20][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[20][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[21][1] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[21][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[22][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[22][2] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[23][1] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[23][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[24][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[24][2] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[25][1] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[25][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[26][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[26][2] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[27][1] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[27][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[28][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[28][2] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[29][1] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[29][2] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[30][1] = 0.000000e+00f;
-		AutoMATiC_DMC_bvar[30][2] = 1.000000e+00f;
-		AutoMATiC_DMC_bvar[31][1] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[31][2] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[32][1] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[32][2] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[33][1] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[33][2] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[34][1] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[34][2] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[35][1] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[35][2] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[36][1] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[36][2] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[37][1] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[37][2] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[38][1] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[38][2] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[39][1] = -1.000000e+00f;
-		AutoMATiC_DMC_bvar[39][2] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[40][1] = -0.000000e+00f;
-		AutoMATiC_DMC_bvar[40][2] = -1.000000e+00f;
-		AutoMATiC_DMC_btmp2 = dtablica(1,40,1,2);
-		AutoMATiC_DMC_b = dtablica(1,40,1,2);
-		AutoMATiC_DMC_b[1][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[1][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[2][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[2][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[3][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[3][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[4][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[4][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[5][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[5][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[6][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[6][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[7][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[7][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[8][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[8][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[9][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[9][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[10][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[10][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[11][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[11][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[12][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[12][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[13][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[13][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[14][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[14][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[15][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[15][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[16][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[16][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[17][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[17][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[18][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[18][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[19][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[19][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[20][1] = 1.000000e-02f;
-		AutoMATiC_DMC_b[20][2] = 1.000000e-02f;
-		AutoMATiC_DMC_b[21][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[21][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[22][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[22][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[23][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[23][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[24][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[24][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[25][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[25][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[26][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[26][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[27][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[27][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[28][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[28][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[29][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[29][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[30][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[30][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[31][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[31][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[32][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[32][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[33][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[33][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[34][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[34][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[35][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[35][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[36][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[36][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[37][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[37][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[38][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[38][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[39][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[39][2] = 1.000000e+00f;
-		AutoMATiC_DMC_b[40][1] = 1.000000e+00f;
-		AutoMATiC_DMC_b[40][2] = 1.000000e+00f;
-		dumax = dtablica(1,1,1,2);
-		dumax[1][1] = 1.000000e-02f;
-		dumax[1][2] = 1.000000e-02f;
-		dumin = dtablica(1,1,1,2);
-		dumin[1][1] = -1.000000e-02f;
-		dumin[1][2] = -1.000000e-02f;
-		umax = dtablica(1,1,1,2);
-		umax[1][1] = 1.000000e+00f;
-		umax[1][2] = 1.000000e+00f;
-		umin = dtablica(1,1,1,2);
-		umin[1][1] = -1.000000e+00f;
-		umin[1][2] = -1.000000e+00f;
-		return;
-	}
-	for(j=1;j<=10;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_dUp[j][k] = 0;
-	for(j=1;j<=10;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_Yzad[j][k] = 0;
-	for(j=1;j<=10;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_Y[j][k] = 0;
-	for(j=1;j<=2;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_tmpu[j][k] = 0;
-	AutoMATiC_DMC_itmp=1;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=5;++AutoMATiC_DMC_i){
-		for(AutoMATiC_DMC_j=1;AutoMATiC_DMC_j<=2;++AutoMATiC_DMC_j){
-			AutoMATiC_DMC_dUp[AutoMATiC_DMC_itmp][1]=ad->du[ad->k-AutoMATiC_DMC_i][AutoMATiC_DMC_j-1];
-			AutoMATiC_DMC_itmp=AutoMATiC_DMC_itmp+1;
-		}
-	}
-	AutoMATiC_DMC_itmp=1;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=5;++AutoMATiC_DMC_i){
-		for(AutoMATiC_DMC_j=1;AutoMATiC_DMC_j<=2;++AutoMATiC_DMC_j){
-			AutoMATiC_DMC_Yzad[AutoMATiC_DMC_itmp][1]=ad->z[AutoMATiC_DMC_j-1];
-			AutoMATiC_DMC_itmp=AutoMATiC_DMC_itmp+1;
-		}
-	}
-	AutoMATiC_DMC_itmp=1;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=5;++AutoMATiC_DMC_i){
-		for(AutoMATiC_DMC_j=1;AutoMATiC_DMC_j<=2;++AutoMATiC_DMC_j){
-			AutoMATiC_DMC_Y[AutoMATiC_DMC_itmp][1]=ad->y[ad->k][AutoMATiC_DMC_j-1];
-			AutoMATiC_DMC_itmp=AutoMATiC_DMC_itmp+1;
-		}
-	}
-	for(j=1;j<=2;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_e[j][k] = 0;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
-		AutoMATiC_DMC_e[AutoMATiC_DMC_i][1]=ad->z[AutoMATiC_DMC_i-1]-ad->y[ad->k][AutoMATiC_DMC_i-1];
-	}
-	iloczynab(AutoMATiC_DMC_Ke,AutoMATiC_DMC_e,AutoMATiC_DMC_dutmp1,2,2,2,1);
-	iloczynab(AutoMATiC_DMC_Ku,AutoMATiC_DMC_dUp,AutoMATiC_DMC_dutmp2,2,10,10,1);
-	sumaaa(AutoMATiC_DMC_dutmp1,AutoMATiC_DMC_dutmp2,AutoMATiC_DMC_du,2,1,-1);
-	for(j=1;j<=2;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_du[j][k] = 0;
-	for(j=1;j<=2;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_uk[j][k] = 0;
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
-		AutoMATiC_DMC_uk[AutoMATiC_DMC_i][1]=ad->u[ad->k-1][AutoMATiC_DMC_i-1];
-	}
-	sumaaa(AutoMATiC_DMC_Yzad,AutoMATiC_DMC_Y,AutoMATiC_DMC_ftmp1,10,1,-1);
-	iloczynab(AutoMATiC_DMC_Mp,AutoMATiC_DMC_dUp,AutoMATiC_DMC_ftmp2,10,10,10,1);
-	sumaaa(AutoMATiC_DMC_ftmp1,AutoMATiC_DMC_ftmp2,AutoMATiC_DMC_ftmp3,10,1,-1);
-	iloczynab(AutoMATiC_DMC_fconst,AutoMATiC_DMC_ftmp3,AutoMATiC_DMC_ftmp4,10,10,10,1);
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=10;++AutoMATiC_DMC_i){
-		AutoMATiC_DMC_ftmp[AutoMATiC_DMC_i]=AutoMATiC_DMC_ftmp4[AutoMATiC_DMC_i][1];
-	}
-	iloczynab(AutoMATiC_DMC_bvar,AutoMATiC_DMC_uk,AutoMATiC_DMC_btmp1,40,2,2,1);
-	sumaaa(AutoMATiC_DMC_b,AutoMATiC_DMC_btmp1,AutoMATiC_DMC_btmp2,40,2,1);
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=40;++AutoMATiC_DMC_i){
-		AutoMATiC_DMC_btmp[AutoMATiC_DMC_i]=AutoMATiC_DMC_btmp2[AutoMATiC_DMC_i][1];
-	}
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
-		AutoMATiC_DMC_qpx[AutoMATiC_DMC_i]=0;
-	}
-	iloczynw(AutoMATiC_DMC_btmp,-1,AutoMATiC_DMC_btmp,40);pk();
-	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
-		AutoMATiC_DMC_du[AutoMATiC_DMC_i][1]=AutoMATiC_DMC_qpx[AutoMATiC_DMC_i];
-	}
-	for(AutoMATiC_DMC_n=1;AutoMATiC_DMC_n<=2;++AutoMATiC_DMC_n){
-		if(AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]>dumax[1][AutoMATiC_DMC_n]){
-			AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]=dumax[1][AutoMATiC_DMC_n];
-		}
-		if(AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]<dumin[1][AutoMATiC_DMC_n]){
-			AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]=dumin[1][AutoMATiC_DMC_n];
-		}
-		AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]=ad->u[ad->k-1][AutoMATiC_DMC_n-1]+AutoMATiC_DMC_du[AutoMATiC_DMC_n][1];
-		if(AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]>umax[1][AutoMATiC_DMC_n]){
-			AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]=umax[1][AutoMATiC_DMC_n];
-		}
-		if(AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]<umin[1][AutoMATiC_DMC_n]){
-			AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]=umin[1][AutoMATiC_DMC_n];
-		}
-		AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]=AutoMATiC_DMC_tmpu[AutoMATiC_DMC_n][1]-ad->u[ad->k-1][AutoMATiC_DMC_n-1];
-	}
-	for(j=1;j<=1;++j) for(k=1;k<=2;++k) control_value[j][k] = 0;
-	for(AutoMATiC_DMC_n=1;AutoMATiC_DMC_n<=2;++AutoMATiC_DMC_n){
-		control_value[1][AutoMATiC_DMC_n]=AutoMATiC_DMC_du[AutoMATiC_DMC_n][1];
-	}
-
-	set_current_control_increment(c,&(control_value[1][1])); // du is indexed starting with 1, therefore to maintain compatibility it is required to refer to first element of an actual array
-}
-
-void controller_setup(){
-profiler_start(2);
-    init_archive_data(&ad, 200, 200, 2, 2, 0, 0, 0.01);
-    init_current_control(&cc,&ad);
-    controller(NULL,NULL);
-profiler_end(2);
-}
-
-void idle(){
-profiler_start(13);
-    const int k = 0;
-	static char str[1000] = {0};
-
-    sprintf(str, "x = [%f,%f,",ad.y[k][0], ad.y[k][1]);    write_string(str);
-    sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
-    sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
-    write_string("];\n\r");
-profiler_end(13);
-}
-
-void loop(){
-profiler_start(10);
-    static int i = 0;
-	if(i<  50){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-	else      { ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    if(++i > 100) i = 0;
-	
-profiler_start(50);
-	controller(&ad,&cc);
-profiler_end(50);
-	
-    push_current_controls_to_archive_data(&cc,&ad);	
-profiler_end(10);
-}
-
-void timeout(){
-    while(1);
-}
-\end{lstlisting}
+\lstinputlisting[style=myc]{dmcn.c}
+\newpage 
+\section{Analytic GPC -- generated source of \texttt{main\_mpc.c}}\label{ch:gpca}
+\lstinputlisting[style=myc]{gpca.c}
+\newpage 
+\section{Numeric GPC -- generated source of \texttt{main\_mpc.c}}\label{ch:gpcn}
+\lstinputlisting[style=myc]{gpcn.c}
+\newpage 
+\section{Analytic and Numeric DMC -- generated source of \texttt{main\_mpc.c}}\label{ch:dmcan}
+\lstinputlisting[style=myc]{dmcan.c}
+\newpage 
+\section{PID algorithm -- generated source of \texttt{main\_mpc.c}}\label{ch:pid}
+\lstinputlisting[style=myc]{pid.c}
 \end{document}
 

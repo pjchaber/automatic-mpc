@@ -35,20 +35,16 @@ if( INIT == 1 )
     ny = size(GPC_b,1);
     nu = size(GPC_b,2);
     
-    pars.N  = N ;
-    pars.Nu = Nu;
-    pars.a  = GPC_a ;
-    pars.b  = GPC_b ;
-    pars.na = na;
-    pars.nb = nb;
-    pars.nu = nu;
-    pars.ny = ny;
-    
     % Macierze Lambda oraz Psi -- wagi funkcji kosztów
-    %lambda = 1000.0;
-    Lambda = eye(Nu*nu)*lambda;
-    Psi    = eye(N *ny)*1.0;
-
+    if(isrow(lambda)); tmp_lambda = repmat(lambda,1,Nu);
+    else             ; tmp_lambda = repmat(lambda,Nu,1);
+    end
+    if(isrow(psi))   ; tmp_psi = repmat(psi,1,N);
+    else             ; tmp_psi = repmat(psi,N,1);
+    end
+    Lambda = diag(tmp_lambda);
+    Psi = diag(tmp_psi);
+    
     % OdpowiedŸ skokowa
     S = zeros(ny,nu,N);
     for k = 1:size(S,3)
@@ -87,11 +83,9 @@ if( INIT == 1 )
     Aducell = cell(Nu,Nu);
     Aucell = cell(Nu,Nu);
     bvarcell = cell(Nu,1);
-    bcell = cell(Nu,1);
 
     for i = 1:Nu
         bvarcell{i}  = eye(nu);
-        bcell{i}  = ones(nu,1);
         for j = 1:Nu
             if(i>=j)
                 Aucell{i,j} = EYEnu;      
@@ -107,12 +101,21 @@ if( INIT == 1 )
         end
     end
 
+    bducell = cell(Nu,1);
+    bucell = cell(Nu,1);
+    for i = 1:Nu
+        bducell{i}     = -dumin';
+        bducell{i+Nu}  = +dumax';
+        bucell{i}      = -umin';
+        bucell{i+Nu}   = +umax';
+    end
+    
     Adu = [-cell2mat(Aducell); cell2mat(Aducell)];
     Au  = [-cell2mat(Aucell ); cell2mat(Aucell )];
     A = [Adu;Au];
 
-    bdu = [-cell2mat(bcell)*dumin; cell2mat(bcell)*dumax];
-    bu  = [-cell2mat(bcell)*umin; cell2mat(bcell)*umax];
+    bdu = cell2mat(bducell);
+    bu  = cell2mat(bucell);
     b = [bdu;bu];
     bvardu = [cell2mat(bvarcell)*0; cell2mat(bvarcell)*0];
     bvaru = [cell2mat(bvarcell); -cell2mat(bvarcell)];
@@ -222,11 +225,11 @@ end
 
 
 for n=1:nu
-    if(du(n,1)>dumax); du(n,1) = dumax; end
-    if(du(n,1)<dumin); du(n,1) = dumin; end
+    if(du(n,1)>dumax(1,n)); du(n,1) = dumax(1,n); end
+    if(du(n,1)<dumin(1,n)); du(n,1) = dumin(1,n); end
     tmpu(n,1) = AD_U(AD_K-1,n) + du(n,1);
-    if(tmpu(n,1)>umax); tmpu(n,1) = umax; end
-    if(tmpu(n,1)<umin); tmpu(n,1) = umin; end
+    if(tmpu(n,1)>umax(1,n)); tmpu(n,1) = umax(1,n); end
+    if(tmpu(n,1)<umin(1,n)); tmpu(n,1) = umin(1,n); end
     du(n,1) = tmpu(n,1) - AD_U(AD_K-1,n);
 end
 

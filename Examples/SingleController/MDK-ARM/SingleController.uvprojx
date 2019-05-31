@@ -1,18 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="project_proj.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="project_projx.xsd">
 
-  <SchemaVersion>1.1</SchemaVersion>
+  <SchemaVersion>2.1</SchemaVersion>
 
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <Targets>
-  <Target> 
+    <Target>
       <TargetName>SingleController</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F746IGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
+          <PackID>Keil.STM32F7xx_DFP.2.11.0</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000-0x2004FFFF) IROM(0x8000000-0x80FFFFF) CLOCK(12000000) FPU3(SFPU) CPUTYPE("Cortex-M7") ELITTLE</Cpu>
           <FlashUtilSpec/>
           <StartupFile/>
@@ -28,7 +31,7 @@
           <SLE66CMisc/>
           <SLE66AMisc/>
           <SLE66LinkerMisc/>
-          <SFDFile/>
+          <SFDFile>$$Device:STM32F746IGTx$CMSIS\SVD\STM32F7x6_v1r1.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath/>
@@ -50,7 +53,7 @@
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>./SingleController/</ListingPath>
+          <ListingPath/>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -61,15 +64,17 @@
             <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopU1X>0</nStopU1X>
+            <nStopU2X>0</nStopU2X>
           </BeforeCompile>
           <BeforeMake>
-            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name/>
+            <UserProg1Name>C:/Users/Admin/Documents/GitHub/AutoMATiC/automatic_transcompiler.exe -I -c -p -i ../Src/main.mpc -o ../Src/main_mpc.c -l C:/Users/Admin/Documents/GitHub/AutoMATiC/Libs/MATLAB/ -L C:/Users/Admin/Documents/GitHub/AutoMATiC/Libs/C/</UserProg1Name>
             <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
-            <nStopB1X>0</nStopB1X>
+            <nStopB1X>2</nStopB1X>
             <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
@@ -79,6 +84,8 @@
             <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopA1X>0</nStopA1X>
+            <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>0</SelectedForBatchBuild>
           <SVCSIdString/>
@@ -97,7 +104,7 @@
           <StopOnExitCode>3</StopOnExitCode>
           <CustomArgument/>
           <IncludeLibraryModules/>
-          <ComprImg/>
+          <ComprImg>0</ComprImg>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
@@ -136,13 +143,13 @@
             <RestoreBreakpoints>1</RestoreBreakpoints>
             <RestoreWatchpoints>1</RestoreWatchpoints>
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>0</RestoreFunctions>
+            <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
-            <RestoreTracepoints>1</RestoreTracepoints> 
+            <RestoreTracepoints>1</RestoreTracepoints>
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>13</TargetSelection>
+          <TargetSelection>6</TargetSelection>
           <SimDlls>
             <CpuDll/>
             <CpuDllArguments/>
@@ -156,7 +163,7 @@
             <PeripheralDll/>
             <PeripheralDllArguments/>
             <InitializationFile/>
-            <Driver>STLink\ST-LINKIII-KEIL_SWO.dll</Driver>
+            <Driver>Segger\JL2CM3.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -222,6 +229,7 @@
             <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
+            <nSecure>0</nSecure>
             <RoSelD>3</RoSelD>
             <RwSelD>3</RwSelD>
             <CodeSel>0</CodeSel>
@@ -274,13 +282,13 @@
               </Ocm6>
               <IRAM>
                 <Type>0</Type>
-                <StartAddress/>
-                <Size/>
+                <StartAddress>0x20000000</StartAddress>
+                <Size>0x50000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
-                <StartAddress/>
-                <Size/>
+                <StartAddress>0x8000000</StartAddress>
+                <Size>0x100000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -304,8 +312,8 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress/>
-                <Size/>
+                <StartAddress>0x8000000</StartAddress>
+                <Size>0x100000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -329,8 +337,8 @@
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
-                <StartAddress/>
-                <Size/>
+                <StartAddress>0x20000000</StartAddress>
+                <Size>0x50000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -356,11 +364,15 @@
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
             <useXO>0</useXO>
+            <v6Lang>0</v6Lang>
+            <v6LangP>0</v6LangP>
+            <vShortEn>0</vShortEn>
+            <vShortWch>0</vShortWch>
             <VariousControls>
               <MiscControls/>
               <Define>USE_HAL_DRIVER,STM32F746xx</Define>
               <Undefine/>
-              <IncludePath>../Inc;  ../Drivers/STM32F7xx_HAL_Driver/Inc;  ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include;  ../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Inc;  ../Drivers/STM32F7xx_HAL_Driver/Inc;  ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include;  ../Drivers/CMSIS/Include;  ..\..\..\Libs\C</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -371,6 +383,8 @@
             <SplitLS>0</SplitLS>
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
+            <uSurpInc>0</uSurpInc>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls/>
               <Define/>
@@ -396,11 +410,11 @@
             <DisabledWarnings/>
           </LDads>
         </TargetArmAds>
-      </TargetOption>     
+      </TargetOption>
       <Groups>
         <Group>
           <GroupName>Application/MDK-ARM</GroupName>
-        <Files>
+          <Files>
             <File>
               <FileName>startup_stm32f746xx.s</FileName>
               <FileType>2</FileType>
@@ -408,13 +422,67 @@
             </File>
           </Files>
         </Group>
-        
-		<Group>
+        <Group>
+          <GroupName>AutoMATiC</GroupName>
+          <Files>
+            <File>
+              <FileName>alokacja_nr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\alokacja_nr.c</FilePath>
+            </File>
+            <File>
+              <FileName>default_functions.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\default_functions.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>mat_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\mat_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpctools.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\mpctools.c</FilePath>
+            </File>
+            <File>
+              <FileName>obl_macierzowe.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\obl_macierzowe.c</FilePath>
+            </File>
+            <File>
+              <FileName>pk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\pk.c</FilePath>
+            </File>
+            <File>
+              <FileName>profiler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\profiler.c</FilePath>
+            </File>
+            <File>
+              <FileName>simulated_signals.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\simulated_signals.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
- <Group>
+        <Group>
           <GroupName>Application/User</GroupName>
           <Files>
+            <File>
+              <FileName>main_mpc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\main_mpc.c</FilePath>
+            </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
@@ -459,6 +527,11 @@
               <FileName>stm32f7xx_hal_dac_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dac_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_hal_rng.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rng.c</FilePath>
             </File>
             <File>
               <FileName>stm32f7xx_hal_tim.c</FileName>
@@ -558,9 +631,9 @@
           </Files>
         </Group>
       </Groups>
-    	
     </Target>
   </Targets>
+
   <RTE>
     <apis/>
     <components>
@@ -573,4 +646,5 @@
     </components>
     <files/>
   </RTE>
+
 </Project>

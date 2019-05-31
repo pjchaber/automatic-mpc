@@ -42,9 +42,14 @@ if( INIT == 1 )
     AutoMATiC_GPC_pars.ny = AutoMATiC_GPC_ny;
     
     % Macierze Lambda oraz Psi -- wagi funkcji kosztów
-    %lambda = 1000.0;
-    AutoMATiC_GPC_Lambda = eye(Nu*AutoMATiC_GPC_nu)*lambda;
-    AutoMATiC_GPC_Psi    = eye(N *AutoMATiC_GPC_ny)*1.0;
+    if(isrow(lambda)); tmp_lambda = repmat(lambda,1,Nu);
+    else             ; tmp_lambda = repmat(lambda,Nu,1);
+    end
+    if(isrow(psi))   ; tmp_psi = repmat(psi,1,N);
+    else             ; tmp_psi = repmat(psi,N,1);
+    end
+    AutoMATiC_GPC_Lambda = diag(tmp_lambda);
+    AutoMATiC_GPC_Psi    = diag(tmp_psi);
 
     % OdpowiedŸ skokowa
     AutoMATiC_GPC_S = zeros(AutoMATiC_GPC_ny,AutoMATiC_GPC_nu,N);
@@ -150,11 +155,11 @@ for AutoMATiC_GPC_r=1:AutoMATiC_GPC_nu
 end
 
 for AutoMATiC_GPC_n=1:AutoMATiC_GPC_nu
-    if(AutoMATiC_GPC_du(AutoMATiC_GPC_n,1)>dumax); AutoMATiC_GPC_du(AutoMATiC_GPC_n,1) = dumax; end
-    if(AutoMATiC_GPC_du(AutoMATiC_GPC_n,1)<dumin); AutoMATiC_GPC_du(AutoMATiC_GPC_n,1) = dumin; end
+    if(AutoMATiC_GPC_du(AutoMATiC_GPC_n,1)>dumax(1,AutoMATiC_GPC_n)); AutoMATiC_GPC_du(AutoMATiC_GPC_n,1) = dumax(1,AutoMATiC_GPC_n); end
+    if(AutoMATiC_GPC_du(AutoMATiC_GPC_n,1)<dumin(1,AutoMATiC_GPC_n)); AutoMATiC_GPC_du(AutoMATiC_GPC_n,1) = dumin(1,AutoMATiC_GPC_n); end
     AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1) = AD_U(AD_K-1,AutoMATiC_GPC_n) + AutoMATiC_GPC_du(AutoMATiC_GPC_n,1);
-    if(AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1)>umax); AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1) = umax; end
-    if(AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1)<umin); AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1) = umin; end
+    if(AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1)>umax(1,AutoMATiC_GPC_n)); AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1) = umax(1,AutoMATiC_GPC_n); end
+    if(AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1)<umin(1,AutoMATiC_GPC_n)); AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1) = umin(1,AutoMATiC_GPC_n); end
     AutoMATiC_GPC_du(AutoMATiC_GPC_n,1) = AutoMATiC_GPC_tmpu(AutoMATiC_GPC_n,1) - AD_U(AD_K-1,AutoMATiC_GPC_n);
 end
 
