@@ -2,10 +2,10 @@
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\obl_macierzowe.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\alokacja_nr.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\pk.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h"
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
@@ -61,20 +61,20 @@ void controller(ArchiveData * ad, CurrentControl * c){
 	static float** umax;
 	static float** umin;
 	if(ad == NULL){
-		AutoMATiC_DMC_dUp = dtablica(1,8,1,1);
-		AutoMATiC_DMC_Yzad = dtablica(1,10,1,1);
-		AutoMATiC_DMC_Y = dtablica(1,10,1,1);
-		AutoMATiC_DMC_tmpu = dtablica(1,2,1,1);
-		AutoMATiC_DMC_e = dtablica(1,2,1,1);
-		control_value = dtablica(1,1,1,2);
-		AutoMATiC_DMC_dutmp1 = dtablica(1,2,1,1);
-		AutoMATiC_DMC_Ke = dtablica(1,2,1,2);
+		AutoMATiC_DMC_dUp = darray(1,8,1,1);
+		AutoMATiC_DMC_Yzad = darray(1,10,1,1);
+		AutoMATiC_DMC_Y = darray(1,10,1,1);
+		AutoMATiC_DMC_tmpu = darray(1,2,1,1);
+		AutoMATiC_DMC_e = darray(1,2,1,1);
+		control_value = darray(1,1,1,2);
+		AutoMATiC_DMC_dutmp1 = darray(1,2,1,1);
+		AutoMATiC_DMC_Ke = darray(1,2,1,2);
 		AutoMATiC_DMC_Ke[1][1] = 3.373006e-01f;
 		AutoMATiC_DMC_Ke[1][2] = -8.539666e-02f;
 		AutoMATiC_DMC_Ke[2][1] = -1.016548e-01f;
 		AutoMATiC_DMC_Ke[2][2] = 5.115693e-01f;
-		AutoMATiC_DMC_dutmp2 = dtablica(1,2,1,1);
-		AutoMATiC_DMC_Ku = dtablica(1,2,1,8);
+		AutoMATiC_DMC_dutmp2 = darray(1,2,1,1);
+		AutoMATiC_DMC_Ku = darray(1,2,1,8);
 		AutoMATiC_DMC_Ku[1][1] = 1.246690e+00f;
 		AutoMATiC_DMC_Ku[1][2] = 1.325999e-01f;
 		AutoMATiC_DMC_Ku[1][3] = 6.350099e-01f;
@@ -91,17 +91,17 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_DMC_Ku[2][6] = 6.519486e-02f;
 		AutoMATiC_DMC_Ku[2][7] = -2.764289e-02f;
 		AutoMATiC_DMC_Ku[2][8] = 1.396884e-02f;
-		AutoMATiC_DMC_du = dtablica(1,2,1,1);
-		dumax = dtablica(1,1,1,2);
+		AutoMATiC_DMC_du = darray(1,2,1,1);
+		dumax = darray(1,1,1,2);
 		dumax[1][1] = 1.000000e-01f;
 		dumax[1][2] = 1.000000e-01f;
-		dumin = dtablica(1,1,1,2);
+		dumin = darray(1,1,1,2);
 		dumin[1][1] = -1.000000e-01f;
 		dumin[1][2] = -1.000000e-01f;
-		umax = dtablica(1,1,1,2);
+		umax = darray(1,1,1,2);
 		umax[1][1] = 1.000000e+00f;
 		umax[1][2] = 1.000000e+00f;
-		umin = dtablica(1,1,1,2);
+		umin = darray(1,1,1,2);
 		umin[1][1] = -1.000000e+00f;
 		umin[1][2] = -1.000000e+00f;
 		return;
@@ -135,9 +135,9 @@ void controller(ArchiveData * ad, CurrentControl * c){
 	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
 		AutoMATiC_DMC_e[AutoMATiC_DMC_i][1]=ad->z[AutoMATiC_DMC_i-1]-ad->y[ad->k][AutoMATiC_DMC_i-1];
 	}
-	iloczynab(AutoMATiC_DMC_Ke,AutoMATiC_DMC_e,AutoMATiC_DMC_dutmp1,2,2,2,1);
-	iloczynab(AutoMATiC_DMC_Ku,AutoMATiC_DMC_dUp,AutoMATiC_DMC_dutmp2,2,8,8,1);
-	sumaaa(AutoMATiC_DMC_dutmp1,AutoMATiC_DMC_dutmp2,AutoMATiC_DMC_du,2,1,-1);
+	productab(AutoMATiC_DMC_Ke,AutoMATiC_DMC_e,AutoMATiC_DMC_dutmp1,2,2,2,1);
+	productab(AutoMATiC_DMC_Ku,AutoMATiC_DMC_dUp,AutoMATiC_DMC_dutmp2,2,8,8,1);
+	sumaa(AutoMATiC_DMC_dutmp1,AutoMATiC_DMC_dutmp2,AutoMATiC_DMC_du,2,1,-1);
 	for(AutoMATiC_DMC_n=1;AutoMATiC_DMC_n<=2;++AutoMATiC_DMC_n){
 		if(AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]>dumax[1][AutoMATiC_DMC_n]){
 			AutoMATiC_DMC_du[AutoMATiC_DMC_n][1]=dumax[1][AutoMATiC_DMC_n];

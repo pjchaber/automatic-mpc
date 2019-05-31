@@ -10,16 +10,16 @@
 \contentsline {subsection}{\numberline {5.5}Interface for Further Ease of Use}{6}
 \contentsline {subsection}{\numberline {5.6}Logic of the Controller}{7}
 \contentsline {subsection}{\numberline {5.7}Dynamic Matrix Control -- Analytic version}{10}
-\contentsline {subsection}{\numberline {5.8}Dynamic Matrix Control -- Numeric version}{11}
+\contentsline {subsection}{\numberline {5.8}Dynamic Matrix Control -- Numeric version}{13}
 \contentsline {subsection}{\numberline {5.9}General Predictive Control -- Analytic version}{13}
-\contentsline {subsection}{\numberline {5.10}General Predictive Control -- Numeric version}{14}
-\contentsline {section}{\numberline {6}Multiple Algorithms in a Controller}{16}
-\contentsline {subsection}{\numberline {6.1}Analytic and Numeric versions of DMC}{16}
-\contentsline {section}{\numberline {7}Extending of the Library}{18}
-\contentsline {subsection}{\numberline {7.1}Proportional-Integral-Derivative Controller}{18}
-\contentsline {section}{\numberline {A}Analytic DMC -- generated source of \texttt {main\_mpc.c}}{21}
-\contentsline {section}{\numberline {B}Numeric DMC -- generated source of \texttt {main\_mpc.c}}{25}
-\contentsline {section}{\numberline {C}Analytic GPC -- generated source of \texttt {main\_mpc.c}}{43}
-\contentsline {section}{\numberline {D}Numeric GPC -- generated source of \texttt {main\_mpc.c}}{47}
-\contentsline {section}{\numberline {E}Analytic and Numeric DMC -- generated source of \texttt {main\_mpc.c}}{64}
-\contentsline {section}{\numberline {F}PID algorithm -- generated source of \texttt {main\_mpc.c}}{84}
+\contentsline {subsection}{\numberline {5.10}General Predictive Control -- Numeric version}{15}
+\contentsline {section}{\numberline {6}Multiple Algorithms in a Controller}{15}
+\contentsline {subsection}{\numberline {6.1}Analytic and Numeric versions of DMC}{15}
+\contentsline {section}{\numberline {7}Extending of the Library}{17}
+\contentsline {subsection}{\numberline {7.1}Proportional-Integral-Derivative Controller}{19}
+\contentsline {section}{\numberline {A}Analytic DMC -- generated source of \texttt {main\_mpc.c}}{22}
+\contentsline {section}{\numberline {B}Numeric DMC -- generated source of \texttt {main\_mpc.c}}{26}
+\contentsline {section}{\numberline {C}Analytic GPC -- generated source of \texttt {main\_mpc.c}}{44}
+\contentsline {section}{\numberline {D}Numeric GPC -- generated source of \texttt {main\_mpc.c}}{48}
+\contentsline {section}{\numberline {E}Analytic and Numeric DMC -- generated source of \texttt {main\_mpc.c}}{65}
+\contentsline {section}{\numberline {F}PID algorithm -- generated source of \texttt {main\_mpc.c}}{85}

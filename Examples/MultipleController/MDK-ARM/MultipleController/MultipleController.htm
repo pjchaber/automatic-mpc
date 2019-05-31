@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\MultipleController\MultipleController.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\MultipleController\MultipleController.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Thu May 30 17:00:48 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Fri May 31 15:37:50 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1116 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -491,13 +491,13 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
 
-<P><STRONG><a name="[136]"></a>strlen</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, strlen.o(.text))
+<P><STRONG><a name="[135]"></a>strlen</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, strlen.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_string
 </UL>
 
 <P><STRONG><a name="[117]"></a>__aeabi_f2d</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, f2d.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;idle
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
+<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
 </UL>
 
 <P><STRONG><a name="[7e]"></a>__aeabi_d2f</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, d2f.o(.text))
@@ -505,7 +505,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
+<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
 </UL>
 
 <P><STRONG><a name="[141]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
@@ -1053,7 +1053,7 @@ Global Symbols
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_DMAAbortOnError
 </UL>
 
-<P><STRONG><a name="[135]"></a>HAL_UART_GetState</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f7xx_hal_uart.o(i.HAL_UART_GetState))
+<P><STRONG><a name="[134]"></a>HAL_UART_GetState</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f7xx_hal_uart.o(i.HAL_UART_GetState))
 <BR><BR>[Called By]<UL><LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_string
 </UL>
 
@@ -1090,7 +1090,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 </UL>
 
-<P><STRONG><a name="[137]"></a>HAL_UART_Transmit_IT</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, stm32f7xx_hal_uart.o(i.HAL_UART_Transmit_IT))
+<P><STRONG><a name="[136]"></a>HAL_UART_Transmit_IT</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, stm32f7xx_hal_uart.o(i.HAL_UART_Transmit_IT))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_UART_Transmit_IT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_string
@@ -1213,10 +1213,10 @@ Global Symbols
 
 <P><STRONG><a name="[14c]"></a>__1printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf), UNUSED)
 
-<P><STRONG><a name="[126]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf))
+<P><STRONG><a name="[137]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;piszkomunikat
+<BR>[Called By]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writemessage
 </UL>
 
 <P><STRONG><a name="[14d]"></a>__c89printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf), UNUSED)
@@ -1233,9 +1233,9 @@ Global Symbols
 <P><STRONG><a name="[115]"></a>__2sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2sprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;idle
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_print
+<BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_print
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;float2strF
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;idle
 </UL>
 
 <P><STRONG><a name="[150]"></a>__c89sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf), UNUSED)
@@ -1243,7 +1243,7 @@ Global Symbols
 <P><STRONG><a name="[151]"></a>sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf), UNUSED)
 
 <P><STRONG><a name="[db]"></a>__controller_setup</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, default_functions.o(i.__controller_setup))
-<BR><BR>[Stack]<UL><LI>Max Depth = 424<LI>Call Chain = __controller_setup &rArr; controller_setup &rArr; controllerDMCN &rArr; pk &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 424<LI>Call Chain = __controller_setup &rArr; controller_setup &rArr; controllerDMCN &rArr; qp &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller_setup
 </UL>
@@ -1273,7 +1273,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
+<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
 </UL>
 
 <P><STRONG><a name="[e3]"></a>__hardware_setup</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, default_functions.o(i.__hardware_setup))
@@ -1293,7 +1293,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e7]"></a>__loop</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, default_functions.o(i.__loop))
-<BR><BR>[Stack]<UL><LI>Max Depth = 424<LI>Call Chain = __loop &rArr; loop &rArr; controllerDMCN &rArr; pk &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 424<LI>Call Chain = __loop &rArr; loop &rArr; controllerDMCN &rArr; qp &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loop
 </UL>
@@ -1355,48 +1355,48 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[fa]"></a>controllerDMCA</STRONG> (Thumb, 1360 bytes, Stack size 64 bytes, main_mpc.o(i.controllerDMCA))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = controllerDMCA &rArr; dtablica &rArr; piszkomunikat &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = controllerDMCA &rArr; darray &rArr; writemessage &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sumaaa
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynab
+<BR>[Calls]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sumaa
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productab
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;darray
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_current_control_increment
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dtablica
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loop
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller_setup
 </UL>
 
 <P><STRONG><a name="[ff]"></a>controllerDMCN</STRONG> (Thumb, 7854 bytes, Stack size 72 bytes, main_mpc.o(i.controllerDMCN))
-<BR><BR>[Stack]<UL><LI>Max Depth = 408<LI>Call Chain = controllerDMCN &rArr; pk &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 408<LI>Call Chain = controllerDMCN &rArr; qp &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sumaaa
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynw
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynab
+<BR>[Calls]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sumaa
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productv
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productab
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;darray
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_current_control_increment
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dtablica
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ustawilzm
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ustawilogr
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pobierzx
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pobierzt
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pobierzb
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pobierzG
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pobierzA
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pk
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;inicjalizacjapk
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qp
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;obtainx
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;obtaint
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;obtainb
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;obtainG
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;obtainA
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initializeqp
+<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;definevarnum
+<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;defineconnum
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loop
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller_setup
 </UL>
 
 <P><STRONG><a name="[dc]"></a>controller_setup</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, main_mpc.o(i.controller_setup))
-<BR><BR>[Stack]<UL><LI>Max Depth = 416<LI>Call Chain = controller_setup &rArr; controllerDMCN &rArr; pk &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 416<LI>Call Chain = controller_setup &rArr; controllerDMCN &rArr; qp &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_current_control
+<BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
+<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_end
+<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_current_control
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_archive_data
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCA
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_end
 </UL>
 <BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__controller_setup
 </UL>
@@ -1404,10 +1404,10 @@ Global Symbols
 <P><STRONG><a name="[de]"></a>controls</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, main_mpc.o(i.controls))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = controls &rArr; profiler_start &rArr; add_new_profiler_entry &rArr; find_profiler_entry &rArr; get_profiler &rArr; create_profiler &rArr; malloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;last_control
-<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__setControlValue
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
+<BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_end
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;last_control
+<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__setControlValue
 </UL>
 <BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__controls
 </UL>
@@ -1420,24 +1420,32 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_profiler
 </UL>
 
-<P><STRONG><a name="[fe]"></a>dtablica</STRONG> (Thumb, 116 bytes, Stack size 32 bytes, alokacja_nr.o(i.dtablica))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = dtablica &rArr; piszkomunikat &rArr; __2printf
+<P><STRONG><a name="[fe]"></a>darray</STRONG> (Thumb, 116 bytes, Stack size 32 bytes, allocation_nr.o(i.darray))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = darray &rArr; writemessage &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;piszkomunikat
+<BR>[Calls]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writemessage
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCA
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;inicjalizacjapk
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initializeqp
 </UL>
 
-<P><STRONG><a name="[112]"></a>dwektor</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, alokacja_nr.o(i.dwektor))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = dwektor &rArr; piszkomunikat &rArr; __2printf
+<P><STRONG><a name="[102]"></a>defineconnum</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, qp.o(i.defineconnum))
+<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 </UL>
-<BR>[Calls]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;piszkomunikat
+
+<P><STRONG><a name="[103]"></a>definevarnum</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, qp.o(i.definevarnum))
+<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
+</UL>
+
+<P><STRONG><a name="[112]"></a>dvector</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, allocation_nr.o(i.dvector))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = dvector &rArr; writemessage &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writemessage
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;inicjalizacjapk
+<BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initializeqp
 </UL>
 
 <P><STRONG><a name="[f9]"></a>find_last</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, profiler.o(i.find_last))
@@ -1489,9 +1497,9 @@ Global Symbols
 <P><STRONG><a name="[e4]"></a>hardware_setup</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, main_mpc.o(i.hardware_setup))
 <BR><BR>[Stack]<UL><LI>Max Depth = 328<LI>Call Chain = hardware_setup &rArr; low_lvl_main &rArr; SystemClock_Config &rArr; HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;low_lvl_main
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
+<BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_end
+<LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;low_lvl_main
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardware_setup
 </UL>
@@ -1499,75 +1507,14 @@ Global Symbols
 <P><STRONG><a name="[e6]"></a>idle</STRONG> (Thumb, 212 bytes, Stack size 32 bytes, main_mpc.o(i.idle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1108<LI>Call Chain = idle &rArr; profiler_print &rArr; get_profiler &rArr; create_profiler &rArr; malloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_string
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
+<BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_print
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_end
+<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_string
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__idle
-</UL>
-
-<P><STRONG><a name="[12a]"></a>iloczynaat</STRONG> (Thumb, 84 bytes, Stack size 20 bytes, obl_macierzowe.o(i.iloczynaat))
-<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = iloczynaat
-</UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
-</UL>
-
-<P><STRONG><a name="[fb]"></a>iloczynab</STRONG> (Thumb, 94 bytes, Stack size 28 bytes, obl_macierzowe.o(i.iloczynab))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = iloczynab
-</UL>
-<BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCA
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
-<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
-</UL>
-
-<P><STRONG><a name="[12d]"></a>iloczynabt</STRONG> (Thumb, 94 bytes, Stack size 28 bytes, obl_macierzowe.o(i.iloczynabt))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = iloczynabt
-</UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
-</UL>
-
-<P><STRONG><a name="[12e]"></a>iloczynatb</STRONG> (Thumb, 94 bytes, Stack size 28 bytes, obl_macierzowe.o(i.iloczynatb))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = iloczynatb
-</UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
-</UL>
-
-<P><STRONG><a name="[130]"></a>iloczynatw</STRONG> (Thumb, 66 bytes, Stack size 20 bytes, obl_macierzowe.o(i.iloczynatw))
-<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = iloczynatw
-</UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
-</UL>
-
-<P><STRONG><a name="[12b]"></a>iloczynaw</STRONG> (Thumb, 66 bytes, Stack size 20 bytes, obl_macierzowe.o(i.iloczynaw))
-<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = iloczynaw
-</UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
-</UL>
-
-<P><STRONG><a name="[100]"></a>iloczynw</STRONG> (Thumb, 36 bytes, Stack size 12 bytes, obl_macierzowe.o(i.iloczynw))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = iloczynw
-</UL>
-<BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-</UL>
-
-<P><STRONG><a name="[134]"></a>iloczynwwt</STRONG> (Thumb, 58 bytes, Stack size 20 bytes, obl_macierzowe.o(i.iloczynwwt))
-<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = iloczynwwt
-</UL>
-<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
-</UL>
-
-<P><STRONG><a name="[104]"></a>inicjalizacjapk</STRONG> (Thumb, 428 bytes, Stack size 16 bytes, pk.o(i.inicjalizacjapk))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = inicjalizacjapk &rArr; dtablica &rArr; piszkomunikat &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lwektor
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwektor
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dtablica
-</UL>
-<BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 </UL>
 
 <P><STRONG><a name="[10b]"></a>init_archive_data</STRONG> (Thumb, 248 bytes, Stack size 40 bytes, mpctools.o(i.init_archive_data))
@@ -1587,36 +1534,46 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller_setup
 </UL>
 
+<P><STRONG><a name="[104]"></a>initializeqp</STRONG> (Thumb, 428 bytes, Stack size 16 bytes, qp.o(i.initializeqp))
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = initializeqp &rArr; darray &rArr; writemessage &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lvector
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dvector
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;darray
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
+</UL>
+
 <P><STRONG><a name="[10e]"></a>last_control</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mpctools.o(i.last_control))
 <BR><BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controls
 </UL>
 
-<P><STRONG><a name="[11a]"></a>liczwyzn</STRONG> (Thumb, 22 bytes, Stack size 12 bytes, pk.o(i.liczwyzn))
+<P><STRONG><a name="[11a]"></a>liczwyzn</STRONG> (Thumb, 22 bytes, Stack size 12 bytes, qp.o(i.liczwyzn))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = liczwyzn &rArr; liczwyznmacodwr &rArr; rozklu
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;liczwyznmacodwr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
 </UL>
 
-<P><STRONG><a name="[11b]"></a>liczwyznmacodwr</STRONG> (Thumb, 658 bytes, Stack size 44 bytes, pk.o(i.liczwyznmacodwr))
+<P><STRONG><a name="[11b]"></a>liczwyznmacodwr</STRONG> (Thumb, 658 bytes, Stack size 44 bytes, qp.o(i.liczwyznmacodwr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = liczwyznmacodwr &rArr; rozklu
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozklu
 </UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;liczwyzn
 </UL>
 
 <P><STRONG><a name="[e8]"></a>loop</STRONG> (Thumb, 188 bytes, Stack size 8 bytes, main_mpc.o(i.loop))
-<BR><BR>[Stack]<UL><LI>Max Depth = 416<LI>Call Chain = loop &rArr; controllerDMCN &rArr; pk &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 416<LI>Call Chain = loop &rArr; controllerDMCN &rArr; qp &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;push_current_controls_to_archive_data
+<BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
+<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_end
+<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;push_current_controls_to_archive_data
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCA
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;random
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_end
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__loop
 </UL>
@@ -1644,13 +1601,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hardware_setup
 </UL>
 
-<P><STRONG><a name="[119]"></a>lwektor</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, alokacja_nr.o(i.lwektor))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = lwektor &rArr; piszkomunikat &rArr; __2printf
+<P><STRONG><a name="[119]"></a>lvector</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, allocation_nr.o(i.lvector))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = lvector &rArr; writemessage &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;piszkomunikat
+<BR>[Calls]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writemessage
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;inicjalizacjapk
+<BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initializeqp
 </UL>
 
 <P><STRONG><a name="[6b]"></a>main</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, main.o(i.main))
@@ -1676,34 +1633,34 @@ Global Symbols
 <P><STRONG><a name="[f8]"></a>malloc</STRONG> (Thumb, 92 bytes, Stack size 20 bytes, malloc.o(i.malloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_current_control
-<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_archive_data
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_matrix
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lwektor
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwektor
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dtablica
+<BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lvector
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dvector
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;darray
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_profiler
 <LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_new_profiler_entry
+<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_current_control
+<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_archive_data
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_matrix
 </UL>
 
 <P><STRONG><a name="[ea]"></a>measurements</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, main_mpc.o(i.measurements))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = measurements &rArr; profiler_start &rArr; add_new_profiler_entry &rArr; find_profiler_entry &rArr; get_profiler &rArr; create_profiler &rArr; malloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_output
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__measureOutput
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
+<BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_end
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_output
+<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__measureOutput
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__measurements
 </UL>
 
-<P><STRONG><a name="[132]"></a>new_control</STRONG> (Thumb, 160 bytes, Stack size 20 bytes, mpctools.o(i.new_control))
+<P><STRONG><a name="[130]"></a>new_control</STRONG> (Thumb, 160 bytes, Stack size 20 bytes, mpctools.o(i.new_control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = new_control
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;push_current_controls_to_archive_data
 </UL>
 
-<P><STRONG><a name="[131]"></a>new_control_increment</STRONG> (Thumb, 156 bytes, Stack size 20 bytes, mpctools.o(i.new_control_increment))
+<P><STRONG><a name="[12f]"></a>new_control_increment</STRONG> (Thumb, 156 bytes, Stack size 20 bytes, mpctools.o(i.new_control_increment))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = new_control_increment
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;push_current_controls_to_archive_data
@@ -1715,75 +1672,107 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;measurements
 </UL>
 
-<P><STRONG><a name="[111]"></a>piszkomunikat</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, alokacja_nr.o(i.piszkomunikat))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = piszkomunikat &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lwektor
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwektor
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dtablica
+<P><STRONG><a name="[105]"></a>obtainA</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, qp.o(i.obtainA))
+<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 </UL>
 
-<P><STRONG><a name="[101]"></a>pk</STRONG> (Thumb, 596 bytes, Stack size 80 bytes, pk.o(i.pk))
-<BR><BR>[Stack]<UL><LI>Max Depth = 336<LI>Call Chain = pk &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+<P><STRONG><a name="[106]"></a>obtainG</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, qp.o(i.obtainG))
+<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 </UL>
-<BR>[Calls]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;testogr
-<LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pomocniczezadpkr
+
+<P><STRONG><a name="[107]"></a>obtainb</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, qp.o(i.obtainb))
+<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
+</UL>
+
+<P><STRONG><a name="[108]"></a>obtaint</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, qp.o(i.obtaint))
+<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
+</UL>
+
+<P><STRONG><a name="[109]"></a>obtainx</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, qp.o(i.obtainx))
+<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
+</UL>
+
+<P><STRONG><a name="[126]"></a>pkr</STRONG> (Thumb, 1272 bytes, Stack size 64 bytes, qp.o(i.pkr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+</UL>
+<BR>[Calls]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sumvv
+<LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productav
+<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productatv
+<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productatb
+<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productabt
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productab
+<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productaat
+<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
+<LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;liczwyznmacodwr
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;liczwyzn
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pomocniczezadpkr
+</UL>
+
+<P><STRONG><a name="[12e]"></a>pomocniczezadpkr</STRONG> (Thumb, 244 bytes, Stack size 24 bytes, qp.o(i.pomocniczezadpkr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+</UL>
+<BR>[Calls]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qp
+</UL>
+
+<P><STRONG><a name="[127]"></a>productaat</STRONG> (Thumb, 84 bytes, Stack size 20 bytes, matrix_cal.o(i.productaat))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = productaat
+</UL>
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+</UL>
+
+<P><STRONG><a name="[fb]"></a>productab</STRONG> (Thumb, 94 bytes, Stack size 28 bytes, matrix_cal.o(i.productab))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = productab
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
+<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCA
+<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
+<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+</UL>
+
+<P><STRONG><a name="[12a]"></a>productabt</STRONG> (Thumb, 94 bytes, Stack size 28 bytes, matrix_cal.o(i.productabt))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = productabt
+</UL>
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+</UL>
+
+<P><STRONG><a name="[12b]"></a>productatb</STRONG> (Thumb, 94 bytes, Stack size 28 bytes, matrix_cal.o(i.productatb))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = productatb
+</UL>
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+</UL>
+
+<P><STRONG><a name="[12d]"></a>productatv</STRONG> (Thumb, 66 bytes, Stack size 20 bytes, matrix_cal.o(i.productatv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = productatv
+</UL>
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+</UL>
+
+<P><STRONG><a name="[128]"></a>productav</STRONG> (Thumb, 66 bytes, Stack size 20 bytes, matrix_cal.o(i.productav))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = productav
+</UL>
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+</UL>
+
+<P><STRONG><a name="[100]"></a>productv</STRONG> (Thumb, 36 bytes, Stack size 12 bytes, matrix_cal.o(i.productv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = productv
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 </UL>
 
-<P><STRONG><a name="[129]"></a>pkr</STRONG> (Thumb, 1272 bytes, Stack size 64 bytes, pk.o(i.pkr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+<P><STRONG><a name="[133]"></a>productvvt</STRONG> (Thumb, 58 bytes, Stack size 20 bytes, matrix_cal.o(i.productvvt))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = productvvt
 </UL>
-<BR>[Calls]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sumaww
-<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynaw
-<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynatw
-<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynatb
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynabt
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynab
-<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynaat
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
-<LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;liczwyznmacodwr
-<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;liczwyzn
-</UL>
-<BR>[Called By]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pomocniczezadpkr
-</UL>
-
-<P><STRONG><a name="[105]"></a>pobierzA</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pk.o(i.pobierzA))
-<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-</UL>
-
-<P><STRONG><a name="[106]"></a>pobierzG</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pk.o(i.pobierzG))
-<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-</UL>
-
-<P><STRONG><a name="[107]"></a>pobierzb</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pk.o(i.pobierzb))
-<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-</UL>
-
-<P><STRONG><a name="[108]"></a>pobierzt</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pk.o(i.pobierzt))
-<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-</UL>
-
-<P><STRONG><a name="[109]"></a>pobierzx</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pk.o(i.pobierzx))
-<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-</UL>
-
-<P><STRONG><a name="[128]"></a>pomocniczezadpkr</STRONG> (Thumb, 244 bytes, Stack size 24 bytes, pk.o(i.pomocniczezadpkr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
-</UL>
-<BR>[Calls]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
-</UL>
-<BR>[Called By]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pk
+<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
 </UL>
 
 <P><STRONG><a name="[10d]"></a>profiler_end</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, profiler.o(i.profiler_end))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = profiler_end &rArr; find_profiler_entry &rArr; get_profiler &rArr; create_profiler &rArr; malloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__get_time
-<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_profiler_entry
+<BR>[Calls]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_profiler_entry
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__get_time
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;measurements
 <LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loop
@@ -1796,9 +1785,9 @@ Global Symbols
 <P><STRONG><a name="[118]"></a>profiler_print</STRONG> (Thumb, 168 bytes, Stack size 1040 bytes, profiler.o(i.profiler_print))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1076<LI>Call Chain = profiler_print &rArr; get_profiler &rArr; create_profiler &rArr; malloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__write_string
-<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_profiler
+<BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_profiler
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;float2strF
+<LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__write_string
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;idle
@@ -1807,8 +1796,8 @@ Global Symbols
 <P><STRONG><a name="[10a]"></a>profiler_start</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, profiler.o(i.profiler_start))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = profiler_start &rArr; add_new_profiler_entry &rArr; find_profiler_entry &rArr; get_profiler &rArr; create_profiler &rArr; malloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__get_time
-<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_new_profiler_entry
+<BR>[Calls]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_new_profiler_entry
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__get_time
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;measurements
 <LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loop
@@ -1821,10 +1810,19 @@ Global Symbols
 <P><STRONG><a name="[11e]"></a>push_current_controls_to_archive_data</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, mpctools.o(i.push_current_controls_to_archive_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = push_current_controls_to_archive_data &rArr; new_control_increment
 </UL>
-<BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_control_increment
-<LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_control
+<BR>[Calls]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_control_increment
+<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_control
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loop
+</UL>
+
+<P><STRONG><a name="[101]"></a>qp</STRONG> (Thumb, 596 bytes, Stack size 80 bytes, qp.o(i.qp))
+<BR><BR>[Stack]<UL><LI>Max Depth = 336<LI>Call Chain = qp &rArr; pomocniczezadpkr &rArr; pkr &rArr; rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
+</UL>
+<BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;testogr
+<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pomocniczezadpkr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 </UL>
 
 <P><STRONG><a name="[11d]"></a>random</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, main_1.o(i.random))
@@ -1835,23 +1833,23 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loop
 </UL>
 
-<P><STRONG><a name="[11c]"></a>rozklu</STRONG> (Thumb, 462 bytes, Stack size 32 bytes, pk.o(i.rozklu))
+<P><STRONG><a name="[11c]"></a>rozklu</STRONG> (Thumb, 462 bytes, Stack size 32 bytes, qp.o(i.rozklu))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = rozklu
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;liczwyznmacodwr
 </UL>
 
-<P><STRONG><a name="[12c]"></a>rozkqr</STRONG> (Thumb, 1064 bytes, Stack size 96 bytes, pk.o(i.rozkqr))
+<P><STRONG><a name="[129]"></a>rozkqr</STRONG> (Thumb, 1064 bytes, Stack size 96 bytes, qp.o(i.rozkqr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = rozkqr &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynwwt
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iloczynab
+<BR>[Calls]<UL><LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productvvt
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;productab
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
-<LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;znak
+<LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;znak
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sqrt
 </UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
 </UL>
 
 <P><STRONG><a name="[fd]"></a>set_current_control_increment</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mpctools.o(i.set_current_control_increment))
@@ -1859,23 +1857,23 @@ Global Symbols
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCA
 </UL>
 
-<P><STRONG><a name="[fc]"></a>sumaaa</STRONG> (Thumb, 142 bytes, Stack size 20 bytes, obl_macierzowe.o(i.sumaaa))
-<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = sumaaa
+<P><STRONG><a name="[fc]"></a>sumaa</STRONG> (Thumb, 142 bytes, Stack size 20 bytes, matrix_cal.o(i.sumaa))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = sumaa
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCA
 </UL>
 
-<P><STRONG><a name="[12f]"></a>sumaww</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, obl_macierzowe.o(i.sumaww))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = sumaww
+<P><STRONG><a name="[12c]"></a>sumvv</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, matrix_cal.o(i.sumvv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = sumvv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
+<BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pkr
 </UL>
 
-<P><STRONG><a name="[127]"></a>testogr</STRONG> (Thumb, 180 bytes, Stack size 20 bytes, pk.o(i.testogr))
+<P><STRONG><a name="[131]"></a>testogr</STRONG> (Thumb, 180 bytes, Stack size 20 bytes, qp.o(i.testogr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = testogr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pk
+<BR>[Called By]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qp
 </UL>
 
 <P><STRONG><a name="[ee]"></a>timeout</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, main_mpc.o(i.timeout))
@@ -1891,27 +1889,29 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 </UL>
 
-<P><STRONG><a name="[102]"></a>ustawilogr</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pk.o(i.ustawilogr))
-<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-</UL>
-
-<P><STRONG><a name="[103]"></a>ustawilzm</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pk.o(i.ustawilzm))
-<BR><BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controllerDMCN
-</UL>
-
 <P><STRONG><a name="[f0]"></a>write_string</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, main_1.o(i.write_string))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = write_string &rArr; HAL_UART_Transmit_IT
 </UL>
-<BR>[Calls]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_IT
-<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_GetState
-<LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<BR>[Calls]<UL><LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_IT
+<LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_GetState
+<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__write_string
 <LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;idle
 </UL>
 
-<P><STRONG><a name="[133]"></a>znak</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, pk.o(i.znak))
-<BR><BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
+<P><STRONG><a name="[111]"></a>writemessage</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, allocation_nr.o(i.writemessage))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = writemessage &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lvector
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dvector
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;darray
+</UL>
+
+<P><STRONG><a name="[132]"></a>znak</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, qp.o(i.znak))
+<BR><BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rozkqr
 </UL>
 <P>
 <H3>

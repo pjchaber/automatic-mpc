@@ -2,10 +2,10 @@
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\obl_macierzowe.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\alokacja_nr.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\pk.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h"
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
@@ -53,28 +53,28 @@ void controller(ArchiveData * ad, CurrentControl * c){
 	static float** umax;
 	static float** umin;
 	if(ad == NULL){
-		e = dtablica(1,2,1,3);
-		tmpu = dtablica(1,2,1,1);
-		er = dtablica(1,2,1,3);
-		du = dtablica(1,2,1,1);
-		control_value = dtablica(1,1,1,2);
-		r = dtablica(1,3,1,2);
+		e = darray(1,2,1,3);
+		tmpu = darray(1,2,1,1);
+		er = darray(1,2,1,3);
+		du = darray(1,2,1,1);
+		control_value = darray(1,1,1,2);
+		r = darray(1,3,1,2);
 		r[1][1] = 0.000000e+00f;
 		r[1][2] = 0.000000e+00f;
 		r[2][1] = -9.500000e-02f;
 		r[2][2] = -2.500000e-02f;
 		r[3][1] = 1.050000e-01f;
 		r[3][2] = 7.500000e-02f;
-		dumax = dtablica(1,1,1,2);
+		dumax = darray(1,1,1,2);
 		dumax[1][1] = 1.000000e-01f;
 		dumax[1][2] = 1.000000e-01f;
-		dumin = dtablica(1,1,1,2);
+		dumin = darray(1,1,1,2);
 		dumin[1][1] = -1.000000e-01f;
 		dumin[1][2] = -1.000000e-01f;
-		umax = dtablica(1,1,1,2);
+		umax = darray(1,1,1,2);
 		umax[1][1] = 1.000000e+00f;
 		umax[1][2] = 1.000000e+00f;
-		umin = dtablica(1,1,1,2);
+		umin = darray(1,1,1,2);
 		umin[1][1] = -1.000000e+00f;
 		umin[1][2] = -1.000000e+00f;
 		return;

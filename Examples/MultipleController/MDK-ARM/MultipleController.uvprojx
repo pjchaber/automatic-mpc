@@ -150,7 +150,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>11</TargetSelection>
+          <TargetSelection>6</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -164,7 +164,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>STLink\ST-LINKIII-KEIL_SWO.dll</Driver>
+            <Driver>Segger\JL2CM3.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -427,11 +427,6 @@
           <GroupName>AutoMATiC</GroupName>
           <Files>
             <File>
-              <FileName>alokacja_nr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libs\C\alokacja_nr.c</FilePath>
-            </File>
-            <File>
               <FileName>default_functions.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libs\C\default_functions.c</FilePath>
@@ -452,16 +447,6 @@
               <FilePath>..\..\..\Libs\C\mpctools.c</FilePath>
             </File>
             <File>
-              <FileName>obl_macierzowe.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libs\C\obl_macierzowe.c</FilePath>
-            </File>
-            <File>
-              <FileName>pk.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libs\C\pk.c</FilePath>
-            </File>
-            <File>
               <FileName>profiler.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libs\C\profiler.c</FilePath>
@@ -470,6 +455,21 @@
               <FileName>simulated_signals.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libs\C\simulated_signals.c</FilePath>
+            </File>
+            <File>
+              <FileName>allocation_nr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\allocation_nr.c</FilePath>
+            </File>
+            <File>
+              <FileName>matrix_cal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\matrix_cal.c</FilePath>
+            </File>
+            <File>
+              <FileName>qp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\qp.c</FilePath>
             </File>
           </Files>
         </Group>

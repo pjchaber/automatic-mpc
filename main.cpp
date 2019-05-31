@@ -222,10 +222,16 @@ int main (int argc, TCHAR *argv[]){
     output_file << "#include \""<< c_libraries_path << "mpctools.h\"" << endl;
     output_file << "#include \""<< c_libraries_path << "simulated_signals.h\"" << endl;
     // output_file << "#include \""<< c_libraries_path << "default_functions.h\"" << endl;
-    output_file << "#include \""<< c_libraries_path << "obl_macierzowe.h\"" << endl;
+    output_file << "#include \""<< c_libraries_path << "matrix_cal.h\"" << endl;
     output_file << "#include \""<< c_libraries_path << "mat_lib.h\"" << endl;
-    output_file << "#include \""<< c_libraries_path << "alokacja_nr.h\"" << endl;
-    output_file << "#include \""<< c_libraries_path << "pk.h\"" << endl;
+    output_file << "#include \""<< c_libraries_path << "allocation_nr.h\"" << endl;
+    output_file << "#include \""<< c_libraries_path << "qp.h\"" << endl;
+
+    // Porzucone ze wzgledu na uzycie jezyka polskiego
+    // output_file << "#include \""<< c_libraries_path << "obl_macierzowe.h\"" << endl;
+    // output_file << "#include \""<< c_libraries_path << "mat_lib.h\"" << endl;
+    // output_file << "#include \""<< c_libraries_path << "alokacja_nr.h\"" << endl;
+    // output_file << "#include \""<< c_libraries_path << "pk.h\"" << endl;
     
 	string line;
     bool block_open = false;

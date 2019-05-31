@@ -2,10 +2,10 @@
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\obl_macierzowe.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\alokacja_nr.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\pk.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h"
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
@@ -56,15 +56,15 @@ void controller(ArchiveData * ad, CurrentControl * c){
 	static float** umax;
 	static float** umin;
 	if(ad == NULL){
-		AutoMATiC_GPC_du = dtablica(1,2,1,1);
-		AutoMATiC_GPC_tmpu = dtablica(1,2,1,1);
-		control_value = dtablica(1,1,1,2);
-		AutoMATiC_GPC_Kyzad = dtablica(1,2,1,2);
+		AutoMATiC_GPC_du = darray(1,2,1,1);
+		AutoMATiC_GPC_tmpu = darray(1,2,1,1);
+		control_value = darray(1,1,1,2);
+		AutoMATiC_GPC_Kyzad = darray(1,2,1,2);
 		AutoMATiC_GPC_Kyzad[1][1] = 3.373006e-01f;
 		AutoMATiC_GPC_Kyzad[1][2] = -8.539666e-02f;
 		AutoMATiC_GPC_Kyzad[2][1] = -1.016548e-01f;
 		AutoMATiC_GPC_Kyzad[2][2] = 5.115693e-01f;
-		AutoMATiC_GPC_Ku = dtablica3(1,2,1,2,1,4);
+		AutoMATiC_GPC_Ku = darray3(1,2,1,2,1,4);
 		AutoMATiC_GPC_Ku[1][1][1] = -1.246174e+00f;
 		AutoMATiC_GPC_Ku[1][1][2] = 1.843347e+00f;
 		AutoMATiC_GPC_Ku[1][1][3] = -5.971733e-01f;
@@ -81,7 +81,7 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_GPC_Ku[2][2][2] = 1.006652e+00f;
 		AutoMATiC_GPC_Ku[2][2][3] = -1.391867e-01f;
 		AutoMATiC_GPC_Ku[2][2][4] = 0.000000e+00f;
-		AutoMATiC_GPC_Ky = dtablica3(1,2,1,2,1,3);
+		AutoMATiC_GPC_Ky = darray3(1,2,1,2,1,3);
 		AutoMATiC_GPC_Ky[1][1][1] = -8.392055e-01f;
 		AutoMATiC_GPC_Ky[1][1][2] = 6.226592e-01f;
 		AutoMATiC_GPC_Ky[1][1][3] = -1.207543e-01f;
@@ -94,16 +94,16 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_GPC_Ky[2][2][1] = -8.538780e-01f;
 		AutoMATiC_GPC_Ky[2][2][2] = 3.850181e-01f;
 		AutoMATiC_GPC_Ky[2][2][3] = -4.270940e-02f;
-		dumax = dtablica(1,1,1,2);
+		dumax = darray(1,1,1,2);
 		dumax[1][1] = 1.000000e-01f;
 		dumax[1][2] = 1.000000e-01f;
-		dumin = dtablica(1,1,1,2);
+		dumin = darray(1,1,1,2);
 		dumin[1][1] = -1.000000e-01f;
 		dumin[1][2] = -1.000000e-01f;
-		umax = dtablica(1,1,1,2);
+		umax = darray(1,1,1,2);
 		umax[1][1] = 1.000000e+00f;
 		umax[1][2] = 1.000000e+00f;
-		umin = dtablica(1,1,1,2);
+		umin = darray(1,1,1,2);
 		umin[1][1] = -1.000000e+00f;
 		umin[1][2] = -1.000000e+00f;
 		return;

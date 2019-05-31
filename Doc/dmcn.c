@@ -2,10 +2,10 @@
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\obl_macierzowe.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\alokacja_nr.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\pk.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h"
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
@@ -77,14 +77,14 @@ void controller(ArchiveData * ad, CurrentControl * c){
 	static float * AutoMATiC_DMC_btmp;
 	static float * AutoMATiC_DMC_qpx;
 	if(ad == NULL){
-		ustawilogr(40);
-		ustawilzm(10);
-		inicjalizacjapk();
-		AutoMATiC_DMC_A=pobierzA();
-		AutoMATiC_DMC_H=pobierzG();
-		AutoMATiC_DMC_btmp=pobierzb();
-		AutoMATiC_DMC_ftmp=pobierzt();
-		AutoMATiC_DMC_qpx=pobierzx();
+		defineconnum(40);
+		definevarnum(10);
+		initializeqp();
+		AutoMATiC_DMC_A=obtainA();
+		AutoMATiC_DMC_H=obtainG();
+		AutoMATiC_DMC_btmp=obtainb();
+		AutoMATiC_DMC_ftmp=obtaint();
+		AutoMATiC_DMC_qpx=obtainx();
 		AutoMATiC_DMC_A[1][1] = 1.000000e+00f;
 		AutoMATiC_DMC_A[1][2] = 0.000000e+00f;
 		AutoMATiC_DMC_A[1][3] = 0.000000e+00f;
@@ -585,22 +585,22 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_DMC_H[10][8] = 0.000000e+00f;
 		AutoMATiC_DMC_H[10][9] = 0.000000e+00f;
 		AutoMATiC_DMC_H[10][10] = 2.000000e+00f;
-		AutoMATiC_DMC_dUp = dtablica(1,8,1,1);
-		AutoMATiC_DMC_Yzad = dtablica(1,10,1,1);
-		AutoMATiC_DMC_Y = dtablica(1,10,1,1);
-		AutoMATiC_DMC_tmpu = dtablica(1,2,1,1);
-		AutoMATiC_DMC_e = dtablica(1,2,1,1);
-		AutoMATiC_DMC_du = dtablica(1,2,1,1);
-		AutoMATiC_DMC_uk = dtablica(1,2,1,1);
-		control_value = dtablica(1,1,1,2);
-		AutoMATiC_DMC_dutmp1 = dtablica(1,2,1,1);
-		AutoMATiC_DMC_Ke = dtablica(1,2,1,2);
+		AutoMATiC_DMC_dUp = darray(1,8,1,1);
+		AutoMATiC_DMC_Yzad = darray(1,10,1,1);
+		AutoMATiC_DMC_Y = darray(1,10,1,1);
+		AutoMATiC_DMC_tmpu = darray(1,2,1,1);
+		AutoMATiC_DMC_e = darray(1,2,1,1);
+		AutoMATiC_DMC_du = darray(1,2,1,1);
+		AutoMATiC_DMC_uk = darray(1,2,1,1);
+		control_value = darray(1,1,1,2);
+		AutoMATiC_DMC_dutmp1 = darray(1,2,1,1);
+		AutoMATiC_DMC_Ke = darray(1,2,1,2);
 		AutoMATiC_DMC_Ke[1][1] = 3.373006e-01f;
 		AutoMATiC_DMC_Ke[1][2] = -8.539666e-02f;
 		AutoMATiC_DMC_Ke[2][1] = -1.016548e-01f;
 		AutoMATiC_DMC_Ke[2][2] = 5.115693e-01f;
-		AutoMATiC_DMC_dutmp2 = dtablica(1,2,1,1);
-		AutoMATiC_DMC_Ku = dtablica(1,2,1,8);
+		AutoMATiC_DMC_dutmp2 = darray(1,2,1,1);
+		AutoMATiC_DMC_Ku = darray(1,2,1,8);
 		AutoMATiC_DMC_Ku[1][1] = 1.246690e+00f;
 		AutoMATiC_DMC_Ku[1][2] = 1.325999e-01f;
 		AutoMATiC_DMC_Ku[1][3] = 6.350099e-01f;
@@ -617,9 +617,9 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_DMC_Ku[2][6] = 6.519486e-02f;
 		AutoMATiC_DMC_Ku[2][7] = -2.764289e-02f;
 		AutoMATiC_DMC_Ku[2][8] = 1.396884e-02f;
-		AutoMATiC_DMC_ftmp1 = dtablica(1,10,1,1);
-		AutoMATiC_DMC_ftmp2 = dtablica(1,10,1,1);
-		AutoMATiC_DMC_Mp = dtablica(1,10,1,8);
+		AutoMATiC_DMC_ftmp1 = darray(1,10,1,1);
+		AutoMATiC_DMC_ftmp2 = darray(1,10,1,1);
+		AutoMATiC_DMC_Mp = darray(1,10,1,8);
 		AutoMATiC_DMC_Mp[1][1] = 2.552292e+00f;
 		AutoMATiC_DMC_Mp[1][2] = 6.321206e-01f;
 		AutoMATiC_DMC_Mp[1][3] = 1.249453e+00f;
@@ -700,9 +700,9 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_DMC_Mp[10][6] = 1.506941e-01f;
 		AutoMATiC_DMC_Mp[10][7] = 5.465313e-03f;
 		AutoMATiC_DMC_Mp[10][8] = 3.355960e-02f;
-		AutoMATiC_DMC_ftmp3 = dtablica(1,10,1,1);
-		AutoMATiC_DMC_ftmp4 = dtablica(1,10,1,1);
-		AutoMATiC_DMC_fconst = dtablica(1,10,1,10);
+		AutoMATiC_DMC_ftmp3 = darray(1,10,1,1);
+		AutoMATiC_DMC_ftmp4 = darray(1,10,1,1);
+		AutoMATiC_DMC_fconst = darray(1,10,1,10);
 		AutoMATiC_DMC_fconst[1][1] = 0.000000e+00f;
 		AutoMATiC_DMC_fconst[1][2] = 0.000000e+00f;
 		AutoMATiC_DMC_fconst[1][3] = -5.104583e+00f;
@@ -803,8 +803,8 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_DMC_fconst[10][8] = 0.000000e+00f;
 		AutoMATiC_DMC_fconst[10][9] = 0.000000e+00f;
 		AutoMATiC_DMC_fconst[10][10] = 0.000000e+00f;
-		AutoMATiC_DMC_btmp1 = dtablica(1,40,1,1);
-		AutoMATiC_DMC_bvar = dtablica(1,40,1,2);
+		AutoMATiC_DMC_btmp1 = darray(1,40,1,1);
+		AutoMATiC_DMC_bvar = darray(1,40,1,2);
 		AutoMATiC_DMC_bvar[1][1] = 0.000000e+00f;
 		AutoMATiC_DMC_bvar[1][2] = 0.000000e+00f;
 		AutoMATiC_DMC_bvar[2][1] = 0.000000e+00f;
@@ -885,8 +885,8 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_DMC_bvar[39][2] = -0.000000e+00f;
 		AutoMATiC_DMC_bvar[40][1] = -0.000000e+00f;
 		AutoMATiC_DMC_bvar[40][2] = -1.000000e+00f;
-		AutoMATiC_DMC_btmp2 = dtablica(1,40,1,1);
-		AutoMATiC_DMC_b = dtablica(1,40,1,1);
+		AutoMATiC_DMC_btmp2 = darray(1,40,1,1);
+		AutoMATiC_DMC_b = darray(1,40,1,1);
 		AutoMATiC_DMC_b[1][1] = 1.000000e-01f;
 		AutoMATiC_DMC_b[2][1] = 1.000000e-01f;
 		AutoMATiC_DMC_b[3][1] = 1.000000e-01f;
@@ -927,16 +927,16 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_DMC_b[38][1] = 1.000000e+00f;
 		AutoMATiC_DMC_b[39][1] = 1.000000e+00f;
 		AutoMATiC_DMC_b[40][1] = 1.000000e+00f;
-		dumax = dtablica(1,1,1,2);
+		dumax = darray(1,1,1,2);
 		dumax[1][1] = 1.000000e-01f;
 		dumax[1][2] = 1.000000e-01f;
-		dumin = dtablica(1,1,1,2);
+		dumin = darray(1,1,1,2);
 		dumin[1][1] = -1.000000e-01f;
 		dumin[1][2] = -1.000000e-01f;
-		umax = dtablica(1,1,1,2);
+		umax = darray(1,1,1,2);
 		umax[1][1] = 1.000000e+00f;
 		umax[1][2] = 1.000000e+00f;
-		umin = dtablica(1,1,1,2);
+		umin = darray(1,1,1,2);
 		umin[1][1] = -1.000000e+00f;
 		umin[1][2] = -1.000000e+00f;
 		return;
@@ -970,30 +970,30 @@ void controller(ArchiveData * ad, CurrentControl * c){
 	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
 		AutoMATiC_DMC_e[AutoMATiC_DMC_i][1]=ad->z[AutoMATiC_DMC_i-1]-ad->y[ad->k][AutoMATiC_DMC_i-1];
 	}
-	iloczynab(AutoMATiC_DMC_Ke,AutoMATiC_DMC_e,AutoMATiC_DMC_dutmp1,2,2,2,1);
-	iloczynab(AutoMATiC_DMC_Ku,AutoMATiC_DMC_dUp,AutoMATiC_DMC_dutmp2,2,8,8,1);
-	sumaaa(AutoMATiC_DMC_dutmp1,AutoMATiC_DMC_dutmp2,AutoMATiC_DMC_du,2,1,-1);
+	productab(AutoMATiC_DMC_Ke,AutoMATiC_DMC_e,AutoMATiC_DMC_dutmp1,2,2,2,1);
+	productab(AutoMATiC_DMC_Ku,AutoMATiC_DMC_dUp,AutoMATiC_DMC_dutmp2,2,8,8,1);
+	sumaa(AutoMATiC_DMC_dutmp1,AutoMATiC_DMC_dutmp2,AutoMATiC_DMC_du,2,1,-1);
 	for(j=1;j<=2;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_du[j][k] = 0;
 	for(j=1;j<=2;++j) for(k=1;k<=1;++k) AutoMATiC_DMC_uk[j][k] = 0;
 	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
 		AutoMATiC_DMC_uk[AutoMATiC_DMC_i][1]=ad->u[ad->k-1][AutoMATiC_DMC_i-1];
 	}
-	sumaaa(AutoMATiC_DMC_Yzad,AutoMATiC_DMC_Y,AutoMATiC_DMC_ftmp1,10,1,-1);
-	iloczynab(AutoMATiC_DMC_Mp,AutoMATiC_DMC_dUp,AutoMATiC_DMC_ftmp2,10,8,8,1);
-	sumaaa(AutoMATiC_DMC_ftmp1,AutoMATiC_DMC_ftmp2,AutoMATiC_DMC_ftmp3,10,1,-1);
-	iloczynab(AutoMATiC_DMC_fconst,AutoMATiC_DMC_ftmp3,AutoMATiC_DMC_ftmp4,10,10,10,1);
+	sumaa(AutoMATiC_DMC_Yzad,AutoMATiC_DMC_Y,AutoMATiC_DMC_ftmp1,10,1,-1);
+	productab(AutoMATiC_DMC_Mp,AutoMATiC_DMC_dUp,AutoMATiC_DMC_ftmp2,10,8,8,1);
+	sumaa(AutoMATiC_DMC_ftmp1,AutoMATiC_DMC_ftmp2,AutoMATiC_DMC_ftmp3,10,1,-1);
+	productab(AutoMATiC_DMC_fconst,AutoMATiC_DMC_ftmp3,AutoMATiC_DMC_ftmp4,10,10,10,1);
 	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=10;++AutoMATiC_DMC_i){
 		AutoMATiC_DMC_ftmp[AutoMATiC_DMC_i]=AutoMATiC_DMC_ftmp4[AutoMATiC_DMC_i][1];
 	}
-	iloczynab(AutoMATiC_DMC_bvar,AutoMATiC_DMC_uk,AutoMATiC_DMC_btmp1,40,2,2,1);
-	sumaaa(AutoMATiC_DMC_b,AutoMATiC_DMC_btmp1,AutoMATiC_DMC_btmp2,40,1,1);
+	productab(AutoMATiC_DMC_bvar,AutoMATiC_DMC_uk,AutoMATiC_DMC_btmp1,40,2,2,1);
+	sumaa(AutoMATiC_DMC_b,AutoMATiC_DMC_btmp1,AutoMATiC_DMC_btmp2,40,1,1);
 	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=40;++AutoMATiC_DMC_i){
 		AutoMATiC_DMC_btmp[AutoMATiC_DMC_i]=AutoMATiC_DMC_btmp2[AutoMATiC_DMC_i][1];
 	}
 	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
 		AutoMATiC_DMC_qpx[AutoMATiC_DMC_i]=0;
 	}
-	iloczynw(AutoMATiC_DMC_btmp,-1,AutoMATiC_DMC_btmp,40);pk();
+	productv(AutoMATiC_DMC_btmp,-1,AutoMATiC_DMC_btmp,40);qp();
 	for(AutoMATiC_DMC_i=1;AutoMATiC_DMC_i<=2;++AutoMATiC_DMC_i){
 		AutoMATiC_DMC_du[AutoMATiC_DMC_i][1]=AutoMATiC_DMC_qpx[AutoMATiC_DMC_i];
 	}

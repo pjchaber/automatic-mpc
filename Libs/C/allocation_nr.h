@@ -1,0 +1,27 @@
+//void piszkomunikat(char tekst[],int polecenie);
+//long *lwektor(long nl, long nh);
+//long **ltablica(long nrl, long nrh, long ncl, long nch);
+//float *dwektor(long nl, long nh);
+//float **dtablica(long nrl, long nrh, long ncl, long nch);
+//float ***dtablica3(long nrl, long nrh, long ncl, long nch, long ndl, long ndh);
+//void dwektorkasuj(float *v, long nl, long nh);
+//void dtablicakasuj(float **m, long nrl, long nrh, long ncl, long nch);
+//void dtablica3kasuj(float ***t, long nrl, long nrh, long ncl, long nch,long ndl, long ndh);
+//void lwektorkasuj(long *v, long nl, long nh);
+//void ltablicakasuj(long **m, long nrl, long nrh, long ncl, long nch);
+//long wart_max(long a, long b);
+//long wart_min(long a, long b);
+
+void writemessage(char text[],int exit);
+long *lvector(long nl, long nh);
+long **larray(long nrl, long nrh, long ncl, long nch);
+float *dvector(long nl, long nh);
+float **darray(long nrl, long nrh, long ncl, long nch);
+float ***darray3(long nrl, long nrh, long ncl, long nch, long ndl, long ndh);
+void dvectordelete(float *v, long nl, long nh);
+void darraydelete(float **m, long nrl, long nrh, long ncl, long nch);
+void darray3delete(float ***t, long nrl, long nrh, long ncl, long nch,long ndl, long ndh);
+void lvectordelete(long *v, long nl, long nh);
+void larraydelete(long **m, long nrl, long nrh, long ncl, long nch);
+long value_max(long a, long b);
+long value_min(long a, long b);

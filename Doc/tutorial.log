@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.5)  31 MAY 2019 14:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.5)  31 MAY 2019 15:56
 entering extended mode
 **./tutorial.tex
 (tutorial.tex
@@ -1339,7 +1339,6 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./dmcn.csv}
 PGFPlots: reading {./dmcn.csv}
 Missing character: There is no ; in font nullfont!
- [13]
 PGFPlots: reading {./gpca.csv}
 PGFPlots: reading {./gpca.csv}
 PGFPlots: reading {./gpca.csv}
@@ -1348,7 +1347,7 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./gpca.csv}
 PGFPlots: reading {./gpca.csv}
 Missing character: There is no ; in font nullfont!
- [14]
+ [13] [14]
 PGFPlots: reading {./gpcn.csv}
 PGFPlots: reading {./gpcn.csv}
 PGFPlots: reading {./gpcn.csv}
@@ -1357,7 +1356,7 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./gpcn.csv}
 PGFPlots: reading {./gpcn.csv}
 Missing character: There is no ; in font nullfont!
- [15]
+ [15] [16]
 PGFPlots: reading {./dmcan.csv}
 PGFPlots: reading {./dmcan.csv}
 PGFPlots: reading {./dmcan.csv}
@@ -1368,7 +1367,7 @@ PGFPlots: reading {./dmcan.csv}
 PGFPlots: reading {./dmcan.csv}
 PGFPlots: reading {./dmcan.csv}
 Missing character: There is no ; in font nullfont!
- [16] [17] [18] [19]
+ [17] [18] [19] [20]
 PGFPlots: reading {./pid.csv}
 PGFPlots: reading {./pid.csv}
 PGFPlots: reading {./pid.csv}
@@ -1377,45 +1376,45 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./pid.csv}
 PGFPlots: reading {./pid.csv}
 Missing character: There is no ; in font nullfont!
- [20]
+ [21]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1058.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1069.
 
- (dmca.c [21]
-[22] [23]) [24] (dmcn.c [25] [26] [27] [28] [29] [30] [31] [32] [33] [34]
-[35] [36] [37] [38] [39] [40] [41]) [42] (gpca.c [43] [44] [45]) [46] (gpcn.c
-[47] [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60] [61]
-[62]) [63] (dmcan.c [64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74]
-[75] [76] [77] [78] [79] [80] [81] [82]) [83] (pid.c [84] [85]) [86]
-(tutorial.aux) ) 
+ (dmca.c
+[22] [23] [24]) [25] (dmcn.c [26] [27] [28] [29] [30] [31] [32] [33] [34]
+[35] [36] [37] [38] [39] [40] [41] [42]) [43] (gpca.c [44] [45] [46]) [47]
+(gpcn.c [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60]
+[61] [62] [63]) [64] (dmcan.c [65] [66] [67] [68] [69] [70] [71] [72] [73]
+[74] [75] [76] [77] [78] [79] [80] [81] [82] [83]) [84] (pid.c [85] [86])
+[87] (tutorial.aux) ) 
 Here is how much of TeX's memory you used:
  40145 strings out of 493305
- 941777 string characters out of 3138875
- 21372066 words of memory out of 24318241
+ 941761 string characters out of 3138875
+ 21413365 words of memory out of 24359540
  43132 multiletter control sequences out of 15000+200000
  546789 words of font info for 82 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  79i,19n,136p,1318b,2419s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Admin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\tcrm1095.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on tutorial.pdf (87 pages, 555303 bytes).
+ <C:\Users\Admin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
+jknappen\ec\dpi600\tcrm1095.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcs
+c10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on tutorial.pdf (88 pages, 555503 bytes).
 PDF statistics:
- 360 PDF objects out of 1000 (max. 8388607)
+ 363 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -33,11 +33,11 @@ K =  [.1 .05];
 Ti = [1 .1];
 Td = [0.0 0.0];
 
-%AutoMATiC_Generate('AutoMATiC_PID_Algorithm_s','controller');
+AutoMATiC_Generate('AutoMATiC_PID_Algorithm_s','controller');
 %AutoMATiC_Generate('AutoMATiC_DMC_Analytic_Algorithm','controller');
 %AutoMATiC_Generate('AutoMATiC_DMC_Numeric_Algorithm','controller');
 %AutoMATiC_Generate('AutoMATiC_GPC_Analytic_Algorithm','controller');
-AutoMATiC_Generate('AutoMATiC_GPC_Numeric_Algorithm','controller');
+%AutoMATiC_Generate('AutoMATiC_GPC_Numeric_Algorithm','controller');
 
 
 function S = step_response_generation(GPC_a,GPC_b,D)

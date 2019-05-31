@@ -3,9 +3,44 @@
 #include <math.h>
 #include <time.h>
 
-#include "alokacja_nr.h"
-#include "obl_macierzowe.h"
-#include "pk.h"
+//#include "alokacja_nr.h"
+//#include "obl_macierzowe.h"
+//#include "pk.h"
+#include "allocation_nr.h"
+#include "matrix_cal.h"
+#include "qp.h"
+
+// Legacy stuff -- translation from Polish to English
+#define piszkomunikat  writemessage
+#define lwektor        lvector
+#define ltablica       larray
+#define dwektor        dvector
+#define dtablica       darray
+#define dtablica3      darray3
+#define dwektorkasuj   dvectordelete
+#define dtablicakasuj  darraydelete
+#define dtablica3kasuj darray3delete
+#define lwektorkasuj   lvectordelete
+#define ltablicakasuj  larraydelete
+#define wart_max       value_max
+#define wart_min       value_min
+
+#define iloczynaat     productaat
+#define iloczynata     productata
+#define iloczynab      productab
+#define iloczynatb     productatb
+#define iloczynatbt    productatbt
+#define iloczynabt     productabt
+#define iloczynaw      productav
+#define sumaww         sumvv
+#define sumaaa         sumaa
+#define iloczynwwt     productvvt
+#define iloczynwtw     productvtv
+#define iloczynwta     productvta
+#define iloczynatw     productatv
+#define iloraza        dividea
+#define iloczyna       producta
+#define iloczynw       productv
 
 static long pk_ilzm,pk_ilogr,pk_ilor,*pk_nrnzal;
 
@@ -18,23 +53,23 @@ static long *lu_ind;
 static float *pk_wp1,*pk_wp2,*pk_wp3;
 static float **pk_mp1,**pk_mp2,**pk_mp3;
 
-void ustawilzm(long ilzm_){
+void definevarnum(long ilzm_){
 	pk_ilzm = ilzm_;
 }
-void ustawilogr(long ilogr_){
+void defineconnum(long ilogr_){
 	pk_ilogr = ilogr_;
 }
 
-float ** pobierzA(void){     return pk_A;}
-float *  pobierzb(void){     return pk_b;}
-float *  pobierzx(void){     return pk_x;}
-float *  pobierzlambda(void){return pk_lambda;}
-float ** pobierzG(void){     return pk_G;}
-float *  pobierzt(void){     return pk_t;}
-float    pobierzepsogr(void){return pk_epsogr;}
-float    pobierzzero(void){  return pk_zero;}
-long     pobierzilzm(void){  return pk_ilzm;}
-long     pobierzilogr(void){ return pk_ilogr;}
+float ** obtainA(void){     return pk_A;}
+float *  obtainb(void){     return pk_b;}
+float *  obtainx(void){     return pk_x;}
+float *  obtainlambda(void){return pk_lambda;}
+float ** obtainG(void){     return pk_G;}
+float *  obtaint(void){     return pk_t;}
+float    obtainepsogr(void){return pk_epsogr;}
+float    obtainzero(void){  return pk_zero;}
+long     obtainvarnum(void){  return pk_ilzm;}
+long     obtainconnum(void){ return pk_ilogr;}
 
 float rozklu(float **mac,long wym,float **macl,long *ind,float *znak) {
 	float wartnajw,liczba,wynik;
@@ -402,7 +437,7 @@ int pkr(void) {
 	}
 	return(-1);
 }
-void inicjalizacjapk(void) {
+void initializeqp(void) {
 	long il;
 	
 	pk_epsogr=1.0e-3f; pk_zero=1.0e-10f;	
@@ -544,7 +579,7 @@ int pomocniczezadpkr() {
 	}
 	return(pkr());
 }
-int pk() {
+int qp() {
 	long i,j,nrlmin,jestalfa,nralfamin;
 	float norma,lmin,alfa,mian,licznik;
 

@@ -2,10 +2,10 @@
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\profiler.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\obl_macierzowe.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\alokacja_nr.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\pk.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h"
+#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h"
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
@@ -77,14 +77,14 @@ void controller(ArchiveData * ad, CurrentControl * c){
 	static float * btmp;
 	static float * qpx;
 	if(ad == NULL){
-		ustawilogr(40);
-		ustawilzm(10);
-		inicjalizacjapk();
-		A=pobierzA();
-		H=pobierzG();
-		btmp=pobierzb();
-		ftmp=pobierzt();
-		qpx=pobierzx();
+		defineconnum(40);
+		definevarnum(10);
+		initializeqp();
+		A=obtainA();
+		H=obtainG();
+		btmp=obtainb();
+		ftmp=obtaint();
+		qpx=obtainx();
 		A[1][1] = 1.000000e+00f;
 		A[1][2] = 0.000000e+00f;
 		A[1][3] = 0.000000e+00f;
@@ -585,17 +585,17 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		H[10][8] = 0.000000e+00f;
 		H[10][9] = 0.000000e+00f;
 		H[10][10] = 2.000000e+00f;
-		tmpu = dtablica(1,2,1,1);
-		du = dtablica(1,2,1,1);
-		Yzad = dtablica(1,10,1,1);
-		y0 = dtablica(1,2,1,5);
-		Y0 = dtablica(1,10,1,1);
-		uk = dtablica(1,2,1,1);
-		disturbance = dtablica(1,2,1,1);
-		control_value = dtablica(1,1,1,2);
-		ftmp1 = dtablica(1,10,1,1);
-		ftmp4 = dtablica(1,10,1,1);
-		fconst = dtablica(1,10,1,10);
+		tmpu = darray(1,2,1,1);
+		du = darray(1,2,1,1);
+		Yzad = darray(1,10,1,1);
+		y0 = darray(1,2,1,5);
+		Y0 = darray(1,10,1,1);
+		uk = darray(1,2,1,1);
+		disturbance = darray(1,2,1,1);
+		control_value = darray(1,1,1,2);
+		ftmp1 = darray(1,10,1,1);
+		ftmp4 = darray(1,10,1,1);
+		fconst = darray(1,10,1,10);
 		fconst[1][1] = 0.000000e+00f;
 		fconst[1][2] = 0.000000e+00f;
 		fconst[1][3] = -5.104583e+00f;
@@ -696,8 +696,8 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		fconst[10][8] = 0.000000e+00f;
 		fconst[10][9] = 0.000000e+00f;
 		fconst[10][10] = 0.000000e+00f;
-		btmp1 = dtablica(1,40,1,1);
-		bvar = dtablica(1,40,1,2);
+		btmp1 = darray(1,40,1,1);
+		bvar = darray(1,40,1,2);
 		bvar[1][1] = 0.000000e+00f;
 		bvar[1][2] = 0.000000e+00f;
 		bvar[2][1] = 0.000000e+00f;
@@ -778,8 +778,8 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		bvar[39][2] = -0.000000e+00f;
 		bvar[40][1] = -0.000000e+00f;
 		bvar[40][2] = -1.000000e+00f;
-		btmp2 = dtablica(1,40,1,1);
-		b = dtablica(1,40,1,1);
+		btmp2 = darray(1,40,1,1);
+		b = darray(1,40,1,1);
 		b[1][1] = 1.000000e-01f;
 		b[2][1] = 1.000000e-01f;
 		b[3][1] = 1.000000e-01f;
@@ -820,7 +820,7 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		b[38][1] = 1.000000e+00f;
 		b[39][1] = 1.000000e+00f;
 		b[40][1] = 1.000000e+00f;
-		GPC_b = dtablica3(1,2,1,2,1,4);
+		GPC_b = darray3(1,2,1,2,1,4);
 		GPC_b[1][1][1] = 0.000000e+00f;
 		GPC_b[1][1][2] = 2.552292e+00f;
 		GPC_b[1][1][3] = -9.389356e-01f;
@@ -837,21 +837,21 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		GPC_b[2][2][2] = 1.426990e+00f;
 		GPC_b[2][2][3] = -2.695237e-01f;
 		GPC_b[2][2][4] = 0.000000e+00f;
-		GPC_a = dtablica(1,2,1,2);
+		GPC_a = darray(1,2,1,2);
 		GPC_a[1][1] = -8.574211e-01f;
 		GPC_a[1][2] = 1.800923e-01f;
 		GPC_a[2][1] = -4.753804e-01f;
 		GPC_a[2][2] = 5.411377e-02f;
-		dumax = dtablica(1,1,1,2);
+		dumax = darray(1,1,1,2);
 		dumax[1][1] = 1.000000e-01f;
 		dumax[1][2] = 1.000000e-01f;
-		dumin = dtablica(1,1,1,2);
+		dumin = darray(1,1,1,2);
 		dumin[1][1] = -1.000000e-01f;
 		dumin[1][2] = -1.000000e-01f;
-		umax = dtablica(1,1,1,2);
+		umax = darray(1,1,1,2);
 		umax[1][1] = 1.000000e+00f;
 		umax[1][2] = 1.000000e+00f;
-		umin = dtablica(1,1,1,2);
+		umin = darray(1,1,1,2);
 		umin[1][1] = -1.000000e+00f;
 		umin[1][2] = -1.000000e+00f;
 		return;
@@ -923,20 +923,20 @@ void controller(ArchiveData * ad, CurrentControl * c){
 			itmp=itmp+1;
 		}
 	}
-	sumaaa(Yzad,Y0,ftmp1,10,1,-1);
-	iloczynab(fconst,ftmp1,ftmp4,10,10,10,1);
+	sumaa(Yzad,Y0,ftmp1,10,1,-1);
+	productab(fconst,ftmp1,ftmp4,10,10,10,1);
 	for(i=1;i<=10;++i){
 		ftmp[i]=ftmp4[i][1];
 	}
-	iloczynab(bvar,uk,btmp1,40,2,2,1);
-	sumaaa(b,btmp1,btmp2,40,1,1);
+	productab(bvar,uk,btmp1,40,2,2,1);
+	sumaa(b,btmp1,btmp2,40,1,1);
 	for(i=1;i<=40;++i){
 		btmp[i]=btmp2[i][1];
 	}
 	for(i=1;i<=2;++i){
 		qpx[i]=0;
 	}
-	iloczynw(btmp,-1,btmp,40);pk();
+	productv(btmp,-1,btmp,40);qp();
 	for(i=1;i<=2;++i){
 		du[i][1]=qpx[i];
 	}

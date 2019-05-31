@@ -6,10 +6,10 @@
 .\multiplecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\multiplecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\multiplecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\obl_macierzowe.h
+.\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h
 .\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h
-.\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\alokacja_nr.h
-.\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\pk.h
+.\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h
+.\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h
 .\multiplecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h
 .\multiplecontroller\main_mpc.o: ../Inc/stm32f7xx_hal_conf.h
 .\multiplecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h

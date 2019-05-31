@@ -706,23 +706,34 @@ As it is visible, the \lstinline|<path to AutoMATiC>| in this example is \lstinl
 \begin{figure}
 \centering
 \plotthissiet{dmca}
-\caption{Test}
+\caption{Control and output signals trajectories -- control using generated Analytic DMC controller}
 \label{fig:dmca}
 \end{figure}
-A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:dmca}. Also the result generated with a profiler is shown in table \ref{tab:dmca}.
+A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:dmca}. Also the result generated with a profiler is shown in table \ref{tab:dmca}. Consecutive columns in this and further shown tables are as follows:
+\begin{itemize}
+\item id-- identifier of the block of code, which was to be inspected,
+\item time total-- total time that the program spent executing this block,
+\item entries-- number of times the program entered this block,
+\item min-- minimum amount of time spent executing this block,
+\item mean--mean amount of time spent executing this block,
+\item max--maximum amount of time spent executing this block,
+\item running -- flag denoting if this data was obtained during execution of this block (1 -- yes, 0 -- no).
+\end{itemize}
+All time measurements are obtained using the \lstinline[style=myc]|get_time| function, thus in this and following examples, their unit is a millisecond.
+
 \begin{table}
 \centering
-\caption{Test}
+\caption{Profiler results -- control using generated Analytic DMC controller}
 \label{tab:dmca}
 \begin{tabular}{ccccccc}
-        id & time total &    entries &    min &       mean &  max &    running \\ \hline
-    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
-    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
-    3 ( 3) &          0 &        519 &      0 &     0.0000 &    0 & 0\\
-    4 ( 4) &         27 &        519 &      0 &     0.0520 &    1 & 0\\
-   10 ( A) &         65 &        519 &      0 &     0.1252 &    1 & 0\\
-   50 (32) &         11 &        519 &      0 &     0.0211 &    1 & 0\\
-   13 ( D) &       4115 &        519 &      6 &     7.9287 &   74 & 1\\
+	  id    & time total  & entries & min  & mean & max & running \\ \hline
+	1 ( 1)  &       1        &    1    &    1    & 1.0000  &   1    &    0    \\
+	2 ( 2)  &       0        &    1    &    0    & 0.0000  &   0    &    0    \\
+	3 ( 3)  &       0        &   519   &    0    & 0.0000  &   0    &    0    \\
+	4 ( 4)  &       27       &   519   &    0    & 0.0520  &   1    &    0    \\
+	10 ( A) &       65       &   519   &    0    & 0.1252  &   1    &    0    \\
+	50 (32) &       11       &   519   &    0    & 0.0211  &   1    &    0    \\
+	13 ( D) &      4115      &   519   &    6    & 7.9287  &   74   &    1
 \end{tabular}
 \end{table}
 
@@ -741,24 +752,24 @@ which, after performing same tasks as before to generate the final pure C code, 
 \begin{figure}
 \centering
 \plotthissiet{dmcn}
-\caption{Test}
+\caption{Control and output signals trajectories -- control using generated Numeric DMC controller}
 \label{fig:dmcn}
 \end{figure}
 A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:dmcn}. Also the result generated with a profiler is shown in table \ref{tab:dmcn}.
 
 \begin{table}
 \centering
-\caption{Test}
+\caption{Profiler results --  control using generated Numeric DMC controller}
 \label{tab:dmcn}
 \begin{tabular}{ccccccc}
-        id & time total &    entries &    min &       mean &  max &    running\\ \hline
-    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
-    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
-    3 ( 3) &          0 &        511 &      0 &     0.0000 &    0 & 0\\
-    4 ( 4) &         29 &        511 &      0 &     0.0567 &    1 & 0\\
-   10 ( A) &       2401 &        511 &      2 &     4.6986 &   50 & 0\\
-   50 (32) &       2375 &        511 &      1 &     4.6477 &   50 & 0\\
-   13 ( D) &       3566 &        511 &      6 &     6.9784 &    8 & 1\\
+	  id    & time total  & entries & min  & mean & max & running \\ \hline
+	1 ( 1)  &       1        &    1    &    1    & 1.0000  &   1    &    0    \\
+	2 ( 2)  &       0        &    1    &    0    & 0.0000  &   0    &    0    \\
+	3 ( 3)  &       0        &   511   &    0    & 0.0000  &   0    &    0    \\
+	4 ( 4)  &       29       &   511   &    0    & 0.0567  &   1    &    0    \\
+	10 ( A) &      2401      &   511   &    2    & 4.6986  &   50   &    0    \\
+	50 (32) &      2375      &   511   &    1    & 4.6477  &   50   &    0    \\
+	13 ( D) &      3566      &   511   &    6    & 6.9784  &   8    &    1
 \end{tabular}
 \end{table}
 
@@ -776,24 +787,24 @@ which, after performing same tasks as before to generate the final pure C code, 
 \begin{figure}
 \centering
 \plotthissiet{gpca}
-\caption{Test}
+\caption{Control and output signals trajectories -- control using generated Analytic GPC controller}
 \label{fig:gpca}
 \end{figure}
 A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:gpca}. Also the result generated with a profiler is shown in table \ref{tab:gpca}.
 
 \begin{table}
 \centering
-\caption{Test}
+\caption{Profiler results -- control using generated Analytic GPC controller}
 \label{tab:gpca}
 \begin{tabular}{ccccccc}
-        id & time total &    entries &    min &       mean &  max &    running\\ \hline
-    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
-    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
-    3 ( 3) &          0 &        511 &      0 &     0.0000 &    0 & 0\\
-    4 ( 4) &         25 &        511 &      0 &     0.0489 &    1 & 0\\
-   10 ( A) &         55 &        511 &      0 &     0.1076 &    1 & 0\\
-   50 (32) &          5 &        511 &      0 &     0.0097 &    1 & 0\\
-   13 ( D) &       3528 &        511 &      6 &     6.9041 &    7 & 1\\
+	  id    & time total  & entries & min  & mean & max & running \\ \hline
+	1 ( 1)  &       1        &    1    &    1    & 1.0000  &   1    &    0    \\
+	2 ( 2)  &       0        &    1    &    0    & 0.0000  &   0    &    0    \\
+	3 ( 3)  &       0        &   511   &    0    & 0.0000  &   0    &    0    \\
+	4 ( 4)  &       25       &   511   &    0    & 0.0489  &   1    &    0    \\
+	10 ( A) &       55       &   511   &    0    & 0.1076  &   1    &    0    \\
+	50 (32) &       5        &   511   &    0    & 0.0097  &   1    &    0    \\
+	13 ( D) &      3528      &   511   &    6    & 6.9041  &   7    &    1
 \end{tabular}
 \end{table}
 \subsection{General Predictive Control -- Numeric version}
@@ -810,23 +821,23 @@ has to be performed. After performing same tasks as before to generate the final
 \begin{figure}
 \centering
 \plotthissiet{gpcn}
-\caption{Test}
+\caption{Control and output signals trajectories -- control using generated Numeric GPC controller}
 \label{fig:gpcn}
 \end{figure}
 A plot of signals measurements obtained from this controller is shown in the Fig. \ref{fig:gpcn}. Also the result generated with a profiler is shown in table \ref{tab:gpcn}.
 \begin{table}
 \centering
-\caption{Test}
+\caption{Profiler results -- control using generated Numeric GPC controller}
 \label{tab:gpcn}
 \begin{tabular}{ccccccc}
-        id & time total &    entries &    min &       mean &  max &    running\\ \hline
-    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
-    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
-    3 ( 3) &          0 &        511 &      0 &     0.0000 &    0 & 0\\
-    4 ( 4) &         29 &        511 &      0 &     0.0567 &    1 & 0\\
-   10 ( A) &       2447 &        511 &      2 &     4.7886 &   56 & 0\\
-   50 (32) &       2395 &        511 &      2 &     4.6868 &   56 & 0\\
-   13 ( D) &       3540 &        511 &      6 &     6.9275 &    8 & 1\\
+	  id    & time total  & entries & min  & mean & max & running \\ \hline
+	1 ( 1)  &       1        &    1    &    1    & 1.0000  &   1    &    0    \\
+	2 ( 2)  &       0        &    1    &    0    & 0.0000  &   0    &    0    \\
+	3 ( 3)  &       0        &   511   &    0    & 0.0000  &   0    &    0    \\
+	4 ( 4)  &       29       &   511   &    0    & 0.0567  &   1    &    0    \\
+	10 ( A) &      2447      &   511   &    2    & 4.7886  &   56   &    0    \\
+	50 (32) &      2395      &   511   &    2    & 4.6868  &   56   &    0    \\
+	13 ( D) &      3540      &   511   &    6    & 6.9275  &   8    &    1
 \end{tabular}
 \end{table}
 \section{Multiple Algorithms in a Controller}
@@ -926,24 +937,24 @@ A plot of signals measurements obtained from this controller is shown in the Fig
 
 \end{groupplot}
 \end{tikzpicture}%
-\caption{Test}
+\caption{Control and output signals trajectories -- control using generated Numeric and Analytic DMC controllers}
 \label{fig:dmcan}
 \end{figure}
 
 
 \begin{table}
 \centering
-\caption{Test}
+\caption{Profiler results -- control using generated Numeric and Analytic DMC controllers}
 \label{tab:dmcan}
 \begin{tabular}{ccccccc}
-        id & time total &    entries &    min &       mean &  max &    running\\ \hline
-    1 ( 1) &          1 &          1 &      1 &     1.0000 &    1 & 0\\
-    2 ( 2) &          0 &          1 &      0 &     0.0000 &    0 & 0\\
-    3 ( 3) &          0 &        511 &      0 &     0.0000 &    0 & 0\\
-    4 ( 4) &         29 &        511 &      0 &     0.0567 &    1 & 0\\
-   10 ( A) &        539 &        511 &      0 &     1.0547 &   20 & 0\\
-   50 (32) &        496 &        511 &      0 &     0.9706 &   20 & 0\\
-   13 ( D) &       3637 &        511 &      6 &     7.1174 &    8 & 1\\
+	  id    & time total [s] & entries & min [s] & mean[s] & max[s] & running \\ \hline
+	1 ( 1)  &       1        &    1    &    1    & 1.0000  &   1    &    0    \\
+	2 ( 2)  &       0        &    1    &    0    & 0.0000  &   0    &    0    \\
+	3 ( 3)  &       0        &   511   &    0    & 0.0000  &   0    &    0    \\
+	4 ( 4)  &       29       &   511   &    0    & 0.0567  &   1    &    0    \\
+	10 ( A) &      539       &   511   &    0    & 1.0547  &   20   &    0    \\
+	50 (32) &      496       &   511   &    0    & 0.9706  &   20   &    0    \\
+	13 ( D) &      3637      &   511   &    6    & 7.1174  &   8    &    1
 \end{tabular}
 \end{table}
 
@@ -1049,7 +1060,7 @@ Having the definition of the PID controller prepared, the same Keil uVision 5 pr
 \begin{figure}
 \centering
 \plotthissiet{pid}
-\caption{Test}
+\caption{Control and output signals trajectories -- control using generated PID controller}
 \label{fig:pid}
 \end{figure}
 
