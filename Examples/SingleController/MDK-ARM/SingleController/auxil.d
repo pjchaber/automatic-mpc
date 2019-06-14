@@ -1,0 +1,14 @@
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\src\auxil.c
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\osqp.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\types.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+singlecontroller\auxil.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+singlecontroller\auxil.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\constants.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\util.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\cs.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\lin_alg.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\auxil.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\proj.h
+singlecontroller\auxil.o: ..\..\..\Libs\C\osqp\include\scaling.h

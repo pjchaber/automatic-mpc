@@ -1,0 +1,9 @@
+.\multiplecontroller\cs.o: ..\..\..\Libs\C\osqp\src\cs.c
+.\multiplecontroller\cs.o: ..\..\..\Libs\C\osqp\include\cs.h
+.\multiplecontroller\cs.o: ..\..\..\Libs\C\osqp\include\types.h
+.\multiplecontroller\cs.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+.\multiplecontroller\cs.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+.\multiplecontroller\cs.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\multiplecontroller\cs.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\multiplecontroller\cs.o: ..\..\..\Libs\C\osqp\include\constants.h
+.\multiplecontroller\cs.o: ..\..\..\Libs\C\osqp\include\lin_alg.h

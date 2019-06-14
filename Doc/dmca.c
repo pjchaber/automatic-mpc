@@ -3,13 +3,12 @@
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mpctools.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\simulated_signals.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h"
 #include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h"
-#include "C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h"
+#include "osqp.h"
+#include "util.h"
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
-#include "mat_lib.h"
 
 ArchiveData ad;
 CurrentControl cc;
@@ -93,11 +92,11 @@ void controller(ArchiveData * ad, CurrentControl * c){
 		AutoMATiC_DMC_Ku[2][8] = 1.396884e-02f;
 		AutoMATiC_DMC_du = darray(1,2,1,1);
 		dumax = darray(1,1,1,2);
-		dumax[1][1] = 1.000000e-01f;
-		dumax[1][2] = 1.000000e-01f;
+		dumax[1][1] = 1.000000e-02f;
+		dumax[1][2] = 1.000000e-02f;
 		dumin = darray(1,1,1,2);
-		dumin[1][1] = -1.000000e-01f;
-		dumin[1][2] = -1.000000e-01f;
+		dumin[1][1] = -1.000000e-02f;
+		dumin[1][2] = -1.000000e-02f;
 		umax = darray(1,1,1,2);
 		umax[1][1] = 1.000000e+00f;
 		umax[1][2] = 1.000000e+00f;
@@ -180,7 +179,7 @@ profiler_start(13);
     sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
     sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
     write_string("];\n\r");
-	if(++i > 510) profiler_print();
+	if(++i > 1000) profiler_print();
 profiler_end(13);
 }
 

@@ -1,3 +1,27 @@
+/*
+ * This file is part of AutoMATiC.
+ * AutoMATiC -- Automatic code generation based on the MATLAB and 
+ * C languages.
+ * 
+ * Copytight (C) 2018-2019 by Patryk Chaber. Developed within the 
+ * Warsaw University of Technology, Institute of Control and 
+ * Computation Engineering under supervision of Maciej Lawrynczuk. 
+ * All rights reserved.
+ * 
+ * AutoMATiC is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * AutoMATiC is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with AutoMATiC.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 void productaat(float **a,float **b,long a1,long a2); //b=a*a', a(a1,a2), b(a1,a1)
 void productata (float **a,float **b,long a1,long a2);//b=a'*a, a(a1,a2), b(a2,a2)
 void productab  (float **a,float **b,float **c,long a1,long a2,long b1,long b2); //c=a*b, a(a1,a2), b(b1,b2), c(a1,b2), necessary condition a2=b1

@@ -1,0 +1,15 @@
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\src\polish.c
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\polish.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\types.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+singlecontroller\polish.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+singlecontroller\polish.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\constants.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\lin_alg.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\util.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\auxil.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\lin_sys.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\kkt.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\cs.h
+singlecontroller\polish.o: ..\..\..\Libs\C\osqp\include\proj.h

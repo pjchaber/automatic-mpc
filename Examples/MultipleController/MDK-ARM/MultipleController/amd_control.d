@@ -1,0 +1,11 @@
+.\multiplecontroller\amd_control.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_control.c
+.\multiplecontroller\amd_control.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\include\amd_internal.h
+.\multiplecontroller\amd_control.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+.\multiplecontroller\amd_control.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+.\multiplecontroller\amd_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\multiplecontroller\amd_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\multiplecontroller\amd_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\multiplecontroller\amd_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\multiplecontroller\amd_control.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\include\amd.h
+.\multiplecontroller\amd_control.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\include\SuiteSparse_config.h
+.\multiplecontroller\amd_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

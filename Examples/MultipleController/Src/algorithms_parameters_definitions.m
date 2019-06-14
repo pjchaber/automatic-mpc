@@ -29,23 +29,20 @@ umin  =-[1.0 1.0]; % Lower bound--control signal
 umax  = [1.0 1.0]; % Upper bound--control signal
 
 T = 0.1;
-K =  [4.5 4.5];
-Ti = [0.5 0.5];
-Td = [0.0 0.1];
+K =  [.1 .05];
+Ti = [1 .1];
+Td = [0.0 0.0];
 
 %code = AutoMATiC_Generate('AutoMATiC_PID_Algorithm_s','controller');
-%code = AutoMATiC_Generate('AutoMATiC_DMC_Analytic_Algorithm','controller');
+%AutoMATiC_Generate('AutoMATiC_DMC_Analytic_Algorithm','controller');
 AutoMATiC_Generate('AutoMATiC_DMC_Analytic_Algorithm','controllerDMCA',1);
-%code = AutoMATiC_Generate('AutoMATiC_GPC_Analytic_Algorithm','controller');
-%code = AutoMATiC_Generate('AutoMATiC_GPC_Numeric_Algorithm','controller');
-
+%AutoMATiC_Generate('AutoMATiC_GPC_Analytic_Algorithm','controller');
+%AutoMATiC_Generate('AutoMATiC_GPC_Numeric_Algorithm','controller');
 
 lambda= [0.1 0.1]; % Penalty--control signals' increments
 dumin =-[.1  .1 ]; % Lower bound--control increments
 dumax = [.1  .1 ]; % Upper bound--control increments
 AutoMATiC_Generate('AutoMATiC_DMC_Numeric_Algorithm','controllerDMCN',0);
-% %code = AutoMATiC_Generate('AutoMATiC_GPC_Analytic_Algorithm','controller');
-% %code = AutoMATiC_Generate('AutoMATiC_GPC_Numeric_Algorithm','controller');
 
 function S = step_response_generation(GPC_a,GPC_b,D)
     ny = size(GPC_a,1);

@@ -1,0 +1,9 @@
+.\multiplecontroller\scaling.o: ..\..\..\Libs\C\osqp\src\scaling.c
+.\multiplecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\scaling.h
+.\multiplecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\types.h
+.\multiplecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+.\multiplecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+.\multiplecontroller\scaling.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\multiplecontroller\scaling.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\multiplecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\constants.h
+.\multiplecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\lin_alg.h

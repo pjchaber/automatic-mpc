@@ -7,9 +7,15 @@ singlecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 singlecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 singlecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 singlecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h
-singlecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h
 singlecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h
-singlecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h
+singlecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\osqp.h
+singlecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\types.h
+singlecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+singlecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+singlecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\constants.h
+singlecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\util.h
+singlecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\cs.h
+singlecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\lin_alg.h
 singlecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h
 singlecontroller\main_mpc.o: ../Inc/stm32f7xx_hal_conf.h
 singlecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h
@@ -50,4 +56,3 @@ singlecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_u
 singlecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
 singlecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 singlecontroller\main_mpc.o: ../Inc/main.h
-singlecontroller\main_mpc.o: ..\..\..\Libs\C\mat_lib.h

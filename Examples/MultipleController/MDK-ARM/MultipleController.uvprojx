@@ -351,7 +351,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -373,7 +373,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F746xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include;..\..\..\Libs\C</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include;..\..\..\Libs\C;..\..\..\Libs\C\osqp\include;..\..\..\Libs\C\osqp\lin_sys;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_sources\include;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -465,11 +465,6 @@
               <FileName>matrix_cal.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libs\C\matrix_cal.c</FilePath>
-            </File>
-            <File>
-              <FileName>qp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libs\C\qp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -625,6 +620,131 @@
               <FileName>system_stm32f7xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/system_stm32f7xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>osqp</GroupName>
+          <Files>
+            <File>
+              <FileName>auxil.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\auxil.c</FilePath>
+            </File>
+            <File>
+              <FileName>cs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\cs.c</FilePath>
+            </File>
+            <File>
+              <FileName>kkt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\kkt.c</FilePath>
+            </File>
+            <File>
+              <FileName>lin_alg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\lin_alg.c</FilePath>
+            </File>
+            <File>
+              <FileName>lin_sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\lin_sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>osqp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\osqp.c</FilePath>
+            </File>
+            <File>
+              <FileName>polish.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\polish.c</FilePath>
+            </File>
+            <File>
+              <FileName>proj.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\proj.c</FilePath>
+            </File>
+            <File>
+              <FileName>scaling.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\scaling.c</FilePath>
+            </File>
+            <File>
+              <FileName>util.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\src\util.c</FilePath>
+            </File>
+            <File>
+              <FileName>qdldl_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>qdldl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_sources\src\qdldl.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_1.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_2.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_aat.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_aat.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_control.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_defaults.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_defaults.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_info.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_info.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_order.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_order.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_post_tree.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_post_tree.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_postorder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_postorder.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_preprocess.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_preprocess.c</FilePath>
+            </File>
+            <File>
+              <FileName>amd_valid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\amd_valid.c</FilePath>
+            </File>
+            <File>
+              <FileName>SuiteSparse_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\src\SuiteSparse_config.c</FilePath>
             </File>
           </Files>
         </Group>

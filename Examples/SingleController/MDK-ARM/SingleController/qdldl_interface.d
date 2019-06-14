@@ -1,0 +1,17 @@
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_interface.c
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+singlecontroller\qdldl_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+singlecontroller\qdldl_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_sources\include\qdldl.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_sources\include\qdldl_types.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_interface.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\include\types.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\include\constants.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\include\amd.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\include\SuiteSparse_config.h
+singlecontroller\qdldl_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+singlecontroller\qdldl_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\include\lin_alg.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\include\kkt.h
+singlecontroller\qdldl_interface.o: ..\..\..\Libs\C\osqp\include\cs.h

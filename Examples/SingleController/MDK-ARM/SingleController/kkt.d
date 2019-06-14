@@ -1,0 +1,10 @@
+singlecontroller\kkt.o: ..\..\..\Libs\C\osqp\src\kkt.c
+singlecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\kkt.h
+singlecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\types.h
+singlecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+singlecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+singlecontroller\kkt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+singlecontroller\kkt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+singlecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\constants.h
+singlecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\cs.h
+singlecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\lin_alg.h

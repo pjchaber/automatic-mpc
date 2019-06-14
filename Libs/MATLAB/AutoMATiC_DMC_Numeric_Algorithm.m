@@ -1,3 +1,27 @@
+%%
+% This file is part of AutoMATiC.
+% AutoMATiC -- Automatic code generation based on the MATLAB and 
+% C languages.
+% 
+% Copytight (C) 2018-2019 by Patryk Chaber. Developed within the 
+% Warsaw University of Technology, Institute of Control and 
+% Computation Engineering under supervision of Maciej Lawrynczuk. 
+% All rights reserved.
+% 
+% AutoMATiC is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 3 of the License, or
+% (at your option) any later version.
+% 
+% AutoMATiC is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with AutoMATiC.  If not, see <https://www.gnu.org/licenses/>.
+%
+
 %% DOCUMENTATION
 % This algorithm calculates the control signal as constant. This constant
 % may be different for each control signal. To get control value of 2 for
@@ -104,25 +128,41 @@ if( INIT == 1 )
         end
     end
 
-    AutoMATiC_DMC_bducell = cell(Nu*2,1);
-    AutoMATiC_DMC_bucell = cell(Nu*2,1);
+%     AutoMATiC_DMC_bducell = cell(Nu*2,1);
+%     AutoMATiC_DMC_bucell = cell(Nu*2,1);
+    AutoMATiC_DMC_bcell = cell(Nu*4,1);
     for AutoMATiC_DMC_i = 1:Nu
-        AutoMATiC_DMC_bducell{AutoMATiC_DMC_i}     = -dumin';
-        AutoMATiC_DMC_bducell{AutoMATiC_DMC_i+Nu}  = +dumax';
-        AutoMATiC_DMC_bucell{AutoMATiC_DMC_i}      = -umin';
-        AutoMATiC_DMC_bucell{AutoMATiC_DMC_i+Nu}   = +umax';
+%         AutoMATiC_DMC_bducell{AutoMATiC_DMC_i}     = -dumin';
+%         AutoMATiC_DMC_bducell{AutoMATiC_DMC_i+Nu}  = +dumax';
+%         AutoMATiC_DMC_bucell{AutoMATiC_DMC_i}      = -umin';
+%         AutoMATiC_DMC_bucell{AutoMATiC_DMC_i+Nu}   = +umax';
+        
+        AutoMATiC_DMC_bcell{AutoMATiC_DMC_i+Nu*0} = -dumin';
+        AutoMATiC_DMC_bcell{AutoMATiC_DMC_i+Nu*1} = -umin';
+        AutoMATiC_DMC_bcell{AutoMATiC_DMC_i+Nu*2} = +dumax';
+        AutoMATiC_DMC_bcell{AutoMATiC_DMC_i+Nu*3} = +umax';
     end
     
-    AutoMATiC_DMC_Adu = [-cell2mat(AutoMATiC_DMC_Aducell); cell2mat(AutoMATiC_DMC_Aducell)];
-    AutoMATiC_DMC_Au  = [-cell2mat(AutoMATiC_DMC_Aucell ); cell2mat(AutoMATiC_DMC_Aucell )];
-    AutoMATiC_DMC_A = [AutoMATiC_DMC_Adu;AutoMATiC_DMC_Au];
+% Active Set version    
+%     AutoMATiC_DMC_Adu = [-cell2mat(AutoMATiC_DMC_Aducell); cell2mat(AutoMATiC_DMC_Aducell)];
+%     AutoMATiC_DMC_Au  = [-cell2mat(AutoMATiC_DMC_Aucell ); cell2mat(AutoMATiC_DMC_Aucell )];
+%     AutoMATiC_DMC_A = [AutoMATiC_DMC_Adu;AutoMATiC_DMC_Au];
 
-    AutoMATiC_DMC_bdu = cell2mat(AutoMATiC_DMC_bducell);
-    AutoMATiC_DMC_bu  = cell2mat(AutoMATiC_DMC_bucell);
-    AutoMATiC_DMC_b = [AutoMATiC_DMC_bdu;AutoMATiC_DMC_bu];
-    AutoMATiC_DMC_bvardu = [cell2mat(AutoMATiC_DMC_bvarcell)*0; cell2mat(AutoMATiC_DMC_bvarcell)*0];
-    AutoMATiC_DMC_bvaru = [cell2mat(AutoMATiC_DMC_bvarcell); -cell2mat(AutoMATiC_DMC_bvarcell)];
-    AutoMATiC_DMC_bvar = [AutoMATiC_DMC_bvardu; AutoMATiC_DMC_bvaru];
+% osQP adaptation
+    AutoMATiC_DMC_A = [
+        -cell2mat(AutoMATiC_DMC_Aducell); 
+        -cell2mat(AutoMATiC_DMC_Aucell );
+         cell2mat(AutoMATiC_DMC_Aducell);  
+         cell2mat(AutoMATiC_DMC_Aucell )];
+
+    AutoMATiC_DMC_b = cell2mat(AutoMATiC_DMC_bcell);
+    
+    AutoMATiC_DMC_bvar = [
+         cell2mat(AutoMATiC_DMC_bvarcell)*0; 
+         cell2mat(AutoMATiC_DMC_bvarcell); 
+        -cell2mat(AutoMATiC_DMC_bvarcell)*0; 
+        -cell2mat(AutoMATiC_DMC_bvarcell);
+        ];
     
     INIT = 0;
     return; % exits only this script, not the one higher in call stack
@@ -186,7 +226,7 @@ for AutoMATiC_DMC_i = 1:(4*AutoMATiC_DMC_nu*Nu)
     AutoMATiC_DMC_btmp(AutoMATiC_DMC_i) = AutoMATiC_DMC_btmp2(AutoMATiC_DMC_i,1);
 end
 
-for AutoMATiC_DMC_i=1:AutoMATiC_DMC_nu
+for AutoMATiC_DMC_i=1:(AutoMATiC_DMC_nu*Nu)
     AutoMATiC_DMC_qpx(AutoMATiC_DMC_i) = 0;
 end
 AutoMATiC_DMC_qpx = quadprog(AutoMATiC_DMC_H,AutoMATiC_DMC_ftmp,AutoMATiC_DMC_A,AutoMATiC_DMC_btmp,[],[],[],[],[],AutoMATiC_DMC_options);

@@ -1,0 +1,47 @@
+\providecommand{\noopsort}[1]{}
+\begin{thebibliography}{1}
+
+\bibitem{Camacho1999}
+E.F. Camacho and C.~Bordons.
+\newblock {\em Model Predictive Control}.
+\newblock Springer, London, 1999.
+
+\bibitem{Chaber2019}
+P.~{Chaber} and M.~{{\L}awry\'{n}czuk}.
+\newblock Fast analytical model predictive controllers and their implementation
+  for stm32 arm microcontroller.
+\newblock {\em IEEE Transactions on Industrial Informatics}.
+\newblock to appear.
+
+\bibitem{Clarke1987}
+D.W. Clarke, C.~Mohtadi, and P.S. Tuffs.
+\newblock {Generalized predictive control}.
+\newblock {\em Automatica}, 23:137--160, 1987.
+
+\bibitem{Cutler1980}
+C.R. Cutler and B.L. Ramaker.
+\newblock Dynamic matrix control -- a computer control algorithm.
+\newblock {\em Joint Automatic Control Conference}, 17:72, 1980.
+
+\bibitem{Maciejowski2002}
+J.M. Maciejowski.
+\newblock {\em Predictive Control with Constraints}.
+\newblock Prentice Hall, Harlow, 2001.
+
+\bibitem{stachurski2009}
+A.~Stachurski.
+\newblock {\em Wprowadzenie do optymalizacji}.
+\newblock Oficyna Wydawnicza Politechniki Warszawskiej, 2009.
+
+\bibitem{osqp}
+B.~Stellato, G.~Banjac, P.~Goulart, A.~Bemporad, and S.~Boyd.
+\newblock {OSQP}: An operator splitting solver for quadratic programs.
+\newblock {\em ArXiv e-prints}, November 2017.
+
+\bibitem{Tatjewski2007}
+P.~Tatjewski.
+\newblock {\em Advanced Control of Industrial Processes: Structures and
+  Algorithms}.
+\newblock Springer, London, 2007.
+
+\end{thebibliography}

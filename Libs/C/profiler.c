@@ -1,3 +1,27 @@
+/*
+ * This file is part of AutoMATiC.
+ * AutoMATiC -- Automatic code generation based on the MATLAB and 
+ * C languages.
+ * 
+ * Copytight (C) 2018-2019 by Patryk Chaber. Developed within the 
+ * Warsaw University of Technology, Institute of Control and 
+ * Computation Engineering under supervision of Maciej Lawrynczuk. 
+ * All rights reserved.
+ * 
+ * AutoMATiC is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * AutoMATiC is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with AutoMATiC.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -30,7 +54,10 @@ void profiler_print(){
 	__write_string(str);
 	while(e != NULL){
 		if(e->id != 0xFF){
-			sprintf(str,"%%%5d (%2X) | %10ld | %10d | %10ld | %10s | %10ld | %1d\n", e->id, e->id, e->time_total, e->entries, e->time_min, float2strF(((float)(e->time_total))/e->entries), e->time_max, e->running);
+			if(e->name[0] == 0)
+				sprintf(str,"%%%5d | %10ld | %10d | %10ld | %10s | %10ld | %1d\n", e->id, e->time_total, e->entries, e->time_min, float2strF(((float)(e->time_total))/e->entries), e->time_max, e->running);
+			else
+				sprintf(str,"%%%5d (%s) | %10ld | %10d | %10ld | %10s | %10ld | %1d\n", e->id, e->name, e->time_total, e->entries, e->time_min, float2strF(((float)(e->time_total))/e->entries), e->time_max, e->running);
 			__write_string(str);
 		}
 		e = e->next;
@@ -69,12 +96,13 @@ ProfilerEntry * find_last(){
 	return e;
 }
 
-ProfilerEntry * add_new_profiler_entry(unsigned char id){
+ProfilerEntry * add_new_profiler_entry(unsigned char id, char * name){
 	ProfilerEntry * e = find_profiler_entry(id);
 	if(e == NULL) {
 		e = (ProfilerEntry*)malloc(sizeof(ProfilerEntry));
 		find_last()->next = e;
 		e->id = id;
+		e->name = name;
 		e->next = NULL;
 		e->time_total = 0;
 		e->entries = 0;
@@ -86,15 +114,15 @@ ProfilerEntry * add_new_profiler_entry(unsigned char id){
 	return e;
 }
 
-void profiler_start(unsigned char id){
-	ProfilerEntry * e = add_new_profiler_entry(id);
+void profiler_start(unsigned char id, char * name){
+	ProfilerEntry * e = add_new_profiler_entry(id, name);
 	e->running = 1;
 	e->time_start = __get_time();
 	++(e->entries);
 }
 
-void profiler_count(unsigned char id){
-	ProfilerEntry * e = add_new_profiler_entry(id);
+void profiler_count(unsigned char id, char * name){
+	ProfilerEntry * e = add_new_profiler_entry(id, name);
 	++(e->entries);
 }
 

@@ -1,3 +1,27 @@
+/*
+ * This file is part of AutoMATiC.
+ * AutoMATiC -- Automatic code generation based on the MATLAB and 
+ * C languages.
+ * 
+ * Copytight (C) 2018-2019 by Patryk Chaber. Developed within the 
+ * Warsaw University of Technology, Institute of Control and 
+ * Computation Engineering under supervision of Maciej Lawrynczuk. 
+ * All rights reserved.
+ * 
+ * AutoMATiC is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * AutoMATiC is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with AutoMATiC.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -223,9 +247,11 @@ int main (int argc, TCHAR *argv[]){
     output_file << "#include \""<< c_libraries_path << "simulated_signals.h\"" << endl;
     // output_file << "#include \""<< c_libraries_path << "default_functions.h\"" << endl;
     output_file << "#include \""<< c_libraries_path << "matrix_cal.h\"" << endl;
-    output_file << "#include \""<< c_libraries_path << "mat_lib.h\"" << endl;
+    // output_file << "#include \""<< c_libraries_path << "mat_lib.h\"" << endl;
     output_file << "#include \""<< c_libraries_path << "allocation_nr.h\"" << endl;
-    output_file << "#include \""<< c_libraries_path << "qp.h\"" << endl;
+    // output_file << "#include \""<< c_libraries_path << "qp.h\"" << endl;
+    output_file << "#include \""<< "osqp.h\"" << endl;
+    output_file << "#include \""<< "util.h\"" << endl;
 
     // Porzucone ze wzgledu na uzycie jezyka polskiego
     // output_file << "#include \""<< c_libraries_path << "obl_macierzowe.h\"" << endl;
@@ -291,14 +317,28 @@ int main (int argc, TCHAR *argv[]){
 		} else if(word.compare(PROFILER_BEGIN)==0){
 			iss >> word;
 			int id = atoi(word.c_str());
+			string profiler_name = "";
 			if(profiler) {
-				output_file << "profiler_start("<<id<<");" << endl;
+				// output_file << "profiler_start("<<id<<");" << endl;
+				while(iss >> word){
+					if(!profiler_name.empty()) 
+						profiler_name.append(" ");
+					profiler_name.append(word);
+				}
+				output_file << "profiler_start("<<id<<",\""<<profiler_name<<"\");" << endl;
 			}
 		} else if(word.compare(PROFILER_COUNT)==0){
 			iss >> word;
 			int id = atoi(word.c_str());
+			string profiler_name = "";
 			if(profiler) {
-				output_file << "profiler_count("<<id<<");" << endl;
+				// output_file << "profiler_count("<<id<<");" << endl;				
+				while(iss >> word){
+					if(!profiler_name.empty()) 
+						profiler_name.append(" ");
+					profiler_name.append(word);
+				}
+				output_file << "profiler_count("<<id<<",\""<<profiler_name<<"\");" << endl;
 			}
         } else if(word.compare(PROFILER_END)==0){
             iss >> word;

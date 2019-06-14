@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.5)  31 MAY 2019 15:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.5)  14 JUN 2019 15:38
 entering extended mode
 **./tutorial.tex
 (tutorial.tex
@@ -1144,25 +1144,25 @@ LaTeX Warning: Unused global option(s):
 (tutorial.aux)
 \openout1 = `tutorial.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 192.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 192.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 216.
+LaTeX Font Info:    ... okay on input line 216.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 216.
+LaTeX Font Info:    ... okay on input line 216.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 216.
+LaTeX Font Info:    ... okay on input line 216.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 216.
+LaTeX Font Info:    ... okay on input line 216.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 216.
+LaTeX Font Info:    ... okay on input line 216.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 216.
+LaTeX Font Info:    ... okay on input line 216.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 216.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 216.
 
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 192.
+LaTeX Font Info:    ... okay on input line 216.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1276,26 +1276,34 @@ File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 (C:\Users\Admin\AppData\Roaming\MiKTeX\2.9\tex\latex\siunitx\siunitx-binary.cfg
 File: siunitx-binary.cfg 2017/11/26 v2.7k siunitx: Binary units
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 192.
+LaTeX Font Info:    Try loading font information for U+msa on input line 216.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 192.
+LaTeX Font Info:    Try loading font information for U+msb on input line 216.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
 
-{C:/Users/Admin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (tutorial.t
-oc
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
+(Font)              using `OT1/cmr/bx/n' instead on input line 217.
+
+
+LaTeX Warning: No \author given.
+
+[1
+
+{C:/Users/Admin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+(tutorial.toc
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 20.
 )
 \tf@toc=\write4
 \openout4 = `tutorial.toc'.
 
- [1]
-Overfull \hbox (1.1118pt too wide) in paragraph at lines 207--208
+ [1] [2] [3]
+Overfull \hbox (1.1118pt too wide) in paragraph at lines 376--377
 []\OT1/cmr/m/n/10.95 STM32F746IGT6 mi-cro-con-troller (part of the Core7XXI eva
 l-u-a-tion board with Open7XXI-
  []
@@ -1303,25 +1311,31 @@ l-u-a-tion board with Open7XXI-
 (C:\Users\Admin\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-[2] [3]
+[4]
+<rysunki2.pdf, id=38, page=12, 357.4695pt x 212.86627pt>
+File: rysunki2.pdf Graphic file (type pdf)
+<use rysunki2.pdf, page 12>
+Package pdftex.def Info: rysunki2.pdf , page12 used on input line 425.
+(pdftex.def)             Requested size: 455.24408pt x 271.11018pt.
+ [5] [6 <./rysunki2.pdf>]
 (C:\Users\Admin\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (C:\Users\Admin\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 344.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 520.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 344.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 520.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 349.
- [4] [5] [6] [7]
-[8] [9] [10]
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 525.
+ [7] [8] [9] [10]
+[11] [12] [13]
 PGFPlots: reading {./dmca.csv}
 PGFPlots: reading {./dmca.csv}
 PGFPlots: reading {./dmca.csv}
@@ -1330,7 +1344,7 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./dmca.csv}
 PGFPlots: reading {./dmca.csv}
 Missing character: There is no ; in font nullfont!
- [11] [12]
+ [14] [15]
 PGFPlots: reading {./dmcn.csv}
 PGFPlots: reading {./dmcn.csv}
 PGFPlots: reading {./dmcn.csv}
@@ -1339,6 +1353,7 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./dmcn.csv}
 PGFPlots: reading {./dmcn.csv}
 Missing character: There is no ; in font nullfont!
+ [16] [17]
 PGFPlots: reading {./gpca.csv}
 PGFPlots: reading {./gpca.csv}
 PGFPlots: reading {./gpca.csv}
@@ -1347,7 +1362,6 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./gpca.csv}
 PGFPlots: reading {./gpca.csv}
 Missing character: There is no ; in font nullfont!
- [13] [14]
 PGFPlots: reading {./gpcn.csv}
 PGFPlots: reading {./gpcn.csv}
 PGFPlots: reading {./gpcn.csv}
@@ -1356,7 +1370,7 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./gpcn.csv}
 PGFPlots: reading {./gpcn.csv}
 Missing character: There is no ; in font nullfont!
- [15] [16]
+ [18] [19]
 PGFPlots: reading {./dmcan.csv}
 PGFPlots: reading {./dmcan.csv}
 PGFPlots: reading {./dmcan.csv}
@@ -1367,7 +1381,7 @@ PGFPlots: reading {./dmcan.csv}
 PGFPlots: reading {./dmcan.csv}
 PGFPlots: reading {./dmcan.csv}
 Missing character: There is no ; in font nullfont!
- [17] [18] [19] [20]
+ [20] [21] [22] [23]
 PGFPlots: reading {./pid.csv}
 PGFPlots: reading {./pid.csv}
 PGFPlots: reading {./pid.csv}
@@ -1376,45 +1390,52 @@ Missing character: There is no ; in font nullfont!
 PGFPlots: reading {./pid.csv}
 PGFPlots: reading {./pid.csv}
 Missing character: There is no ; in font nullfont!
- [21]
+ (tutorial.bbl
+[24]) [25]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1069.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1261.
 
- (dmca.c
-[22] [23] [24]) [25] (dmcn.c [26] [27] [28] [29] [30] [31] [32] [33] [34]
-[35] [36] [37] [38] [39] [40] [41] [42]) [43] (gpca.c [44] [45] [46]) [47]
-(gpcn.c [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60]
-[61] [62] [63]) [64] (dmcan.c [65] [66] [67] [68] [69] [70] [71] [72] [73]
-[74] [75] [76] [77] [78] [79] [80] [81] [82] [83]) [84] (pid.c [85] [86])
-[87] (tutorial.aux) ) 
+ (dmca.c [26] [27] [28]) [29] (dmcn.c [30] [31] [32] [33] [34]
+[35] [36] [37] [38] [39] [40] [41] [42] [43]) [44] (gpca.c [45] [46] [47])
+[48] (gpcn.c [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60]
+[61]) [62] (dmcan.c [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73]
+[74] [75] [76] [77] [78]) [79] (pid.c [80] [81]) [82] (tutorial.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 40145 strings out of 493305
- 941761 string characters out of 3138875
- 21413365 words of memory out of 24359540
- 43132 multiletter control sequences out of 15000+200000
- 546789 words of font info for 82 fonts, out of 3000000 for 9000
+ 40254 strings out of 493305
+ 943325 string characters out of 3138875
+ 21415659 words of memory out of 24361834
+ 43228 multiletter control sequences out of 15000+200000
+ 549603 words of font info for 91 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,19n,136p,1318b,2419s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Admin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
-jknappen\ec\dpi600\tcrm1095.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcs
-c10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on tutorial.pdf (88 pages, 555503 bytes).
+ 79i,19n,136p,1320b,2423s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Admin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
+tcrm1095.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+extra/cmmib8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+r10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
+12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C
+:/Users/Admin/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/pl/plr10.pfb>
+Output written on tutorial.pdf (83 pages, 2210819 bytes).
 PDF statistics:
- 363 PDF objects out of 1000 (max. 8388607)
+ 380 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -23,8 +23,8 @@ N  = 5; % prediction horizon
 Nu = 5; % control horizon
 lambda= [1.0 1.0]; % Penalty--control signals' incr.
 psi   = [1.0 1.0]; % Penalty--control errors
-dumin =-[.1 .1]; % Lower bound--control increments
-dumax = [.1 .1]; % Upper bound--control increments
+dumin =-[.01 .01]; % Lower bound--control increments
+dumax = [.01 .01]; % Upper bound--control increments
 umin  =-[1.0 1.0]; % Lower bound--control signal
 umax  = [1.0 1.0]; % Upper bound--control signal
 
@@ -33,12 +33,11 @@ K =  [.1 .05];
 Ti = [1 .1];
 Td = [0.0 0.0];
 
-AutoMATiC_Generate('AutoMATiC_PID_Algorithm_s','controller');
+%AutoMATiC_Generate('AutoMATiC_PID_Algorithm','controller');
 %AutoMATiC_Generate('AutoMATiC_DMC_Analytic_Algorithm','controller');
 %AutoMATiC_Generate('AutoMATiC_DMC_Numeric_Algorithm','controller');
 %AutoMATiC_Generate('AutoMATiC_GPC_Analytic_Algorithm','controller');
-%AutoMATiC_Generate('AutoMATiC_GPC_Numeric_Algorithm','controller');
-
+AutoMATiC_Generate('AutoMATiC_GPC_Numeric_Algorithm','controller');
 
 function S = step_response_generation(GPC_a,GPC_b,D)
     ny = size(GPC_a,1);

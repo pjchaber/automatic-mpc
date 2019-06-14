@@ -1,7 +1,6 @@
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
-#include "mat_lib.h"
 
 ArchiveData ad;
 CurrentControl cc;
@@ -57,7 +56,7 @@ void idle(){
     sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
     sprintf(str,      "%d,",algorithm_used);               write_string(str);
     write_string("];\n\r");
-	if(++i > 510) profiler_print();
+	if(++i > 1000) profiler_print();
     #MPC_PROFILER_END 13
 }
 

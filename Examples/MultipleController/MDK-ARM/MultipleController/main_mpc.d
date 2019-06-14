@@ -7,9 +7,15 @@
 .\multiplecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\multiplecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\matrix_cal.h
-.\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\mat_lib.h
 .\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\allocation_nr.h
-.\multiplecontroller\main_mpc.o: C:\Users\Admin\Documents\GitHub\AutoMATiC\Libs\C\qp.h
+.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\osqp.h
+.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\types.h
+.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\constants.h
+.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\util.h
+.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\cs.h
+.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\osqp\include\lin_alg.h
 .\multiplecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h
 .\multiplecontroller\main_mpc.o: ../Inc/stm32f7xx_hal_conf.h
 .\multiplecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h
@@ -50,4 +56,3 @@
 .\multiplecontroller\main_mpc.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
 .\multiplecontroller\main_mpc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\multiplecontroller\main_mpc.o: ../Inc/main.h
-.\multiplecontroller\main_mpc.o: ..\..\..\Libs\C\mat_lib.h

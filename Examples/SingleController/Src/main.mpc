@@ -1,7 +1,6 @@
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
-#include "mat_lib.h"
 
 ArchiveData ad;
 CurrentControl cc;
@@ -15,17 +14,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
     }
 }
 void measurements(){
-    #MPC_PROFILER_BEGIN 4
+    #MPC_PROFILER_BEGIN 4 measurements
     new_output(&ad,__measureOutput());
     #MPC_PROFILER_END 4
 }
 void controls(){
-    #MPC_PROFILER_BEGIN 3
+    #MPC_PROFILER_BEGIN 3 controls' application
     __setControlValue(last_control(&ad));
     #MPC_PROFILER_END 3
 }
 void hardware_setup(){
-    #MPC_PROFILER_BEGIN 1
+    #MPC_PROFILER_BEGIN 1 hardware setup
     low_lvl_main();
     #MPC_PROFILER_END 1
 }
@@ -36,15 +35,15 @@ algorithms_parameters_definitions
 #MPC_END
 
 void controller_setup(){
-    #MPC_PROFILER_BEGIN 2
+    #MPC_PROFILER_BEGIN 2 software setup
     init_archive_data(&ad, 200, 200, 2, 2, 0, 0, 0.01);
     init_current_control(&cc,&ad);
     controller(NULL,NULL);
-    #MPC_PROFILER_END 2
+    #MPC_PROFILER_END 2 
 }
 
 void idle(){
-    #MPC_PROFILER_BEGIN 13
+    #MPC_PROFILER_BEGIN 13 other procedures
     const int k = 0;
 	static int i = 0;
 	static char str[1000] = {0};
@@ -53,12 +52,12 @@ void idle(){
     sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
     sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
     write_string("];\n\r");
-	if(++i > 510) profiler_print();
+	if(++i > 10) profiler_print();
     #MPC_PROFILER_END 13
 }
 
 void loop(){
-    #MPC_PROFILER_BEGIN 10
+    #MPC_PROFILER_BEGIN 10 controls' calculation
     static int i = 0;
 	     if(i< 100){ ad.z[0] = -0.1f; ad.z[1] = +0.2f; }
 	else if(i< 150){ ad.z[0] = -0.1f; ad.z[1] = -0.2f; }
@@ -66,7 +65,7 @@ void loop(){
 	else           { ad.z[0] = +0.1f; ad.z[1] = +0.2f; }
 	if(++i > 300) i = 0;
 	
-    #MPC_PROFILER_BEGIN 50
+    #MPC_PROFILER_BEGIN 50 control algorithm
 	controller(&ad,&cc);
 	#MPC_PROFILER_END 50
 	

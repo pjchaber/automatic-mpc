@@ -1,0 +1,10 @@
+.\multiplecontroller\kkt.o: ..\..\..\Libs\C\osqp\src\kkt.c
+.\multiplecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\kkt.h
+.\multiplecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\types.h
+.\multiplecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+.\multiplecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+.\multiplecontroller\kkt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\multiplecontroller\kkt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\multiplecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\constants.h
+.\multiplecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\cs.h
+.\multiplecontroller\kkt.o: ..\..\..\Libs\C\osqp\include\lin_alg.h

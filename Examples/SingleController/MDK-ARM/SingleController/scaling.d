@@ -1,0 +1,9 @@
+singlecontroller\scaling.o: ..\..\..\Libs\C\osqp\src\scaling.c
+singlecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\scaling.h
+singlecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\types.h
+singlecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+singlecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+singlecontroller\scaling.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+singlecontroller\scaling.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+singlecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\constants.h
+singlecontroller\scaling.o: ..\..\..\Libs\C\osqp\include\lin_alg.h

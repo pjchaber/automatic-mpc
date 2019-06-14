@@ -1,25 +1,25 @@
 \contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {2}Requirements}{2}
-\contentsline {section}{\numberline {3}Installation}{2}
-\contentsline {section}{\numberline {4}Setup}{3}
-\contentsline {section}{\numberline {5}Single Algorithm in a Controller}{3}
-\contentsline {subsection}{\numberline {5.1}Communication with PC using USART}{4}
-\contentsline {subsection}{\numberline {5.2}Measuring Voltage Signal}{5}
-\contentsline {subsection}{\numberline {5.3}Creating Voltage Signal}{5}
-\contentsline {subsection}{\numberline {5.4}Inducing Interruptions with a Constant Frequency}{6}
-\contentsline {subsection}{\numberline {5.5}Interface for Further Ease of Use}{6}
-\contentsline {subsection}{\numberline {5.6}Logic of the Controller}{7}
-\contentsline {subsection}{\numberline {5.7}Dynamic Matrix Control -- Analytic version}{10}
-\contentsline {subsection}{\numberline {5.8}Dynamic Matrix Control -- Numeric version}{13}
-\contentsline {subsection}{\numberline {5.9}General Predictive Control -- Analytic version}{13}
-\contentsline {subsection}{\numberline {5.10}General Predictive Control -- Numeric version}{15}
-\contentsline {section}{\numberline {6}Multiple Algorithms in a Controller}{15}
-\contentsline {subsection}{\numberline {6.1}Analytic and Numeric versions of DMC}{15}
-\contentsline {section}{\numberline {7}Extending of the Library}{17}
-\contentsline {subsection}{\numberline {7.1}Proportional-Integral-Derivative Controller}{19}
-\contentsline {section}{\numberline {A}Analytic DMC -- generated source of \texttt {main\_mpc.c}}{22}
-\contentsline {section}{\numberline {B}Numeric DMC -- generated source of \texttt {main\_mpc.c}}{26}
-\contentsline {section}{\numberline {C}Analytic GPC -- generated source of \texttt {main\_mpc.c}}{44}
-\contentsline {section}{\numberline {D}Numeric GPC -- generated source of \texttt {main\_mpc.c}}{48}
-\contentsline {section}{\numberline {E}Analytic and Numeric DMC -- generated source of \texttt {main\_mpc.c}}{65}
-\contentsline {section}{\numberline {F}PID algorithm -- generated source of \texttt {main\_mpc.c}}{85}
+\contentsline {section}{\numberline {2}Conditions of Using the {\scshape AutoMATiC}\ System}{4}
+\contentsline {section}{\numberline {3}Requirements}{4}
+\contentsline {section}{\numberline {4}Installation}{5}
+\contentsline {section}{\numberline {5}Setup}{5}
+\contentsline {section}{\numberline {6}Generation of a Single MPC}{5}
+\contentsline {subsection}{\numberline {6.1}Communication with PC using USART}{7}
+\contentsline {subsection}{\numberline {6.2}Measurement of Voltage Signals}{8}
+\contentsline {subsection}{\numberline {6.3}Creation of Voltage Signals}{9}
+\contentsline {subsection}{\numberline {6.4}Induction of Interrupts with a Constant Frequency}{9}
+\contentsline {subsection}{\numberline {6.5}Interface for Further Ease of Use}{9}
+\contentsline {subsection}{\numberline {6.6}Logic of the Control Algorithm}{10}
+\contentsline {subsection}{\numberline {6.7}Dynamic Matrix Control Algorithm: Analytical version}{13}
+\contentsline {subsection}{\numberline {6.8}Dynamic Matrix Control Algorithm: Numerical Version}{16}
+\contentsline {subsection}{\numberline {6.9}General Predictive Control Algorithm: Analytical Version}{16}
+\contentsline {subsection}{\numberline {6.10}General Predictive Control Algorithm: Numerical Version}{18}
+\contentsline {section}{\numberline {7}Multiple MPC Algorithms Exchanged On-line in a Seamless Way Using One Microcontroller}{20}
+\contentsline {section}{\numberline {8}Extension of the Library of Control Algorithms}{22}
+\contentsline {subsection}{\numberline {8.1}Proportional-Integral-Derivative Controller}{22}
+\contentsline {section}{\numberline {A}Analytical DMC Algorithm: Generated Source of \texttt {main\_mpc.c}}{26}
+\contentsline {section}{\numberline {B}Numerical DMC Algorithm: Generated Source of \texttt {main\_mpc.c}}{30}
+\contentsline {section}{\numberline {C}Analytical GPC Algorithm: Generated Source of \texttt {main\_mpc.c}}{45}
+\contentsline {section}{\numberline {D}Numerical GPC Algorithm: Generated Source of \texttt {main\_mpc.c}}{49}
+\contentsline {section}{\numberline {E}Analytical and Numerical DMC Algorithms Exchanged On-Line: Generated Source of \texttt {main\_mpc.c}}{63}
+\contentsline {section}{\numberline {F}PID Algorithm: Generated Source of \texttt {main\_mpc.c}}{80}

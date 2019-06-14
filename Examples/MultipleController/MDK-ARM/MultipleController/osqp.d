@@ -1,0 +1,15 @@
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\src\osqp.c
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\osqp.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\types.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\glob_opts.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\osqp_configure.h
+.\multiplecontroller\osqp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\multiplecontroller\osqp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\constants.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\util.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\cs.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\lin_alg.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\auxil.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\scaling.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\polish.h
+.\multiplecontroller\osqp.o: ..\..\..\Libs\C\osqp\include\lin_sys.h
