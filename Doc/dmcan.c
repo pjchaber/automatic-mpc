@@ -24,17 +24,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
     }
 }
 void measurements(){
-profiler_start(4);
+profiler_start(4,"measurements");
     new_output(&ad,__measureOutput());
 profiler_end(4);
 }
 void controls(){
-profiler_start(3);
+profiler_start(3,"controls' application");
     __setControlValue(last_control(&ad));
 profiler_end(3);
 }
 void hardware_setup(){
-profiler_start(1);
+profiler_start(1,"hardware setup");
     low_lvl_main();
 profiler_end(1);
 }
@@ -984,7 +984,7 @@ void controllerDMCN(ArchiveData * ad, CurrentControl * c){
 }
 
 void controller_setup(){
-profiler_start(2);
+profiler_start(2,"software setup");
     init_archive_data(&ad, 200, 200, 2, 2, 0, 0, 0.01);
     init_current_control(&cc,&ad);
     controllerDMCA(NULL,NULL);
@@ -993,7 +993,7 @@ profiler_end(2);
 }
 
 void idle(){
-profiler_start(13);
+profiler_start(13,"other procedures");
     const int k = 0;
 	static int i = 0;
 	static char str[1000] = {0};
@@ -1003,12 +1003,14 @@ profiler_start(13);
     sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
     sprintf(str,      "%d,",algorithm_used);               write_string(str);
     write_string("];\n\r");
-	if(++i > 1000) profiler_print();
+	if(++i > 1000) {
+profiler_print();
+	}
 profiler_end(13);
 }
 
 void loop(){
-profiler_start(10);
+profiler_start(10,"controls' calculation");
     static int i = 0;
 	     if(i< 100){ ad.z[0] = -0.1f; ad.z[1] = +0.2f; }
 	else if(i< 150){ ad.z[0] = -0.1f; ad.z[1] = -0.2f; }
@@ -1021,7 +1023,7 @@ profiler_start(10);
 		algorithm_used = algorithm_used==0?1:0;
 
 	
-profiler_start(50);
+profiler_start(50,"control algorithm");
 	if(algorithm_used == 0) controllerDMCA(&ad,&cc);
 	else                    controllerDMCN(&ad,&cc);
 profiler_end(50);

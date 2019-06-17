@@ -3,23 +3,23 @@
 \contentsline {section}{\numberline {3}Requirements}{4}
 \contentsline {section}{\numberline {4}Installation}{5}
 \contentsline {section}{\numberline {5}Setup}{5}
-\contentsline {section}{\numberline {6}Generation of a Single MPC}{5}
-\contentsline {subsection}{\numberline {6.1}Communication with PC using USART}{7}
+\contentsline {section}{\numberline {6}Generation of a Single MPC}{6}
+\contentsline {subsection}{\numberline {6.1}Communication with PC using USART}{8}
 \contentsline {subsection}{\numberline {6.2}Measurement of Voltage Signals}{8}
 \contentsline {subsection}{\numberline {6.3}Creation of Voltage Signals}{9}
 \contentsline {subsection}{\numberline {6.4}Induction of Interrupts with a Constant Frequency}{9}
 \contentsline {subsection}{\numberline {6.5}Interface for Further Ease of Use}{9}
-\contentsline {subsection}{\numberline {6.6}Logic of the Control Algorithm}{10}
-\contentsline {subsection}{\numberline {6.7}Dynamic Matrix Control Algorithm: Analytical version}{13}
-\contentsline {subsection}{\numberline {6.8}Dynamic Matrix Control Algorithm: Numerical Version}{16}
-\contentsline {subsection}{\numberline {6.9}General Predictive Control Algorithm: Analytical Version}{16}
-\contentsline {subsection}{\numberline {6.10}General Predictive Control Algorithm: Numerical Version}{18}
-\contentsline {section}{\numberline {7}Multiple MPC Algorithms Exchanged On-line in a Seamless Way Using One Microcontroller}{20}
-\contentsline {section}{\numberline {8}Extension of the Library of Control Algorithms}{22}
-\contentsline {subsection}{\numberline {8.1}Proportional-Integral-Derivative Controller}{22}
-\contentsline {section}{\numberline {A}Analytical DMC Algorithm: Generated Source of \texttt {main\_mpc.c}}{26}
-\contentsline {section}{\numberline {B}Numerical DMC Algorithm: Generated Source of \texttt {main\_mpc.c}}{30}
-\contentsline {section}{\numberline {C}Analytical GPC Algorithm: Generated Source of \texttt {main\_mpc.c}}{45}
-\contentsline {section}{\numberline {D}Numerical GPC Algorithm: Generated Source of \texttt {main\_mpc.c}}{49}
-\contentsline {section}{\numberline {E}Analytical and Numerical DMC Algorithms Exchanged On-Line: Generated Source of \texttt {main\_mpc.c}}{63}
-\contentsline {section}{\numberline {F}PID Algorithm: Generated Source of \texttt {main\_mpc.c}}{80}
+\contentsline {subsection}{\numberline {6.6}Logic of the Control Algorithm}{11}
+\contentsline {subsection}{\numberline {6.7}Dynamic Matrix Control Algorithm: Analytical version}{14}
+\contentsline {subsection}{\numberline {6.8}Dynamic Matrix Control Algorithm: Numerical Version}{17}
+\contentsline {subsection}{\numberline {6.9}General Predictive Control Algorithm: Analytical Version}{17}
+\contentsline {subsection}{\numberline {6.10}General Predictive Control Algorithm: Numerical Version}{19}
+\contentsline {section}{\numberline {7}Multiple MPC Algorithms Exchanged On-line in a Seamless Way Using One Microcontroller}{21}
+\contentsline {section}{\numberline {8}Extension of the Library of Control Algorithms}{23}
+\contentsline {subsection}{\numberline {8.1}Proportional-Integral-Derivative Controller}{23}
+\contentsline {section}{\numberline {A}Analytical DMC Algorithm: Generated Source of \texttt {main\_mpc.c}}{28}
+\contentsline {section}{\numberline {B}Numerical DMC Algorithm: Generated Source of \texttt {main\_mpc.c}}{32}
+\contentsline {section}{\numberline {C}Analytical GPC Algorithm: Generated Source of \texttt {main\_mpc.c}}{47}
+\contentsline {section}{\numberline {D}Numerical GPC Algorithm: Generated Source of \texttt {main\_mpc.c}}{51}
+\contentsline {section}{\numberline {E}Analytical and Numerical DMC Algorithms Exchanged On-Line: Generated Source of \texttt {main\_mpc.c}}{65}
+\contentsline {section}{\numberline {F}PID Algorithm: Generated Source of \texttt {main\_mpc.c}}{82}

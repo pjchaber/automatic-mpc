@@ -819,7 +819,9 @@ profiler_start(13,"other procedures");
     sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
     sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
     write_string("];\n\r");
-	if(++i > 10) profiler_print();
+	if(++i > 1000) {
+profiler_print();
+	}
 profiler_end(13);
 }
 

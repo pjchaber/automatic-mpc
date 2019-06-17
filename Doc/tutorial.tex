@@ -183,6 +183,7 @@ table[col sep = comma, x index = {0}, y index = {6}]{./#1.csv};
 	keywordstyle=[5]\bfseries\color{green!50!blue}, % not used anymore	
 	morekeywords=[6]{ArchiveDataPtr,ArchiveData},
 	keywordstyle=[6]\bfseries\color{green!50!red}, % not used anymore	
+%	moredelim=**[is][\color{myred}]{@}{@},
 }
 \lstdefinestyle{mym}{
 	language=matlab,
@@ -417,6 +418,11 @@ mex -setup C++
 Also make sure to use the same MATLAB version which was used in the shell in steps \ref{it:shell} and \ref{it:regserver}.
 \end{enumerate}
 
+The \AutomaticMPC\ system comes with already cloned version of OSQP (0.5.0), with a temporary minor bug fix (\url{https://github.com/oxfordcontrol/osqp/issues/157}). The cloned OSQP project was made following the instructions on \url{https://osqp.org/docs/get_started/sources.html#build-from-sources}, with additional call for \lstinline|cmake| right before the compilation:
+\begin{lstlisting}
+cmake -DPRINTING=OFF -DPROFILING=OFF -DCTRLC=OFF -DDFLOAT=ON -DENABLE_MKL_PARDISO=OFF .
+\end{lstlisting}
+
 \section{Setup}
 All further examples focus on the task of controlling output voltages of emulated process. All signals used to connect the controller and the process are voltage signals of range from 0 to 3.3V. From the implementation side, those signals are represented as values from -1 to 1, where the lowest value represents 0V and the highest one represents 3.3V. The process that is emulated is a matrix of single inertia transfer functions (\ref{eq:obj}). Although the theoretical introduction considers any number of input and output signals, further on a process with only two inputs and two outputs is used. The process is configured exactly the same as the controller and utilises the same microcontroller to perform its tasks. Two ADC inputs of the controller are connected directly to the two DAC outputs of the process and two ADC inputs of the process are connected to the two DAC outputs of the controller, as shown in Fig. \ref{fig:setup}.
 
@@ -641,7 +647,43 @@ It is worth noting that the transcompiler is executed while being in the directo
 \item \lstinline|-L <path>| -- relative path to the directory with C libraries of the transcompiler.
 \end{itemize}
 
-To complete the setup of the project one has to add source files and headers of \AutomaticMPC\ system to a project for further compilation. All these files can be found in a directory \lstinline|<absolute path to AutoMATiC>/Libs/C/|. Also a file named \lstinline|main.mpc| has to be created and placed in the \lstinline|../Src/| directory. This file will contain all the logic of the controller with as few low level implementation parts as possible.
+To complete the setup of the project one has to add source files and headers of \AutomaticMPC\ system to a project for further compilation. All these files can be found in a directory \lstinline|<absolute path to AutoMATiC>/Libs/C/|. Also a file named \lstinline|main.mpc| has to be created and placed in the \lstinline|../Src/| directory. This file will contain all the logic of the controller with as few low level implementation parts as possible. 
+
+To incorporate OSQP solver one has to add a list of files into the Keil uVision5 project (it is best to create additional group for those files):
+\begin{itemize}[itemsep=0pt]
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/auxil.c   |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/cs.c      |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/kkt.c     |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/lin_alg.c |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/lin_sys.c |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/osqp.c    |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/polish.c  |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/proj.c    |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/scaling.c |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/src/util.c    |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/qdldl_interface.c |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/qdldl_sources/src/qdldl.c |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_1.c              |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_2.c              |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_aat.c            |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_control.c        |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_defaults.c       |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_info.c           |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_order.c          |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_post_tree.c      |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_postorder.c      |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_preprocess.c     |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/amd_valid.c          |
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/src/SuiteSparse_config.c |
+\end{itemize}
+Also a following list of directories has to be included in the searching path:
+\begin{itemize}[itemsep=0pt]
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/include/|
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/|
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/qdldl_sources/include/|
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/direct/qdldl/amd/include/|
+\item \lstinline|<path to AutoMATiC>/Libs/C/osqp/lin_sys/|
+\end{itemize}
 
 \subsection{Logic of the Control Algorithm}
 The file that contains logic of the controller, namely \lstinline|main.mpc|, contains implementations which can be divided in a few parts:
@@ -656,7 +698,6 @@ The execution of the MATLAB script is not necessary -- content of this script co
 #include "stm32f7xx_hal.h"
 #include <string.h>
 #include "main.h"
-#include "mat_lib.h"
 
 ArchiveData ad;
 CurrentControl cc;
@@ -670,17 +711,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
     }
 }
 void measurements(){
-    #MPC_PROFILER_BEGIN 4 measurements
+    #MPC_PROFILER_BEGIN 4 @\color{myred}measurements@
     new_output(&ad,__measureOutput());
     #MPC_PROFILER_END 4
 }
 void controls(){
-    #MPC_PROFILER_BEGIN 3 controls' application
+    #MPC_PROFILER_BEGIN 3 @\color{myred}controls' application@
     __setControlValue(last_control(&ad));
     #MPC_PROFILER_END 3
 }
 void hardware_setup(){
-    #MPC_PROFILER_BEGIN 1 hardware setup
+    #MPC_PROFILER_BEGIN 1 @\color{myred}hardware setup@
     low_lvl_main();
     #MPC_PROFILER_END 1
 }
@@ -695,7 +736,7 @@ algorithms_parameters_definitions
 #MPC_END
 
 void controller_setup(){
-    #MPC_PROFILER_BEGIN 2 software setup
+    #MPC_PROFILER_BEGIN 2 @\color{myred}software setup@
     init_archive_data(&ad, 200, 200, 2, 2, 0, 0, 0.01);
     init_current_control(&cc,&ad);
     controller(NULL,NULL);
@@ -703,7 +744,7 @@ void controller_setup(){
 }
 
 void idle(){
-    #MPC_PROFILER_BEGIN 13 other procedures
+    #MPC_PROFILER_BEGIN 13 @\color{myred}other procedures@
     const int k = 0;
 	static char str[1000] = {0};
 
@@ -711,17 +752,22 @@ void idle(){
     sprintf(str,      "%f,%f,",ad.z[0], ad.z[1]);          write_string(str);
     sprintf(str,      "%f,%f,",ad.u[k-1][0],ad.u[k-1][1]); write_string(str);
     write_string("];\n\r");
+	if(++i > 1000) {
+		#MPC_PROFILER_PRINT
+	}
     #MPC_PROFILER_END 13
 }
 
 void loop(){
-    #MPC_PROFILER_BEGIN 10 controls' calculation
+    #MPC_PROFILER_BEGIN 10 @\color{myred}controls' calculation@
     static int i = 0;
-	if(i<  50){ ad.z[0] = -0.1; ad.z[1] =  0.2; }
-	else      { ad.z[0] =  0.1; ad.z[1] = -0.2; }
-    if(++i > 100) i = 0;
+	     if(i< 100){ ad.z[0] = -0.1f; ad.z[1] = +0.2f; }
+	else if(i< 150){ ad.z[0] = -0.1f; ad.z[1] = -0.2f; }
+	else if(i< 250){ ad.z[0] = +0.1f; ad.z[1] = -0.2f; }
+	else           { ad.z[0] = +0.1f; ad.z[1] = +0.2f; }
+	if(++i > 300) i = 0;
 	
-    #MPC_PROFILER_BEGIN 50 control algorithm
+    #MPC_PROFILER_BEGIN 50 @\color{myred}control algorithm@
 	controller(&ad,&cc);
 	#MPC_PROFILER_END 50
 	
@@ -877,7 +923,7 @@ This function is defined in the script in \lstinline|<path to AutoMATiC>/Libs/MA
 
 At this point, if the build procedure will be called on the Keil uVision5 project, the automatic code generation will be called first which will generate a file called \lstinline|main_mpc.c| which can be found in Appendix \ref{ch:dmca}.
 
-As it is visible, the \lstinline|<path to AutoMATiC>| in this example is \lstinline|C:\Users\Admin\Documents\GitHub\AutoMATiC|. It is worth noting that there is no part where the MATLAB code could be placed, instead there is a definition of the \lstinline[style=myc]|void controller(ArchiveData * ad, CurrentControl * c)| function. Also each pair of \lstinline[style=myc]|#MPC_PROFILER_BEGIN <id> <description>| and \lstinline[style=myc]|#MPC_PROFILER_END <id>| is substituted with a pair of corresponding C functions \lstinline[style=myc]|profiler_start(<id>,<description>)| and \lstinline[style=myc]|profiler_end(<id>)|, where \lstinline|<id>| is the identifier of the block, and the \lstinline|<description>| is the additional description of this block. If this generated C language source file is not included in the project and the build fails -- it is necessary to add this file to the project and repeat the building process. At this point everything should be ready to program the microcontroller and test the MPC controller itself.
+As it is visible, the \lstinline|<path to AutoMATiC>| in this example is \lstinline|C:\Users\Admin\Documents\GitHub\AutoMATiC|. It is worth noting that there is no part where the MATLAB code could be placed, instead there is a definition of the \lstinline[style=myc]|void controller(ArchiveData * ad, CurrentControl * c)| function. Also each pair of \lstinline[style=myc]|#MPC_PROFILER_BEGIN <id> <description>| and \lstinline[style=myc]|#MPC_PROFILER_END <id>| is substituted with a pair of corresponding C functions \lstinline[style=myc]|profiler_start(<id>,<description>)| and \lstinline[style=myc]|profiler_end(<id>)|, where \lstinline|<id>| is the identifier of the block, and the \lstinline|<description>| is the additional description of this block. Also a keyword \lstinline[style=myc]|#MPC_PROFILER_PRINT| is translated into a function \lstinline[style=myc]|profiler_print()| call, which prints out the current state of profiler using  \lstinline[style=myc]|write_string| function. If this generated C language source file is not included in the project and the build fails -- it is necessary to add this file to the project and repeat the building process. At this point everything should be ready to program the microcontroller and test the MPC controller itself.
 
 \begin{figure}
 \centering
@@ -1228,8 +1274,6 @@ There are a few aspects worth noting. Firstly, a set point value can be used in 
 
 It is important to finish the code that is to be used for transcompilation with a special comment \lstinline[style=mym]|%% STOP| which defines the end of the algorithms definition.
 
-Having the definition of the PID controller prepared, the same Keil uVision 5 project as the one used for the DMC Analytical algorithm, can be utilised. Therefore, a recompilation (which will also execute the transcompilation) results in the code presented in Appendix \ref{ch:pid}. The obtained process trajectories are shown in Fig. \ref{fig:pid}, and profiler results are shown in table \ref{tab:pid}.
-
 \begin{figure}
 \centering
 \plotthissiet{pid}
@@ -1252,11 +1296,15 @@ Having the definition of the PID controller prepared, the same Keil uVision 5 pr
    13 (other procedures) &       7027 &       1001 &          6 &     7.0199 &          8 & 1 \\
 \end{tabular}
 \end{table}
+Having the definition of the PID controller prepared, the same Keil uVision 5 project as the one used for the DMC Analytical algorithm, can be utilised. Therefore, a recompilation (which will also execute the transcompilation) results in the code presented in Appendix \ref{ch:pid}. The obtained process trajectories are shown in Fig. \ref{fig:pid}, and profiler results are shown in table \ref{tab:pid}.
 
+
+\clearpage
+\newpage 
 \bibliographystyle{plain}
 \bibliography{bib}
-
 \newpage 
+
 \appendix
 \section{Analytical DMC Algorithm: Generated Source of \texttt{main\_mpc.c}}\label{ch:dmca}
 \lstinputlisting[style=myc]{dmca.c}

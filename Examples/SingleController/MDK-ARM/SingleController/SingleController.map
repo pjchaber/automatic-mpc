@@ -1090,6 +1090,7 @@ Section Cross References
     osqp.o(i.osqp_solve) refers to auxil.o(i.update_info) for update_info
     osqp.o(i.osqp_solve) refers to auxil.o(i.check_termination) for check_termination
     osqp.o(i.osqp_solve) refers to auxil.o(i.adapt_rho) for adapt_rho
+    osqp.o(i.osqp_solve) refers to auxil.o(i.has_solution) for has_solution
     osqp.o(i.osqp_solve) refers to auxil.o(i.compute_obj_val) for compute_obj_val
     osqp.o(i.osqp_solve) refers to auxil.o(i.update_status) for update_status
     osqp.o(i.osqp_solve) refers to auxil.o(i.compute_rho_estimate) for compute_rho_estimate
@@ -1208,7 +1209,6 @@ Section Cross References
     scaling.o(i.unscale_solution) refers to lin_alg.o(i.vec_mult_scalar) for vec_mult_scalar
     scaling.o(.data) refers to scaling.o(.conststring) for .conststring
     util.o(i.copy_settings) refers to mallocr.o(i.__malloc$realloc) for malloc
-    util.o(i.copy_settings) refers to memcpya.o(.text) for __aeabi_memcpy4
     util.o(.data) refers to util.o(.conststring) for .conststring
     qdldl_interface.o(i.LDLSolve) refers to qdldl_interface.o(i.permute_x) for permute_x
     qdldl_interface.o(i.LDLSolve) refers to qdldl.o(i.QDLDL_solve) for QDLDL_solve
@@ -2401,43 +2401,43 @@ Image Symbol Table
     ../Src/stm32f7xx_hal_msp.c               0x00000000   Number         0  stm32f7xx_hal_msp.o ABSOLUTE
     ../Src/stm32f7xx_it.c                    0x00000000   Number         0  stm32f7xx_it.o ABSOLUTE
     ../Src/system_stm32f7xx.c                0x00000000   Number         0  system_stm32f7xx.o ABSOLUTE
-    ../clib/microlib/division.c              0x00000000   Number         0  ldiv.o ABSOLUTE
-    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  ldiv.o ABSOLUTE
     ../clib/microlib/errno.c                 0x00000000   Number         0  errno.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
     ../clib/microlib/malloc/calloc.c         0x00000000   Number         0  calloc.o ABSOLUTE
-    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloc.o ABSOLUTE
-    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocr.o ABSOLUTE
-    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloca.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocra.o ABSOLUTE
+    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloca.o ABSOLUTE
+    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocr.o ABSOLUTE
+    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloc.o ABSOLUTE
     ../clib/microlib/malloc/mvars.c          0x00000000   Number         0  mvars.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stdio/fputc.c           0x00000000   Number         0  fputc.o ABSOLUTE
     ../clib/microlib/stdio/semi.s            0x00000000   Number         0  semi.o ABSOLUTE
@@ -2452,8 +2452,8 @@ Image Symbol Table
     ../fplib/microlib/f2d.c                  0x00000000   Number         0  f2d.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
-    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixl.o ABSOLUTE
     ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltl.o ABSOLUTE
@@ -2563,8 +2563,8 @@ Image Symbol Table
     .text                                    0x080007a8   Section        0  llshl.o(.text)
     .text                                    0x080007c6   Section        0  llushr.o(.text)
     .text                                    0x080007e6   Section        0  llsshr.o(.text)
-    .text                                    0x0800080a   Section        0  iusefp.o(.text)
     .text                                    0x0800080a   Section        0  fepilogue.o(.text)
+    .text                                    0x0800080a   Section        0  iusefp.o(.text)
     .text                                    0x08000878   Section        0  depilogue.o(.text)
     .text                                    0x08000932   Section        0  dsqrt.o(.text)
     .text                                    0x080009d4   Section        0  dfixul.o(.text)
@@ -2777,145 +2777,144 @@ Image Symbol Table
     i.controls                               0x0800b454   Section        0  main_mpc.o(i.controls)
     i.copy_csc_mat                           0x0800b490   Section        0  cs.o(i.copy_csc_mat)
     i.copy_settings                          0x0800b514   Section        0  util.o(i.copy_settings)
-    i.create_matrix                          0x0800b52e   Section        0  mpctools.o(i.create_matrix)
-    create_matrix                            0x0800b52f   Thumb Code    60  mpctools.o(i.create_matrix)
-    i.create_profiler                        0x0800b56a   Section        0  profiler.o(i.create_profiler)
-    i.create_vector                          0x0800b58a   Section        0  mpctools.o(i.create_vector)
-    create_vector                            0x0800b58b   Thumb Code    22  mpctools.o(i.create_vector)
-    i.csc_calloc                             0x0800b5a0   Section        0  cs.o(i.csc_calloc)
-    csc_calloc                               0x0800b5a1   Thumb Code    24  cs.o(i.csc_calloc)
-    i.csc_cumsum                             0x0800b5b8   Section        0  cs.o(i.csc_cumsum)
-    i.csc_done                               0x0800b622   Section        0  cs.o(i.csc_done)
-    i.csc_malloc                             0x0800b658   Section        0  cs.o(i.csc_malloc)
-    csc_malloc                               0x0800b659   Thumb Code    24  cs.o(i.csc_malloc)
-    i.csc_matrix                             0x0800b670   Section        0  cs.o(i.csc_matrix)
-    i.csc_pinv                               0x0800b6ba   Section        0  cs.o(i.csc_pinv)
-    i.csc_spalloc                            0x0800b706   Section        0  cs.o(i.csc_spalloc)
-    i.csc_spfree                             0x0800b7ec   Section        0  cs.o(i.csc_spfree)
-    i.csc_symperm                            0x0800b818   Section        0  cs.o(i.csc_symperm)
-    i.csc_to_triu                            0x0800bb0a   Section        0  cs.o(i.csc_to_triu)
-    i.darray                                 0x0800bc34   Section        0  allocation_nr.o(i.darray)
-    i.darray3                                0x0800bccc   Section        0  allocation_nr.o(i.darray3)
-    i.find_last                              0x0800be30   Section        0  profiler.o(i.find_last)
-    i.find_profiler_entry                    0x0800be48   Section        0  profiler.o(i.find_profiler_entry)
-    i.float2strF                             0x0800be64   Section        0  profiler.o(i.float2strF)
-    i.form_Ared                              0x0800bebc   Section        0  polish.o(i.form_Ared)
-    form_Ared                                0x0800bebd   Thumb Code  1058  polish.o(i.form_Ared)
-    i.form_KKT                               0x0800c2de   Section        0  kkt.o(i.form_KKT)
-    i.form_rhs_red                           0x0800c77e   Section        0  polish.o(i.form_rhs_red)
-    form_rhs_red                             0x0800c77f   Thumb Code   184  polish.o(i.form_rhs_red)
-    i.fputc                                  0x0800c836   Section        0  fputc.o(i.fputc)
-    i.free_linsys_solver_qdldl               0x0800c848   Section        0  qdldl_interface.o(i.free_linsys_solver_qdldl)
-    i.get_profiler                           0x0800c8f0   Section        0  profiler.o(i.get_profiler)
-    i.get_time                               0x0800c90c   Section        0  main_mpc.o(i.get_time)
-    i.get_ypol_from_yred                     0x0800c914   Section        0  polish.o(i.get_ypol_from_yred)
-    get_ypol_from_yred                       0x0800c915   Thumb Code   216  polish.o(i.get_ypol_from_yred)
-    i.hardware_setup                         0x0800c9f0   Section        0  main_mpc.o(i.hardware_setup)
-    i.has_solution                           0x0800ca18   Section        0  auxil.o(i.has_solution)
-    has_solution                             0x0800ca19   Thumb Code    84  auxil.o(i.has_solution)
-    i.idle                                   0x0800ca6c   Section        0  main_mpc.o(i.idle)
-    i.init_archive_data                      0x0800cbb4   Section        0  mpctools.o(i.init_archive_data)
-    i.init_current_control                   0x0800ccb0   Section        0  mpctools.o(i.init_current_control)
-    i.init_linsys_solver                     0x0800cd20   Section        0  lin_sys.o(i.init_linsys_solver)
-    i.init_linsys_solver_qdldl               0x0800cd6c   Section        0  qdldl_interface.o(i.init_linsys_solver_qdldl)
-    i.int_vec_set_scalar                     0x0800d07c   Section        0  lin_alg.o(i.int_vec_set_scalar)
-    i.internal_alloc                         0x0800d0a8   Section        0  mallocr.o(i.internal_alloc)
-    internal_alloc                           0x0800d0a9   Thumb Code    76  mallocr.o(i.internal_alloc)
-    i.is_dual_infeasible                     0x0800d0f8   Section        0  auxil.o(i.is_dual_infeasible)
-    i.is_primal_infeasible                   0x0800d310   Section        0  auxil.o(i.is_primal_infeasible)
-    i.iterative_refinement                   0x0800d484   Section        0  polish.o(i.iterative_refinement)
-    iterative_refinement                     0x0800d485   Thumb Code   308  polish.o(i.iterative_refinement)
-    i.last_control                           0x0800d5b8   Section        0  mpctools.o(i.last_control)
-    i.limit_scaling                          0x0800d5c4   Section        0  scaling.o(i.limit_scaling)
-    i.load_linsys_solver                     0x0800d6a8   Section        0  lin_sys.o(i.load_linsys_solver)
-    i.loop                                   0x0800d6b8   Section        0  main_mpc.o(i.loop)
-    i.low_lvl_main                           0x0800d7c4   Section        0  main_1.o(i.low_lvl_main)
-    i.main                                   0x0800d834   Section        0  main.o(i.main)
-    i.main_interrupt                         0x0800d838   Section        0  main.o(i.main_interrupt)
-    i.mat_inf_norm_cols                      0x0800d870   Section        0  lin_alg.o(i.mat_inf_norm_cols)
-    i.mat_inf_norm_cols_sym_triu             0x0800d924   Section        0  lin_alg.o(i.mat_inf_norm_cols_sym_triu)
-    i.mat_inf_norm_rows                      0x0800da24   Section        0  lin_alg.o(i.mat_inf_norm_rows)
-    i.mat_mult_scalar                        0x0800dafc   Section        0  lin_alg.o(i.mat_mult_scalar)
-    i.mat_postmult_diag                      0x0800db3a   Section        0  lin_alg.o(i.mat_postmult_diag)
-    i.mat_premult_diag                       0x0800dba4   Section        0  lin_alg.o(i.mat_premult_diag)
-    i.mat_tpose_vec                          0x0800dc14   Section        0  lin_alg.o(i.mat_tpose_vec)
-    i.mat_vec                                0x0800defc   Section        0  lin_alg.o(i.mat_vec)
-    i.measurements                           0x0800e08c   Section        0  main_mpc.o(i.measurements)
-    i.new_control                            0x0800e0c0   Section        0  mpctools.o(i.new_control)
-    i.new_control_increment                  0x0800e162   Section        0  mpctools.o(i.new_control_increment)
-    i.new_output                             0x0800e202   Section        0  mpctools.o(i.new_output)
-    i.osqp_cleanup                           0x0800e258   Section        0  osqp.o(i.osqp_cleanup)
-    i.osqp_set_default_settings              0x0800e4a4   Section        0  osqp.o(i.osqp_set_default_settings)
-    i.osqp_setup                             0x0800e544   Section        0  osqp.o(i.osqp_setup)
-    i.osqp_solve                             0x0800e8fe   Section        0  osqp.o(i.osqp_solve)
-    i.osqp_update_bounds                     0x0800eb40   Section        0  osqp.o(i.osqp_update_bounds)
-    i.osqp_update_lin_cost                   0x0800ec00   Section        0  osqp.o(i.osqp_update_lin_cost)
-    i.osqp_update_rho                        0x0800ec68   Section        0  osqp.o(i.osqp_update_rho)
-    i.permute_KKT                            0x0800ee4c   Section        0  qdldl_interface.o(i.permute_KKT)
-    permute_KKT                              0x0800ee4d   Thumb Code   362  qdldl_interface.o(i.permute_KKT)
-    i.permute_x                              0x0800efb6   Section        0  qdldl_interface.o(i.permute_x)
-    i.permutet_x                             0x0800eff0   Section        0  qdldl_interface.o(i.permutet_x)
-    i.polish                                 0x0800f028   Section        0  polish.o(i.polish)
-    i.prea_int_vec_copy                      0x0800f288   Section        0  lin_alg.o(i.prea_int_vec_copy)
-    i.prea_vec_copy                          0x0800f2ba   Section        0  lin_alg.o(i.prea_vec_copy)
-    i.productab                              0x0800f2ec   Section        0  matrix_cal.o(i.productab)
-    i.profiler_end                           0x0800f35c   Section        0  profiler.o(i.profiler_end)
-    i.profiler_exists                        0x0800f3b8   Section        0  profiler.o(i.profiler_exists)
-    i.profiler_print                         0x0800f3cc   Section        0  profiler.o(i.profiler_print)
-    i.profiler_start                         0x0800f5f0   Section        0  profiler.o(i.profiler_start)
-    i.project                                0x0800f612   Section        0  proj.o(i.project)
-    i.project_normalcone                     0x0800f66a   Section        0  proj.o(i.project_normalcone)
-    i.push_current_controls_to_archive_data  0x0800f702   Section        0  mpctools.o(i.push_current_controls_to_archive_data)
-    i.quad_form                              0x0800f720   Section        0  lin_alg.o(i.quad_form)
-    i.realloc                                0x0800f81c   Section        0  mallocr.o(i.realloc)
-    i.reset_info                             0x0800f888   Section        0  auxil.o(i.reset_info)
-    i.scale_data                             0x0800f8a0   Section        0  scaling.o(i.scale_data)
-    i.set_current_control_increment          0x0800fb14   Section        0  mpctools.o(i.set_current_control_increment)
-    i.set_rho_vec                            0x0800fb1c   Section        0  auxil.o(i.set_rho_vec)
-    i.solve_linsys_qdldl                     0x0800fd4c   Section        0  qdldl_interface.o(i.solve_linsys_qdldl)
-    i.store_solution                         0x0800fd70   Section        0  auxil.o(i.store_solution)
-    i.sumaa                                  0x0800fed4   Section        0  matrix_cal.o(i.sumaa)
-    i.swap_vectors                           0x0800ff66   Section        0  auxil.o(i.swap_vectors)
-    i.timer_loop                             0x0800ff70   Section        0  main.o(i.timer_loop)
-    i.triplet_to_csc                         0x0800ff88   Section        0  cs.o(i.triplet_to_csc)
-    i.triplet_to_csr                         0x08010102   Section        0  cs.o(i.triplet_to_csr)
-    i.unload_linsys_solver                   0x0801027c   Section        0  lin_sys.o(i.unload_linsys_solver)
-    i.unscale_solution                       0x0801028c   Section        0  scaling.o(i.unscale_solution)
-    i.update_KKT_A                           0x080102de   Section        0  kkt.o(i.update_KKT_A)
-    i.update_KKT_P                           0x0801031e   Section        0  kkt.o(i.update_KKT_P)
-    i.update_KKT_param2                      0x080103b6   Section        0  kkt.o(i.update_KKT_param2)
-    i.update_info                            0x080103fc   Section        0  auxil.o(i.update_info)
-    i.update_linsys_solver_matrices_qdldl    0x080104b4   Section        0  qdldl_interface.o(i.update_linsys_solver_matrices_qdldl)
-    i.update_linsys_solver_rho_vec_qdldl     0x08010544   Section        0  qdldl_interface.o(i.update_linsys_solver_rho_vec_qdldl)
-    i.update_rho_vec                         0x08010610   Section        0  auxil.o(i.update_rho_vec)
-    i.update_status                          0x0801084c   Section        0  auxil.o(i.update_status)
-    i.update_x                               0x08010a10   Section        0  auxil.o(i.update_x)
-    i.update_xz_tilde                        0x08010aa4   Section        0  auxil.o(i.update_xz_tilde)
-    i.update_y                               0x08010ac0   Section        0  auxil.o(i.update_y)
-    i.update_z                               0x08010b60   Section        0  auxil.o(i.update_z)
-    i.update_z_tilde                         0x08010be2   Section        0  auxil.o(i.update_z_tilde)
-    update_z_tilde                           0x08010be3   Thumb Code   104  auxil.o(i.update_z_tilde)
-    i.validate_data                          0x08010c4a   Section        0  auxil.o(i.validate_data)
-    i.validate_linsys_solver                 0x08010d16   Section        0  auxil.o(i.validate_linsys_solver)
-    i.validate_settings                      0x08010d3e   Section        0  auxil.o(i.validate_settings)
-    i.vec_add_scaled                         0x08010f26   Section        0  lin_alg.o(i.vec_add_scaled)
-    i.vec_copy                               0x08010f6a   Section        0  lin_alg.o(i.vec_copy)
-    i.vec_ew_max_vec                         0x08010fac   Section        0  lin_alg.o(i.vec_ew_max_vec)
-    i.vec_ew_prod                            0x08010ff0   Section        0  lin_alg.o(i.vec_ew_prod)
-    i.vec_ew_recipr                          0x08011034   Section        0  lin_alg.o(i.vec_ew_recipr)
-    i.vec_ew_sqrt                            0x0801106e   Section        0  lin_alg.o(i.vec_ew_sqrt)
-    i.vec_mean                               0x080110ac   Section        0  lin_alg.o(i.vec_mean)
-    i.vec_mult_scalar                        0x0801110c   Section        0  lin_alg.o(i.vec_mult_scalar)
-    i.vec_norm_inf                           0x0801113c   Section        0  lin_alg.o(i.vec_norm_inf)
-    i.vec_prod                               0x080111a0   Section        0  lin_alg.o(i.vec_prod)
-    i.vec_scaled_norm_inf                    0x080111ec   Section        0  lin_alg.o(i.vec_scaled_norm_inf)
-    i.vec_set_scalar                         0x08011274   Section        0  lin_alg.o(i.vec_set_scalar)
-    i.write_string                           0x08011298   Section        0  main_1.o(i.write_string)
-    i.writemessage                           0x080112d4   Section        0  allocation_nr.o(i.writemessage)
-    .constdata                               0x080112f0   Section        8  stm32f7xx_hal_dma.o(.constdata)
-    flagBitshiftOffset                       0x080112f0   Data           8  stm32f7xx_hal_dma.o(.constdata)
-    .constdata                               0x080112f8   Section       24  system_stm32f7xx.o(.constdata)
-    .conststring                             0x08011310   Section       20  main_mpc.o(.conststring)
+    i.create_matrix                          0x0800b5cc   Section        0  mpctools.o(i.create_matrix)
+    create_matrix                            0x0800b5cd   Thumb Code    60  mpctools.o(i.create_matrix)
+    i.create_profiler                        0x0800b608   Section        0  profiler.o(i.create_profiler)
+    i.create_vector                          0x0800b628   Section        0  mpctools.o(i.create_vector)
+    create_vector                            0x0800b629   Thumb Code    22  mpctools.o(i.create_vector)
+    i.csc_calloc                             0x0800b63e   Section        0  cs.o(i.csc_calloc)
+    csc_calloc                               0x0800b63f   Thumb Code    24  cs.o(i.csc_calloc)
+    i.csc_cumsum                             0x0800b656   Section        0  cs.o(i.csc_cumsum)
+    i.csc_done                               0x0800b6c0   Section        0  cs.o(i.csc_done)
+    i.csc_malloc                             0x0800b6f6   Section        0  cs.o(i.csc_malloc)
+    csc_malloc                               0x0800b6f7   Thumb Code    24  cs.o(i.csc_malloc)
+    i.csc_matrix                             0x0800b70e   Section        0  cs.o(i.csc_matrix)
+    i.csc_pinv                               0x0800b758   Section        0  cs.o(i.csc_pinv)
+    i.csc_spalloc                            0x0800b7a4   Section        0  cs.o(i.csc_spalloc)
+    i.csc_spfree                             0x0800b88a   Section        0  cs.o(i.csc_spfree)
+    i.csc_symperm                            0x0800b8b6   Section        0  cs.o(i.csc_symperm)
+    i.csc_to_triu                            0x0800bba8   Section        0  cs.o(i.csc_to_triu)
+    i.darray                                 0x0800bcd4   Section        0  allocation_nr.o(i.darray)
+    i.darray3                                0x0800bd6c   Section        0  allocation_nr.o(i.darray3)
+    i.find_last                              0x0800bed0   Section        0  profiler.o(i.find_last)
+    i.find_profiler_entry                    0x0800bee8   Section        0  profiler.o(i.find_profiler_entry)
+    i.float2strF                             0x0800bf04   Section        0  profiler.o(i.float2strF)
+    i.form_Ared                              0x0800bf5c   Section        0  polish.o(i.form_Ared)
+    form_Ared                                0x0800bf5d   Thumb Code  1058  polish.o(i.form_Ared)
+    i.form_KKT                               0x0800c37e   Section        0  kkt.o(i.form_KKT)
+    i.form_rhs_red                           0x0800c81e   Section        0  polish.o(i.form_rhs_red)
+    form_rhs_red                             0x0800c81f   Thumb Code   184  polish.o(i.form_rhs_red)
+    i.fputc                                  0x0800c8d6   Section        0  fputc.o(i.fputc)
+    i.free_linsys_solver_qdldl               0x0800c8e8   Section        0  qdldl_interface.o(i.free_linsys_solver_qdldl)
+    i.get_profiler                           0x0800c990   Section        0  profiler.o(i.get_profiler)
+    i.get_time                               0x0800c9ac   Section        0  main_mpc.o(i.get_time)
+    i.get_ypol_from_yred                     0x0800c9b4   Section        0  polish.o(i.get_ypol_from_yred)
+    get_ypol_from_yred                       0x0800c9b5   Thumb Code   216  polish.o(i.get_ypol_from_yred)
+    i.hardware_setup                         0x0800ca90   Section        0  main_mpc.o(i.hardware_setup)
+    i.has_solution                           0x0800cab8   Section        0  auxil.o(i.has_solution)
+    i.idle                                   0x0800cb0c   Section        0  main_mpc.o(i.idle)
+    i.init_archive_data                      0x0800cc54   Section        0  mpctools.o(i.init_archive_data)
+    i.init_current_control                   0x0800cd50   Section        0  mpctools.o(i.init_current_control)
+    i.init_linsys_solver                     0x0800cdc0   Section        0  lin_sys.o(i.init_linsys_solver)
+    i.init_linsys_solver_qdldl               0x0800ce0c   Section        0  qdldl_interface.o(i.init_linsys_solver_qdldl)
+    i.int_vec_set_scalar                     0x0800d11c   Section        0  lin_alg.o(i.int_vec_set_scalar)
+    i.internal_alloc                         0x0800d148   Section        0  mallocr.o(i.internal_alloc)
+    internal_alloc                           0x0800d149   Thumb Code    76  mallocr.o(i.internal_alloc)
+    i.is_dual_infeasible                     0x0800d198   Section        0  auxil.o(i.is_dual_infeasible)
+    i.is_primal_infeasible                   0x0800d3b0   Section        0  auxil.o(i.is_primal_infeasible)
+    i.iterative_refinement                   0x0800d524   Section        0  polish.o(i.iterative_refinement)
+    iterative_refinement                     0x0800d525   Thumb Code   308  polish.o(i.iterative_refinement)
+    i.last_control                           0x0800d658   Section        0  mpctools.o(i.last_control)
+    i.limit_scaling                          0x0800d664   Section        0  scaling.o(i.limit_scaling)
+    i.load_linsys_solver                     0x0800d748   Section        0  lin_sys.o(i.load_linsys_solver)
+    i.loop                                   0x0800d758   Section        0  main_mpc.o(i.loop)
+    i.low_lvl_main                           0x0800d864   Section        0  main_1.o(i.low_lvl_main)
+    i.main                                   0x0800d8d4   Section        0  main.o(i.main)
+    i.main_interrupt                         0x0800d8d8   Section        0  main.o(i.main_interrupt)
+    i.mat_inf_norm_cols                      0x0800d910   Section        0  lin_alg.o(i.mat_inf_norm_cols)
+    i.mat_inf_norm_cols_sym_triu             0x0800d9c4   Section        0  lin_alg.o(i.mat_inf_norm_cols_sym_triu)
+    i.mat_inf_norm_rows                      0x0800dac4   Section        0  lin_alg.o(i.mat_inf_norm_rows)
+    i.mat_mult_scalar                        0x0800db9c   Section        0  lin_alg.o(i.mat_mult_scalar)
+    i.mat_postmult_diag                      0x0800dbda   Section        0  lin_alg.o(i.mat_postmult_diag)
+    i.mat_premult_diag                       0x0800dc44   Section        0  lin_alg.o(i.mat_premult_diag)
+    i.mat_tpose_vec                          0x0800dcb4   Section        0  lin_alg.o(i.mat_tpose_vec)
+    i.mat_vec                                0x0800df9c   Section        0  lin_alg.o(i.mat_vec)
+    i.measurements                           0x0800e12c   Section        0  main_mpc.o(i.measurements)
+    i.new_control                            0x0800e160   Section        0  mpctools.o(i.new_control)
+    i.new_control_increment                  0x0800e202   Section        0  mpctools.o(i.new_control_increment)
+    i.new_output                             0x0800e2a2   Section        0  mpctools.o(i.new_output)
+    i.osqp_cleanup                           0x0800e2f8   Section        0  osqp.o(i.osqp_cleanup)
+    i.osqp_set_default_settings              0x0800e544   Section        0  osqp.o(i.osqp_set_default_settings)
+    i.osqp_setup                             0x0800e5e4   Section        0  osqp.o(i.osqp_setup)
+    i.osqp_solve                             0x0800e99e   Section        0  osqp.o(i.osqp_solve)
+    i.osqp_update_bounds                     0x0800ebf2   Section        0  osqp.o(i.osqp_update_bounds)
+    i.osqp_update_lin_cost                   0x0800ecb2   Section        0  osqp.o(i.osqp_update_lin_cost)
+    i.osqp_update_rho                        0x0800ed18   Section        0  osqp.o(i.osqp_update_rho)
+    i.permute_KKT                            0x0800eefc   Section        0  qdldl_interface.o(i.permute_KKT)
+    permute_KKT                              0x0800eefd   Thumb Code   362  qdldl_interface.o(i.permute_KKT)
+    i.permute_x                              0x0800f066   Section        0  qdldl_interface.o(i.permute_x)
+    i.permutet_x                             0x0800f0a0   Section        0  qdldl_interface.o(i.permutet_x)
+    i.polish                                 0x0800f0d8   Section        0  polish.o(i.polish)
+    i.prea_int_vec_copy                      0x0800f338   Section        0  lin_alg.o(i.prea_int_vec_copy)
+    i.prea_vec_copy                          0x0800f36a   Section        0  lin_alg.o(i.prea_vec_copy)
+    i.productab                              0x0800f39c   Section        0  matrix_cal.o(i.productab)
+    i.profiler_end                           0x0800f40c   Section        0  profiler.o(i.profiler_end)
+    i.profiler_exists                        0x0800f468   Section        0  profiler.o(i.profiler_exists)
+    i.profiler_print                         0x0800f47c   Section        0  profiler.o(i.profiler_print)
+    i.profiler_start                         0x0800f6a0   Section        0  profiler.o(i.profiler_start)
+    i.project                                0x0800f6c2   Section        0  proj.o(i.project)
+    i.project_normalcone                     0x0800f71a   Section        0  proj.o(i.project_normalcone)
+    i.push_current_controls_to_archive_data  0x0800f7b2   Section        0  mpctools.o(i.push_current_controls_to_archive_data)
+    i.quad_form                              0x0800f7d0   Section        0  lin_alg.o(i.quad_form)
+    i.realloc                                0x0800f8cc   Section        0  mallocr.o(i.realloc)
+    i.reset_info                             0x0800f938   Section        0  auxil.o(i.reset_info)
+    i.scale_data                             0x0800f950   Section        0  scaling.o(i.scale_data)
+    i.set_current_control_increment          0x0800fbc4   Section        0  mpctools.o(i.set_current_control_increment)
+    i.set_rho_vec                            0x0800fbcc   Section        0  auxil.o(i.set_rho_vec)
+    i.solve_linsys_qdldl                     0x0800fdfc   Section        0  qdldl_interface.o(i.solve_linsys_qdldl)
+    i.store_solution                         0x0800fe20   Section        0  auxil.o(i.store_solution)
+    i.sumaa                                  0x0800ff84   Section        0  matrix_cal.o(i.sumaa)
+    i.swap_vectors                           0x08010016   Section        0  auxil.o(i.swap_vectors)
+    i.timer_loop                             0x08010020   Section        0  main.o(i.timer_loop)
+    i.triplet_to_csc                         0x08010038   Section        0  cs.o(i.triplet_to_csc)
+    i.triplet_to_csr                         0x080101b2   Section        0  cs.o(i.triplet_to_csr)
+    i.unload_linsys_solver                   0x0801032c   Section        0  lin_sys.o(i.unload_linsys_solver)
+    i.unscale_solution                       0x0801033c   Section        0  scaling.o(i.unscale_solution)
+    i.update_KKT_A                           0x0801038e   Section        0  kkt.o(i.update_KKT_A)
+    i.update_KKT_P                           0x080103ce   Section        0  kkt.o(i.update_KKT_P)
+    i.update_KKT_param2                      0x08010466   Section        0  kkt.o(i.update_KKT_param2)
+    i.update_info                            0x080104ac   Section        0  auxil.o(i.update_info)
+    i.update_linsys_solver_matrices_qdldl    0x08010564   Section        0  qdldl_interface.o(i.update_linsys_solver_matrices_qdldl)
+    i.update_linsys_solver_rho_vec_qdldl     0x080105f4   Section        0  qdldl_interface.o(i.update_linsys_solver_rho_vec_qdldl)
+    i.update_rho_vec                         0x080106c0   Section        0  auxil.o(i.update_rho_vec)
+    i.update_status                          0x080108fc   Section        0  auxil.o(i.update_status)
+    i.update_x                               0x08010ac0   Section        0  auxil.o(i.update_x)
+    i.update_xz_tilde                        0x08010b54   Section        0  auxil.o(i.update_xz_tilde)
+    i.update_y                               0x08010b70   Section        0  auxil.o(i.update_y)
+    i.update_z                               0x08010c10   Section        0  auxil.o(i.update_z)
+    i.update_z_tilde                         0x08010c92   Section        0  auxil.o(i.update_z_tilde)
+    update_z_tilde                           0x08010c93   Thumb Code   104  auxil.o(i.update_z_tilde)
+    i.validate_data                          0x08010cfa   Section        0  auxil.o(i.validate_data)
+    i.validate_linsys_solver                 0x08010dc6   Section        0  auxil.o(i.validate_linsys_solver)
+    i.validate_settings                      0x08010dee   Section        0  auxil.o(i.validate_settings)
+    i.vec_add_scaled                         0x08010fd6   Section        0  lin_alg.o(i.vec_add_scaled)
+    i.vec_copy                               0x0801101a   Section        0  lin_alg.o(i.vec_copy)
+    i.vec_ew_max_vec                         0x0801105c   Section        0  lin_alg.o(i.vec_ew_max_vec)
+    i.vec_ew_prod                            0x080110a0   Section        0  lin_alg.o(i.vec_ew_prod)
+    i.vec_ew_recipr                          0x080110e4   Section        0  lin_alg.o(i.vec_ew_recipr)
+    i.vec_ew_sqrt                            0x0801111e   Section        0  lin_alg.o(i.vec_ew_sqrt)
+    i.vec_mean                               0x0801115c   Section        0  lin_alg.o(i.vec_mean)
+    i.vec_mult_scalar                        0x080111bc   Section        0  lin_alg.o(i.vec_mult_scalar)
+    i.vec_norm_inf                           0x080111ec   Section        0  lin_alg.o(i.vec_norm_inf)
+    i.vec_prod                               0x08011250   Section        0  lin_alg.o(i.vec_prod)
+    i.vec_scaled_norm_inf                    0x0801129c   Section        0  lin_alg.o(i.vec_scaled_norm_inf)
+    i.vec_set_scalar                         0x08011324   Section        0  lin_alg.o(i.vec_set_scalar)
+    i.write_string                           0x08011348   Section        0  main_1.o(i.write_string)
+    i.writemessage                           0x08011384   Section        0  allocation_nr.o(i.writemessage)
+    .constdata                               0x080113a0   Section        8  stm32f7xx_hal_dma.o(.constdata)
+    flagBitshiftOffset                       0x080113a0   Data           8  stm32f7xx_hal_dma.o(.constdata)
+    .constdata                               0x080113a8   Section       24  system_stm32f7xx.o(.constdata)
+    .conststring                             0x080113c0   Section       20  main_mpc.o(.conststring)
     .data                                    0x20000000   Section        4  main.o(.data)
     .data                                    0x20000004   Section        4  profiler.o(.data)
     it                                       0x20000004   Data           4  profiler.o(.data)
@@ -3337,122 +3336,123 @@ Image Symbol Table
     controller_setup                         0x0800b3f5   Thumb Code    62  main_mpc.o(i.controller_setup)
     controls                                 0x0800b455   Thumb Code    30  main_mpc.o(i.controls)
     copy_csc_mat                             0x0800b491   Thumb Code   132  cs.o(i.copy_csc_mat)
-    copy_settings                            0x0800b515   Thumb Code    26  util.o(i.copy_settings)
-    create_profiler                          0x0800b56b   Thumb Code    32  profiler.o(i.create_profiler)
-    csc_cumsum                               0x0800b5b9   Thumb Code   106  cs.o(i.csc_cumsum)
-    csc_done                                 0x0800b623   Thumb Code    54  cs.o(i.csc_done)
-    csc_matrix                               0x0800b671   Thumb Code    74  cs.o(i.csc_matrix)
-    csc_pinv                                 0x0800b6bb   Thumb Code    76  cs.o(i.csc_pinv)
-    csc_spalloc                              0x0800b707   Thumb Code   230  cs.o(i.csc_spalloc)
-    csc_spfree                               0x0800b7ed   Thumb Code    44  cs.o(i.csc_spfree)
-    csc_symperm                              0x0800b819   Thumb Code   754  cs.o(i.csc_symperm)
-    csc_to_triu                              0x0800bb0b   Thumb Code   298  cs.o(i.csc_to_triu)
-    darray                                   0x0800bc35   Thumb Code   136  allocation_nr.o(i.darray)
-    darray3                                  0x0800bccd   Thumb Code   340  allocation_nr.o(i.darray3)
-    find_last                                0x0800be31   Thumb Code    24  profiler.o(i.find_last)
-    find_profiler_entry                      0x0800be49   Thumb Code    28  profiler.o(i.find_profiler_entry)
-    float2strF                               0x0800be65   Thumb Code    72  profiler.o(i.float2strF)
-    form_KKT                                 0x0800c2df   Thumb Code  1184  kkt.o(i.form_KKT)
-    fputc                                    0x0800c837   Thumb Code    18  fputc.o(i.fputc)
-    free_linsys_solver_qdldl                 0x0800c849   Thumb Code   166  qdldl_interface.o(i.free_linsys_solver_qdldl)
-    get_profiler                             0x0800c8f1   Thumb Code    22  profiler.o(i.get_profiler)
-    get_time                                 0x0800c90d   Thumb Code     8  main_mpc.o(i.get_time)
-    hardware_setup                           0x0800c9f1   Thumb Code    22  main_mpc.o(i.hardware_setup)
-    idle                                     0x0800ca6d   Thumb Code   266  main_mpc.o(i.idle)
-    init_archive_data                        0x0800cbb5   Thumb Code   248  mpctools.o(i.init_archive_data)
-    init_current_control                     0x0800ccb1   Thumb Code   108  mpctools.o(i.init_current_control)
-    init_linsys_solver                       0x0800cd21   Thumb Code    76  lin_sys.o(i.init_linsys_solver)
-    init_linsys_solver_qdldl                 0x0800cd6d   Thumb Code   760  qdldl_interface.o(i.init_linsys_solver_qdldl)
-    int_vec_set_scalar                       0x0800d07d   Thumb Code    44  lin_alg.o(i.int_vec_set_scalar)
-    is_dual_infeasible                       0x0800d0f9   Thumb Code   518  auxil.o(i.is_dual_infeasible)
-    is_primal_infeasible                     0x0800d311   Thumb Code   368  auxil.o(i.is_primal_infeasible)
-    last_control                             0x0800d5b9   Thumb Code    12  mpctools.o(i.last_control)
-    limit_scaling                            0x0800d5c5   Thumb Code   204  scaling.o(i.limit_scaling)
-    load_linsys_solver                       0x0800d6a9   Thumb Code    16  lin_sys.o(i.load_linsys_solver)
-    loop                                     0x0800d6b9   Thumb Code   194  main_mpc.o(i.loop)
-    low_lvl_main                             0x0800d7c5   Thumb Code    96  main_1.o(i.low_lvl_main)
-    main                                     0x0800d835   Thumb Code     4  main.o(i.main)
-    main_interrupt                           0x0800d839   Thumb Code    52  main.o(i.main_interrupt)
-    mat_inf_norm_cols                        0x0800d871   Thumb Code   176  lin_alg.o(i.mat_inf_norm_cols)
-    mat_inf_norm_cols_sym_triu               0x0800d925   Thumb Code   252  lin_alg.o(i.mat_inf_norm_cols_sym_triu)
-    mat_inf_norm_rows                        0x0800da25   Thumb Code   210  lin_alg.o(i.mat_inf_norm_rows)
-    mat_mult_scalar                          0x0800dafd   Thumb Code    62  lin_alg.o(i.mat_mult_scalar)
-    mat_postmult_diag                        0x0800db3b   Thumb Code   106  lin_alg.o(i.mat_postmult_diag)
-    mat_premult_diag                         0x0800dba5   Thumb Code   112  lin_alg.o(i.mat_premult_diag)
-    mat_tpose_vec                            0x0800dc15   Thumb Code   740  lin_alg.o(i.mat_tpose_vec)
-    mat_vec                                  0x0800defd   Thumb Code   394  lin_alg.o(i.mat_vec)
-    measurements                             0x0800e08d   Thumb Code    32  main_mpc.o(i.measurements)
-    new_control                              0x0800e0c1   Thumb Code   162  mpctools.o(i.new_control)
-    new_control_increment                    0x0800e163   Thumb Code   160  mpctools.o(i.new_control_increment)
-    new_output                               0x0800e203   Thumb Code    86  mpctools.o(i.new_output)
-    osqp_cleanup                             0x0800e259   Thumb Code   586  osqp.o(i.osqp_cleanup)
-    osqp_set_default_settings                0x0800e4a5   Thumb Code   138  osqp.o(i.osqp_set_default_settings)
-    osqp_setup                               0x0800e545   Thumb Code   954  osqp.o(i.osqp_setup)
-    osqp_solve                               0x0800e8ff   Thumb Code   578  osqp.o(i.osqp_solve)
-    osqp_update_bounds                       0x0800eb41   Thumb Code   192  osqp.o(i.osqp_update_bounds)
-    osqp_update_lin_cost                     0x0800ec01   Thumb Code   102  osqp.o(i.osqp_update_lin_cost)
-    osqp_update_rho                          0x0800ec69   Thumb Code   450  osqp.o(i.osqp_update_rho)
-    permute_x                                0x0800efb7   Thumb Code    58  qdldl_interface.o(i.permute_x)
-    permutet_x                               0x0800eff1   Thumb Code    56  qdldl_interface.o(i.permutet_x)
-    polish                                   0x0800f029   Thumb Code   600  polish.o(i.polish)
-    prea_int_vec_copy                        0x0800f289   Thumb Code    50  lin_alg.o(i.prea_int_vec_copy)
-    prea_vec_copy                            0x0800f2bb   Thumb Code    50  lin_alg.o(i.prea_vec_copy)
-    productab                                0x0800f2ed   Thumb Code   108  matrix_cal.o(i.productab)
-    profiler_end                             0x0800f35d   Thumb Code    92  profiler.o(i.profiler_end)
-    profiler_exists                          0x0800f3b9   Thumb Code    14  profiler.o(i.profiler_exists)
-    profiler_print                           0x0800f3cd   Thumb Code   274  profiler.o(i.profiler_print)
-    profiler_start                           0x0800f5f1   Thumb Code    34  profiler.o(i.profiler_start)
-    project                                  0x0800f613   Thumb Code    88  proj.o(i.project)
-    project_normalcone                       0x0800f66b   Thumb Code   152  proj.o(i.project_normalcone)
-    push_current_controls_to_archive_data    0x0800f703   Thumb Code    30  mpctools.o(i.push_current_controls_to_archive_data)
-    quad_form                                0x0800f721   Thumb Code   246  lin_alg.o(i.quad_form)
-    realloc                                  0x0800f81d   Thumb Code   102  mallocr.o(i.realloc)
-    reset_info                               0x0800f889   Thumb Code    24  auxil.o(i.reset_info)
-    scale_data                               0x0800f8a1   Thumb Code   620  scaling.o(i.scale_data)
-    set_current_control_increment            0x0800fb15   Thumb Code     8  mpctools.o(i.set_current_control_increment)
-    set_rho_vec                              0x0800fb1d   Thumb Code   500  auxil.o(i.set_rho_vec)
-    solve_linsys_qdldl                       0x0800fd4d   Thumb Code    34  qdldl_interface.o(i.solve_linsys_qdldl)
-    store_solution                           0x0800fd71   Thumb Code   344  auxil.o(i.store_solution)
-    sumaa                                    0x0800fed5   Thumb Code   146  matrix_cal.o(i.sumaa)
-    swap_vectors                             0x0800ff67   Thumb Code    10  auxil.o(i.swap_vectors)
-    timer_loop                               0x0800ff71   Thumb Code    20  main.o(i.timer_loop)
-    triplet_to_csc                           0x0800ff89   Thumb Code   378  cs.o(i.triplet_to_csc)
-    triplet_to_csr                           0x08010103   Thumb Code   378  cs.o(i.triplet_to_csr)
-    unload_linsys_solver                     0x0801027d   Thumb Code    16  lin_sys.o(i.unload_linsys_solver)
-    unscale_solution                         0x0801028d   Thumb Code    82  scaling.o(i.unscale_solution)
-    update_KKT_A                             0x080102df   Thumb Code    64  kkt.o(i.update_KKT_A)
-    update_KKT_P                             0x0801031f   Thumb Code   152  kkt.o(i.update_KKT_P)
-    update_KKT_param2                        0x080103b7   Thumb Code    68  kkt.o(i.update_KKT_param2)
-    update_info                              0x080103fd   Thumb Code   180  auxil.o(i.update_info)
-    update_linsys_solver_matrices_qdldl      0x080104b5   Thumb Code   142  qdldl_interface.o(i.update_linsys_solver_matrices_qdldl)
-    update_linsys_solver_rho_vec_qdldl       0x08010545   Thumb Code   196  qdldl_interface.o(i.update_linsys_solver_rho_vec_qdldl)
-    update_rho_vec                           0x08010611   Thumb Code   522  auxil.o(i.update_rho_vec)
-    update_status                            0x0801084d   Thumb Code   254  auxil.o(i.update_status)
-    update_x                                 0x08010a11   Thumb Code   148  auxil.o(i.update_x)
-    update_xz_tilde                          0x08010aa5   Thumb Code    28  auxil.o(i.update_xz_tilde)
-    update_y                                 0x08010ac1   Thumb Code   160  auxil.o(i.update_y)
-    update_z                                 0x08010b61   Thumb Code   130  auxil.o(i.update_z)
-    validate_data                            0x08010c4b   Thumb Code   204  auxil.o(i.validate_data)
-    validate_linsys_solver                   0x08010d17   Thumb Code    40  auxil.o(i.validate_linsys_solver)
-    validate_settings                        0x08010d3f   Thumb Code   488  auxil.o(i.validate_settings)
-    vec_add_scaled                           0x08010f27   Thumb Code    68  lin_alg.o(i.vec_add_scaled)
-    vec_copy                                 0x08010f6b   Thumb Code    66  lin_alg.o(i.vec_copy)
-    vec_ew_max_vec                           0x08010fad   Thumb Code    68  lin_alg.o(i.vec_ew_max_vec)
-    vec_ew_prod                              0x08010ff1   Thumb Code    68  lin_alg.o(i.vec_ew_prod)
-    vec_ew_recipr                            0x08011035   Thumb Code    58  lin_alg.o(i.vec_ew_recipr)
-    vec_ew_sqrt                              0x0801106f   Thumb Code    60  lin_alg.o(i.vec_ew_sqrt)
-    vec_mean                                 0x080110ad   Thumb Code    92  lin_alg.o(i.vec_mean)
-    vec_mult_scalar                          0x0801110d   Thumb Code    48  lin_alg.o(i.vec_mult_scalar)
-    vec_norm_inf                             0x0801113d   Thumb Code    94  lin_alg.o(i.vec_norm_inf)
-    vec_prod                                 0x080111a1   Thumb Code    70  lin_alg.o(i.vec_prod)
-    vec_scaled_norm_inf                      0x080111ed   Thumb Code   132  lin_alg.o(i.vec_scaled_norm_inf)
-    vec_set_scalar                           0x08011275   Thumb Code    36  lin_alg.o(i.vec_set_scalar)
-    write_string                             0x08011299   Thumb Code    54  main_1.o(i.write_string)
-    writemessage                             0x080112d5   Thumb Code    24  allocation_nr.o(i.writemessage)
-    AHBPrescTable                            0x080112f8   Data          16  system_stm32f7xx.o(.constdata)
-    APBPrescTable                            0x08011308   Data           8  system_stm32f7xx.o(.constdata)
-    Region$$Table$$Base                      0x08011324   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08011344   Number         0  anon$$obj.o(Region$$Table)
+    copy_settings                            0x0800b515   Thumb Code   184  util.o(i.copy_settings)
+    create_profiler                          0x0800b609   Thumb Code    32  profiler.o(i.create_profiler)
+    csc_cumsum                               0x0800b657   Thumb Code   106  cs.o(i.csc_cumsum)
+    csc_done                                 0x0800b6c1   Thumb Code    54  cs.o(i.csc_done)
+    csc_matrix                               0x0800b70f   Thumb Code    74  cs.o(i.csc_matrix)
+    csc_pinv                                 0x0800b759   Thumb Code    76  cs.o(i.csc_pinv)
+    csc_spalloc                              0x0800b7a5   Thumb Code   230  cs.o(i.csc_spalloc)
+    csc_spfree                               0x0800b88b   Thumb Code    44  cs.o(i.csc_spfree)
+    csc_symperm                              0x0800b8b7   Thumb Code   754  cs.o(i.csc_symperm)
+    csc_to_triu                              0x0800bba9   Thumb Code   298  cs.o(i.csc_to_triu)
+    darray                                   0x0800bcd5   Thumb Code   136  allocation_nr.o(i.darray)
+    darray3                                  0x0800bd6d   Thumb Code   340  allocation_nr.o(i.darray3)
+    find_last                                0x0800bed1   Thumb Code    24  profiler.o(i.find_last)
+    find_profiler_entry                      0x0800bee9   Thumb Code    28  profiler.o(i.find_profiler_entry)
+    float2strF                               0x0800bf05   Thumb Code    72  profiler.o(i.float2strF)
+    form_KKT                                 0x0800c37f   Thumb Code  1184  kkt.o(i.form_KKT)
+    fputc                                    0x0800c8d7   Thumb Code    18  fputc.o(i.fputc)
+    free_linsys_solver_qdldl                 0x0800c8e9   Thumb Code   166  qdldl_interface.o(i.free_linsys_solver_qdldl)
+    get_profiler                             0x0800c991   Thumb Code    22  profiler.o(i.get_profiler)
+    get_time                                 0x0800c9ad   Thumb Code     8  main_mpc.o(i.get_time)
+    hardware_setup                           0x0800ca91   Thumb Code    22  main_mpc.o(i.hardware_setup)
+    has_solution                             0x0800cab9   Thumb Code    84  auxil.o(i.has_solution)
+    idle                                     0x0800cb0d   Thumb Code   268  main_mpc.o(i.idle)
+    init_archive_data                        0x0800cc55   Thumb Code   248  mpctools.o(i.init_archive_data)
+    init_current_control                     0x0800cd51   Thumb Code   108  mpctools.o(i.init_current_control)
+    init_linsys_solver                       0x0800cdc1   Thumb Code    76  lin_sys.o(i.init_linsys_solver)
+    init_linsys_solver_qdldl                 0x0800ce0d   Thumb Code   760  qdldl_interface.o(i.init_linsys_solver_qdldl)
+    int_vec_set_scalar                       0x0800d11d   Thumb Code    44  lin_alg.o(i.int_vec_set_scalar)
+    is_dual_infeasible                       0x0800d199   Thumb Code   518  auxil.o(i.is_dual_infeasible)
+    is_primal_infeasible                     0x0800d3b1   Thumb Code   368  auxil.o(i.is_primal_infeasible)
+    last_control                             0x0800d659   Thumb Code    12  mpctools.o(i.last_control)
+    limit_scaling                            0x0800d665   Thumb Code   204  scaling.o(i.limit_scaling)
+    load_linsys_solver                       0x0800d749   Thumb Code    16  lin_sys.o(i.load_linsys_solver)
+    loop                                     0x0800d759   Thumb Code   194  main_mpc.o(i.loop)
+    low_lvl_main                             0x0800d865   Thumb Code    96  main_1.o(i.low_lvl_main)
+    main                                     0x0800d8d5   Thumb Code     4  main.o(i.main)
+    main_interrupt                           0x0800d8d9   Thumb Code    52  main.o(i.main_interrupt)
+    mat_inf_norm_cols                        0x0800d911   Thumb Code   176  lin_alg.o(i.mat_inf_norm_cols)
+    mat_inf_norm_cols_sym_triu               0x0800d9c5   Thumb Code   252  lin_alg.o(i.mat_inf_norm_cols_sym_triu)
+    mat_inf_norm_rows                        0x0800dac5   Thumb Code   210  lin_alg.o(i.mat_inf_norm_rows)
+    mat_mult_scalar                          0x0800db9d   Thumb Code    62  lin_alg.o(i.mat_mult_scalar)
+    mat_postmult_diag                        0x0800dbdb   Thumb Code   106  lin_alg.o(i.mat_postmult_diag)
+    mat_premult_diag                         0x0800dc45   Thumb Code   112  lin_alg.o(i.mat_premult_diag)
+    mat_tpose_vec                            0x0800dcb5   Thumb Code   740  lin_alg.o(i.mat_tpose_vec)
+    mat_vec                                  0x0800df9d   Thumb Code   394  lin_alg.o(i.mat_vec)
+    measurements                             0x0800e12d   Thumb Code    32  main_mpc.o(i.measurements)
+    new_control                              0x0800e161   Thumb Code   162  mpctools.o(i.new_control)
+    new_control_increment                    0x0800e203   Thumb Code   160  mpctools.o(i.new_control_increment)
+    new_output                               0x0800e2a3   Thumb Code    86  mpctools.o(i.new_output)
+    osqp_cleanup                             0x0800e2f9   Thumb Code   586  osqp.o(i.osqp_cleanup)
+    osqp_set_default_settings                0x0800e545   Thumb Code   138  osqp.o(i.osqp_set_default_settings)
+    osqp_setup                               0x0800e5e5   Thumb Code   954  osqp.o(i.osqp_setup)
+    osqp_solve                               0x0800e99f   Thumb Code   596  osqp.o(i.osqp_solve)
+    osqp_update_bounds                       0x0800ebf3   Thumb Code   192  osqp.o(i.osqp_update_bounds)
+    osqp_update_lin_cost                     0x0800ecb3   Thumb Code   102  osqp.o(i.osqp_update_lin_cost)
+    osqp_update_rho                          0x0800ed19   Thumb Code   450  osqp.o(i.osqp_update_rho)
+    permute_x                                0x0800f067   Thumb Code    58  qdldl_interface.o(i.permute_x)
+    permutet_x                               0x0800f0a1   Thumb Code    56  qdldl_interface.o(i.permutet_x)
+    polish                                   0x0800f0d9   Thumb Code   600  polish.o(i.polish)
+    prea_int_vec_copy                        0x0800f339   Thumb Code    50  lin_alg.o(i.prea_int_vec_copy)
+    prea_vec_copy                            0x0800f36b   Thumb Code    50  lin_alg.o(i.prea_vec_copy)
+    productab                                0x0800f39d   Thumb Code   108  matrix_cal.o(i.productab)
+    profiler_end                             0x0800f40d   Thumb Code    92  profiler.o(i.profiler_end)
+    profiler_exists                          0x0800f469   Thumb Code    14  profiler.o(i.profiler_exists)
+    profiler_print                           0x0800f47d   Thumb Code   274  profiler.o(i.profiler_print)
+    profiler_start                           0x0800f6a1   Thumb Code    34  profiler.o(i.profiler_start)
+    project                                  0x0800f6c3   Thumb Code    88  proj.o(i.project)
+    project_normalcone                       0x0800f71b   Thumb Code   152  proj.o(i.project_normalcone)
+    push_current_controls_to_archive_data    0x0800f7b3   Thumb Code    30  mpctools.o(i.push_current_controls_to_archive_data)
+    quad_form                                0x0800f7d1   Thumb Code   246  lin_alg.o(i.quad_form)
+    realloc                                  0x0800f8cd   Thumb Code   102  mallocr.o(i.realloc)
+    reset_info                               0x0800f939   Thumb Code    24  auxil.o(i.reset_info)
+    scale_data                               0x0800f951   Thumb Code   620  scaling.o(i.scale_data)
+    set_current_control_increment            0x0800fbc5   Thumb Code     8  mpctools.o(i.set_current_control_increment)
+    set_rho_vec                              0x0800fbcd   Thumb Code   500  auxil.o(i.set_rho_vec)
+    solve_linsys_qdldl                       0x0800fdfd   Thumb Code    34  qdldl_interface.o(i.solve_linsys_qdldl)
+    store_solution                           0x0800fe21   Thumb Code   344  auxil.o(i.store_solution)
+    sumaa                                    0x0800ff85   Thumb Code   146  matrix_cal.o(i.sumaa)
+    swap_vectors                             0x08010017   Thumb Code    10  auxil.o(i.swap_vectors)
+    timer_loop                               0x08010021   Thumb Code    20  main.o(i.timer_loop)
+    triplet_to_csc                           0x08010039   Thumb Code   378  cs.o(i.triplet_to_csc)
+    triplet_to_csr                           0x080101b3   Thumb Code   378  cs.o(i.triplet_to_csr)
+    unload_linsys_solver                     0x0801032d   Thumb Code    16  lin_sys.o(i.unload_linsys_solver)
+    unscale_solution                         0x0801033d   Thumb Code    82  scaling.o(i.unscale_solution)
+    update_KKT_A                             0x0801038f   Thumb Code    64  kkt.o(i.update_KKT_A)
+    update_KKT_P                             0x080103cf   Thumb Code   152  kkt.o(i.update_KKT_P)
+    update_KKT_param2                        0x08010467   Thumb Code    68  kkt.o(i.update_KKT_param2)
+    update_info                              0x080104ad   Thumb Code   180  auxil.o(i.update_info)
+    update_linsys_solver_matrices_qdldl      0x08010565   Thumb Code   142  qdldl_interface.o(i.update_linsys_solver_matrices_qdldl)
+    update_linsys_solver_rho_vec_qdldl       0x080105f5   Thumb Code   196  qdldl_interface.o(i.update_linsys_solver_rho_vec_qdldl)
+    update_rho_vec                           0x080106c1   Thumb Code   522  auxil.o(i.update_rho_vec)
+    update_status                            0x080108fd   Thumb Code   254  auxil.o(i.update_status)
+    update_x                                 0x08010ac1   Thumb Code   148  auxil.o(i.update_x)
+    update_xz_tilde                          0x08010b55   Thumb Code    28  auxil.o(i.update_xz_tilde)
+    update_y                                 0x08010b71   Thumb Code   160  auxil.o(i.update_y)
+    update_z                                 0x08010c11   Thumb Code   130  auxil.o(i.update_z)
+    validate_data                            0x08010cfb   Thumb Code   204  auxil.o(i.validate_data)
+    validate_linsys_solver                   0x08010dc7   Thumb Code    40  auxil.o(i.validate_linsys_solver)
+    validate_settings                        0x08010def   Thumb Code   488  auxil.o(i.validate_settings)
+    vec_add_scaled                           0x08010fd7   Thumb Code    68  lin_alg.o(i.vec_add_scaled)
+    vec_copy                                 0x0801101b   Thumb Code    66  lin_alg.o(i.vec_copy)
+    vec_ew_max_vec                           0x0801105d   Thumb Code    68  lin_alg.o(i.vec_ew_max_vec)
+    vec_ew_prod                              0x080110a1   Thumb Code    68  lin_alg.o(i.vec_ew_prod)
+    vec_ew_recipr                            0x080110e5   Thumb Code    58  lin_alg.o(i.vec_ew_recipr)
+    vec_ew_sqrt                              0x0801111f   Thumb Code    60  lin_alg.o(i.vec_ew_sqrt)
+    vec_mean                                 0x0801115d   Thumb Code    92  lin_alg.o(i.vec_mean)
+    vec_mult_scalar                          0x080111bd   Thumb Code    48  lin_alg.o(i.vec_mult_scalar)
+    vec_norm_inf                             0x080111ed   Thumb Code    94  lin_alg.o(i.vec_norm_inf)
+    vec_prod                                 0x08011251   Thumb Code    70  lin_alg.o(i.vec_prod)
+    vec_scaled_norm_inf                      0x0801129d   Thumb Code   132  lin_alg.o(i.vec_scaled_norm_inf)
+    vec_set_scalar                           0x08011325   Thumb Code    36  lin_alg.o(i.vec_set_scalar)
+    write_string                             0x08011349   Thumb Code    54  main_1.o(i.write_string)
+    writemessage                             0x08011385   Thumb Code    24  allocation_nr.o(i.writemessage)
+    AHBPrescTable                            0x080113a8   Data          16  system_stm32f7xx.o(.constdata)
+    APBPrescTable                            0x080113b8   Data           8  system_stm32f7xx.o(.constdata)
+    Region$$Table$$Base                      0x080113d4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080113f4   Number         0  anon$$obj.o(Region$$Table)
     ready                                    0x20000000   Data           4  main.o(.data)
     adc_val_f                                0x200000a4   Data           8  main_1.o(.data)
     v                                        0x200000ac   Data           8  main_1.o(.data)
@@ -3487,51 +3487,51 @@ Memory Map of the image
 
   Image Entry point : 0x080001c9
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00011440, Max: 0x00100000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000114f0, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00011344, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x000113f4, Max: 0x00100000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x000001c8   Data   RO            3    RESET               startup_stm32f746xx.o
-    0x080001c8   0x00000000   Code   RO         6162  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x080001c8   0x00000004   Code   RO         6486    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x080001cc   0x00000004   Code   RO         6489    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080001d0   0x00000000   Code   RO         6491    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080001d0   0x00000000   Code   RO         6493    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080001d0   0x00000008   Code   RO         6494    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080001d8   0x00000000   Code   RO         6496    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x080001d8   0x00000000   Code   RO         6498    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x080001d8   0x00000004   Code   RO         6487    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x080001c8   0x00000000   Code   RO         6163  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x080001c8   0x00000004   Code   RO         6487    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x080001cc   0x00000004   Code   RO         6490    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080001d0   0x00000000   Code   RO         6492    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080001d0   0x00000000   Code   RO         6494    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080001d0   0x00000008   Code   RO         6495    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080001d8   0x00000000   Code   RO         6497    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x080001d8   0x00000000   Code   RO         6499    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x080001d8   0x00000004   Code   RO         6488    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x080001dc   0x00000024   Code   RO            4    .text               startup_stm32f746xx.o
-    0x08000200   0x00000062   Code   RO         6165    .text               mc_w.l(uldiv.o)
-    0x08000262   0x00000062   Code   RO         6167    .text               mc_w.l(ldiv.o)
-    0x080002c4   0x00000024   Code   RO         6169    .text               mc_w.l(memcpya.o)
-    0x080002e8   0x00000024   Code   RO         6171    .text               mc_w.l(memseta.o)
-    0x0800030c   0x0000000e   Code   RO         6173    .text               mc_w.l(strlen.o)
-    0x0800031a   0x0000001c   Code   RO         6466    .text               mc_w.l(calloc.o)
-    0x08000336   0x0000014e   Code   RO         6468    .text               mf_w.l(dadd.o)
-    0x08000484   0x000000e4   Code   RO         6470    .text               mf_w.l(dmul.o)
-    0x08000568   0x000000de   Code   RO         6472    .text               mf_w.l(ddiv.o)
-    0x08000646   0x0000002c   Code   RO         6474    .text               mf_w.l(ffltl.o)
-    0x08000672   0x0000004a   Code   RO         6476    .text               mf_w.l(dfixl.o)
-    0x080006bc   0x00000026   Code   RO         6478    .text               mf_w.l(f2d.o)
+    0x08000200   0x00000062   Code   RO         6166    .text               mc_w.l(uldiv.o)
+    0x08000262   0x00000062   Code   RO         6168    .text               mc_w.l(ldiv.o)
+    0x080002c4   0x00000024   Code   RO         6170    .text               mc_w.l(memcpya.o)
+    0x080002e8   0x00000024   Code   RO         6172    .text               mc_w.l(memseta.o)
+    0x0800030c   0x0000000e   Code   RO         6174    .text               mc_w.l(strlen.o)
+    0x0800031a   0x0000001c   Code   RO         6467    .text               mc_w.l(calloc.o)
+    0x08000336   0x0000014e   Code   RO         6469    .text               mf_w.l(dadd.o)
+    0x08000484   0x000000e4   Code   RO         6471    .text               mf_w.l(dmul.o)
+    0x08000568   0x000000de   Code   RO         6473    .text               mf_w.l(ddiv.o)
+    0x08000646   0x0000002c   Code   RO         6475    .text               mf_w.l(ffltl.o)
+    0x08000672   0x0000004a   Code   RO         6477    .text               mf_w.l(dfixl.o)
+    0x080006bc   0x00000026   Code   RO         6479    .text               mf_w.l(f2d.o)
     0x080006e2   0x00000002   PAD
-    0x080006e4   0x00000030   Code   RO         6480    .text               mf_w.l(cdcmple.o)
-    0x08000714   0x00000030   Code   RO         6482    .text               mf_w.l(cdrcmple.o)
-    0x08000744   0x00000038   Code   RO         6484    .text               mf_w.l(d2f.o)
-    0x0800077c   0x0000002c   Code   RO         6503    .text               mc_w.l(uidiv.o)
-    0x080007a8   0x0000001e   Code   RO         6505    .text               mc_w.l(llshl.o)
-    0x080007c6   0x00000020   Code   RO         6507    .text               mc_w.l(llushr.o)
-    0x080007e6   0x00000024   Code   RO         6509    .text               mc_w.l(llsshr.o)
-    0x0800080a   0x00000000   Code   RO         6520    .text               mc_w.l(iusefp.o)
-    0x0800080a   0x0000006e   Code   RO         6521    .text               mf_w.l(fepilogue.o)
-    0x08000878   0x000000ba   Code   RO         6523    .text               mf_w.l(depilogue.o)
-    0x08000932   0x000000a2   Code   RO         6525    .text               mf_w.l(dsqrt.o)
-    0x080009d4   0x00000030   Code   RO         6527    .text               mf_w.l(dfixul.o)
-    0x08000a04   0x00000024   Code   RO         6529    .text               mc_w.l(init.o)
-    0x08000a28   0x00000000   Code   RO         6531    .text               mc_w.l(semi.o)
-    0x08000a28   0x00000000   Code   RO         6532    .text               mc_w.l(iusesemip.o)
+    0x080006e4   0x00000030   Code   RO         6481    .text               mf_w.l(cdcmple.o)
+    0x08000714   0x00000030   Code   RO         6483    .text               mf_w.l(cdrcmple.o)
+    0x08000744   0x00000038   Code   RO         6485    .text               mf_w.l(d2f.o)
+    0x0800077c   0x0000002c   Code   RO         6504    .text               mc_w.l(uidiv.o)
+    0x080007a8   0x0000001e   Code   RO         6506    .text               mc_w.l(llshl.o)
+    0x080007c6   0x00000020   Code   RO         6508    .text               mc_w.l(llushr.o)
+    0x080007e6   0x00000024   Code   RO         6510    .text               mc_w.l(llsshr.o)
+    0x0800080a   0x00000000   Code   RO         6521    .text               mc_w.l(iusefp.o)
+    0x0800080a   0x0000006e   Code   RO         6522    .text               mf_w.l(fepilogue.o)
+    0x08000878   0x000000ba   Code   RO         6524    .text               mf_w.l(depilogue.o)
+    0x08000932   0x000000a2   Code   RO         6526    .text               mf_w.l(dsqrt.o)
+    0x080009d4   0x00000030   Code   RO         6528    .text               mf_w.l(dfixul.o)
+    0x08000a04   0x00000024   Code   RO         6530    .text               mc_w.l(init.o)
+    0x08000a28   0x00000000   Code   RO         6532    .text               mc_w.l(semi.o)
+    0x08000a28   0x00000000   Code   RO         6533    .text               mc_w.l(iusesemip.o)
     0x08000a28   0x0000007e   Code   RO         1269    i.ADC_DMAConvCplt   stm32f7xx_hal_adc.o
     0x08000aa6   0x0000001a   Code   RO         1270    i.ADC_DMAError      stm32f7xx_hal_adc.o
     0x08000ac0   0x0000000e   Code   RO         1271    i.ADC_DMAHalfConvCplt  stm32f7xx_hal_adc.o
@@ -3612,8 +3612,8 @@ Memory Map of the image
     0x08003484   0x00000078   Code   RO         3008    i.HAL_UART_Transmit_IT  stm32f7xx_hal_uart.o
     0x080034fc   0x00000002   Code   RO         3009    i.HAL_UART_TxCpltCallback  stm32f7xx_hal_uart.o
     0x080034fe   0x00000004   Code   RO         1088    i.HardFault_Handler  stm32f7xx_it.o
-    0x08003502   0x0000004e   Code   RO         5803    i.LDLSolve          qdldl_interface.o
-    0x08003550   0x000000da   Code   RO         5804    i.LDL_factor        qdldl_interface.o
+    0x08003502   0x0000004e   Code   RO         5804    i.LDLSolve          qdldl_interface.o
+    0x08003550   0x000000da   Code   RO         5805    i.LDL_factor        qdldl_interface.o
     0x0800362a   0x00000002   PAD
     0x0800362c   0x0000008c   Code   RO          966    i.MX_ADC3_Init      main_1.o
     0x080036b8   0x0000004c   Code   RO          967    i.MX_DAC_Init       main_1.o
@@ -3626,18 +3626,18 @@ Memory Map of the image
     0x080038b4   0x00000004   Code   RO         1089    i.MemManage_Handler  stm32f7xx_it.o
     0x080038b8   0x00000002   Code   RO         1090    i.NMI_Handler       stm32f7xx_it.o
     0x080038ba   0x00000002   Code   RO         1091    i.PendSV_Handler    stm32f7xx_it.o
-    0x080038bc   0x00000084   Code   RO         5888    i.QDLDL_Lsolve      qdldl.o
-    0x08003940   0x00000084   Code   RO         5889    i.QDLDL_Ltsolve     qdldl.o
-    0x080039c4   0x0000016e   Code   RO         5890    i.QDLDL_etree       qdldl.o
+    0x080038bc   0x00000084   Code   RO         5889    i.QDLDL_Lsolve      qdldl.o
+    0x08003940   0x00000084   Code   RO         5890    i.QDLDL_Ltsolve     qdldl.o
+    0x080039c4   0x0000016e   Code   RO         5891    i.QDLDL_etree       qdldl.o
     0x08003b32   0x00000002   PAD
-    0x08003b34   0x00000428   Code   RO         5891    i.QDLDL_factor      qdldl.o
-    0x08003f5c   0x0000006c   Code   RO         5892    i.QDLDL_solve       qdldl.o
+    0x08003b34   0x00000428   Code   RO         5892    i.QDLDL_factor      qdldl.o
+    0x08003f5c   0x0000006c   Code   RO         5893    i.QDLDL_solve       qdldl.o
     0x08003fc8   0x00000002   Code   RO         1092    i.SVC_Handler       stm32f7xx_it.o
     0x08003fca   0x00000002   PAD
-    0x08003fcc   0x000000e8   Code   RO         6066    i.SuiteSparse_divcomplex  suitesparse_config.o
-    0x080040b4   0x00000018   Code   RO         6067    i.SuiteSparse_free  suitesparse_config.o
-    0x080040cc   0x00000160   Code   RO         6068    i.SuiteSparse_hypot  suitesparse_config.o
-    0x0800422c   0x00000054   Code   RO         6069    i.SuiteSparse_malloc  suitesparse_config.o
+    0x08003fcc   0x000000e8   Code   RO         6067    i.SuiteSparse_divcomplex  suitesparse_config.o
+    0x080040b4   0x00000018   Code   RO         6068    i.SuiteSparse_free  suitesparse_config.o
+    0x080040cc   0x00000160   Code   RO         6069    i.SuiteSparse_hypot  suitesparse_config.o
+    0x0800422c   0x00000054   Code   RO         6070    i.SuiteSparse_malloc  suitesparse_config.o
     0x08004280   0x00000008   Code   RO         1093    i.SysTick_Handler   stm32f7xx_it.o
     0x08004288   0x000000d8   Code   RO          974    i.SystemClock_Config  main_1.o
     0x08004360   0x00000064   Code   RO         4939    i.SystemInit        system_stm32f7xx.o
@@ -3658,52 +3658,52 @@ Memory Map of the image
     0x08004ae4   0x00000068   Code   RO         3031    i.UART_WaitOnFlagUntilTimeout  stm32f7xx_hal_uart.o
     0x08004b4c   0x00000010   Code   RO         1095    i.USART1_IRQHandler  stm32f7xx_it.o
     0x08004b5c   0x00000004   Code   RO         1096    i.UsageFault_Handler  stm32f7xx_it.o
-    0x08004b60   0x00000020   Code   RO         6410    i.__0printf         mc_w.l(printfa.o)
-    0x08004b80   0x00000028   Code   RO         6412    i.__0sprintf        mc_w.l(printfa.o)
+    0x08004b60   0x00000020   Code   RO         6411    i.__0printf         mc_w.l(printfa.o)
+    0x08004b80   0x00000028   Code   RO         6413    i.__0sprintf        mc_w.l(printfa.o)
     0x08004ba8   0x00000010   Code   RO         1562    i.__NVIC_GetPriorityGrouping  stm32f7xx_hal_cortex.o
     0x08004bb8   0x00000028   Code   RO         1563    i.__NVIC_SetPriority  stm32f7xx_hal_cortex.o
     0x08004be0   0x00000008   Code   RO           10    i.__controller_setup  default_functions.o
     0x08004be8   0x00000008   Code   RO           11    i.__controls        default_functions.o
-    0x08004bf0   0x0000005c   Code   RO         6442    i.__free$realloc    mc_w.l(mallocr.o)
+    0x08004bf0   0x0000005c   Code   RO         6443    i.__free$realloc    mc_w.l(mallocr.o)
     0x08004c4c   0x00000008   Code   RO           12    i.__get_time        default_functions.o
-    0x08004c54   0x00000014   Code   RO         6132    i.__hardfp_fabs     m_wm.l(fabs.o)
-    0x08004c68   0x0000007a   Code   RO         6138    i.__hardfp_sqrt     m_wm.l(sqrt.o)
-    0x08004ce2   0x0000003a   Code   RO         6150    i.__hardfp_sqrtf    m_wm.l(sqrtf.o)
+    0x08004c54   0x00000014   Code   RO         6133    i.__hardfp_fabs     m_wm.l(fabs.o)
+    0x08004c68   0x0000007a   Code   RO         6139    i.__hardfp_sqrt     m_wm.l(sqrt.o)
+    0x08004ce2   0x0000003a   Code   RO         6151    i.__hardfp_sqrtf    m_wm.l(sqrtf.o)
     0x08004d1c   0x00000008   Code   RO           13    i.__hardware_setup  default_functions.o
     0x08004d24   0x00000008   Code   RO           14    i.__idle            default_functions.o
     0x08004d2c   0x00000008   Code   RO           15    i.__loop            default_functions.o
-    0x08004d34   0x00000050   Code   RO         6443    i.__malloc$realloc  mc_w.l(mallocr.o)
+    0x08004d34   0x00000050   Code   RO         6444    i.__malloc$realloc  mc_w.l(mallocr.o)
     0x08004d84   0x00000008   Code   RO          975    i.__measureOutput   main_1.o
     0x08004d8c   0x00000008   Code   RO           16    i.__measurements    default_functions.o
-    0x08004d94   0x0000000e   Code   RO         6535    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08004da2   0x00000002   Code   RO         6536    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08004da4   0x0000000e   Code   RO         6537    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08004d94   0x0000000e   Code   RO         6536    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08004da2   0x00000002   Code   RO         6537    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08004da4   0x0000000e   Code   RO         6538    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x08004db2   0x00000002   PAD
     0x08004db4   0x00000054   Code   RO          976    i.__setControlValue  main_1.o
-    0x08004e08   0x0000000c   Code   RO         6515    i.__set_errno       mc_w.l(errno.o)
+    0x08004e08   0x0000000c   Code   RO         6516    i.__set_errno       mc_w.l(errno.o)
     0x08004e14   0x0000000c   Code   RO           21    i.__write_string    default_functions.o
-    0x08004e20   0x00000164   Code   RO         6417    i._fp_digits        mc_w.l(printfa.o)
-    0x08004f84   0x000006dc   Code   RO         6418    i._printf_core      mc_w.l(printfa.o)
-    0x08005660   0x00000024   Code   RO         6419    i._printf_post_padding  mc_w.l(printfa.o)
-    0x08005684   0x0000002e   Code   RO         6420    i._printf_pre_padding  mc_w.l(printfa.o)
-    0x080056b2   0x0000000a   Code   RO         6422    i._sputc            mc_w.l(printfa.o)
+    0x08004e20   0x00000164   Code   RO         6418    i._fp_digits        mc_w.l(printfa.o)
+    0x08004f84   0x000006dc   Code   RO         6419    i._printf_core      mc_w.l(printfa.o)
+    0x08005660   0x00000024   Code   RO         6420    i._printf_post_padding  mc_w.l(printfa.o)
+    0x08005684   0x0000002e   Code   RO         6421    i._printf_pre_padding  mc_w.l(printfa.o)
+    0x080056b2   0x0000000a   Code   RO         6423    i._sputc            mc_w.l(printfa.o)
     0x080056bc   0x00000078   Code   RO         4972    i.adapt_rho         auxil.o
     0x08005734   0x0000003a   Code   RO          409    i.add_new_profiler_entry  profiler.o
-    0x0800576e   0x00000372   Code   RO         5924    i.amd_l1            amd_1.o
-    0x08005ae0   0x00001864   Code   RO         5939    i.amd_l2            amd_2.o
-    0x08007344   0x00000358   Code   RO         5956    i.amd_l_aat         amd_aat.o
-    0x0800769c   0x0000048c   Code   RO         6006    i.amd_l_order       amd_order.o
-    0x08007b28   0x000000d4   Code   RO         6018    i.amd_l_post_tree   amd_post_tree.o
-    0x08007bfc   0x00000248   Code   RO         6030    i.amd_l_postorder   amd_postorder.o
-    0x08007e44   0x000001e8   Code   RO         6042    i.amd_l_preprocess  amd_preprocess.o
-    0x0800802c   0x0000012c   Code   RO         6054    i.amd_l_valid       amd_valid.o
-    0x08008158   0x00000018   Code   RO         5776    i.c_strcpy          util.o
+    0x0800576e   0x00000372   Code   RO         5925    i.amd_l1            amd_1.o
+    0x08005ae0   0x00001864   Code   RO         5940    i.amd_l2            amd_2.o
+    0x08007344   0x00000358   Code   RO         5957    i.amd_l_aat         amd_aat.o
+    0x0800769c   0x0000048c   Code   RO         6007    i.amd_l_order       amd_order.o
+    0x08007b28   0x000000d4   Code   RO         6019    i.amd_l_post_tree   amd_post_tree.o
+    0x08007bfc   0x00000248   Code   RO         6031    i.amd_l_postorder   amd_postorder.o
+    0x08007e44   0x000001e8   Code   RO         6043    i.amd_l_preprocess  amd_preprocess.o
+    0x0800802c   0x0000012c   Code   RO         6055    i.amd_l_valid       amd_valid.o
+    0x08008158   0x00000018   Code   RO         5777    i.c_strcpy          util.o
     0x08008170   0x000002dc   Code   RO         4973    i.check_termination  auxil.o
-    0x0800844c   0x00000070   Code   RO         5940    i.clear_flag        amd_2.o
+    0x0800844c   0x00000070   Code   RO         5941    i.clear_flag        amd_2.o
     0x080084bc   0x00000040   Code   RO         4974    i.cold_start        auxil.o
     0x080084fc   0x000000e4   Code   RO         4975    i.compute_dua_res   auxil.o
     0x080085e0   0x000000ee   Code   RO         4976    i.compute_dua_tol   auxil.o
-    0x080086ce   0x0000003e   Code   RO         5737    i.compute_inf_norm_cols_KKT  scaling.o
+    0x080086ce   0x0000003e   Code   RO         5738    i.compute_inf_norm_cols_KKT  scaling.o
     0x0800870c   0x0000005c   Code   RO         4977    i.compute_obj_val   auxil.o
     0x08008768   0x00000078   Code   RO         4978    i.compute_pri_res   auxil.o
     0x080087e0   0x000000a4   Code   RO         4979    i.compute_pri_tol   auxil.o
@@ -3713,142 +3713,142 @@ Memory Map of the image
     0x0800b3f2   0x00000002   PAD
     0x0800b3f4   0x00000060   Code   RO          730    i.controller_setup  main_mpc.o
     0x0800b454   0x0000003c   Code   RO          731    i.controls          main_mpc.o
-    0x0800b490   0x00000084   Code   RO         5155    i.copy_csc_mat      cs.o
-    0x0800b514   0x0000001a   Code   RO         5777    i.copy_settings     util.o
-    0x0800b52e   0x0000003c   Code   RO          324    i.create_matrix     mpctools.o
-    0x0800b56a   0x00000020   Code   RO          410    i.create_profiler   profiler.o
-    0x0800b58a   0x00000016   Code   RO          325    i.create_vector     mpctools.o
-    0x0800b5a0   0x00000018   Code   RO         5156    i.csc_calloc        cs.o
-    0x0800b5b8   0x0000006a   Code   RO         5157    i.csc_cumsum        cs.o
-    0x0800b622   0x00000036   Code   RO         5158    i.csc_done          cs.o
-    0x0800b658   0x00000018   Code   RO         5159    i.csc_malloc        cs.o
-    0x0800b670   0x0000004a   Code   RO         5160    i.csc_matrix        cs.o
-    0x0800b6ba   0x0000004c   Code   RO         5161    i.csc_pinv          cs.o
-    0x0800b706   0x000000e6   Code   RO         5162    i.csc_spalloc       cs.o
-    0x0800b7ec   0x0000002c   Code   RO         5163    i.csc_spfree        cs.o
-    0x0800b818   0x000002f2   Code   RO         5164    i.csc_symperm       cs.o
-    0x0800bb0a   0x0000012a   Code   RO         5165    i.csc_to_triu       cs.o
-    0x0800bc34   0x00000098   Code   RO          542    i.darray            allocation_nr.o
-    0x0800bccc   0x00000164   Code   RO          543    i.darray3           allocation_nr.o
-    0x0800be30   0x00000018   Code   RO          411    i.find_last         profiler.o
-    0x0800be48   0x0000001c   Code   RO          412    i.find_profiler_entry  profiler.o
-    0x0800be64   0x00000058   Code   RO          413    i.float2strF        profiler.o
-    0x0800bebc   0x00000422   Code   RO         5681    i.form_Ared         polish.o
-    0x0800c2de   0x000004a0   Code   RO         5246    i.form_KKT          kkt.o
-    0x0800c77e   0x000000b8   Code   RO         5682    i.form_rhs_red      polish.o
-    0x0800c836   0x00000012   Code   RO         6500    i.fputc             mc_w.l(fputc.o)
-    0x0800c848   0x000000a6   Code   RO         5805    i.free_linsys_solver_qdldl  qdldl_interface.o
-    0x0800c8ee   0x00000002   PAD
-    0x0800c8f0   0x0000001c   Code   RO          414    i.get_profiler      profiler.o
-    0x0800c90c   0x00000008   Code   RO          732    i.get_time          main_mpc.o
-    0x0800c914   0x000000dc   Code   RO         5683    i.get_ypol_from_yred  polish.o
-    0x0800c9f0   0x00000028   Code   RO          733    i.hardware_setup    main_mpc.o
-    0x0800ca18   0x00000054   Code   RO         4982    i.has_solution      auxil.o
-    0x0800ca6c   0x00000148   Code   RO          734    i.idle              main_mpc.o
-    0x0800cbb4   0x000000fc   Code   RO          326    i.init_archive_data  mpctools.o
-    0x0800ccb0   0x00000070   Code   RO          327    i.init_current_control  mpctools.o
-    0x0800cd20   0x0000004c   Code   RO         5465    i.init_linsys_solver  lin_sys.o
-    0x0800cd6c   0x00000310   Code   RO         5806    i.init_linsys_solver_qdldl  qdldl_interface.o
-    0x0800d07c   0x0000002c   Code   RO         5282    i.int_vec_set_scalar  lin_alg.o
-    0x0800d0a8   0x00000050   Code   RO         6444    i.internal_alloc    mc_w.l(mallocr.o)
-    0x0800d0f8   0x00000218   Code   RO         4983    i.is_dual_infeasible  auxil.o
-    0x0800d310   0x00000174   Code   RO         4984    i.is_primal_infeasible  auxil.o
-    0x0800d484   0x00000134   Code   RO         5684    i.iterative_refinement  polish.o
-    0x0800d5b8   0x0000000c   Code   RO          328    i.last_control      mpctools.o
-    0x0800d5c4   0x000000e4   Code   RO         5738    i.limit_scaling     scaling.o
-    0x0800d6a8   0x00000010   Code   RO         5466    i.load_linsys_solver  lin_sys.o
-    0x0800d6b8   0x0000010c   Code   RO          735    i.loop              main_mpc.o
-    0x0800d7c4   0x00000070   Code   RO          977    i.low_lvl_main      main_1.o
-    0x0800d834   0x00000004   Code   RO          185    i.main              main.o
-    0x0800d838   0x00000038   Code   RO          187    i.main_interrupt    main.o
-    0x0800d870   0x000000b4   Code   RO         5283    i.mat_inf_norm_cols  lin_alg.o
-    0x0800d924   0x00000100   Code   RO         5284    i.mat_inf_norm_cols_sym_triu  lin_alg.o
-    0x0800da24   0x000000d8   Code   RO         5285    i.mat_inf_norm_rows  lin_alg.o
-    0x0800dafc   0x0000003e   Code   RO         5286    i.mat_mult_scalar   lin_alg.o
-    0x0800db3a   0x0000006a   Code   RO         5287    i.mat_postmult_diag  lin_alg.o
-    0x0800dba4   0x00000070   Code   RO         5288    i.mat_premult_diag  lin_alg.o
-    0x0800dc14   0x000002e8   Code   RO         5289    i.mat_tpose_vec     lin_alg.o
-    0x0800defc   0x00000190   Code   RO         5290    i.mat_vec           lin_alg.o
-    0x0800e08c   0x00000034   Code   RO          736    i.measurements      main_mpc.o
-    0x0800e0c0   0x000000a2   Code   RO          330    i.new_control       mpctools.o
-    0x0800e162   0x000000a0   Code   RO          331    i.new_control_increment  mpctools.o
-    0x0800e202   0x00000056   Code   RO          332    i.new_output        mpctools.o
-    0x0800e258   0x0000024a   Code   RO         5501    i.osqp_cleanup      osqp.o
-    0x0800e4a2   0x00000002   PAD
-    0x0800e4a4   0x000000a0   Code   RO         5502    i.osqp_set_default_settings  osqp.o
-    0x0800e544   0x000003ba   Code   RO         5503    i.osqp_setup        osqp.o
-    0x0800e8fe   0x00000242   Code   RO         5504    i.osqp_solve        osqp.o
-    0x0800eb40   0x000000c0   Code   RO         5509    i.osqp_update_bounds  osqp.o
-    0x0800ec00   0x00000066   Code   RO         5516    i.osqp_update_lin_cost  osqp.o
-    0x0800ec66   0x00000002   PAD
-    0x0800ec68   0x000001e4   Code   RO         5521    i.osqp_update_rho   osqp.o
-    0x0800ee4c   0x0000016a   Code   RO         5807    i.permute_KKT       qdldl_interface.o
-    0x0800efb6   0x0000003a   Code   RO         5808    i.permute_x         qdldl_interface.o
-    0x0800eff0   0x00000038   Code   RO         5809    i.permutet_x        qdldl_interface.o
-    0x0800f028   0x00000260   Code   RO         5685    i.polish            polish.o
-    0x0800f288   0x00000032   Code   RO         5291    i.prea_int_vec_copy  lin_alg.o
-    0x0800f2ba   0x00000032   Code   RO         5292    i.prea_vec_copy     lin_alg.o
-    0x0800f2ec   0x00000070   Code   RO          632    i.productab         matrix_cal.o
-    0x0800f35c   0x0000005c   Code   RO          416    i.profiler_end      profiler.o
-    0x0800f3b8   0x00000014   Code   RO          417    i.profiler_exists   profiler.o
-    0x0800f3cc   0x00000224   Code   RO          418    i.profiler_print    profiler.o
-    0x0800f5f0   0x00000022   Code   RO          419    i.profiler_start    profiler.o
-    0x0800f612   0x00000058   Code   RO         5716    i.project           proj.o
-    0x0800f66a   0x00000098   Code   RO         5717    i.project_normalcone  proj.o
-    0x0800f702   0x0000001e   Code   RO          334    i.push_current_controls_to_archive_data  mpctools.o
-    0x0800f720   0x000000fc   Code   RO         5293    i.quad_form         lin_alg.o
-    0x0800f81c   0x0000006c   Code   RO         6445    i.realloc           mc_w.l(mallocr.o)
-    0x0800f888   0x00000018   Code   RO         4985    i.reset_info        auxil.o
-    0x0800f8a0   0x00000274   Code   RO         5739    i.scale_data        scaling.o
-    0x0800fb14   0x00000008   Code   RO          336    i.set_current_control_increment  mpctools.o
-    0x0800fb1c   0x00000230   Code   RO         4986    i.set_rho_vec       auxil.o
-    0x0800fd4c   0x00000022   Code   RO         5810    i.solve_linsys_qdldl  qdldl_interface.o
-    0x0800fd6e   0x00000002   PAD
-    0x0800fd70   0x00000164   Code   RO         4987    i.store_solution    auxil.o
-    0x0800fed4   0x00000092   Code   RO          642    i.sumaa             matrix_cal.o
-    0x0800ff66   0x0000000a   Code   RO         4988    i.swap_vectors      auxil.o
-    0x0800ff70   0x00000018   Code   RO          188    i.timer_loop        main.o
-    0x0800ff88   0x0000017a   Code   RO         5167    i.triplet_to_csc    cs.o
-    0x08010102   0x0000017a   Code   RO         5168    i.triplet_to_csr    cs.o
-    0x0801027c   0x00000010   Code   RO         5467    i.unload_linsys_solver  lin_sys.o
-    0x0801028c   0x00000052   Code   RO         5741    i.unscale_solution  scaling.o
-    0x080102de   0x00000040   Code   RO         5247    i.update_KKT_A      kkt.o
-    0x0801031e   0x00000098   Code   RO         5248    i.update_KKT_P      kkt.o
-    0x080103b6   0x00000044   Code   RO         5249    i.update_KKT_param2  kkt.o
-    0x080103fa   0x00000002   PAD
-    0x080103fc   0x000000b8   Code   RO         4989    i.update_info       auxil.o
-    0x080104b4   0x0000008e   Code   RO         5811    i.update_linsys_solver_matrices_qdldl  qdldl_interface.o
-    0x08010542   0x00000002   PAD
-    0x08010544   0x000000cc   Code   RO         5812    i.update_linsys_solver_rho_vec_qdldl  qdldl_interface.o
-    0x08010610   0x0000023c   Code   RO         4990    i.update_rho_vec    auxil.o
-    0x0801084c   0x000001c4   Code   RO         4991    i.update_status     auxil.o
-    0x08010a10   0x00000094   Code   RO         4992    i.update_x          auxil.o
-    0x08010aa4   0x0000001c   Code   RO         4993    i.update_xz_tilde   auxil.o
-    0x08010ac0   0x000000a0   Code   RO         4994    i.update_y          auxil.o
-    0x08010b60   0x00000082   Code   RO         4995    i.update_z          auxil.o
-    0x08010be2   0x00000068   Code   RO         4996    i.update_z_tilde    auxil.o
-    0x08010c4a   0x000000cc   Code   RO         4997    i.validate_data     auxil.o
-    0x08010d16   0x00000028   Code   RO         4998    i.validate_linsys_solver  auxil.o
-    0x08010d3e   0x000001e8   Code   RO         4999    i.validate_settings  auxil.o
-    0x08010f26   0x00000044   Code   RO         5295    i.vec_add_scaled    lin_alg.o
-    0x08010f6a   0x00000042   Code   RO         5296    i.vec_copy          lin_alg.o
-    0x08010fac   0x00000044   Code   RO         5298    i.vec_ew_max_vec    lin_alg.o
-    0x08010ff0   0x00000044   Code   RO         5301    i.vec_ew_prod       lin_alg.o
-    0x08011034   0x0000003a   Code   RO         5302    i.vec_ew_recipr     lin_alg.o
-    0x0801106e   0x0000003c   Code   RO         5303    i.vec_ew_sqrt       lin_alg.o
-    0x080110aa   0x00000002   PAD
-    0x080110ac   0x00000060   Code   RO         5304    i.vec_mean          lin_alg.o
-    0x0801110c   0x00000030   Code   RO         5305    i.vec_mult_scalar   lin_alg.o
-    0x0801113c   0x00000064   Code   RO         5306    i.vec_norm_inf      lin_alg.o
-    0x080111a0   0x0000004c   Code   RO         5308    i.vec_prod          lin_alg.o
-    0x080111ec   0x00000088   Code   RO         5309    i.vec_scaled_norm_inf  lin_alg.o
-    0x08011274   0x00000024   Code   RO         5310    i.vec_set_scalar    lin_alg.o
-    0x08011298   0x0000003c   Code   RO          979    i.write_string      main_1.o
-    0x080112d4   0x0000001c   Code   RO          554    i.writemessage      allocation_nr.o
-    0x080112f0   0x00000008   Data   RO         3833    .constdata          stm32f7xx_hal_dma.o
-    0x080112f8   0x00000018   Data   RO         4940    .constdata          system_stm32f7xx.o
-    0x08011310   0x00000014   Data   RO          739    .conststring        main_mpc.o
-    0x08011324   0x00000020   Data   RO         6533    Region$$Table       anon$$obj.o
+    0x0800b490   0x00000084   Code   RO         5156    i.copy_csc_mat      cs.o
+    0x0800b514   0x000000b8   Code   RO         5778    i.copy_settings     util.o
+    0x0800b5cc   0x0000003c   Code   RO          324    i.create_matrix     mpctools.o
+    0x0800b608   0x00000020   Code   RO          410    i.create_profiler   profiler.o
+    0x0800b628   0x00000016   Code   RO          325    i.create_vector     mpctools.o
+    0x0800b63e   0x00000018   Code   RO         5157    i.csc_calloc        cs.o
+    0x0800b656   0x0000006a   Code   RO         5158    i.csc_cumsum        cs.o
+    0x0800b6c0   0x00000036   Code   RO         5159    i.csc_done          cs.o
+    0x0800b6f6   0x00000018   Code   RO         5160    i.csc_malloc        cs.o
+    0x0800b70e   0x0000004a   Code   RO         5161    i.csc_matrix        cs.o
+    0x0800b758   0x0000004c   Code   RO         5162    i.csc_pinv          cs.o
+    0x0800b7a4   0x000000e6   Code   RO         5163    i.csc_spalloc       cs.o
+    0x0800b88a   0x0000002c   Code   RO         5164    i.csc_spfree        cs.o
+    0x0800b8b6   0x000002f2   Code   RO         5165    i.csc_symperm       cs.o
+    0x0800bba8   0x0000012a   Code   RO         5166    i.csc_to_triu       cs.o
+    0x0800bcd2   0x00000002   PAD
+    0x0800bcd4   0x00000098   Code   RO          542    i.darray            allocation_nr.o
+    0x0800bd6c   0x00000164   Code   RO          543    i.darray3           allocation_nr.o
+    0x0800bed0   0x00000018   Code   RO          411    i.find_last         profiler.o
+    0x0800bee8   0x0000001c   Code   RO          412    i.find_profiler_entry  profiler.o
+    0x0800bf04   0x00000058   Code   RO          413    i.float2strF        profiler.o
+    0x0800bf5c   0x00000422   Code   RO         5682    i.form_Ared         polish.o
+    0x0800c37e   0x000004a0   Code   RO         5247    i.form_KKT          kkt.o
+    0x0800c81e   0x000000b8   Code   RO         5683    i.form_rhs_red      polish.o
+    0x0800c8d6   0x00000012   Code   RO         6501    i.fputc             mc_w.l(fputc.o)
+    0x0800c8e8   0x000000a6   Code   RO         5806    i.free_linsys_solver_qdldl  qdldl_interface.o
+    0x0800c98e   0x00000002   PAD
+    0x0800c990   0x0000001c   Code   RO          414    i.get_profiler      profiler.o
+    0x0800c9ac   0x00000008   Code   RO          732    i.get_time          main_mpc.o
+    0x0800c9b4   0x000000dc   Code   RO         5684    i.get_ypol_from_yred  polish.o
+    0x0800ca90   0x00000028   Code   RO          733    i.hardware_setup    main_mpc.o
+    0x0800cab8   0x00000054   Code   RO         4982    i.has_solution      auxil.o
+    0x0800cb0c   0x00000148   Code   RO          734    i.idle              main_mpc.o
+    0x0800cc54   0x000000fc   Code   RO          326    i.init_archive_data  mpctools.o
+    0x0800cd50   0x00000070   Code   RO          327    i.init_current_control  mpctools.o
+    0x0800cdc0   0x0000004c   Code   RO         5466    i.init_linsys_solver  lin_sys.o
+    0x0800ce0c   0x00000310   Code   RO         5807    i.init_linsys_solver_qdldl  qdldl_interface.o
+    0x0800d11c   0x0000002c   Code   RO         5283    i.int_vec_set_scalar  lin_alg.o
+    0x0800d148   0x00000050   Code   RO         6445    i.internal_alloc    mc_w.l(mallocr.o)
+    0x0800d198   0x00000218   Code   RO         4983    i.is_dual_infeasible  auxil.o
+    0x0800d3b0   0x00000174   Code   RO         4984    i.is_primal_infeasible  auxil.o
+    0x0800d524   0x00000134   Code   RO         5685    i.iterative_refinement  polish.o
+    0x0800d658   0x0000000c   Code   RO          328    i.last_control      mpctools.o
+    0x0800d664   0x000000e4   Code   RO         5739    i.limit_scaling     scaling.o
+    0x0800d748   0x00000010   Code   RO         5467    i.load_linsys_solver  lin_sys.o
+    0x0800d758   0x0000010c   Code   RO          735    i.loop              main_mpc.o
+    0x0800d864   0x00000070   Code   RO          977    i.low_lvl_main      main_1.o
+    0x0800d8d4   0x00000004   Code   RO          185    i.main              main.o
+    0x0800d8d8   0x00000038   Code   RO          187    i.main_interrupt    main.o
+    0x0800d910   0x000000b4   Code   RO         5284    i.mat_inf_norm_cols  lin_alg.o
+    0x0800d9c4   0x00000100   Code   RO         5285    i.mat_inf_norm_cols_sym_triu  lin_alg.o
+    0x0800dac4   0x000000d8   Code   RO         5286    i.mat_inf_norm_rows  lin_alg.o
+    0x0800db9c   0x0000003e   Code   RO         5287    i.mat_mult_scalar   lin_alg.o
+    0x0800dbda   0x0000006a   Code   RO         5288    i.mat_postmult_diag  lin_alg.o
+    0x0800dc44   0x00000070   Code   RO         5289    i.mat_premult_diag  lin_alg.o
+    0x0800dcb4   0x000002e8   Code   RO         5290    i.mat_tpose_vec     lin_alg.o
+    0x0800df9c   0x00000190   Code   RO         5291    i.mat_vec           lin_alg.o
+    0x0800e12c   0x00000034   Code   RO          736    i.measurements      main_mpc.o
+    0x0800e160   0x000000a2   Code   RO          330    i.new_control       mpctools.o
+    0x0800e202   0x000000a0   Code   RO          331    i.new_control_increment  mpctools.o
+    0x0800e2a2   0x00000056   Code   RO          332    i.new_output        mpctools.o
+    0x0800e2f8   0x0000024a   Code   RO         5502    i.osqp_cleanup      osqp.o
+    0x0800e542   0x00000002   PAD
+    0x0800e544   0x000000a0   Code   RO         5503    i.osqp_set_default_settings  osqp.o
+    0x0800e5e4   0x000003ba   Code   RO         5504    i.osqp_setup        osqp.o
+    0x0800e99e   0x00000254   Code   RO         5505    i.osqp_solve        osqp.o
+    0x0800ebf2   0x000000c0   Code   RO         5510    i.osqp_update_bounds  osqp.o
+    0x0800ecb2   0x00000066   Code   RO         5517    i.osqp_update_lin_cost  osqp.o
+    0x0800ed18   0x000001e4   Code   RO         5522    i.osqp_update_rho   osqp.o
+    0x0800eefc   0x0000016a   Code   RO         5808    i.permute_KKT       qdldl_interface.o
+    0x0800f066   0x0000003a   Code   RO         5809    i.permute_x         qdldl_interface.o
+    0x0800f0a0   0x00000038   Code   RO         5810    i.permutet_x        qdldl_interface.o
+    0x0800f0d8   0x00000260   Code   RO         5686    i.polish            polish.o
+    0x0800f338   0x00000032   Code   RO         5292    i.prea_int_vec_copy  lin_alg.o
+    0x0800f36a   0x00000032   Code   RO         5293    i.prea_vec_copy     lin_alg.o
+    0x0800f39c   0x00000070   Code   RO          632    i.productab         matrix_cal.o
+    0x0800f40c   0x0000005c   Code   RO          416    i.profiler_end      profiler.o
+    0x0800f468   0x00000014   Code   RO          417    i.profiler_exists   profiler.o
+    0x0800f47c   0x00000224   Code   RO          418    i.profiler_print    profiler.o
+    0x0800f6a0   0x00000022   Code   RO          419    i.profiler_start    profiler.o
+    0x0800f6c2   0x00000058   Code   RO         5717    i.project           proj.o
+    0x0800f71a   0x00000098   Code   RO         5718    i.project_normalcone  proj.o
+    0x0800f7b2   0x0000001e   Code   RO          334    i.push_current_controls_to_archive_data  mpctools.o
+    0x0800f7d0   0x000000fc   Code   RO         5294    i.quad_form         lin_alg.o
+    0x0800f8cc   0x0000006c   Code   RO         6446    i.realloc           mc_w.l(mallocr.o)
+    0x0800f938   0x00000018   Code   RO         4985    i.reset_info        auxil.o
+    0x0800f950   0x00000274   Code   RO         5740    i.scale_data        scaling.o
+    0x0800fbc4   0x00000008   Code   RO          336    i.set_current_control_increment  mpctools.o
+    0x0800fbcc   0x00000230   Code   RO         4986    i.set_rho_vec       auxil.o
+    0x0800fdfc   0x00000022   Code   RO         5811    i.solve_linsys_qdldl  qdldl_interface.o
+    0x0800fe1e   0x00000002   PAD
+    0x0800fe20   0x00000164   Code   RO         4987    i.store_solution    auxil.o
+    0x0800ff84   0x00000092   Code   RO          642    i.sumaa             matrix_cal.o
+    0x08010016   0x0000000a   Code   RO         4988    i.swap_vectors      auxil.o
+    0x08010020   0x00000018   Code   RO          188    i.timer_loop        main.o
+    0x08010038   0x0000017a   Code   RO         5168    i.triplet_to_csc    cs.o
+    0x080101b2   0x0000017a   Code   RO         5169    i.triplet_to_csr    cs.o
+    0x0801032c   0x00000010   Code   RO         5468    i.unload_linsys_solver  lin_sys.o
+    0x0801033c   0x00000052   Code   RO         5742    i.unscale_solution  scaling.o
+    0x0801038e   0x00000040   Code   RO         5248    i.update_KKT_A      kkt.o
+    0x080103ce   0x00000098   Code   RO         5249    i.update_KKT_P      kkt.o
+    0x08010466   0x00000044   Code   RO         5250    i.update_KKT_param2  kkt.o
+    0x080104aa   0x00000002   PAD
+    0x080104ac   0x000000b8   Code   RO         4989    i.update_info       auxil.o
+    0x08010564   0x0000008e   Code   RO         5812    i.update_linsys_solver_matrices_qdldl  qdldl_interface.o
+    0x080105f2   0x00000002   PAD
+    0x080105f4   0x000000cc   Code   RO         5813    i.update_linsys_solver_rho_vec_qdldl  qdldl_interface.o
+    0x080106c0   0x0000023c   Code   RO         4990    i.update_rho_vec    auxil.o
+    0x080108fc   0x000001c4   Code   RO         4991    i.update_status     auxil.o
+    0x08010ac0   0x00000094   Code   RO         4992    i.update_x          auxil.o
+    0x08010b54   0x0000001c   Code   RO         4993    i.update_xz_tilde   auxil.o
+    0x08010b70   0x000000a0   Code   RO         4994    i.update_y          auxil.o
+    0x08010c10   0x00000082   Code   RO         4995    i.update_z          auxil.o
+    0x08010c92   0x00000068   Code   RO         4996    i.update_z_tilde    auxil.o
+    0x08010cfa   0x000000cc   Code   RO         4997    i.validate_data     auxil.o
+    0x08010dc6   0x00000028   Code   RO         4998    i.validate_linsys_solver  auxil.o
+    0x08010dee   0x000001e8   Code   RO         4999    i.validate_settings  auxil.o
+    0x08010fd6   0x00000044   Code   RO         5296    i.vec_add_scaled    lin_alg.o
+    0x0801101a   0x00000042   Code   RO         5297    i.vec_copy          lin_alg.o
+    0x0801105c   0x00000044   Code   RO         5299    i.vec_ew_max_vec    lin_alg.o
+    0x080110a0   0x00000044   Code   RO         5302    i.vec_ew_prod       lin_alg.o
+    0x080110e4   0x0000003a   Code   RO         5303    i.vec_ew_recipr     lin_alg.o
+    0x0801111e   0x0000003c   Code   RO         5304    i.vec_ew_sqrt       lin_alg.o
+    0x0801115a   0x00000002   PAD
+    0x0801115c   0x00000060   Code   RO         5305    i.vec_mean          lin_alg.o
+    0x080111bc   0x00000030   Code   RO         5306    i.vec_mult_scalar   lin_alg.o
+    0x080111ec   0x00000064   Code   RO         5307    i.vec_norm_inf      lin_alg.o
+    0x08011250   0x0000004c   Code   RO         5309    i.vec_prod          lin_alg.o
+    0x0801129c   0x00000088   Code   RO         5310    i.vec_scaled_norm_inf  lin_alg.o
+    0x08011324   0x00000024   Code   RO         5311    i.vec_set_scalar    lin_alg.o
+    0x08011348   0x0000003c   Code   RO          979    i.write_string      main_1.o
+    0x08011384   0x0000001c   Code   RO          554    i.writemessage      allocation_nr.o
+    0x080113a0   0x00000008   Data   RO         3833    .constdata          stm32f7xx_hal_dma.o
+    0x080113a8   0x00000018   Data   RO         4940    .constdata          system_stm32f7xx.o
+    0x080113c0   0x00000014   Data   RO          739    .conststring        main_mpc.o
+    0x080113d4   0x00000020   Data   RO         6534    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00045468, Max: 0x00050000, ABSOLUTE)
@@ -3862,11 +3862,11 @@ Memory Map of the image
     0x200000c4   0x00000009   Data   RW         4210    .data               stm32f7xx_hal.o
     0x200000cd   0x00000003   PAD
     0x200000d0   0x00000004   Data   RW         4941    .data               system_stm32f7xx.o
-    0x200000d4   0x00000018   Data   RW         6075    .data               suitesparse_config.o
-    0x200000ec   0x00000004   Data   RW         6502    .data               mc_w.l(stdout.o)
-    0x200000f0   0x00000004   Data   RW         6511    .data               mc_w.l(mvars.o)
-    0x200000f4   0x00000004   Data   RW         6512    .data               mc_w.l(mvars.o)
-    0x200000f8   0x00000004   Data   RW         6516    .data               mc_w.l(errno.o)
+    0x200000d4   0x00000018   Data   RW         6076    .data               suitesparse_config.o
+    0x200000ec   0x00000004   Data   RW         6503    .data               mc_w.l(stdout.o)
+    0x200000f0   0x00000004   Data   RW         6512    .data               mc_w.l(mvars.o)
+    0x200000f4   0x00000004   Data   RW         6513    .data               mc_w.l(mvars.o)
+    0x200000f8   0x00000004   Data   RW         6517    .data               mc_w.l(errno.o)
     0x200000fc   0x00000064   Zero   RW          420    .bss                profiler.o
     0x20000160   0x00000e1c   Zero   RW          738    .bss                main_mpc.o
     0x20000f7c   0x000004ec   Zero   RW          980    .bss                main_1.o
@@ -3890,7 +3890,7 @@ Image component sizes
        584          0          0          0          0       1570   amd_postorder.o
        488          0          0          0          0       1311   amd_preprocess.o
        300          0          0          0          0       1314   amd_valid.o
-      6838        392          0          0          0      22748   auxil.o
+      6838        392          0          0          0      22783   auxil.o
       2572          0          0          0          0      12320   cs.o
         68          0          0          0          0       7282   default_functions.o
       1468          0          0          0          0       4681   kkt.o
@@ -3898,15 +3898,15 @@ Image component sizes
        108          0          0          0          0       3141   lin_sys.o
         84          8          0          4          0       1801   main.o
       1314        140          0         32       1260       9788   main_1.o
-     11360        918         20        156       3612     850388   main_mpc.o
+     11360        916         20        156       3612     850416   main_mpc.o
        258          4          0          0          0       1792   matrix_cal.o
        904          8          0          0          0       7845   mpctools.o
-      3056         56          0          0          0       7011   osqp.o
+      3074         56          0          0          0       7027   osqp.o
       2378         12          0          0          0       4893   polish.o
        952        302          0          4        100       7901   profiler.o
        240          0          0          0          0       1743   proj.o
       1802         14          0          0          0       6742   qdldl.o
-      2102         32          0          0          0      11603   qdldl_interface.o
+      2102         32          0          0          0      11599   qdldl_interface.o
       1000         32          0          0          0       3480   scaling.o
         36          8        456          0     278528        864   startup_stm32f746xx.o
        134         26          0          9          0       8585   stm32f7xx_hal.o
@@ -3927,10 +3927,10 @@ Image component sizes
         96         24          0          0          0       6455   stm32f7xx_it.o
        692         28          0         24          0       6062   suitesparse_config.o
        100         18         24          4          0       1239   system_stm32f7xx.o
-        50          0          0          0          0       1267   util.o
+       208          0          0          0          0       1347   util.o
 
     ----------------------------------------------------------------------
-     64922       2608        540        236     283500    1133217   Object Totals
+     65098       2606        540        236     283500    1133372   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         34          0          0          3          0          0   (incl. Padding)
 
@@ -4006,15 +4006,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     69928       2756        540        252     283500    1108429   Grand Totals
-     69928       2756        540        252     283500    1108429   ELF Image Totals
-     69928       2756        540        252          0          0   ROM Totals
+     70104       2754        540        252     283500    1108584   Grand Totals
+     70104       2754        540        252     283500    1108584   ELF Image Totals
+     70104       2754        540        252          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                70468 (  68.82kB)
+    Total RO  Size (Code + RO Data)                70644 (  68.99kB)
     Total RW  Size (RW Data + ZI Data)            283752 ( 277.10kB)
-    Total ROM Size (Code + RO Data + RW Data)      70720 (  69.06kB)
+    Total ROM Size (Code + RO Data + RW Data)      70896 (  69.23kB)
 
 ==============================================================================
 

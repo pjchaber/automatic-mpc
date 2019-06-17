@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SingleController\SingleController.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SingleController\SingleController.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Fri Jun 14 15:29:39 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Fri Jun 14 17:43:32 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1520 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -485,7 +485,6 @@ Global Symbols
 
 <P><STRONG><a name="[149]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller
-<LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;copy_settings
 </UL>
 
 <P><STRONG><a name="[1ae]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
@@ -559,7 +558,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
 <BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_rho
-<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
+<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_rho_vec
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SuiteSparse_hypot
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;amd_l2
@@ -573,8 +572,8 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_linsys_solver_qdldl
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_rho
-<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_rho_vec
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_rho_estimate
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_linsys_solver_rho_vec_qdldl
@@ -587,7 +586,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[198]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mean
+<BR>[Called By]<UL><LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mean
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;amd_l_aat
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;amd_l2
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;amd_l_order
@@ -606,8 +605,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;idle
 <LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_linsys_solver_qdldl
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_rho
-<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_rho_vec
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_dual_infeasible
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_rho_estimate
@@ -618,7 +617,7 @@ Global Symbols
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_linsys_solver_rho_vec_qdldl
 <LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;limit_scaling
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[f0]"></a>__aeabi_cdcmpeq</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, cdcmple.o(.text))
@@ -628,17 +627,17 @@ Global Symbols
 
 <P><STRONG><a name="[140]"></a>__aeabi_cdcmple</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, cdcmple.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_rho
-<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
+<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_rho_vec
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_dual_infeasible
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_rho_estimate
 <LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;limit_scaling
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[f1]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, cdrcmple.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_rho
-<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
+<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_rho_vec
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_dual_infeasible
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_rho_estimate
@@ -655,8 +654,8 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_linsys_solver_qdldl
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_rho
-<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_rho_vec
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_rho_estimate
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SuiteSparse_hypot
@@ -914,9 +913,9 @@ Global Symbols
 <P><STRONG><a name="[a5]"></a>HAL_DMA_Init</STRONG> (Thumb, 232 bytes, Stack size 24 bytes, stm32f7xx_hal_dma.o(i.HAL_DMA_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = HAL_DMA_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CheckFifoParam
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CheckFifoParam
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CalcBaseAndBitshift
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_MspInit
 </UL>
@@ -938,14 +937,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ad]"></a>HAL_GetTick</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f7xx_hal.o(i.HAL_GetTick))
-<BR><BR>[Called By]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PWREx_EnableOverDrive
 <LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_time
+<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
 </UL>
 
 <P><STRONG><a name="[f6]"></a>HAL_IncTick</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f7xx_hal.o(i.HAL_IncTick))
@@ -955,9 +954,9 @@ Global Symbols
 <P><STRONG><a name="[b1]"></a>HAL_Init</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, stm32f7xx_hal.o(i.HAL_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = HAL_Init &rArr; HAL_InitTick &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;low_lvl_main
 </UL>
@@ -965,8 +964,8 @@ Global Symbols
 <P><STRONG><a name="[b3]"></a>HAL_InitTick</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, stm32f7xx_hal.o(i.HAL_InitTick))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = HAL_InitTick &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SYSTICK_Config
+<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SYSTICK_Config
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
@@ -991,11 +990,11 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_GetPriorityGrouping
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_MspInit
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_DMA_Init
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 
 <P><STRONG><a name="[b2]"></a>HAL_NVIC_SetPriorityGrouping</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f7xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping))
@@ -1021,9 +1020,9 @@ Global Symbols
 <P><STRONG><a name="[ba]"></a>HAL_RCC_ClockConfig</STRONG> (Thumb, 382 bytes, Stack size 16 bytes, stm32f7xx_hal_rcc.o(i.HAL_RCC_ClockConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
@@ -1054,8 +1053,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
 </UL>
 
 <P><STRONG><a name="[bf]"></a>HAL_RCC_OscConfig</STRONG> (Thumb, 1200 bytes, Stack size 24 bytes, stm32f7xx_hal_rcc.o(i.HAL_RCC_OscConfig))
@@ -1110,8 +1109,8 @@ Global Symbols
 <P><STRONG><a name="[c2]"></a>HAL_TIM_Base_Init</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, stm32f7xx_hal_tim.o(i.HAL_TIM_Base_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = HAL_TIM_Base_Init &rArr; HAL_TIM_Base_MspInit &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
+<BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM5_Init
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM2_Init
@@ -1132,12 +1131,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c5]"></a>HAL_TIM_ConfigClockSource</STRONG> (Thumb, 264 bytes, Stack size 24 bytes, stm32f7xx_hal_tim.o(i.HAL_TIM_ConfigClockSource))
-<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = HAL_TIM_ConfigClockSource &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = HAL_TIM_ConfigClockSource &rArr; TIM_TI2_ConfigInputStage
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ETR_SetConfig
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI2_ConfigInputStage
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI2_ConfigInputStage
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI1_ConfigInputStage
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITRx_SetConfig
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ETR_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM5_Init
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM2_Init
@@ -1150,14 +1149,14 @@ Global Symbols
 <P><STRONG><a name="[ca]"></a>HAL_TIM_IRQHandler</STRONG> (Thumb, 440 bytes, Stack size 8 bytes, stm32f7xx_hal_tim.o(i.HAL_TIM_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_TriggerCallback
+<BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
+<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_TriggerCallback
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_PulseFinishedCallback
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_CaptureCallback
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_CommutCallback
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_BreakCallback
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_Break2Callback
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 </UL>
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
@@ -1183,8 +1182,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[d7]"></a>HAL_UART_ErrorCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f7xx_hal_uart.o(i.HAL_UART_ErrorCallback))
-<BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_DMAAbortOnError
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_IRQHandler
+<BR><BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_IRQHandler
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_DMAAbortOnError
 </UL>
 
 <P><STRONG><a name="[1a4]"></a>HAL_UART_GetState</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f7xx_hal_uart.o(i.HAL_UART_GetState))
@@ -1205,10 +1204,10 @@ Global Symbols
 <P><STRONG><a name="[d9]"></a>HAL_UART_Init</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, stm32f7xx_hal_uart.o(i.HAL_UART_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = HAL_UART_Init &rArr; UART_SetConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
+<BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_AdvFeatureConfig
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 </UL>
@@ -1371,8 +1370,8 @@ Global Symbols
 <P><STRONG><a name="[dd]"></a>UART_CheckIdleState</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, stm32f7xx_hal_uart.o(i.UART_CheckIdleState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = UART_CheckIdleState &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 </UL>
@@ -1465,7 +1464,7 @@ Global Symbols
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_linsys_solver_qdldl
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;permute_KKT
 <LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iterative_refinement
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 <LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_cleanup
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;realloc
 </UL>
@@ -1502,7 +1501,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
-<BR>[Called By]<UL><LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_sqrt
+<BR>[Called By]<UL><LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_sqrt
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_rho_estimate
 </UL>
 
@@ -1552,7 +1551,7 @@ Global Symbols
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;permute_KKT
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LDL_factor
 <LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iterative_refinement
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 <LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;copy_settings
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calloc
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;realloc
@@ -1712,7 +1711,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_solve
 <LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_setup
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 </UL>
 
 <P><STRONG><a name="[130]"></a>compute_dua_res</STRONG> (Thumb, 228 bytes, Stack size 40 bytes, auxil.o(i.compute_dua_res))
@@ -1848,11 +1847,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_setup
 </UL>
 
-<P><STRONG><a name="[156]"></a>copy_settings</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, util.o(i.copy_settings))
+<P><STRONG><a name="[156]"></a>copy_settings</STRONG> (Thumb, 184 bytes, Stack size 16 bytes, util.o(i.copy_settings))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = copy_settings &rArr; malloc &rArr; internal_alloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
+<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
 <BR>[Called By]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_setup
 </UL>
@@ -1928,7 +1926,7 @@ Global Symbols
 <LI><a href="#[15b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;csc_done
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free_linsys_solver_qdldl
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;permute_KKT
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 <LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_cleanup
 </UL>
 
@@ -2053,7 +2051,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardware_setup
 </UL>
 
-<P><STRONG><a name="[108]"></a>idle</STRONG> (Thumb, 266 bytes, Stack size 32 bytes, main_mpc.o(i.idle))
+<P><STRONG><a name="[18a]"></a>has_solution</STRONG> (Thumb, 84 bytes, Stack size 8 bytes, auxil.o(i.has_solution))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = has_solution
+</UL>
+<BR>[Called By]<UL><LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_solve
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+</UL>
+
+<P><STRONG><a name="[108]"></a>idle</STRONG> (Thumb, 268 bytes, Stack size 32 bytes, main_mpc.o(i.idle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1160<LI>Call Chain = idle &rArr; profiler_print &rArr; get_profiler &rArr; create_profiler &rArr; malloc &rArr; internal_alloc
 </UL>
 <BR>[Calls]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_start
@@ -2089,7 +2094,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_linsys_solver_qdldl
 </UL>
 <BR>[Called By]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_setup
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[16f]"></a>init_linsys_solver_qdldl</STRONG> (Thumb, 760 bytes, Stack size 104 bytes, qdldl_interface.o(i.init_linsys_solver_qdldl))
@@ -2233,19 +2238,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_inf_norm_cols_KKT
 </UL>
 
-<P><STRONG><a name="[199]"></a>mat_mult_scalar</STRONG> (Thumb, 62 bytes, Stack size 20 bytes, lin_alg.o(i.mat_mult_scalar))
+<P><STRONG><a name="[19a]"></a>mat_mult_scalar</STRONG> (Thumb, 62 bytes, Stack size 20 bytes, lin_alg.o(i.mat_mult_scalar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = mat_mult_scalar
 </UL>
 <BR>[Called By]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
 </UL>
 
-<P><STRONG><a name="[197]"></a>mat_postmult_diag</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, lin_alg.o(i.mat_postmult_diag))
+<P><STRONG><a name="[198]"></a>mat_postmult_diag</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, lin_alg.o(i.mat_postmult_diag))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = mat_postmult_diag
 </UL>
 <BR>[Called By]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
 </UL>
 
-<P><STRONG><a name="[196]"></a>mat_premult_diag</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, lin_alg.o(i.mat_premult_diag))
+<P><STRONG><a name="[197]"></a>mat_premult_diag</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, lin_alg.o(i.mat_premult_diag))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = mat_premult_diag
 </UL>
 <BR>[Called By]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
@@ -2267,7 +2272,7 @@ Global Symbols
 <LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_pri_res
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_dua_res
 <LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iterative_refinement
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[10d]"></a>measurements</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, main_mpc.o(i.measurements))
@@ -2281,13 +2286,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__measurements
 </UL>
 
-<P><STRONG><a name="[192]"></a>new_control</STRONG> (Thumb, 162 bytes, Stack size 12 bytes, mpctools.o(i.new_control))
+<P><STRONG><a name="[193]"></a>new_control</STRONG> (Thumb, 162 bytes, Stack size 12 bytes, mpctools.o(i.new_control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = new_control
 </UL>
 <BR>[Called By]<UL><LI><a href="#[174]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;push_current_controls_to_archive_data
 </UL>
 
-<P><STRONG><a name="[193]"></a>new_control_increment</STRONG> (Thumb, 160 bytes, Stack size 12 bytes, mpctools.o(i.new_control_increment))
+<P><STRONG><a name="[194]"></a>new_control_increment</STRONG> (Thumb, 160 bytes, Stack size 12 bytes, mpctools.o(i.new_control_increment))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = new_control_increment
 </UL>
 <BR>[Called By]<UL><LI><a href="#[174]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;push_current_controls_to_archive_data
@@ -2335,7 +2340,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller
 </UL>
 
-<P><STRONG><a name="[14c]"></a>osqp_solve</STRONG> (Thumb, 578 bytes, Stack size 64 bytes, osqp.o(i.osqp_solve))
+<P><STRONG><a name="[14c]"></a>osqp_solve</STRONG> (Thumb, 596 bytes, Stack size 64 bytes, osqp.o(i.osqp_solve))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1456<LI>Call Chain = osqp_solve &rArr; polish &rArr; init_linsys_solver &rArr; init_linsys_solver_qdldl &rArr; permute_KKT &rArr; amd_l_order &rArr; amd_l1 &rArr; amd_l2 &rArr; amd_l_postorder &rArr; amd_l_post_tree
 </UL>
 <BR>[Calls]<UL><LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_z
@@ -2345,14 +2350,15 @@ Global Symbols
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_status
 <LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_info
 <LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swap_vectors
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;has_solution
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_rho_estimate
 <LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_obj_val
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cold_start
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_termination
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adapt_rho
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ldivmod
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 <BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller
 </UL>
@@ -2362,8 +2368,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_prod
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prea_vec_copy
-<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
-<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_info
+<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_rho_vec
+<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_info
 </UL>
 <BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller
 </UL>
@@ -2371,10 +2377,10 @@ Global Symbols
 <P><STRONG><a name="[14a]"></a>osqp_update_lin_cost</STRONG> (Thumb, 102 bytes, Stack size 32 bytes, osqp.o(i.osqp_update_lin_cost))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = osqp_update_lin_cost &rArr; vec_ew_prod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mult_scalar
+<BR>[Calls]<UL><LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mult_scalar
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_prod
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prea_vec_copy
-<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_info
+<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_info
 </UL>
 <BR>[Called By]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller
 </UL>
@@ -2404,7 +2410,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LDLSolve
 </UL>
 
-<P><STRONG><a name="[18a]"></a>polish</STRONG> (Thumb, 600 bytes, Stack size 64 bytes, polish.o(i.polish))
+<P><STRONG><a name="[18b]"></a>polish</STRONG> (Thumb, 600 bytes, Stack size 64 bytes, polish.o(i.polish))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1392<LI>Call Chain = polish &rArr; init_linsys_solver &rArr; init_linsys_solver_qdldl &rArr; permute_KKT &rArr; amd_l_order &rArr; amd_l1 &rArr; amd_l2 &rArr; amd_l_postorder &rArr; amd_l_post_tree
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
@@ -2415,10 +2421,10 @@ Global Symbols
 <LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mat_vec
 <LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
 <LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_info
-<LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;project_normalcone
+<LI><a href="#[191]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;project_normalcone
 <LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iterative_refinement
 <LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_ypol_from_yred
-<LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;form_rhs_red
+<LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;form_rhs_red
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;form_Ared
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
@@ -2438,10 +2444,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_lin_cost
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_bounds
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;copy_csc_mat
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_dua_res
 <LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iterative_refinement
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[148]"></a>productab</STRONG> (Thumb, 108 bytes, Stack size 28 bytes, matrix_cal.o(i.productab))
@@ -2464,14 +2470,14 @@ Global Symbols
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controller_setup
 </UL>
 
-<P><STRONG><a name="[191]"></a>profiler_exists</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, profiler.o(i.profiler_exists))
+<P><STRONG><a name="[192]"></a>profiler_exists</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, profiler.o(i.profiler_exists))
 <BR><BR>[Called By]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_print
 </UL>
 
 <P><STRONG><a name="[16d]"></a>profiler_print</STRONG> (Thumb, 274 bytes, Stack size 1048 bytes, profiler.o(i.profiler_print))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1128<LI>Call Chain = profiler_print &rArr; get_profiler &rArr; create_profiler &rArr; malloc &rArr; internal_alloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[191]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_exists
+<BR>[Calls]<UL><LI><a href="#[192]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;profiler_exists
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_profiler
 <LI><a href="#[165]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;float2strF
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__write_string
@@ -2500,17 +2506,17 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_z
 </UL>
 
-<P><STRONG><a name="[190]"></a>project_normalcone</STRONG> (Thumb, 152 bytes, Stack size 28 bytes, proj.o(i.project_normalcone))
+<P><STRONG><a name="[191]"></a>project_normalcone</STRONG> (Thumb, 152 bytes, Stack size 28 bytes, proj.o(i.project_normalcone))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = project_normalcone
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[174]"></a>push_current_controls_to_archive_data</STRONG> (Thumb, 30 bytes, Stack size 12 bytes, mpctools.o(i.push_current_controls_to_archive_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = push_current_controls_to_archive_data &rArr; new_control_increment
 </UL>
-<BR>[Calls]<UL><LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_control_increment
-<LI><a href="#[192]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_control
+<BR>[Calls]<UL><LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_control_increment
+<LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;new_control
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loop
 </UL>
@@ -2532,7 +2538,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> suitesparse_config.o(.data)
 </UL>
-<P><STRONG><a name="[18c]"></a>reset_info</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, auxil.o(i.reset_info))
+<P><STRONG><a name="[18d]"></a>reset_info</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, auxil.o(i.reset_info))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = reset_info &rArr; update_status
 </UL>
 <BR>[Calls]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_status
@@ -2545,16 +2551,16 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = scale_data &rArr; compute_inf_norm_cols_KKT &rArr; mat_inf_norm_cols_sym_triu
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[198]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mean
-<LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_sqrt
-<LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_recipr
-<LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mat_premult_diag
-<LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mat_postmult_diag
-<LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mat_mult_scalar
+<LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mean
+<LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_sqrt
+<LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_recipr
+<LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mat_premult_diag
+<LI><a href="#[198]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mat_postmult_diag
+<LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mat_mult_scalar
 <LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mat_inf_norm_cols_sym_triu
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_set_scalar
 <LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_norm_inf
-<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mult_scalar
+<LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mult_scalar
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_prod
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
@@ -2588,19 +2594,19 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> qdldl_interface.o(i.init_linsys_solver_qdldl)
 </UL>
-<P><STRONG><a name="[18b]"></a>store_solution</STRONG> (Thumb, 344 bytes, Stack size 40 bytes, auxil.o(i.store_solution))
+<P><STRONG><a name="[18c]"></a>store_solution</STRONG> (Thumb, 344 bytes, Stack size 40 bytes, auxil.o(i.store_solution))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = store_solution &rArr; unscale_solution &rArr; vec_ew_prod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_set_scalar
 <LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_norm_inf
-<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mult_scalar
+<LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mult_scalar
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unscale_solution
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prea_vec_copy
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
+<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;has_solution
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cold_start
-<LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;has_solution
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_solve
 </UL>
@@ -2649,10 +2655,10 @@ Global Symbols
 <P><STRONG><a name="[19b]"></a>unscale_solution</STRONG> (Thumb, 82 bytes, Stack size 24 bytes, scaling.o(i.unscale_solution))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = unscale_solution &rArr; vec_ew_prod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mult_scalar
+<BR>[Calls]<UL><LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_mult_scalar
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_ew_prod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<BR>[Called By]<UL><LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 </UL>
 
 <P><STRONG><a name="[19d]"></a>update_KKT_A</STRONG> (Thumb, 64 bytes, Stack size 20 bytes, kkt.o(i.update_KKT_A))
@@ -2681,7 +2687,7 @@ Global Symbols
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_dua_res
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_solve
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[78]"></a>update_linsys_solver_matrices_qdldl</STRONG> (Thumb, 142 bytes, Stack size 72 bytes, qdldl_interface.o(i.update_linsys_solver_matrices_qdldl))
@@ -2704,7 +2710,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> qdldl_interface.o(i.init_linsys_solver_qdldl)
 </UL>
-<P><STRONG><a name="[18d]"></a>update_rho_vec</STRONG> (Thumb, 522 bytes, Stack size 56 bytes, auxil.o(i.update_rho_vec))
+<P><STRONG><a name="[18e]"></a>update_rho_vec</STRONG> (Thumb, 522 bytes, Stack size 56 bytes, auxil.o(i.update_rho_vec))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = update_rho_vec &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
@@ -2724,7 +2730,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_solve
 <LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_setup
-<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_info
+<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_info
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_termination
 </UL>
 
@@ -2790,7 +2796,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
 <BR>[Called By]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_setup
-<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[13a]"></a>vec_ew_max_vec</STRONG> (Thumb, 68 bytes, Stack size 28 bytes, lin_alg.o(i.vec_ew_max_vec))
@@ -2811,13 +2817,13 @@ Global Symbols
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
 </UL>
 
-<P><STRONG><a name="[195]"></a>vec_ew_recipr</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, lin_alg.o(i.vec_ew_recipr))
+<P><STRONG><a name="[196]"></a>vec_ew_recipr</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, lin_alg.o(i.vec_ew_recipr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = vec_ew_recipr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
 </UL>
 
-<P><STRONG><a name="[194]"></a>vec_ew_sqrt</STRONG> (Thumb, 60 bytes, Stack size 24 bytes, lin_alg.o(i.vec_ew_sqrt))
+<P><STRONG><a name="[195]"></a>vec_ew_sqrt</STRONG> (Thumb, 60 bytes, Stack size 24 bytes, lin_alg.o(i.vec_ew_sqrt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = vec_ew_sqrt &rArr; __hardfp_sqrtf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sqrtf
@@ -2825,7 +2831,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
 </UL>
 
-<P><STRONG><a name="[198]"></a>vec_mean</STRONG> (Thumb, 92 bytes, Stack size 32 bytes, lin_alg.o(i.vec_mean))
+<P><STRONG><a name="[199]"></a>vec_mean</STRONG> (Thumb, 92 bytes, Stack size 32 bytes, lin_alg.o(i.vec_mean))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = vec_mean &rArr; __aeabi_l2f &rArr; _float_epilogue
 </UL>
 <BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_l2f
@@ -2833,19 +2839,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
 </UL>
 
-<P><STRONG><a name="[18e]"></a>vec_mult_scalar</STRONG> (Thumb, 48 bytes, Stack size 20 bytes, lin_alg.o(i.vec_mult_scalar))
+<P><STRONG><a name="[18f]"></a>vec_mult_scalar</STRONG> (Thumb, 48 bytes, Stack size 20 bytes, lin_alg.o(i.vec_mult_scalar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = vec_mult_scalar
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osqp_update_lin_cost
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unscale_solution
-<LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
 </UL>
 
 <P><STRONG><a name="[136]"></a>vec_norm_inf</STRONG> (Thumb, 94 bytes, Stack size 20 bytes, lin_alg.o(i.vec_norm_inf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = vec_norm_inf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<BR>[Called By]<UL><LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_primal_infeasible
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;is_dual_infeasible
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;compute_rho_estimate
@@ -2876,7 +2882,7 @@ Global Symbols
 <P><STRONG><a name="[12f]"></a>vec_set_scalar</STRONG> (Thumb, 36 bytes, Stack size 20 bytes, lin_alg.o(i.vec_set_scalar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = vec_set_scalar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
+<BR>[Called By]<UL><LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cold_start
 <LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_ypol_from_yred
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scale_data
@@ -3030,8 +3036,8 @@ Local Symbols
 <P><STRONG><a name="[b7]"></a>__NVIC_SetPriority</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, stm32f7xx_hal_cortex.o(i.__NVIC_SetPriority))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __NVIC_SetPriority
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SYSTICK_Config
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SYSTICK_Config
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 </UL>
 
 <P><STRONG><a name="[c8]"></a>TIM_ITRx_SetConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f7xx_hal_tim.o(i.TIM_ITRx_SetConfig))
@@ -3095,12 +3101,6 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_xz_tilde
 </UL>
 
-<P><STRONG><a name="[19a]"></a>has_solution</STRONG> (Thumb, 84 bytes, Stack size 8 bytes, auxil.o(i.has_solution))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = has_solution
-</UL>
-<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_solution
-</UL>
-
 <P><STRONG><a name="[1a1]"></a>update_z_tilde</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, auxil.o(i.update_z_tilde))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = update_z_tilde
 </UL>
@@ -3133,13 +3133,13 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;int_vec_set_scalar
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;csc_spalloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
-<P><STRONG><a name="[18f]"></a>form_rhs_red</STRONG> (Thumb, 184 bytes, Stack size 20 bytes, polish.o(i.form_rhs_red))
+<P><STRONG><a name="[190]"></a>form_rhs_red</STRONG> (Thumb, 184 bytes, Stack size 20 bytes, polish.o(i.form_rhs_red))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = form_rhs_red
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[16b]"></a>get_ypol_from_yred</STRONG> (Thumb, 216 bytes, Stack size 32 bytes, polish.o(i.get_ypol_from_yred))
@@ -3147,7 +3147,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vec_set_scalar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[172]"></a>iterative_refinement</STRONG> (Thumb, 308 bytes, Stack size 88 bytes, polish.o(i.iterative_refinement))
@@ -3159,7 +3159,7 @@ Local Symbols
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
+<BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;polish
 </UL>
 
 <P><STRONG><a name="[de]"></a>LDLSolve</STRONG> (Thumb, 78 bytes, Stack size 48 bytes, qdldl_interface.o(i.LDLSolve))
