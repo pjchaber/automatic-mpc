@@ -373,7 +373,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F746xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include;..\..\..\Libs\C;..\..\..\Libs\C\osqp\include;..\..\..\Libs\C\osqp\lin_sys;..\..\..\Libs\C\osqp\lin_sys\direct\pardiso;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_sources\include;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\include</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include;..\..\..\Libs\C;..\..\..\Libs\C\osqp\include;..\..\..\Libs\C\osqp\lin_sys;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\qdldl_sources\include;..\..\..\Libs\C\osqp\lin_sys\direct\qdldl\amd\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
