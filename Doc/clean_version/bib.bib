@@ -1,0 +1,1286 @@
+%%
+% This file is part of AutoMATiC.
+% AutoMATiC -- Automatic code generation based on the MATLAB and 
+% C languages.
+% 
+% Copytight (C) 2018-2019 by Patryk Chaber. Developed within the 
+% Warsaw University of Technology, Institute of Control and 
+% Computation Engineering under supervision of Maciej Lawrynczuk. 
+% All rights reserved.
+% 
+% AutoMATiC is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 3 of the License, or
+% (at your option) any later version.
+% 
+% AutoMATiC is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with AutoMATiC.  If not, see <https://www.gnu.org/licenses/>.
+%
+
+@PREAMBLE{ {\providecommand{\noopsort}[1]{}} }
+
+% Książka Stachurskiego o optymalizacji
+@book{stachurski2009,title={Wprowadzenie do optymalizacji},
+  author={ A. Stachurski},
+  year={2009},
+  publisher={Oficyna Wydawnicza Politechniki Warszawskiej}
+}
+
+% Moje artykuły
+@INPROCEEDINGS{Chaber2015a,title="{RBF} neural networks for modelling and predictive control: An application to a neutralisation process",
+	author={P. Chaber and M. {\L}awry{\'{n}}czuk}, 
+	booktitle={2015 20th International Conference on Methods and Models in Automation and Robotics (MMAR)}, 
+	year={2015}, 
+	pages={776--781}, 
+}
+@InProceedings{Chaber2015b,title={Recurrent Polynomial and Neural Structures in Modelling of a Neutralisation Process},
+	author="P. Chaber and M. {\L}awry{\'{n}}czuk",
+	editor="R. Szewczyk	and C. Zieli{\'{n}}ski and M. Kaliczy{\'{n}}ska",
+	booktitle="Progress in Automation, Robotics and Measuring Techniques",
+	year="2015",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="23--32",
+}
+@article{Chaber2015c,title={Stanowisko laboratoryjne do badania wielowymiarowych algorytmów regulacji}, 
+	author = {Wojtulewicz, A. and Chaber, P. and {\L}awry{\'{n}}czuk, M.},
+	journal = {Pomiary Automatyka Robotyka},
+	pages = {15--20},
+	volume = {R. 19, nr 4},
+	year = {2015},
+}
+@InProceedings{Chaber2016a,title="Implementation of Dynamic Matrix Control Algorithm Using a Microcontroller with Fixed-Point Arithmetic",
+	author="P. Chaber",
+	editor="R. Szewczyk	and C. Zieli{\'{n}}ski and M. Kaliczy{\'{n}}ska",
+	booktitle="Challenges in Automation, Robotics and Measurement Techniques",
+	year="2016",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="51--61",
+}
+@INPROCEEDINGS{Chaber2016b,title={Multiple-input multiple-output laboratory stand for process control education}, 
+	author={A. Wojtulewicz and P. Chaber and M. {\L}awry{\'{n}}czuk}, 
+	booktitle={2016 21st International Conference on Methods and Models in Automation and Robotics (MMAR)}, 
+	year={2016}, 
+	pages={466--471}, 
+}
+@INPROCEEDINGS{Chaber2016c,title={Auto-generation of advanced control algorithms' code for microcontrollers using transcompiler}, 
+	author={P. Chaber and M. {\L}awry{\'{n}}czuk}, 
+	booktitle={2016 21st International Conference on Methods and Models in Automation and Robotics (MMAR)}, 
+	year={2016}, 
+	pages={454--459}, 
+}
+@INPROCEEDINGS{Chaber2016d,title="Effectiveness of {PID} and {DMC} control algorithms automatic code generation for microcontrollers: Application to a thermal process", 
+	author={P. Chaber and M. {\L}awry{\'{n}}czuk}, 
+	booktitle={2016 3rd Conference on Control and Fault-Tolerant Systems (SysTol)}, 
+	year={2016}, 
+	pages={618--623}, 
+}
+@InProceedings{Chaber2017a,title="Implementation of Analytical Generalized Predictive Controller for Very Fast Applications Using Microcontrollers: Preliminary Results",
+	author="P. Chaber and M. {\L}awry{\'{n}}czuk",
+	editor="W. Mitkowski and J. Kacprzyk and K. Oprz{\k{e}}dkiewicz and P. Skruch",
+	booktitle="Trends in Advanced Intelligent Control, Optimization and Automation",
+	year="2017",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="378--387",
+}
+@InProceedings{Chaber2017b,title="Automatic Code Generation of {MIMO} Model Predictive Control Algorithms using Transcompiler",
+	author="P. Chaber and M. {\L}awry{\'{n}}czuk",
+	editor="W. Mitkowski and J. Kacprzyk and K. Oprz{\k{e}}dkiewicz and P. Skruch",
+	booktitle="Trends in Advanced Intelligent Control, Optimization and Automation",
+	year="2017",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="315--324",
+}
+@Article{Chaber2018,title={Pruning of recurrent neural models: an optimal brain damage approach},
+	author="P. Chaber and M. {\L}awry{\'{n}}czuk",
+	journal="Nonlinear Dynamics",
+	year="2018",
+	day="01",
+	volume="92",
+	number="2",
+	pages="763--780",
+}
+
+% Teoria regulacji
+@article{Cutler1980,
+	affiliation = {Shell Oil Company, Houston, Texas},
+	author = { C.R. Cutler and B.L. Ramaker},
+	journal = {Joint Automatic Control Conference},
+	pages = {72},
+	title = {Dynamic matrix control -- A computer control algorithm},
+	volume = {17},
+	year = {1980},
+}
+
+@article{Prett1980,
+	affiliation = {Shell Oil Company, Houston, Texas},
+	author = { D.M. Prett and  R.D. Gillette},
+	journal = {Joint Automatic Control Conference},
+	pages = {73},
+	title = {Optimization and constrained multivariable control of a catalytic cracking unit},
+	volume = {17},
+	year = {1980},
+}
+
+@article{Garcia1986,
+	author = { C.E. Garcia  and  A.M. Morshedi },
+	title = "QUADRATIC PROGRAMMING SOLUTION OF DYNAMIC MATRIX CONTROL ({QDMC})",
+	journal = {Chemical Engineering Communications},
+	volume = {46},
+	number = {1-3},
+	pages = {73--87},
+	year  = {1986},
+	publisher = {Taylor & Francis},
+}
+
+@article{Clarke1987,
+	year = {1987},
+	author={D.W. Clarke and C. Mohtadi and P.S. Tuffs},
+	title = {{Generalized predictive control}},
+	journal = {Automatica},
+	volume = {23},
+	pages = {137--160},
+}
+@INPROCEEDINGS{Uyanik2007, 
+author={H.U. Uyanik and N. Tarim}, 
+booktitle={2007 6th IEEE Dallas Circuits and Systems Workshop on System-on-Chip}, 
+title="{PID}-Controlled {PLL} for Fast Frequency-Hopped Systems", 
+year={2007}, 
+pages={1--3}, 
+}
+
+%%%%%%%%%%%%%%%% NIELINIOWE ALGORYTMY REGULACJI PREDYKCYJNEJ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Huang2015,
+title = "Nonlinear Model Predictive Control of a Diesel Engine Air Path: A Comparison of Constraint Handling and Computational Strategies",
+journal = "IFAC-PapersOnLine",
+volume = "48",
+number = "23",
+pages = "372--379",
+year = "2015",
+author = "M. Huang and H. Nakada and K. Butts and I. Kolmanovsky",
+}
+@article{Hadef2013,
+title = "Explicit-Ready Nonlinear Model Predictive Control for Turbocharged Spark-Ignited Engines",
+journal = "IFAC Proceedings Volumes",
+volume = "46",
+number = "21",
+pages = "189--194",
+year = "2013",
+author = "J. El Hadef and G. Colin and Y. Chamaillard and S. Olaru and P. Rodriguez-Ayerbe and V. Talon"
+}
+@article{Yu2013,
+title = "A Battery Management System using Nonlinear Model Predictive Control for a Hybrid Electric Vehicle",
+journal = "IFAC Proceedings Volumes",
+volume = "46",
+number = "21",
+pages = "301--306",
+year = "2013",
+author = "K. Yu and M. Mukai and T. Kawabe",
+}
+
+%%%%%%%%%%%%%%%% PRZYKŁADY Z PRZEMYSŁU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@INPROCEEDINGS{Tian2016, 
+author={H. Tian and Q. Lu and R.B. Gopaluni and V.M. Zavala and J.A. Olson}, 
+booktitle={2016 American Control Conference (ACC)}, 
+title={Economic nonlinear model predictive control for mechanical pulping processes}, 
+year={2016}, 
+pages={1796--1801}, 
+}
+
+@INPROCEEDINGS{Xuan2017, 
+author={D.X. Hieu and D.T.L. Anh and N.D. Phuoc and D.V. Thanh and D.D. Cuong}, 
+booktitle={2017 International Conference on System Science and Engineering (ICSSE)}, 
+title="Temperature prediction and model predictive control ({MPC}) of a distillation column using an artificial neural network based mode", 
+year={2017}, 
+pages={113--118}, 
+}
+
+@INPROCEEDINGS{Oravec2017, 
+author={J. Oravec and M. Bakošová and L. Hanulová and M. Horváthová}, 
+booktitle={2017 21st International Conference on Process Control (PC)}, 
+title="Design of robust {MPC} with integral action for a laboratory continuous stirred-tank reactor", 
+year={2017}, 
+pages={459--464}, 
+}
+
+@INPROCEEDINGS{Durmaz2017, 
+author="B.E. Durmaz and B. Kaçmaz and \.{I}. Mutlu and M.T. Söylemez", 
+booktitle={2017 10th International Conference on Electrical and Electronics Engineering (ELECO)}, 
+title="Implementation and comparison of {LQR-MPC} on active suspension system", 
+year={2017}, 
+pages={828--835}, 
+}
+
+
+%%%%%%%%%%%%% ARTYKUŁY OD PROF. ŁAWRYŃCZUKA %%%%%%%%%%%%%%%%%%%%%%
+@article{Qin2003,
+title = "A survey of industrial model predictive control technology",
+journal = "Control Engineering Practice",
+volume = "11",
+number = "7",
+pages = "733--764",
+year = "2003",
+author = "S.J. Qin and T.A. Badgwell"
+}
+
+@INPROCEEDINGS{Boiroux2017, 
+author={D. Boiroux and J.B. Jorgensen}, 
+booktitle={2017 21st International Conference on Process Control (PC)}, 
+title={C code generation applied to nonlinear model predictive control for an artificial pancreas}, 
+year={2017}, 
+pages={327--332}, }
+
+@ARTICLE{Colin2007, 
+author={G. Colin and Y. Chamaillard and G. Bloch and G. Corde}, 
+journal={IEEE Transactions on Neural Networks}, 
+title="Neural Control of Fast Nonlinear Systems -- Application to a Turbocharged SI Engine With {VCT}", 
+year={2007}, 
+volume={18}, 
+number={4}, 
+pages={1101--1114}, }
+
+@ARTICLE{Abbas2017, 
+author={M.A. Abbas and R. Milman and J.M. Eklund}, 
+journal={Canadian Journal of Electrical and Computer Engineering}, 
+title={Obstacle Avoidance in Real Time With Nonlinear Model Predictive Control of Autonomous Vehicles}, 
+year={2017}, 
+volume={40}, 
+number={1}, 
+pages={12--22}, }
+
+@article{Franze2015,
+title = "An obstacle avoidance model predictive control scheme for mobile robots subject to nonholonomic constraints: A sum-of-squares approach",
+journal = "Journal of the Franklin Institute",
+volume = "352",
+number = "6",
+pages = "2358--2380",
+year = "2015",
+author = "G. Franzè and W. Lucia"
+}
+@article{Liniger2014,
+	year = {2014},
+	author={L. Liniger and A. Domahidi and M. Morari},
+	title = {{Optimization-based autonomous racing of 1:43 scale RC cars}},
+	journal = {Optimal Control Applications and Methods},
+	volume = {36},
+	pages = {628--647},
+}
+
+@article{Weimann2018,
+title = "Energy-optimal adaptive cruise control combining model predictive control and dynamic programming",
+journal = "Control Engineering Practice",
+volume = "72",
+pages = "125--137",
+year = "2018",
+author = "A. Weißmann and D. Görges and X. Lin",
+}
+@article{Shakouri2014,
+title = "Nonlinear Model Predictive Control approach in design of Adaptive Cruise Control with automated switching to cruise control",
+journal = "Control Engineering Practice",
+volume = "26",
+pages = "160--177",
+year = "2014",
+author = "P. Shakouri and A. Ordys",
+}
+
+@article{c  ,
+title = "Outdoor flocking of quadcopter drones with decentralized model predictive control",
+journal = "ISA Transactions",
+volume = "71",
+pages = "84--92",
+year = "2017",
+author = "Q. Yuan and J. Zhan and X. Li",
+}
+
+
+
+
+%%%%%%%%%%%%% PRZYKŁADY MPC NA uC %%%%%%%%%%%%%%%%%%%%%%
+
+@INPROCEEDINGS{Prasetyo2017, 
+author={H.F. Prasetyo and A.S. Rohman and M.R.A.R. Santabudi}, 
+booktitle={2017 3rd International Conference on Science in Information Technology (ICSITech)}, 
+title="Implementation of model predictive control using Algorithm-3 on {Arduino} {Mega} 2560 for speed control of {BLDC} motor", 
+year={2017}, 
+pages={642--647}, 
+}
+
+@INPROCEEDINGS{Malouche2015, 
+author={I. Malouche and A.K. Abbes and F. Bouani}, 
+booktitle={2015 IEEE 12th International Multi-Conference on Systems, Signals Devices (SSD15)}, 
+title={Automatic model predictive control implementation in a high-performance microcontroller}, 
+year={2015}, 
+pages={1--6}, 
+}
+
+@article{Carpiuc2016,
+	year = {2016},
+	author={S.-C. Carpiuc and C. Lazar},
+	title = {{Real-time multi-rate predictive cascade speed control of synchronous machines in automotive
+	electrical traction drives}},
+	journal = {IEEE Transactions of Industrial Electronics},
+	volume = {63},
+	pages = {5133--5142},
+}
+
+@ARTICLE{Gulan2017, 
+author={M. Gulan and G. Takács and N.A. Nguyen and S. Olaru and P. Rodríguez-Ayerbe and B. Rohal'-Ilkiv}, 
+journal={IEEE Transactions on Control Systems Technology}, 
+title={Efficient Embedded Model Predictive Vibration Control via Convex Lifting}, 
+year={2017}, 
+pages={1--15}, 
+}
+
+@INPROCEEDINGS{Baca2016, 
+author={T. Baca and G. Loianno and M. Saska}, 
+booktitle={2016 21st International Conference on Methods and Models in Automation and Robotics (MMAR)}, 
+title={Embedded model predictive control of unmanned micro aerial vehicles}, 
+year={2016}, 
+pages={992--997}, 
+}
+
+
+
+
+
+
+
+%%%%%%%%%%%%% PORÓWNANIE PID I MPC %%%%%%%%%%%%%%%%
+
+@INPROCEEDINGS{Bakarac2018, 
+author={P. Bakaráč and M. Klaučo and M. Fikar}, 
+booktitle={2018 Cybernetics Informatics (K I)}, 
+title="Comparison of inverted pendulum stabilization with {PID}, {LQ}, and {MPC} control", 
+year={2018}, 
+pages={1--6}, 
+}
+
+@INPROCEEDINGS{Ali2017, 
+author={A. Ali and S.F. Ahmed and M.K. Joyo and K. Kushsairy}, 
+booktitle={2017 IEEE 3rd International Conference on Engineering Technologies and Social Sciences (ICETSS)}, 
+title="{MPC-PID} comparison for controlling therapeutic upper limb rehabilitation robot under perturbed conditions", 
+year={2017}, 
+pages={1--5}, 
+}
+
+@INPROCEEDINGS{Salem2015, 
+author={F. Salem and M.I. Mosaad}, 
+booktitle={Michael Faraday IET International Summit 2015}, 
+title="A comparison between {MPC} and optimal {PID} controllers: Case studies", 
+year={2015}, 
+pages={59--65}, 
+}
+
+@INPROCEEDINGS{Mohammad2017, 
+author={N.N. Mohammad and A.A. Azman and M.H. Marzaki and R. Adnan and M.H.F. Rahiman and S.N. Tajuddin}, 
+booktitle={2017 IEEE 8th Control and System Graduate Research Colloquium (ICSGRC)}, 
+title="Evaluation on energy consumption in compact hydro distillation process between {MPC} and {PID} control", 
+year={2017}, 
+pages={116--121}, 
+}
+
+@INPROCEEDINGS{Jingyun2017, 
+author={L. Jingyun and L. Ping}, 
+booktitle={2017 International Conference on Advanced Mechatronic Systems (ICAMechS)}, 
+title={Temperature and humidity control with a model predictive control method in the air-conditioning system}, 
+year={2017}, 
+pages={408--412}, 
+}
+
+@INPROCEEDINGS{Phuong2018, 
+author={T.H. Phuong and M.P. Belov and T. Dang Khoa}, 
+booktitle={2018 IEEE Conference of Russian Young Researchers in Electrical and Electronic Engineering (EIConRus)}, 
+title="Model predictive controller based on {Laguerre} functions for large radio telescope servo control system", 
+year={2018}, 
+pages={1003--1007}, 
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% KSIĄŻKI I ARTYKUŁY Z TEORIĄ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Book{Tatjewski2016,
+	author = "P. Tatjewski", 
+	editor = "", 
+	title = "Sterowanie zaawansowane obiektów przemysłowych. Struktury i algorytmy. Wydanie drugie zmienione", 
+	publisher = "Akademicka Oficyna Wydawnicza EXIT Andrzej Lang", 
+	year = 2016, 
+	address = "", 
+}
+@article{Lawrynczuk2003,
+	author="M. {\L}awry{\'{n}}czuk and P. Tatjewski",
+	title = "Efektywny obliczeniowo algorytm wielowymiarowej regulacji predykcyjnej dla modeli typu wejście-wyjście",
+	journal = "Pomiary Automatyka Kontrola",
+	volume = "R. 49, nr 9",
+	year = "2003",
+	pages = "10--14",
+}
+@book{Maciejowski2002,
+	author={J.M. Maciejowski},
+	year={2001},
+	title={Predictive Control with Constraints},
+	publisher={Prentice Hall},
+	address={Harlow}
+}
+@book{Camacho1999,
+	author={E.F. Camacho and C. Bordons},
+	year={1999},
+	title={Model Predictive Control},
+	publisher={Springer},
+	address={London}
+}
+@book{Aho2002,
+  title={Kompilatory: regu{\l}y, metody i narz{\k{e}}dzia},
+  author={A.V. Aho  and R. Sethi and J.D. Ullman},
+  year={2002},
+  publisher={Wydawnictwa Naukowo-Techniczene}
+}
+@book{Rossiter2003,
+  title={Model-Based Predictive Control: A Practical Approach},
+  author={J.A. Rossiter},
+  year={2003},
+  publisher={CRC Press}
+}
+
+%%%%%%%%%%%%%%%%%% HISTORIA PID %%%%%%%%%%%%%%%%%%%%
+@article{Bennett2001,
+title = "The past of {PID} controllers",
+journal = "Annual Reviews in Control",
+volume = "25",
+pages = "43--53",
+year = "2001",
+author = "S. Bennett",
+}
+
+
+%%%%%%%%%%%%%%%%%% REGULACJA HIERARCHICZNA %%%%%%%%%%%%%%%%%%%%
+
+@article{Wahyudie2017,
+title = "Hierarchical Control Strategy for Maximising Power Conversion in Heaving Wave Energy Converters",
+journal = "IFAC-PapersOnLine",
+volume = "50",
+number = "1",
+pages = "14711--14716",
+year = "2017",
+author = "A. Wahyudie and O. Saeed and M. Jama",
+}
+
+%%%%%%%%%%%%%%% ALGORYTMY PID Z DOBIERANIEM PARAMETRÓW PRZEZ PSO %%%%%%%%%%%%%%%%%%%%%%%%%
+
+@INPROCEEDINGS{Mercy2017, 
+author={D. Mercy and S.M. Girirajkumar}, 
+booktitle={2017 International Conference on Computing Methodologies and Communication (ICCMC)}, 
+title="An algorithmic approach based {PSO-PID} tuning of a real time conical tank process used in waste water treatment", 
+year={2017}, 
+pages={871--876}, 
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% PID W STRUKTURZE PRZEŁĄCZANEJ %%%%%%%%%%%%%%%%%%%%%%%%%
+
+@INPROCEEDINGS{Jiang2017, 
+author={X. Jiang and N. Cao and Z. Wu and Z. Zhang and M. Liu and S. Xie}, 
+booktitle={2017 IEEE 2nd Advanced Information Technology, Electronic and Automation Control Conference (IAEAC)}, 
+title="A fast approaching control method for nano-positioning systems with switched {PID} controller", 
+year={2017}, 
+pages={1514--1518}, 
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% ACADO %%%%%%%%%%%%%%%%%%%%%%%%%
+@ARTICLE{Houska2011a,
+	author = {B. Houska and H.J. Ferreau and M. Diehl},
+	title = {{ACADO} {Toolkit} -- {An} {Open} {Source} {Framework} for
+	{Automatic} {Control} and {Dynamic} {Optimization}},
+	journal = {Optimal Control Applications and Methods},
+	year = {2011},
+	volume = {32},
+	pages = {298--312},
+	number = {3}
+}
+@ARTICLE{Houska2011b,
+	author = {B. Houska and H.J. Ferreau and M. Diehl},
+	title = {{An Auto-Generated Real-Time Iteration Algorithm for
+	Nonlinear {MPC} in the Microsecond Range}},
+	journal = {Automatica},
+	year = {2011},
+	volume = {47},
+	pages = {2279--2285},
+	number = {10},
+}
+@MISC{acadoManual,
+	author = {B. Houska and H.J. Ferreau and M. Vukov and R. Quirynen},
+	title = {{ACADO} {T}oolkit {U}ser’s {M}anual},
+	howpublished = {http://www.acadotoolkit.org},
+	year = {2009--2013}
+}
+@MISC{acadoForMatlabManual,
+	author = {D. Ariens and B. Houska and H.J. Ferreau},
+	title = {{ACADO} for Matlab User’s Manual},
+	howpublished = {http://www.acadotoolkit.org},
+	year = {2010--2011}
+}
+@INPROCEEDINGS{Ferreau2012,
+	author = {H.J. Ferreau and T. Kraus and M. Vukov and W. Saeys
+	and M. Diehl},
+	title = {High-Speed Moving Horizon Estimation based on Automatic
+	Code Generation},
+	booktitle = {Proceedings of the 51th IEEE Conference on Decision and
+	Control (CDC 2012)},
+	year = {2012}
+}
+@INPROCEEDINGS{Vukov2012,
+	author = {M. Vukov and W. Van Loock and B. Houska and H.J. Ferreau
+	and J. Swevers
+	and M. Diehl},
+	title = {{E}xperimental {V}alidation of {N}onlinear {MPC} on an
+	{O}verhead {C}rane using {A}utomatic {C}ode {G}eneration},
+	booktitle = {The 2012 American Control Conference, Montreal, Canada.},
+	year = {2012}
+}
+@INPROCEEDINGS{Vukov2013,
+	author = {M. Vukov and A. Domahidi and H.J. Ferreau and M. Morari
+	and Diehl, M.},
+	title = {{A}uto-generated {A}lgorithms for {N}onlinear {M}odel
+	{P}redicitive {C}ontrol on {L}ong and on {S}hort {H}orizons},
+	booktitle = {Proceedings of the 52nd Conference on Decision and
+	Control (CDC)},
+	year = {2013}
+}
+@article{Houska2011,
+	year = {2011},
+	author={B. Houska and H.J. Ferreau and M. Diehl},
+	title = {{An auto-generated real-time iteration algorithm for nonlinear MPC in the microsecond range}},
+	journal = {Automatica},
+	volume = {60},
+	pages = {2279--2285},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Multi-Parametric Toolbox 3 %%%%%%%%%%%%%%%%%%%%%%%%%
+@InProceedings {MPT3,
+    author={M. Herceg and M. Kvasnica and C.N. Jones and M. Morari},
+    title={{Multi-Parametric Toolbox 3.0}},
+    booktitle={Proc.~of the European Control Conference},
+    year={2013},
+    address={Z\"urich, Switzerland},
+    pages = {502--510},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% NIELINIOWE ALGORYTMY MPC -- ŁAWRYŃCZUK %%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Lawrynczuk2012,
+	title={Sieci neuronowe w efektywnych obliczeniowo algorytmach regulacji predykcyjnej},
+	author = "M. {\L}awry{\'{n}}czuk",
+	journal={Prace Naukowe Politechniki Warszawskiej. Elektronika},
+	pages={5--317},
+	year={2012}
+}
+@article{Lawrynczuk2017,
+	title = "Nonlinear predictive control of a boiler-turbine unit: A state-space approach with successive on-line model linearisation and quadratic optimisation",
+	journal = "ISA Transactions",
+	volume = "67",
+	pages = "476--495",
+	year = "2017",
+	author = "M. {\L}awry{\'{n}}czuk",
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%% REGULACJA PREDYKCYJNA %%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Zou2017,
+	title = "Electrothermal dynamics-conscious lithium-ion battery cell-level charging management via state-monitored predictive control",
+	journal = "Energy",
+	volume = "141",
+	pages = "250--259",
+	year = "2017",
+	author = "C. Zou and X. Hu and Z. Wei and X. Tang",
+}
+@article{Jiang2012,
+	title = "Model analysis and performance analysis of two industrial {MPCs}",
+	journal = "Control Engineering Practice",
+	volume = "20",
+	number = "3",
+	pages = "219--235",
+	year = "2012",
+	author = "H. Jiang and S.L. Shah and B. Huang and B. Wilson and R. Patwardhan and F. Szeto",
+}
+@article{Wiese2015,
+	title = "Model reduction and {MIMO} model predictive control of gas turbine systems",
+	journal = "Control Engineering Practice",
+	volume = "45",
+	pages = "194--206",
+	year = "2015",
+	author = "A.P. Wiese and M.J. Blom and C. Manzie and M.J. Brear and A. Kitchener",
+}
+@article{Attia2014,
+	title = "Nonlinear cascade strategy for longitudinal control in automated vehicle guidance",
+	journal = "Control Engineering Practice",
+	volume = "29",
+	pages = "225--234",
+	year = "2014",
+	author = "R. Attia and R. Orjuela and M. Basset",
+}
+@article{Bello2014,
+	title = "Coagulation process control in water treatment plants using multiple model predictive control",
+	journal = "Alexandria Engineering Journal",
+	volume = "53",
+	number = "4",
+	pages = "939--948",
+	year = "2014",
+	author = "O. Bello and Y. Hamam and K. Djouani",
+}
+@article{Bachtiar2014,
+	title = "Nonlinear model predictive missile control with a stabilising terminal constraint",
+	journal = "IFAC Proceedings Volumes",
+	volume = "47",
+	number = "3",
+	pages = "457--462",
+	year = "2014",
+	author = "V. Bachtiar and T. Mühlpfordt and W.H. Moase and T. Faulwasser and R. Findeisen and C. Manzie",
+}
+@article{Pandey2016,
+	title = "Control of twin-rotor {MIMO} system using multiple models with second level adaptation",
+	journal = "IFAC-PapersOnLine",
+	volume = "49",
+	number = "1",
+	pages = "676--681",
+	year = "2016",
+	author = "V.K. Pandey and I. Kar and C. Mahanta",
+}
+@article{diCapaci2017,
+	title = "A valve stiction tolerant formulation of {MPC} for industrial processes",
+	journal = "IFAC-PapersOnLine",
+	volume = "50",
+	number = "1",
+	pages = "9044--9049",
+	year = "2017",
+	author = "R. Bacci di Capaci and M. Vaccari and G. Pannocchia",
+}
+@article{Broomhead2014,
+	title = "A Robust Model Predictive Control Framework for Diesel Generators",
+	journal = "IFAC Proceedings Volumes",
+	volume = "47",
+	number = "3",
+	pages = "11848--11853",
+	year = "2014",
+	author = "T. Broomhead and C. Manzie and L. Eriksson and M. Brear and P. Hield",
+}
+
+@INPROCEEDINGS{Shnayder2017, 
+	author={D.A. Shnayder and L.S. Kazarinov and T.A. Barbasova and A.V. Lipatnikov}, 
+	booktitle={2017 Intelligent Systems Conference (IntelliSys)}, 
+	title={Data mining and model-predictive approach for blast furnace thermal control}, 
+	year={2017}, 
+	pages={653--660}, 
+}
+@ARTICLE{Falck2018, 
+	author={J. Falck and G. Buticchi and M. Liserre}, 
+	journal={IEEE Transactions on Industry Applications}, 
+	title={Thermal Stress Based Model Predictive Control of Electric Drives}, 
+	year={2018}, 
+	volume={54}, 
+	number={2}, 
+	pages={1513--1522}, 
+}
+@ARTICLE{Lee2018, 
+	author={J.H. Lee and J.S. Lee and H.C. Moon and K.B. Lee}, 
+	journal={IEEE Journal of Emerging and Selected Topics in Power Electronics}, 
+	title={An Improved Finite Set Model Predictive Control Based on Discrete Space Vector Modulation Methods for Grid-Connected Three-Level Voltage Source Inverter}, 
+	year={2018}, 
+	pages={1--1}, 
+	}
+@article{Maestre2018,
+	title = "An application of economic model predictive control to inventory management in hospitals",
+	journal = "Control Engineering Practice",
+	volume = "71",
+	pages = "120--128",
+	year = "2018",
+	author = "J.M. Maestre and M.I. Fernández and I. Jurado",
+}
+@article{Albalawi2018,
+	title = "Achieving operational process safety via model predictive control",
+	journal = "Journal of Loss Prevention in the Process Industries",
+	volume = "53",
+	pages = "74--88",
+	year = "2018",
+	author = "F. Albalawi and H. Durand and A. Alanqar and P.D. Christofides",
+}
+@article{Salvador2018,
+	title = "Model predictive control of partially fading memory systems with binary inputs",
+	journal = "Journal of Process Control",
+	volume = "64",
+	pages = "141--151",
+	year = "2018",
+	author = "J.R. Salvador and T. Alamo and D.R. Ramirez and D. Muñoz de la Peña",
+}
+--- NIE UŻYTY
+@article{Zenere2017,
+	title = "Model Predictive Control meets robust Kalman filtering",
+	journal = "IFAC-PapersOnLine",
+	volume = "50",
+	number = "1",
+	pages = "3774--3779",
+	year = "2017",
+	author = "A. Zenere and M. Zorzi",
+}
+@article{Fielsch2017,
+	title = "Model Predictive Control for Hydronic Heating Systems in Residential Buildings",
+	journal = "IFAC-PapersOnLine",
+	volume = "50",
+	number = "1",
+	pages = "4216--4221",
+	year = "2017",
+	author = "S. Fielsch and T. Grunert and M. Stursberg and A. Kummert",
+}
+@article{Ohrem2017,
+	title = "Modeling and Nonlinear Model Predictive Control of a Subsea Pump Station",
+	journal = "IFAC-PapersOnLine",
+	volume = "50",
+	number = "2",
+	pages = "121--126",
+	year = "2017",
+	author = "S.J. Ohrem and C. Holden",
+}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% REGULACJA NA MIKROKONTROLERY (RZECZYWISTE OBIEKTY) %%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Chen2017,
+	year = {2017},
+	author={C. Chen and L.L.Q. Zhang and Q. Tong and
+	K. Liu and D. Lyu and R. Min},
+	title = {{Online inductor parameters identification by
+	small-signal injection for sensorless predictive
+	current controlled boost converter}},
+	journal = {IEEE Transactions of Industrial Informatics},
+	volume = {13},
+	pages = {1554--1564},
+}
+@article{Habibullah2017,
+	year = {2017},
+	author={Md. Habibullah and D.D.-C. Lu and D. Xiao and J.E. Fletcher and M.F. Rahman},
+	title = {{Predictive torque control of induction motor
+	sensorless drive fed by a 3L-NPC inverter}},
+	journal = {IEEE Transactions of Industrial Informatics},
+	volume = {13},
+	pages = {60--70},
+}
+@article{Kufoalor2015,
+	year = {2015},
+	author={D.K.M. Kufoalor and V. Aaker and T.A. Johansen and L. Imsland and G.O. Eikrem},
+	title = {{Automatically generated embedded model predictive control: Moving an industrial PC-based MPC to an embedded platform}},
+	journal = {Optimal Control Applications and Methods},
+	volume = {36},
+	pages = {705--727},
+}
+@inproceedings{Kunz2013,
+	author = {K. Kunz and S.M. Huck and T.H. Summers},
+	title = {Fast model predictive control of miniature helicopters}, 
+	booktitle = {Proceedings of the European Control Conference, ECC 2013},
+	year = 2013,  	
+	address= {Zurich, Switzerland}, 
+	pages = {1377--1382},
+}
+@article{Kwak2015,
+	year = {2015},
+	author={S. Kwak and J.-C. Park},
+	title = {{Model-predictive direct power control with vector preselection technique for highly efficient active rectifiers}},
+	journal = {IEEE Transactions of Industrial Informatics},
+	volume = {11},
+	pages = {44--52},
+}
+@article{Liniger2015,
+	year = {2015},
+	author={L. Liniger and A. Domahidi and M. Morari},
+	title = {{Optimization-based autonomous racing of 1:43 scale RC cars}},
+	journal = {Optimal Control Applications and Methods},
+	volume = {36},
+	pages = {628--647},
+}
+
+@article{Liu2016,
+	year = {2016},
+	author={Y. Liu and B. Ge and H. Abu-Rub and H. Sun and F.Z. Peng and Y. Xue},
+	title = {{Model predictive direct power control for active power decoupled single-phase quasi-Z-source inverter}},
+	journal = {IEEE Transactions of Industrial Informatics},
+	volume = {12},
+	pages = {1550--1559},
+}
+@article{Xu2016,
+	year = {2016},
+	author={F. Xu and H. Chen and X. Gong},
+	title = {{Fast nonlinear Model Predictive Control on FPGA using particle swarm optimization}},
+	journal = {IEEE Transactions of Industrial Electronics},
+	volume = {63},
+	pages = {310--321},
+}
+
+
+%%%%%%%%% TRANSKOMPILACJA %%%%%%%%%%%%%%%%%%%%
+@article{Ilyushin2016,
+author = {E. Ilyushin and D. Namiot},
+year = {2016},
+month = {04},
+title = {On source-to-source compilers},
+volume = {4},
+booktitle = {International Journal of Open Information Technologies}
+}
+@book{Simpson2016,
+author = {K. Simpson},
+title = {Tajniki języka {JavaScript}. {ECMAScript} 6 i dalej },
+year = {2016},
+translator = {Piotr Rajca},
+}
+@book{Brown2016,
+author = {T. Brown},
+title = {{JavaScript} Essentials for Modern Application Development},
+year = {2016},
+}
+@book{Zielinski2013,
+author = {J. Zieliński},
+title = {Podstawy programowania w języku {C++}},
+year = {2016},
+}
+
+%%%%%%%%% DODATKOWE ŹRÓDŁA ONLINE %%%%%%%%%%%
+@misc{armgcc,
+title={Using the {GNU} Compiler Collection ({GCC})},
+howpublished={\url{https://gcc.gnu.org/onlinedocs/gcc-4.7.2/gcc/Function-Attributes.html}},
+note={Dostęp: 16 czerwca 2018}
+}
+@misc{MATLABCoder,
+title={{MATLAB} {Coder} Documentation},
+howpublished={\url{https://www.mathworks.com/help/coder/}},
+note={Dostęp: 16 czerwca 2018}
+}
+
+
+@InProceedings{Wojtulewicz2017,
+author="A. Wojtulewicz",
+editor="W. Mitkowski and J. Kacprzyk and K. Oprz{\k{e}}dkiewicz and P. Skruch",
+title="Implementation of Dynamic Matrix Control Algorithm Using Field Programmable Gate Array: Preliminary Results",
+booktitle="Trends in Advanced Intelligent Control, Optimization and Automation",
+year="2017",
+publisher="Springer International Publishing",
+address="Cham",
+pages="325--334",
+}
+
+
+
+%%%%%%%%%%%%% RECENZENCI %%%%%%%%%%%%%%%%%
+@book{Bismor2013,
+	title={Programowanie system{\'o}w sterowania: narz{\k{e}}dzia i metody},
+	author={D. Bismor},
+	year={2013},
+	publisher={Wydawnictwo WNT}
+}
+@article{Smierzchalski2001,
+	title = "Predictive Control and Dynamic Planning of an Autonomous Underwater Vehicle",
+	journal = "IFAC Proceedings Volumes",
+	volume = "34",
+	number = "7",
+	pages = "161--166",
+	year = "2001",
+	author = "R. Smierzchalski and M. Kwiesielewicz and M. Szymanski and R. Sutton",
+}
+
+@InProceedings{Sokolski2017a,
+	author={P. Sokólski and T.A. Rutkowski and K. Duzinkiewicz}, 
+	editor="W. Mitkowski and J. Kacprzyk and K. Oprz{\k{e}}dkiewicz and P. Skruch",
+	title="The {QDMC} Model Predictive Controller for the Nuclear Power Plant Steam Turbine Control",
+	booktitle="Trends in Advanced Intelligent Control, Optimization and Automation",
+	year="2017",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="241--250",
+	}
+
+@INPROCEEDINGS{Sokolski2017b, 
+	author={P. Sokólski and T.A. Rutkowski and K. Duzinkiewicz}, 
+	booktitle={2017 22nd International Conference on Methods and Models in Automation and Robotics (MMAR)}, 
+	title={The distributed model predictive controller for the nuclear power plant turbo-generator set}, 
+	year={2017}, 
+	pages={682--687}, }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@article{Nyquist1932,
+author = { H. Nyquist},
+title = {Regeneration Theory},
+journal = {Bell System Technical Journal},
+volume = {11},
+number = {1},
+pages = {126-147},
+year=1932,
+}
+
+@article{Bode1940,
+author = {H. W. Bode},
+title = {Relations Between Attenuation and Phase in Feedback Amplifier Design},
+journal = {Bell System Technical Journal},
+volume = {19},
+number = {3},
+pages = {421-454},
+year=1940,
+}
+@article{Black1934,
+author = {H. S. Black},
+title = {Stabilized Feedback Amplifiers},
+journal = {Bell System Technical Journal},
+volume = {13},
+number = {1},
+pages = {1-18},
+year=1934,
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%te prace jeszcze nie uszeregowane w pliku bib, kolejnosc jak w artykule
+
+%zmieniłem Ławryńczuk na {\L}awry{\'{n}}czuk
+
+@article{Kheriji2011,
+  title={A microcontroller implementation of model predictive control},
+  author={A.A. Kheriji and F. Bouani and M. Ksouri and M.B. Ahmed},
+  journal={World Academy of Science, Engineering and Technology},
+  volume={53},
+  pages={68--74},
+  year={2011}
+}
+@article{Bitjoka2017,
+author = {L. Bitjoka and M. Ndje and A.Y. Boum and J. Song-Manguelle},
+year = {2017},
+month = {07},
+pages = {682--695},
+title = {Implementation of quadratic dynamic matrix control on arduino due {ARM} cortex-{M3} microcontroller board},
+volume = {6},
+journal = {Journal of Engineering Technology}
+}
+@INPROCEEDINGS{Kouki2017, 
+author={R. Kouki and T. Tunis and H. Salhi and F. Bouani}, 
+booktitle={2017 International Conference on Control, Automation and Diagnosis (ICCAD)}, 
+title={Application of model predictive control for a thermal process using {STM32} microcontroller}, 
+year={2017}, 
+pages={146--151}, 
+address= {Hammamet, Tunisia},}
+@INPROCEEDINGS{Nguyen2012,
+author = {B. Nguyen and Y. Ho and Z. Wu and C.-K. Chui},
+year = {2012},
+address= {Halong City, Vietnam}, 
+title = {Implementation of model predictive control with modified minimal model on low-power {RISC} microcontrollers},
+booktitle = {Proceedings of the Third Symposium on Information and Communication Technology}
+}
+@article{Short2017, 
+title={A Microcontroller-Based Adaptive Model Predictive Control Platform for Process Control Applications}, 
+volume={6}, 
+number={4}, 
+journal={Electronics}, 
+publisher={MDPI AG}, 
+author={M. Short and F. Abugchem}, 
+year={2017}, 
+pages={88}
+}
+@INPROCEEDINGS{Smeti2013, 
+author={A. Smeti and W. Chagra and M. Ksouri}, 
+booktitle={2013 International Conference on Control, Decision and Information Technologies (CoDIT)}, 
+title={Implementation of a Predictive controller on the {STM32} board}, 
+year={2013}, 
+pages={250--253}, 
+address= {Hammamet, Tunisia},}
+
+@INPROCEEDINGS{Kane2014,
+author={M.B. Kane and J. Scruggs and J.P. Lynch},
+booktitle={2014 American Control Conference},
+title={Model-predictive control techniques for hydronic systems implemented on wireless sensor and actuator networks},
+year={2014},
+pages={3542-3547},
+address= {Portland, USA},}
+
+@INPROCEEDINGS{Shiming2002,
+author={S. Yu and H. Wang and H. Feng},
+booktitle={TENCON '02. Proceedings. 2002 IEEE Region 10 Conference on Computers, Communications, Control and Power Engineering},
+title={Fast algorithm of constrained dynamic matrix control},
+year={2002},
+volume={3},
+pages={1412-1415 vol.3},
+month={Oct},}
+
+@INPROCEEDINGS{Jiao2011,
+author={J. Xiaolong and Z. Xuemei and X. Ming and D. Liming},
+booktitle={International Conference on Information Science and Technology},
+title={A Simplified Dynamic Matrix Control for application of embedded real-time {MPC}},
+year={2011},
+pages={1062-1065},
+address= {Nanjing, China},}
+
+@INPROCEEDINGS{Chen2010,
+author={Z. Chen and L. Yu and E. Dong},
+booktitle={2010 International Conference on Computational Intelligence and Software Engineering},
+title={A Fast Generalized Predictive Control Algorithm Based on Toeplitz Matrix},
+year={2010},
+pages={1-4},
+address= {Wuhan, China},}
+
+%nowe
+
+@Article{Andersson2019,title={CasADi: a software framework for nonlinear optimization and optimal control},
+	author="Andersson, Joel A. E.
+and Gillis, Joris
+and Horn, Greg
+and Rawlings, James B.
+and Diehl, Moritz",
+	journal="Mathematical Programming Computation",
+	year="2019",
+	volume="11",
+	pages="1--36",
+}
+
+@article{Bleris2006,
+title = "Towards embedded model predictive control for System-on-a-Chip applications",
+journal = "Journal of Process Control",
+volume = "16",
+pages = "255 -- 264",
+year = "2006",
+author = "Leonidas G. Bleris and Jesus Garcia and Mayuresh V. Kothare and Mark G. Arnold",
+}
+
+@INPROCEEDINGS{Currie2012,
+author={J. {Currie} and A. {Prince-Pike} and D. I. {Wilson}},
+booktitle={2012 19th International Conference on Mechatronics and Machine Vision in Practice (M2VIP)},
+title={Auto-code generation for fast embedded Model Predictive Controllers},
+year={2012},
+volume={},
+number={},
+pages={116-122},
+month={Nov},}
+
+@INPROCEEDINGS{Frasch2013,
+author={J. V. {Frasch} and A. {Gray} and M. {Zanon} and H. J. {Ferreau} and S. {Sager} and F. {Borrelli} and M. {Diehl}},
+booktitle={2013 European Control Conference (ECC)},
+title={An auto-generated nonlinear MPC algorithm for real-time obstacle avoidance of ground vehicles},
+year={2013},
+pages={4136-4141},
+month={July},}
+
+@article{Dua2008,
+title = "MPC on a chip—Recent advances on the application of multi-parametric model-based control",
+journal = "Computers \& Chemical Engineering",
+volume = "32",
+pages = "754 - 765",
+year = "2008",
+author = "P. Dua and K. Kouramas and V. Dua and E.N. Pistikopoulos",
+}
+
+@ARTICLE{Raha2019,
+author={A. {Raha} and A. {Chakrabarty} and V. {Raghunathan} and G. T. {Buzzard}},
+journal={IEEE Transactions on Control Systems Technology},
+title={Embedding Approximate Nonlinear Model Predictive Control at Ultrahigh Speed and Extremely Low Power},
+note = {to appear},
+}
+
+@INPROCEEDINGS{Kvasnica2010,
+author={M. {Kvasnica} and I. {Rauova} and M. {Fikar}},
+booktitle={2010 IEEE International Symposium on Computer-Aided Control System Design},
+title={Automatic code generation for real-time implementation of Model Predictive Control},
+year={2010},
+volume={},
+number={},
+pages={993-998},
+address ={Yokohama, Japan},
+month={Sep.},}
+
+@inproceedings{Zometa2013,
+  author    = {Pablo Zometa and
+               Markus J. K{\"{o}}gel and
+               Rolf Findeisen},
+  title     = {{\(\mu\)}AO-MPC: {A} free code generation tool for embedded real-time
+               linear model predictive control},
+  booktitle = {American Control Conference, {ACC} 2013, Washington, DC, USA, June
+               17-19, 2013},
+  pages     = {5320--5325},
+  year      = {2013},
+  timestamp = {Sun, 30 Apr 2017 01:00:00 +0200},
+}
+
+@INPROCEEDINGS{Mattingley2010,
+author={J. {Mattingley} and Y. {Wang} and S. {Boyd}},
+booktitle={2010 IEEE International Symposium on Computer-Aided Control System Design},
+title={Code generation for receding horizon control},
+year={2010},
+volume={},
+number={},
+pages={985-992},
+address ={Yokohama, Japan},
+month={Sep.},}
+
+
+@article{Mattingley2012,
+	title={CVXGEN: A Code Generator for Embedded Convex Optimization}, 
+	author = {J. {Mattingley} and {S.} Boyd},
+	journal = {Optimization and Engineering},
+	pages = {1--27},
+	volume = {13},
+	year = {2012},
+}
+
+@ARTICLE{Johansen2017,
+author={T. A. {Johansen}},
+journal={IEEE Systems Journal},
+title={Toward Dependable Embedded Model Predictive Control},
+year={2017},
+volume={11},
+number={2},
+pages={1208-1219},
+month={June},}
+
+@book{Tatjewski2007,
+  author={P. Tatjewski},
+  title={Advanced Control of Industrial Processes: Structures and Algorithms},
+	year={2007},
+  publisher={Springer},
+  address={London}
+}	
+
+@article{Gorni2016,
+title = "An efficient modelling for temperature control of residential buildings",
+journal = "Building and Environment",
+volume = "103",
+pages = "86 - 98",
+year = "2016",
+author = "Domenico Gorni and María del Mar Castilla and Antonio Visioli",
+}
+
+@article{Yang2018,
+title = "A state-space thermal model incorporating humidity and thermal comfort for model predictive control in buildings",
+journal = "Energy and Buildings",
+volume = "170",
+pages = "25 - 39",
+year = "2018",
+author = "Shiyu Yang and Man Pun Wan and Bing Feng Ng and Tian Zhang and Sushanth Babu and Zhe Zhang and Wanyu Chen and Swapnil Dubey",
+}
+
+
+@ARTICLE{Chaber2019,
+author={P. {Chaber} and M. {{\L}awry\'{n}czuk}},
+journal={IEEE Transactions on Industrial Informatics},
+title={Fast Analytical Model Predictive Controllers and Their Implementation for STM32 ARM Microcontroller},
+note = {to appear},}
+
+@ARTICLE{Chaber2019a,
+title={AutoMATiC: Code Generation of Model Predictive Control Algorithms for Microcontrollers},
+note = {in review},
+}
+
+@ARTICLE{Zanma2019,
+author={T. {Zanma} and S. {Akiba} and K. {Hoshikawa} and K. {Liu}},
+journal={IEEE Transactions on Industrial Informatics},
+title={Cruise Control for Two-Wheeled Mobile Vehicle Using its Mixed Logical Dynamical System Model},
+year={2019},
+note = {to appear},
+month={},}
+
+@inproceedings{Takacs2016,
+  author = {G. Tak{\'a}cs and P. Zometa and R. Findeisen and B. Rohal'-Ilkiv},
+  title = {Efficiency and performance of embedded model predictive control for active vibration attenuation}, 
+	booktitle = {Proceedings of the European Control Conference, ECC 2016},
+  year = 2016,  	
+  address= {Aalborg, Denmark}, 
+	pages = {1334--1340},
+}
+
+@article{Xia2014,
+	year = {2014},
+	author={C. Xia and T. Liu and T. Shi and Z. Song},
+	title = {{A simplified finite-control-set model-predictive control for power converters}},
+	journal = {IEEE Transactions of Industrial Informatics},
+	volume = {10},
+	pages = {991--1002},
+}
+
+@book{Lawrynczuk2014,
+	title={Computationally Efficient Model Predictive Control Algorithms: A Neural Network Approach},
+	author={M. {\L}awry{\'{n}}czuk},
+  year={2014},
+  publisher={Springer},
+	series={Studies in Systems, Decision and Control},
+	volume={3},
+}
+
+@INPROCEEDINGS{FORCES, 
+author={A. {Domahidi} and A. U. {Zgraggen} and M. N. {Zeilinger} and M. {Morari} and C. N. {Jones}}, 
+booktitle={2012 IEEE 51st IEEE Conference on Decision and Control (CDC)}, 
+title={Efficient interior point methods for multistage problems arising in receding horizon control}, 
+year={2012}, 
+pages={668--674}, 
+month={Dec},
+}
+
+@misc{GUROBI,
+  title={GUROBI Optimizer},
+  howpublished={\url{https://www.gurobi.com/documentation/8.1/refman.pdf}},
+  note={Accessed: 29.04.2019},
+}
+
+ @article{mpMPC,
+title = "Explicit/multi-parametric model predictive control (MPC) of linear discrete-time systems by dynamic and multi-parametric programming",
+journal = "Automatica",
+volume = "47",
+number = "8",
+pages = "1638--1645",
+year = "2011",
+}
+
+@article{osqp,
+	author = {Stellato, B. and Banjac, G. and Goulart, P. and Bemporad, A. and Boyd, S.},
+	title = {{OSQP}: An Operator Splitting Solver for Quadratic Programs},
+	journal = {ArXiv e-prints},
+	year = {2017},
+	month = nov,
+	adsnote = {Provided by the SAO/NASA Astrophysics Data System},
+	adsurl = {http://adsabs.harvard.edu/abs/2017arXiv171108013S},
+	archiveprefix = {arXiv},
+	eprint = {1711.08013},
+	keywords = {Mathematics - Optimization and Control},
+	primaryclass = {math.OC},
+}

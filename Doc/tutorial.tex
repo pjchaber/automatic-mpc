@@ -211,7 +211,8 @@ title style={font=\small}
 \newcommand{\AutomaticMPC}{{\scshape AutoMATiC}}
 
 \title{\bf\AutomaticMPC: Code Generation of Model Predictive Control Algorithms for Microcontrollers -- Tutorial for the User}
-%\author{Patryk Chaber}
+\author{Patryk Chaber\\ Warsaw University of Technology\\ Institute of Control and 
+Computation Engineering}
 \date{\today}
 
 \begin{document}
@@ -228,7 +229,12 @@ title style={font=\small}
 
 %{\color{red}Czy w tytule roz. 6.4 nie powinno byc Interrupts zamiast Interruptions?}
 
-This tutorial describes how the \AutomaticMPC\ software system should be used in order to generate the C code of software implementation of Model Predictive Control (MPC) algorithms \cite{Camacho1999,Maciejowski2002,Tatjewski2007} for a chosen target microcontroller. Multiple-Input Multiple-Output (MIMO) processes are considered with $n_{\text{u}}$ manipulated variables (process inputs) $u_1,\ldots, u_{n_{\text{u}}}$ and $n_{\text{y}}$ controlled variables (process outputs) $y_1,\ldots, y_{n_{\text{y}}}$. In general, in MPC, at each discrete sampling instant, $k=0,1,\ldots$, the increments of the future manipulated variables (a vector of length $n_{\text{u}}N_{\text{u}}$) are repeatedly calculated on-line
+This tutorial describes how the \AutomaticMPC\ software system should be used in order to generate the C code of software implementation of Model Predictive Control (MPC) algorithms \cite{Camacho1999,Maciejowski2002,Tatjewski2007} for a chosen target microcontroller. At first available MPC algorithms are shortly described, conditions of using the \AutomaticMPC\ system, requirements, installation and setup are given. Next, generation of a single MPC algorithm and multiple MPC algorithms exchanged on-line in a seamless way using one microcontroller is detailed. Finally, extension of the library of control algorithms is described.
+
+\section{Model Predictive Control Algorithms for \AutomaticMPC}
+In this work MIMO processes with $n_{\text{u}}$ manipulated variables (process inputs) and $n_{\text{y}}$ controlled variables (process outputs) are considered. Two notation methods are used: vectors $u=\left[u_1\ldots u_{n_{\text{u}}} \right]^{\text{T}}$, $y=\left[y_1\ldots y_{n_{\text{y}}} \right]^{\text{T}}$ and scalars: $u_n$, where $n=1,\ldots,n_{\text{u}}$, and $y_m$, where $m=1,\ldots,n_{\text{y}}$. 
+ 
+The discussed MPC algorithms calculate on-line, at each sampling instant, $k=0,1,\ldots$, the increments of the future manipulated variables (a vector of length $n_{\text{u}}N_{\text{u}}$)~\cite{Tatjewski2007} 
 \begin{equation}
 \triangle\boldsymbol{u}(k)=\left[
 \begin{array}
@@ -240,34 +246,90 @@ This tutorial describes how the \AutomaticMPC\ software system should be used in
 \right]
 \label{w_dUk}
 \end{equation}
-where $\triangle u(k+p|k)$ are backward differences of the manipulated variables for the future sampling instant $k+p$ calculated at the current instant $k$, $N_{\text{u}}$ is the control horizon. When calculation is completed, only the control increments for the current sampling instant are applied to the process. In the consecutive sampling instants process output variables are measured and the optimization procedure is repeated.
-
-Two versions of MPC algorithms are available: analytical and numerical. In the first case the objective of MPC is to minimise the cost-function
+where $\triangle u(k+p|k)$ are backward differences of the manipulated variables for the future sampling instant $k+p$ calculated at the current instant $k$, $N_{\text{u}}$ is the control horizon. The values of the decision variables of MPC~(\ref{w_dUk}) are successively found as a result of optimization of the following  MPC cost-function
 \begin{align}
 J(k)&=\sum_{p=1}^{N} \left\| y^{\text{sp}}(k+p|k)-\hat{y}(k+p|k) \right
-\|^{2}_{\boldsymbol{\Psi}_0}+\sum_{p=0}^{N_{\text{u}}-1} \left\| \triangle u(k+p|k) \right\|^{2}_{\boldsymbol{\Lambda}_0}\label{w_Jk}
+\|^{2}_{\boldsymbol{\Psi}_0}\nonumber\\
+&\quad+\sum_{p=0}^{N_{\text{u}}-1} \left\| \triangle u(k+p|k) \right\|^{2}_{\boldsymbol{\Lambda}_0}\label{w_Jk}
 \end{align}
-Its first part measures future control errors over the prediction horizon $N$, the second one is a penalty function used to minimize increments of the manipulated variables. $y^{\text{sp}}(k+p|k)$ and $\hat{y}(k+p|k)$ denote the vectors (of length $n_{\text{y}}$) of set-points and predicted values for the future sampling instant $k+p$ know at the instant $k$, $\boldsymbol{\Psi}_0=\text{diag}(\psi_1,\ldots,\psi_{n_{\text{y}}})$ and $\boldsymbol{\Lambda}_0=\text{diag}(\lambda_1,\ldots,\lambda_{n_{\text{u}}})$ are weighting matrices of dimensionality $n_{\text{y}}\times n_{\text{y}}$ and $n_{\text{u}}\times n_{\text{u}}$, respectively. The increments of the manipulated variables are calculated analytically, using computationally simple formulas \cite{Chaber2019}. The calculated signals are nex`t projected onto the admissible set determined by the constraints imposed on the values of the manipulated variables for the current sampling instant $k$ and the corresponding increments
-\begin{align}
-&u^{\min}\le u(k) \le u^{\max}\\
-&-\triangle u^{\max} \le \triangle u(k) \le \triangle u^{\max}\label{w_ograniczenia_alg_analityczne}
-\end{align}
-where $u^{\min}$, $u^{\max}$ and $\triangle u^{\max}$ (the vectors of length $n_{\text{u}}$) denote minimal and maximal values as well as the maximal change of the manipulated variables, respectively.
+Its first part measures future control errors over the prediction horizon $N$, the second one is a penalty function used to minimize increments of the manipulated variables. $y^{\text{sp}}(k+p|k)$ and $\hat{y}(k+p|k)$ denote the vectors (of length $n_{\text{y}}$) of set-points and predicted values for the future sampling instant $k+p$ know at the instant $k$, $\boldsymbol{\Psi}_0=\text{diag}(\psi_1,\ldots,\psi_{n_{\text{y}}})$ and $\boldsymbol{\Lambda}_0=\text{diag}(\lambda_1,\ldots,\lambda_{n_{\text{u}}})$ are weighting matrices of dimensionality $n_{\text{y}}\times n_{\text{y}}$ and $n_{\text{u}}\times n_{\text{u}}$, respectively. When optimization is completed, only the control increments for the current sampling instant are applied to the process. In the consecutive sampling instants process output variables are measured and the optimization procedure is repeated. The MPC cost-function~(\ref{w_Jk}) may be expressed as
+\begin{equation}
+J(k)=\left\|\boldsymbol{y}^{\text{sp}}(k)-\hat{\boldsymbol{y}}(k)\right\|
+^{2}_{\boldsymbol{\Psi}}+\left\| \triangle\boldsymbol{u}(k)\right\|  ^{2}_{\boldsymbol{\Lambda}}\label{w_Jk_wektorowo}
+\end{equation}
+where the set-point and predicted trajectories
+\begin{equation}
+\boldsymbol{y}^{\text{sp}}(k)=\left[
+\begin{array}
+[c]{c}
+y^{\text{sp}}(k+1|k)\\
+\vdots\\
+y^{\text{sp}}(k+N|k)
+\end{array}
+\right], \
+\hat{\boldsymbol{y}}(k)=\left[
+\begin{array}
+[c]{c}
+\hat{y}(k+1|k)\\
+\vdots\\
+\hat{y}(k+N|k)
+\end{array}
+\right]
+\label{w_yzad_ypred_wektory}
+\end{equation}
+are vectors of length $n_{\text{y}}N$. Typically, the set-points are constant over the prediction horizon, i.e. $y^{\text{sp}}(k)=y^{\text{sp}}(k+1|k)=\ldots=y^{\text{sp}}(k+N|k)$. The weighting matrices $\boldsymbol{\Psi}=\text{diag}(\boldsymbol{\Psi}_0,\ldots,\boldsymbol{\Psi}_0)$ and $\boldsymbol{\Lambda}=\text{diag}(\boldsymbol{\Lambda}_0,\ldots,\boldsymbol{\Lambda}_0)$ are of dimensionality $n_{\text{y}}N\times n_{\text{y}}N$ and $n_{\text{u}}N_{\text{u}}\times n_{\text{u}}N_{\text{u}}$, respectively. It may be proven~\cite{Tatjewski2007} that when a linear model is used for prediction, the vector of predicted process outputs over the prediction horizon is
+\begin{equation}
+\hat{\boldsymbol{y}}(k)=\boldsymbol{G}\triangle\boldsymbol{u}(k)+\boldsymbol{y}^0(k)\label{w_ypred_Gdu_y0}
+\end{equation}
+where the matrix $\boldsymbol{G}$ is of dimensionality $n_{\mathrm{y}}N \times n_{\mathrm{u}}N_{\mathrm{u}}$ and it is comprised of step-response coefficients of the process model. The free trajectory vector of length $n_{\mathrm{y}}N$ is
+\begin{equation}
+\boldsymbol{y}^0(k)=\left[
+\begin{array}
+[c]{cc}
+y^0(k+1|k)\\
+\vdots\\
+y^0(k+N|k)
+\end{array}
+\right]\label{w_y0_wektor}
+\end{equation}
+It is calculated from the process model assuming no changes of the manipulated variables from the sampling instant $k-1$. Calculation of the free trajectory depends on the model used.
 
-In the case of the numerical MPC algorithms, at each sampling instant $k$, the full vector of future control increments (\ref{w_dUk}) is calculated as the solution of the following rudimentary MPC optimisation problem
+Two general versions of MPC algorithms are available: analytical and numerical. In the first one no constraints are taken into account during calculation of the optimal control policy~(\ref{w_dUk}). It means that using the cost-function~(\ref{w_Jk_wektorowo}) and Eq.~(\ref{w_ypred_Gdu_y0}), the optimal control increments are obtained analytically
+\begin{equation}
+\triangle\boldsymbol{u}(k)=\boldsymbol{K}(\boldsymbol{y}^{\text{sp}}(k)-\boldsymbol{y}^0(k))\label{w_duopt_anal_ogolnie}
+\end{equation}
+where a matrix of dimensionality $n_{\text{u}}N_{\text{u}}\times n_{\text{y}}N$ is
+\begin{align}
+\boldsymbol{K}=(\boldsymbol{G}^{\text{T}}\boldsymbol{\Psi}\boldsymbol{G}+{\boldsymbol{\Lambda}})^{-1}\boldsymbol{G}^{\text{T}}\boldsymbol{\Psi}\label{w_K}
+\end{align}
+Simple constraints imposed on the current values of the manipulated variables and on the current changes may be used 
+\begin{equation}
+u^{\min}\le u(k) \le u^{\max}, \ -\triangle u^{\max} \le \triangle u(k) \le \triangle u^{\max}\label{w_ograniczenia_alg_analityczne}
+\end{equation}
+where $u^{\min}$, $u^{\max}$ and $\triangle u^{\max}$ (the vectors of length $n_{\text{u}}$) denote minimal and maximal values as well as the maximal change of the manipulated variables, respectively. In such a~case the first $n_{\text{u}}$ elements of the calculated vector $\triangle\boldsymbol{u}(k)$ are projected on the admissible set determined by the constraints~(\ref{w_ograniczenia_alg_analityczne}). In the second version of MPC algorithms, called numerical, the cost-function~(\ref{w_Jk}) is minimized numerically subject to some constraints. The rudimentary optimization problem solved at each sampling instant on-line is
 \begin{align}
 &\min\limits_{\triangle\boldsymbol{u}(k)} \left \{ J(k)\right \}\nonumber\\
 &\text{subject to}\label{w_zad_opt_ogolnie}\\
 &u^{\min} \leq u(k+p|k)\leq u^{\max},\ p=0,\ldots,N_{\text{u}}-1\nonumber\\
 &-\triangle u^{\max} \leq\triangle
 u(k+p|k)\leq\triangle u^{\max},\ p=0,\ldots
-,N_{\text{u}}-1\nonumber
+,N_{\text{u}}-1\nonumber\\
+&y^{\min}\leq\hat{y}(k+p|k)\leq y^{\max},\ p=1,\ldots,N\nonumber
 \end{align}
-Provided that a linear model is used for prediction, i.e. to calculated the vectors $\hat{y}(k+p|k)$ for $p=1,\ldots,N$, numerical MPC algorithms result in quadratic optimisation. The OSQP \cite{osqp} library is used for quadratic optimisation in the \AutomaticMPC\ system.
+where $y^{\min}$ and $y^{\max}$ (the vectors of length $n_{\text{y}}$) denote minimal and maximal values of the predicted controlled variables, respectively. In comparison with the analytical version, in the numerical algorithm the constraints may be imposed on the predicted controlled variables and all the constraints are taken into account over the control and prediction horizons, not only for the current sampling instant as in Eqs.~(\ref{w_ograniczenia_alg_analityczne}). The MPC optimization task~(\ref{w_zad_opt_ogolnie}) may be compactly rewritten as
+\begin{align}
+&\min\limits_{\triangle\boldsymbol{u}(k)} \Big\{ \left\|
+\boldsymbol{y}
+^{\text{sp}}(k)-\boldsymbol{G}\triangle\boldsymbol{u}(k)-\boldsymbol{y}^0(k)\right\|^{2}_{\boldsymbol{\Psi}}+\left\|  \triangle\boldsymbol{u}(k)\right\|  ^{2}_{\boldsymbol{\Lambda}}\Big\}\nonumber\\[0mm]
+&\text{subject to}\label{w_zad_opt_ogolnie_wektorowo}\\
+&\boldsymbol{u}^{\min}\leq\boldsymbol{J}\triangle\boldsymbol{u}(k)+\boldsymbol{u}(k-1)\leq\boldsymbol{u}^{\max}\nonumber\\
+&-\triangle\boldsymbol{u}^{\max}\leq\triangle\boldsymbol{u}(k)\leq\triangle\boldsymbol{u}^{\max}\nonumber\\
+&\boldsymbol{y}^{\min}\leq \boldsymbol{G}\triangle\boldsymbol{u}(k)+\boldsymbol{y}^0(k)\leq\boldsymbol{y}^{\max}\nonumber
+\end{align}
+The vectors $\boldsymbol{u}^{\min}$, $\boldsymbol{u}^{\max}$, $\triangle \boldsymbol{u}^{\max}$ and $\boldsymbol{u}(k-1)$ are of length $n_{\text{u}}N_{\text{u}}$, the vectors $\boldsymbol{y}^{\min}$ and $\boldsymbol{y}^{\max}$ are of length $n_{\text{y}}N$, the matrix $\boldsymbol{J}$ is of dimensionality $n_{\text{u}}N_{\text{u}}\times n_{\text{u}}N_{\text{u}}$ and it consists of 0 and 1 entries~\cite{Tatjewski2007}. The OSQP \cite{osqp} library is used for quadratic optimization in the \AutomaticMPC\ system. 
 
-
-
-Two MPC algorithms are available: Dynamic Matrix Control (DMC) \cite{Cutler1980} and Generalized Predictive Control (GPC) \cite{Clarke1987}, each of them in analytical and numerical versions. The DMC algorithm uses for prediction a simple to obtain step-response model of the controlled process. Provided that the process is stable with no integration, the model is comprised by $D$ (which is called the horizon of process dynamics) MIMO step-response matrices
+\subsection{Dynamic Matrix Control (DMC) Algorithm}
+A discrete-time step response model is used in the DMC algorithm~\cite{Cutler1980}. Provided that the process is stable with no integration, the model is comprised by $D$ (which is called the horizon of process dynamics) MIMO step-response matrices
 \begin{equation}
 \boldsymbol{S}_1, \boldsymbol{S}_2, \boldsymbol{S}_3, \ldots, \boldsymbol{S}_{\text{D}} \label{w_Sp}
 \end{equation}
@@ -282,7 +344,14 @@ s_p^{n_{\text{y}},1} & \ldots &  s_p^{n_{\text{y}},n_{\text{u}}}
 \end{array}
 \right] \label{w_Sp_struktura}
 \end{equation}
-The scalar step-response coefficient for the sampling instant $p$, the input $u_n$ and the output $y_m$ is denoted by $s_p^{m,n}$. The GPC algorithms uses the following difference equation model \cite{Chaber2019}
+The scalar step-response coefficient for the sampling instant $p$, the input $u_n$ and the output $y_m$ is denoted by $s_p^{m,n}$. It may be proven~\cite{Tatjewski2007} that in DMC the free trajectory is
+\begin{equation}
+\boldsymbol{y}^0(k)=\boldsymbol{y}(k)+\boldsymbol{G}^{\text{p}}(k)\triangle\boldsymbol{u}^{\text{p}}(k)\label{w_y0_dmc}
+\end{equation}
+The vector $\boldsymbol{y}(k)$ is of length $n_{\text{y}}N$ and takes into account the current values of the controlled variables, the vector $\triangle\boldsymbol{u}^{\text{p}}(k)$ is of length $n_{\text{u}}(D-1)$ and takes into account previous increments of the manipulated variables. The matrix $\boldsymbol{G}^{\text{p}}$ is of dimensionality $n_{\text{y}}N \times n_{\text{u}}(D-1)$ and is comprised of step-response coefficients. Because only the first $n_{\text{u}}$ elements of the calculated vector $\triangle\boldsymbol{u}(k)$ are actually applied to the process, a computationally efficient Fast DMC (FDMC) algorithm is recommended~\cite{Chaber2019}. 
+%
+\subsection{Generalized Predictive Control (GPC) Algorithm}
+The GPC algorithm~\cite{Clarke1987} discussed in this work uses the following difference equation model~\cite{Chaber2019}
 \begin{equation}
 \boldsymbol{A}(q^{-1})y(k)=\boldsymbol{B}(q^{-1})u(k)\label{w_Ayk_Buk}
 \end{equation}
@@ -313,7 +382,7 @@ for $m=1,\ldots,n_{\text{y}}$ and
 \begin{equation}
 B_{m,n}(q^{-1})=b_1^{m,n}q^{-1}+\ldots+b_{n_{\text{B}}}^{m,n}q^{-n_{\text{B}}}\label{w_Bij}
 \end{equation}
-for $m=1,\ldots,n_{\text{y}}$, $n=1,\ldots,n_{\text{u}}$.
+for $m=1,\ldots,n_{\text{y}}$, $n=1,\ldots,n_{\text{u}}$. In the GPC algorithm the free trajectory~(\ref{w_y0_wektor}) is calculated from the process model. The Diophantine equation may be used~\cite{Clarke1987,Tatjewski2007} or the computationally efficient Fast GPC (FGPC) scheme~\cite{Chaber2019} in which only the first $n_{\text{u}}$ elements of the vector $\triangle\boldsymbol{u}(k)$ are calculated.
 
 %{\color{red}Skomentowac: w powyzszym opisie jest proces MIMO nu x ny, a w rozdziale ,,Communication with PC using USART'' mowiny o tylko dwoch zmiennych.}
 \newpage 
@@ -343,8 +412,7 @@ You should have received a copy of the GNU General Public License
 along with AutoMATiC.  If not, see <https://www.gnu.org/licenses/>.
 \end{lstlisting}
 
-\AutomaticMPC\ is open-source software, so you can use it free of charge under the terms of the GNU GPL licence. If you are using the software in your 
-research work, you are supposed to cite one or more of the following references.
+\AutomaticMPC\ is open-source software, so you can use it free of charge under the terms of the GNU GPL licence. If you are using the software in your research work, you are supposed to cite the following references:
 
 \begin{lstlisting}[escapeinside = {},]
 @MISC{AutoMATiCTutorial,
